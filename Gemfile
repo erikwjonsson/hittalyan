@@ -1,0 +1,5 @@
+source 'http://rubygems.org'
+gem 'rack-protection'
+gem 'mongoid', '~>3.0.0'
+gem 'bson_ext'
+gem 'cuba'
