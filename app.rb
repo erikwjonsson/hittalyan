@@ -2,6 +2,7 @@
 require 'cuba'
 require "rack/protection"
 require 'mongoid'
+require 'rack/logger'
 
 require 'securerandom'
 
@@ -14,6 +15,7 @@ Mongoid.load!('mongoid.yml')
 Cuba.use Rack::Session::Cookie
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
+Cuba.use Rack::Logger
 
 def init_session(req, user)
   sid = SecureRandom.uuid
@@ -35,6 +37,8 @@ def render_view(view)
 end
 
 Cuba.define do
+log = env['rack.logger']
+
   on get do
     on "" do
       res.write "Hej värld!"
@@ -78,15 +82,21 @@ Cuba.define do
   end
   
   on post do
-    on "login", param('email'), param('password') do |email, password|
-      user = User.authenticate(email, password)
-      if user
-        init_session(req, user)
-        res.redirect "/medlemssidor"
-      else
-        res.write "Ogiltig e-postadress eller lösenord."
-      end
-    end
+		on "login" do
+			on param('email'), param('password') do |email, password|
+				log.info("Här")
+				log.info("#{email} | #{password}")
+				user = User.authenticate(email, password)
+				if user
+					init_session(req, user)
+					res.redirect "/medlemssidor"
+				else
+					res.write "Ogiltig e-postadress eller lösenord."
+				end
+			end
+			
+			res.write "E-post och lösenord är OBLIGATORISKT!"
+		end
     
     on "signup", param('email'), param('password'), param('name') do |email, password, name|
       user = User.create!(email: email,
