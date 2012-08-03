@@ -8,6 +8,7 @@ class User
   field :notify_by, type: Array # e.g. :email, :sms etc.
   field :active, type: Boolean # normally equivalent to "has paid"
   has_one :session
+  has_one :filter
   @@salt = 'aa2c2c739ba0c61dc84345b1c2dc222f'
   
   after_create do |document|
