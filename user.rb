@@ -5,7 +5,6 @@ class User
   field :email, type: String
   field :hashed_password, type: String
   field :name, type: String
-  field :session_id, type: String
   has_one :session
   @@salt = 'aa2c2c739ba0c61dc84345b1c2dc222f'
   
