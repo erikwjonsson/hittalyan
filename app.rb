@@ -6,9 +6,9 @@ require 'rack/logger'
 
 require 'securerandom'
 
-require_relative 'models/user'
-require_relative 'models/session'
-require_relative 'models/filter'
+require_relative 'helpers'
+require_from_directory 'extensions'
+require_from_directory 'models'
 
 Mongoid.load!('mongoid.yml')
 
