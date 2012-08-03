@@ -38,7 +38,6 @@ def render_view(view)
 end
 
 Cuba.define do
-log = env['rack.logger']
 
   on get do
     on "" do
@@ -85,8 +84,6 @@ log = env['rack.logger']
   on post do
 		on "login" do
 			on param('email'), param('password') do |email, password|
-				log.info("Här")
-				log.info("#{email} | #{password}")
 				user = User.authenticate(email, password)
 				if user
 					init_session(req, user)
