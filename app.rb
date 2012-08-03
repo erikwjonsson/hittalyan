@@ -63,7 +63,12 @@ Cuba.define do
     end
     
     on "login" do
-      render_view "login"
+      user = current_user(req)
+      if user
+        res.redirect '/medlemssidor'
+      else
+        render_view "login"
+      end
     end
     
     on "signup" do
