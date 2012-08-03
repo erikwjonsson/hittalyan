@@ -99,7 +99,8 @@ Cuba.define do
     on "signup", param('email'), param('password'), param('name') do |email, password, name|
       user = User.create!(email: email,
                    hashed_password: password, # becomes hashed when created
-                   name: name)
+                   name: name,
+                   notify_by: [:email, :sms])
       init_session(req, user)
       res.redirect "/medlemssidor"
     end
