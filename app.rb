@@ -36,11 +36,7 @@ def current_user(req)
   end
 end
 
-def render_view(view)
-  res.write File.read(File.join('views', "#{view}.html"))
-end
-
-def render_haml(view, content)
+def render_haml(view, content = nil)
   res.write render(File.join('views', "#{view}.haml"), content: content)
 end
 
@@ -67,10 +63,10 @@ Cuba.define do
         res.redirect "/login"
       else
         on "filtersettings" do
-          render_haml "filtersettings", user
+          render_haml "filtersettings"
         end
         #res.write "Hej #{user.name}. Ditt sessionsid är: #{req.session[:sid]}"
-        render_haml "medlemssidor", ""
+        render_haml "medlemssidor"
       end
       
     end
@@ -80,12 +76,12 @@ Cuba.define do
       if user
         res.redirect '/medlemssidor'
       else
-        render_view "login"
+        render_haml "login"
       end
     end
     
     on "signup" do
-      render_view "signup"
+      render_haml "signup"
     end
     
     on "logout" do

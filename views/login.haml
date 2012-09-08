@@ -1,0 +1,10 @@
+%form{id: "login", action: "/login", method: "post"}
+  %fieldset
+    %legend Logga in här
+    %label{for: "email"} Din e-postadress:
+    %input{type: "text", name: "email", id: "email", maxlength: "50"}
+    
+    %label{for: "password"} Lösenord:
+    %input{type: "password", name: "password", id: "password", maxlength: "50"}
+    
+    %input{type: "submit", name: "login", value: "Down the rabbit hole"}
