@@ -21,10 +21,6 @@ Cuba.plugin Cuba::Render
 # Cuba.use Rack::Protection::RemoteReferrer
 # Cuba.use Rack::Logger
 
-def render_view(view)
-  res.write File.read(File.join('views', "#{view}.html"))
-end
-
 def render_haml(view, content)
   res.write render(File.join('views', "#{view}.haml"), content: content)
 end
@@ -38,7 +34,7 @@ Cuba.define do
         render_haml "filtersettings", ""
       end
       #res.write "Hej #{user.name}. Ditt sessionsid är: #{req.session[:sid]}"
-      render_view "medlemssidor"
+      render_haml "medlemssidor"
     end
     
     on ":catchall" do

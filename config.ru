@@ -1,3 +1,3 @@
-require "./test"
+require "./app"
 
 run Cuba
