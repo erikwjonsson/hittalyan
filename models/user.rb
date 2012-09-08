@@ -5,13 +5,15 @@ class User
   field :email, type: String
   field :hashed_password, type: String
   field :name, type: String
-  field :notify_by, type: Array # e.g. :email, :sms etc.
+	field :notify_by_email, type: Boolean, default: false
+	field :notify_by_sms, type: Boolean, default: false
+	field :notify_by_push_note, type: Boolean, default: false
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
   has_one :session
-  has_one :filter
+  embeds_one :apartment_filter
   @@salt = 'aa2c2c739ba0c61dc84345b1c2dc222f'
   
-  validates_presence_of :email, :hashed_password, :name, :notify_by
+  validates_presence_of :email, :hashed_password, :name
   validates_length_of :hashed_password, minimum: 6, maximum: 16
   validates_length_of :name, minimum: 2, maximum: 50
   

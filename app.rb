@@ -1,10 +1,13 @@
 #encoding: utf-8
 require 'cuba'
-require "rack/protection"
+require 'rack/protection'
 require 'mongoid'
 require 'rack/logger'
-
+require 'haml'
+require 'cuba/render'
 require 'securerandom'
+
+Cuba.plugin Cuba::Render
 
 require_relative 'helpers'
 require_from_directory 'extensions'
@@ -37,8 +40,13 @@ def render_view(view)
   res.write File.read(File.join('views', "#{view}.html"))
 end
 
+def render_haml(view, content)
+  res.write render(File.join('views', "#{view}.haml"), content: content)
+end
+
 Cuba.define do
 
+  #GET-----------------------------------------
   on get do
     on "" do
       res.write "Hej värld!"
@@ -58,8 +66,13 @@ Cuba.define do
       if user == nil
         res.redirect "/login"
       else
-        res.write "Hej #{user.name}. Ditt sessionsid är: #{req.session[:sid]}"
+        on "filtersettings" do
+          render_haml "filtersettings", user
+        end
+        #res.write "Hej #{user.name}. Ditt sessionsid är: #{req.session[:sid]}"
+        render_view "medlemssidor"
       end
+      
     end
     
     on "login" do
@@ -86,6 +99,7 @@ Cuba.define do
     end
   end
   
+  #POST----------------------------------------
   on post do
 		on "login" do
 			on param('email'), param('password') do |email, password|
@@ -108,6 +122,10 @@ Cuba.define do
                    notify_by: [:email, :sms])
       init_session(req, user)
       res.redirect "/medlemssidor"
+    end
+    
+    on "medlemssidor" do
+      res.write "POST on medlemssidor"
     end
   end
   

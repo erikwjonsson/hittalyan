@@ -1,3 +1,5 @@
+﻿# encoding: UTF-8
+
 class Apartment
   include Mongoid::Document
   field :address, type: String
@@ -6,6 +8,10 @@ class Apartment
   field :rooms, type: Integer
   field :area, type: Integer # e.g. in square meters
   field :url, type: URI::HTTP
-  field :marked_as_read, type: Boolean
-  belongs_to :landlord
+  field :landlord, type: String
+	
+	validates :url, presence: true, uniqueness: true
+	validates :address, :region, :rent, :rooms, :area, :landlord,
+						presence: true
 end
+
