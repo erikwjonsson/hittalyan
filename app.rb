@@ -63,7 +63,7 @@ Cuba.define do
         res.redirect "/login"
       else
         on "filtersettings" do
-          render_haml "filtersettings"
+          render_haml "filtersettings", user.filter
         end
         #res.write "Hej #{user.name}. Ditt sessionsid är: #{req.session[:sid]}"
         render_haml "medlemssidor"
@@ -124,8 +124,13 @@ Cuba.define do
       res.write "POST on medlemssidor"
     end
     
-    on "filter", param('rooms') do |rooms|
-      res.write "Filter UN-nested<br/>Rooms: #{rooms}"
+    on "filter", param('rooms'), param('rent'), param('area') do |rooms, rent, area|
+      res.write "Filter POST UN-nested<br/>Rooms: #{rooms}<br/>Rent: #{rent}<br/>Area: #{area}"
+      user = current_user(req)
+      user.create_filter(
+                        rooms: rooms,
+                        rent: rent,
+                        area: area)
     end
   end
   

@@ -10,7 +10,7 @@ class User
 	field :notify_by_push_note, type: Boolean, default: false
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
   has_one :session
-  embeds_one :apartment_filter
+  embeds_one :filter
   @@salt = 'aa2c2c739ba0c61dc84345b1c2dc222f'
   
   validates_presence_of :email, :hashed_password, :name

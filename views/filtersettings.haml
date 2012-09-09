@@ -2,10 +2,9 @@
   %fieldset
     %legend Filterinställningar
     %label{for: "rooms"} Rum:
-    %input{type: "text", name: "rooms", id: "rooms", value: "5"}
+    %input{type: "text", name: "rooms", id: "rooms", value: (content.rooms if content) || "This"}
+    %label{for: "rent"} Hyra:
+    %input{type: "text", name: "rent", id: "rent", value: (content.rent if content) || "Shouldn't"}
+    %label{for: "area"} Area:
+    %input{type: "text", name: "area", id: "area", value: (content.area if content) || "Be here"}
     %input{type: "submit", name: "save", value: "Spara"}
-
-    
-    
-    
-    
