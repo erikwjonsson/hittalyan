@@ -40,6 +40,15 @@ def render_haml(view, content = nil)
   res.write render(File.join('views', "#{view}.haml"), content: content)
 end
 
+def filtered_apartments(filter)
+  apartments = Apartment.all
+  apartments.select do |apartment|
+    (filter.rent === apartment.rent &&
+    filter.rooms === apartment.rooms &&
+    filter.area  === apartment.area)
+  end
+end
+
 Cuba.define do
 
   #GET-----------------------------------------
@@ -64,6 +73,14 @@ Cuba.define do
       else
         on "filtersettings" do
           render_haml "filtersettings", user.filter
+        end
+        
+        on "apartments" do
+          user = current_user(req)
+          filt_apts = filtered_apartments(user.filter)
+          content = {apts: filt_apts,
+                     user: user}
+          render_haml "apartments", content
         end
         #res.write "Hej #{user.name}. Ditt sessionsid är: #{req.session[:sid]}"
         render_haml "medlemssidor"
@@ -125,7 +142,11 @@ Cuba.define do
     end
     
     on "filter", param('rooms'), param('rent'), param('area') do |rooms, rent, area|
-      res.write "Filter POST UN-nested<br/>Rooms: #{rooms}<br/>Rent: #{rent}<br/>Area: #{area}"
+      res.write "Filter POST UN-nested<br/>
+                 Rooms: #{rooms}<br/>
+                 Rent: #{rent}<br/>
+                 Area: #{area}<br/>
+                 <a href="/medlemssidor">Medlemssidor</a>"
       user = current_user(req)
       user.create_filter(
                         rooms: rooms,
