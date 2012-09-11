@@ -40,6 +40,16 @@ def render_haml(view, content = nil)
   res.write render(File.join('views', "#{view}.haml"), content: content)
 end
 
+def render_partial(view, content = nil)
+  render(File.join('views', "#{view}.haml"), content: content)
+end
+
+def render_with_template(template, partial = nil, partial_content = nil)
+  content = {partial: partial,
+             partial_content: partial_content}
+  render_haml template, content 
+end
+
 def filtered_apartments(filter)
   apartments = Apartment.all
   apartments.select do |apartment|
@@ -72,7 +82,7 @@ Cuba.define do
         res.redirect "/login"
       else
         on "filtersettings" do
-          render_haml "filtersettings", user.filter
+          render_with_template "template", "filtersettings", user.filter
         end
         
         on "apartments" do
@@ -80,10 +90,11 @@ Cuba.define do
           filt_apts = filtered_apartments(user.filter)
           content = {apts: filt_apts,
                      user: user}
-          render_haml "apartments", content
+          render_with_template "template", "apartments", content
         end
         #res.write "Hej #{user.name}. Ditt sessionsid är: #{req.session[:sid]}"
-        render_haml "medlemssidor"
+        # render_haml "medlemssidor"
+        render_with_template "template", "medlemssidor"
       end
       
     end
@@ -93,12 +104,12 @@ Cuba.define do
       if user
         res.redirect '/medlemssidor'
       else
-        render_haml "login"
+        render_with_template "template", "login"
       end
     end
     
     on "signup" do
-      render_haml "signup"
+      render_with_template "template", "signup"
     end
     
     on "logout" do
@@ -146,7 +157,7 @@ Cuba.define do
                  Rooms: #{rooms}<br/>
                  Rent: #{rent}<br/>
                  Area: #{area}<br/>
-                 <a href="/medlemssidor">Medlemssidor</a>"
+                 <a href=\"/medlemssidor\">Medlemssidor</a>"
       user = current_user(req)
       user.create_filter(
                         rooms: rooms,

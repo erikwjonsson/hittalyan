@@ -1,4 +1,5 @@
 ﻿%h1= "Apartments matching filter for User: #{content[:user].name}"
 %ul
-  =content[:apts].each_with_index do |apts, index|
-    %li= index
+  %li= content[:apts].length
+  -content[:apts].each_with_index do |apts, index|
+    %li= "moo"
