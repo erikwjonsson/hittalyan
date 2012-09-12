@@ -63,6 +63,10 @@ Cuba.define do
 
   #GET-----------------------------------------
   on get do
+    on "test" do
+      render_with_template "template", "test"
+    end
+  
     on "" do
       res.write "Hej värld!"
       res.write "Sessionsid: #{req.session[:sid]}"
@@ -125,6 +129,10 @@ Cuba.define do
   
   #POST----------------------------------------
   on post do
+    on "test", param('rooms_min'), param('rooms_max') do |rooms_min, rooms_max|
+      render_with_template "template", "test", {rooms_min: rooms_min, rooms_max: rooms_max}
+    end
+  
 		on "login" do
 			on param('email'), param('password') do |email, password|
 				user = User.authenticate(email, password)
@@ -163,6 +171,10 @@ Cuba.define do
                         rooms: rooms,
                         rent: rent,
                         area: area)
+    end
+    
+    on ":catchall" do
+      res.write "Nu kom du allt fel din jävel!"
     end
   end
   
