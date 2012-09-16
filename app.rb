@@ -1,4 +1,4 @@
-#encoding: utf-8
+﻿#encoding: utf-8
 require 'cuba'
 require 'rack/protection'
 require 'mongoid'
@@ -15,11 +15,12 @@ require_from_directory 'models'
 
 Mongoid.load!('mongoid.yml')
 
-
+ROOT_PATH = File.expand_path(File.dirname(__FILE__))
 Cuba.use Rack::Session::Cookie
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger
+Cuba.use Rack::Static, :urls => ["/js", "/libs", "/favicon.ico"], :root => ROOT_PATH
 
 def init_session(req, user)
   sid = SecureRandom.uuid
@@ -64,16 +65,19 @@ Cuba.define do
   #GET-----------------------------------------
   on get do
     on "test" do
-      render_with_template "template", "test"
+      render_haml "test"
     end
   
     on "" do
-      res.write "Hej värld!"
-      res.write "Sessionsid: #{req.session[:sid]}"
+      render_haml "index"
+    end
+    
+    on "landing" do
+      render_haml "landing"
     end
     
     on "vanliga-fragor" do
-      res.write "Vanliga frågor"
+      render_haml "faq"
     end
     
     on "om" do
@@ -83,10 +87,10 @@ Cuba.define do
     on "medlemssidor" do
       user = current_user(req)
       if user == nil
-        res.redirect "/login"
+        render_haml "/login"
       else
         on "filtersettings" do
-          render_with_template "template", "filtersettings", user.filter
+          render_haml "filtersettings", user.filter
         end
         
         on "apartments" do
@@ -94,11 +98,11 @@ Cuba.define do
           filt_apts = filtered_apartments(user.filter)
           content = {apts: filt_apts,
                      user: user}
-          render_with_template "template", "apartments", content
+          render_haml "apartments", content
         end
         #res.write "Hej #{user.name}. Ditt sessionsid är: #{req.session[:sid]}"
         # render_haml "medlemssidor"
-        render_with_template "template", "medlemssidor"
+        render_haml "medlemssidor"
       end
       
     end
@@ -106,20 +110,20 @@ Cuba.define do
     on "login" do
       user = current_user(req)
       if user
-        res.redirect '/medlemssidor'
+        render_haml "medlemssidor"
       else
-        render_with_template "template", "login"
+        render_haml "login"
       end
     end
     
     on "signup" do
-      render_with_template "template", "signup"
+      render_haml "signup"
     end
     
     on "logout" do
       user = current_user(req)
       user.session.delete if user
-      res.redirect "login"
+      render_haml "login"
     end
     
     on ":catchall" do
@@ -130,7 +134,7 @@ Cuba.define do
   #POST----------------------------------------
   on post do
     on "test", param('rooms_min'), param('rooms_max') do |rooms_min, rooms_max|
-      render_with_template "template", "test", {rooms_min: rooms_min, rooms_max: rooms_max}
+      render_haml "test", {rooms_min: rooms_min, rooms_max: rooms_max}
     end
   
 		on "login" do
@@ -138,7 +142,7 @@ Cuba.define do
 				user = User.authenticate(email, password)
 				if user
 					init_session(req, user)
-					res.redirect "/medlemssidor"
+					render_haml "/medlemssidor"
 				else
 					res.write "Ogiltig e-postadress eller lösenord."
 				end
@@ -153,7 +157,7 @@ Cuba.define do
                    name: name,
                    notify_by: [:email, :sms])
       init_session(req, user)
-      res.redirect "/medlemssidor"
+      render_haml "/medlemssidor"
     end
     
     on "medlemssidor" do
