@@ -1,15 +1,5 @@
-﻿%form{id: "filter", action: "/test", method: "post"}
-  %fieldset
-    %legend Filterinställningar
-    %ul
-      %li
-        %label{for: "rooms_min"} Rum: mimimumu:
-        -(1..5).to_a.each do |i|
-          %input{type: "radio", name: "rooms_min", id: "rooms", value: i,
-          checked: ((content[:rooms_min].to_i == i) if content)}=i
-      %li
-        %label{for: "rooms_max"} Rum: maximumu:
-        -(1..5).to_a.each do |i|
-          %input{type: "radio", name: "rooms_max", id: "rooms", value: i,
-          checked: ((content[:rooms_max].to_i == i) if content)}=i
-    %input{type: "submit", name: "save", value: "Spara"}
+﻿%form{name: "myForm", 'ng-submit' => "submit()"}
+  %label{for: "rooms_min"} Rum: mimimumu:
+  %input{type: "text", name: "rooms_min", id: "rooms", 'ng-model' => "input", required: true}
+  %span {{message}}{{input}}
+  %input{type: "submit", name: "save", value: "Spara"}

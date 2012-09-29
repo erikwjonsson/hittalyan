@@ -6,6 +6,7 @@ require 'rack/logger'
 require 'haml'
 require 'cuba/render'
 require 'securerandom'
+require 'rack/post-body-to-params'
 
 Cuba.plugin Cuba::Render
 
@@ -20,6 +21,7 @@ Cuba.use Rack::Session::Cookie
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger
+Cuba.use Rack::PostBodyToParams
 Cuba.use Rack::Static, :urls => ["/js", "/libs", "/favicon.ico"], :root => ROOT_PATH
 
 def init_session(req, user)
@@ -38,17 +40,7 @@ def current_user(req)
 end
 
 def render_haml(view, content = nil)
-  res.write render(File.join('views', "#{view}.haml"), content: content)
-end
-
-def render_partial(view, content = nil)
-  render(File.join('views', "#{view}.haml"), content: content)
-end
-
-def render_with_template(template, partial = nil, partial_content = nil)
-  content = {partial: partial,
-             partial_content: partial_content}
-  render_haml template, content 
+  res.write render(File.join('views', "#{view}.haml"), {}, {format: :html5})
 end
 
 def filtered_apartments(filter)
@@ -70,6 +62,10 @@ Cuba.define do
   
     on "" do
       render_haml "index"
+    end
+    
+    on  "loggedin" do
+      res.status = 401 unless current_user(req)
     end
     
     on "landing" do
@@ -127,14 +123,20 @@ Cuba.define do
     end
     
     on ":catchall" do
+      puts "Nu kom nån jävel allt fel"
+      res.status = 404
       res.write "Nu kom du allt fel din jävel!"
     end
   end
   
   #POST----------------------------------------
   on post do
-    on "test", param('rooms_min'), param('rooms_max') do |rooms_min, rooms_max|
-      render_haml "test", {rooms_min: rooms_min, rooms_max: rooms_max}
+    on "test", param('message') do |m|
+      if m == "moo"
+        res.status = 200
+      else
+        res.status = 401
+      end
     end
   
 		on "login" do
@@ -142,8 +144,8 @@ Cuba.define do
 				user = User.authenticate(email, password)
 				if user
 					init_session(req, user)
-					render_haml "/medlemssidor"
 				else
+          res.status = 401 #unauthorized
 					res.write "Ogiltig e-postadress eller lösenord."
 				end
 			end
@@ -178,6 +180,8 @@ Cuba.define do
     end
     
     on ":catchall" do
+      puts "Nu kom nån jävel allt fel"
+      res.status = 404
       res.write "Nu kom du allt fel din jävel!"
     end
   end
