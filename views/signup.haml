@@ -1,15 +1,20 @@
-%form{id: "signup", action: "/signup", method: "post"}
+%form(name="signup" ng-submit="submit()")
   %fieldset
     %legend Registrera dig här!
-    %ul
-      %li
-        %label{for: "name"} Ditt namn:
-        %input{type: "text", name: "name", id: "name", maxlength: "50"}
-      %li
-        %label{for: "email"} Ditt e-postaddress:
-        %input{type: "text", name: "email", id: "email", maxlength: "50"}
-      %li
-        %label{for: "password"} Lösenord:
-        %input{type: "password", name: "password", id: "password", maxlength: "50"}
-      %li
-        %input{type: "submit", name: "signup", value: "Down the rabbit hole"}
+    %label(for="email") Din e-postadress:
+    %input(type="text"
+           name="email"
+           id="email"
+           ng-model="email"
+           required=true)
+    
+    %label(for="password") Lösenord:
+    %input(type="password"
+           name="password"
+           id="password"
+           ng-model="password"
+           required
+           ng-minlength="6"
+           ng-maxlength="16")
+    
+    %input(type="submit" name="signup" value="Down the rabbit hole")

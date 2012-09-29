@@ -142,13 +142,15 @@ Cuba.define do
       user.session.delete if user
     end
     
-    on "signup", param('email'), param('password'), param('name') do |email, password, name|
-      user = User.create!(email: email,
-                   hashed_password: password, # becomes hashed when created
-                   name: name,
-                   notify_by: [:email, :sms])
-      init_session(req, user)
-      render_haml "/medlemssidor"
+    on "signup", param('email'), param('password') do |email, password|
+      begin
+        user = User.create!(email: email,
+                    hashed_password: password, # becomes hashed when created
+                    name: 'Urist McMuffin',
+                    notify_by: [:email, :sms])
+      rescue
+        res.status = 400
+      end
     end
     
     on "filter", param('rooms'), param('rent'), param('area') do |rooms, rent, area|

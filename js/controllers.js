@@ -41,6 +41,19 @@ function FAQController($scope) {
   $scope.message = "Look within and you will find the answers you seek.";
 };
 
+function SignupController($scope, $http, $location) {
+  $scope.submit = function() {
+    $scope.data = {email: $scope.email,
+                   password: $scope.password};
+    $http.post("signup", $scope.data).
+      success(function(data, status) {
+        $location.path('/');
+      }).
+      error(function(data, status) {
+      });
+  };
+};
+
 function MembersController($scope) {
   $scope.message = "Look within and you will find the answers you seek.";
 };
