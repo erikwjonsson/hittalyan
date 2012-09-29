@@ -21,17 +21,21 @@ angular.module('cubancabal', [])
       if ( next.templateUrl == "login" ) {
         if ( $rootScope.loggedIn ) {
           $location.path('/medlemssidor');
+          next.templateUrl = 'medlemssidor';
         }
       }
 
       if ( next.templateUrl.indexOf("medlemssidor") != -1) {
-        if ( $rootScope.loggedIn == false) {
+        if ( $rootScope.loggedIn == false || $rootScope.loggedIn == null) {
           $location.path('/login');
+          next.templateUrl = 'login';
         }
       }        
     });
     
     $rootScope.$on( "$routeChangeError", function(event, next, current) {
       $location.path('/')
+      // $rootScope
+      
     })
   });

@@ -18,7 +18,7 @@ function LoginController($scope, $http, $location, $rootScope) {
       error(function(data, status) {
         $rootScope.loggedIn = false;
         $scope.message = data;
-        alert($scope.message);
+        alert($rootScope.loggedIn);
       });
   };
 };
