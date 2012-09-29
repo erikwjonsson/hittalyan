@@ -11,7 +11,6 @@ angular.module('cubancabal', [])
       when('/medlemssidor/apartments', {templateUrl: '/medlemssidor/apartments', controller: MembersController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
       when('/signup', {templateUrl: 'signup'}).
-      when('/logout', {templateUrl: 'logout'}).
       when('/om', {templateUrl: 'om',   controller: LandingController}).
       when('/test', {templateUrl: 'test',   controller: TestController}).
       when('/vanliga-fragor', {templateUrl: 'vanliga-fragor', controller: FAQController})

@@ -7,12 +7,12 @@
     %script{src: "libs/angular-resource.min.js"}
     %script{src: "js/app.js"}
     %script{src: "js/controllers.js"}
-  %body
+  %body{'ng-controller' => "IndexController"}
     %a{href: "#/vanliga-fragor"} Vanliga frågor
     %a{href: "#/signup"} Signup
     %a{href: "#/login"} Login
     %a{href: "#/medlemssidor"} Medlemssidor
-    %a{href: "#/logout"} Logout
+    %a{'ng-click' => "logout()"} Logout
     %a{href: "#/test"} Test
     %br
     %div{'ng-view' => true}

@@ -2,6 +2,20 @@
 
 /* Controllers */
 
+function IndexController($scope, $http, $rootScope, $location) {
+  $scope.logout = function() {
+    $http.post("logout").
+      success(function() {
+        $rootScope.loggedIn = false;
+        $location.path('/');
+      }).
+      error(function() {
+        $rootScope.loggedIn = false;
+        $location.path('/');
+      });
+  };
+};
+
 function LandingController($scope) {
   $scope.message = "There is no spoon. Revenge!";
 };

@@ -77,7 +77,7 @@ Cuba.define do
     end
     
     on "om" do
-      res.write "Om oss"
+      render_haml "about"
     end
     
     on "medlemssidor" do
@@ -96,8 +96,6 @@ Cuba.define do
                      user: user}
           render_haml "apartments", content
         end
-        #res.write "Hej #{user.name}. Ditt sessionsid är: #{req.session[:sid]}"
-        # render_haml "medlemssidor"
         render_haml "medlemssidor"
       end
     end
@@ -108,11 +106,6 @@ Cuba.define do
     
     on "signup" do
       render_haml "signup"
-    end
-    
-    on "logout" do
-      user = current_user(req)
-      user.session.delete if user
     end
     
     on ":catchall" do
@@ -142,9 +135,12 @@ Cuba.define do
 					res.write "Ogiltig e-postadress eller lösenord."
 				end
 			end
-			
-			res.write "E-post och lösenord är OBLIGATORISKT!"
 		end
+    
+    on "logout" do
+      user = current_user(req)
+      user.session.delete if user
+    end
     
     on "signup", param('email'), param('password'), param('name') do |email, password, name|
       user = User.create!(email: email,
@@ -153,10 +149,6 @@ Cuba.define do
                    notify_by: [:email, :sms])
       init_session(req, user)
       render_haml "/medlemssidor"
-    end
-    
-    on "medlemssidor" do
-      res.write "POST on medlemssidor"
     end
     
     on "filter", param('rooms'), param('rent'), param('area') do |rooms, rent, area|
@@ -174,7 +166,7 @@ Cuba.define do
     
     on ":catchall" do
       puts "Nu kom nån jävel allt fel"
-      res.status = 404
+      res.status = 404 #not found
       res.write "Nu kom du allt fel din jävel!"
     end
   end
