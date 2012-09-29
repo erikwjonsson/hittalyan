@@ -6,16 +6,17 @@ function LandingController($scope) {
   $scope.message = "There is no spoon. Revenge!";
 };
 
-function LoginController($scope, $http, $location) {
+function LoginController($scope, $http, $location, $rootScope) {
   $scope.submit = function() {
     $scope.data = {email: $scope.email,
                    password: $scope.password};
     $http.post("login", $scope.data).
       success(function(data, status) {
-        $scope.loggedin = true;
+        $rootScope.loggedIn = true;
         $location.path('/medlemssidor');
       }).
       error(function(data, status) {
+        $rootScope.loggedIn = false;
         $scope.message = data;
         alert($scope.message);
       });

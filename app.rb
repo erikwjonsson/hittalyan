@@ -40,7 +40,7 @@ def current_user(req)
 end
 
 def render_haml(view, content = nil)
-  res.write render(File.join('views', "#{view}.haml"), {}, {format: :html5})
+  res.write render(File.join('views', "#{view}.haml"), {content: content}, {format: :html5})
 end
 
 def filtered_apartments(filter)
@@ -83,7 +83,7 @@ Cuba.define do
     on "medlemssidor" do
       user = current_user(req)
       if user == nil
-        render_haml "/login"
+        res.status = 401
       else
         on "filtersettings" do
           render_haml "filtersettings", user.filter
@@ -100,16 +100,10 @@ Cuba.define do
         # render_haml "medlemssidor"
         render_haml "medlemssidor"
       end
-      
     end
     
     on "login" do
-      user = current_user(req)
-      if user
-        render_haml "medlemssidor"
-      else
-        render_haml "login"
-      end
+      render_haml "login"
     end
     
     on "signup" do
@@ -119,7 +113,6 @@ Cuba.define do
     on "logout" do
       user = current_user(req)
       user.session.delete if user
-      render_haml "login"
     end
     
     on ":catchall" do
