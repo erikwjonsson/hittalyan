@@ -22,18 +22,20 @@ function LandingController($scope) {
 
 function LoginController($scope, $http, $location, $rootScope) {
   $scope.submit = function() {
-    $scope.data = {email: $scope.email,
-                   password: $scope.password};
-    $http.post("login", $scope.data).
-      success(function(data, status) {
-        $rootScope.loggedIn = true;
-        $location.path('/medlemssidor');
-      }).
-      error(function(data, status) {
-        $rootScope.loggedIn = false;
-        $scope.message = data;
-        alert($rootScope.loggedIn);
-      });
+    if ( $scope.login.$valid == true) {
+      $scope.data = {email: $scope.email,
+                     password: $scope.password};
+      $http.post("login", $scope.data).
+        success(function(data, status) {
+          $rootScope.loggedIn = true;
+          $location.path('/medlemssidor');
+        }).
+        error(function(data, status) {
+          $rootScope.loggedIn = false;
+          $scope.message = data;
+          alert($rootScope.loggedIn);
+        });
+    };
   };
 };
 

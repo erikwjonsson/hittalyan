@@ -128,8 +128,10 @@ Cuba.define do
 		on "login" do
 			on param('email'), param('password') do |email, password|
 				user = User.authenticate(email, password)
+        puts "login post. email: #{email} pasword: #{password}"
 				if user
 					init_session(req, user)
+          res.write "user här"
 				else
           res.status = 401 #unauthorized
 					res.write "Ogiltig e-postadress eller lösenord."
