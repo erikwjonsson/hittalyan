@@ -45,14 +45,16 @@ function FAQController($scope) {
 
 function SignupController($scope, $http, $location) {
   $scope.submit = function() {
-    $scope.data = {email: $scope.email,
-                   password: $scope.password};
-    $http.post("signup", $scope.data).
-      success(function(data, status) {
-        $location.path('/');
-      }).
-      error(function(data, status) {
-      });
+    if ( $scope.signup.$valid == true) {
+      $scope.data = {email: $scope.email,
+                    password: $scope.password};
+      $http.post("signup", $scope.data).
+        success(function(data, status) {
+          $location.path('/');
+        }).
+        error(function(data, status) {
+        });
+    };
   };
 };
 
