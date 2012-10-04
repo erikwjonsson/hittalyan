@@ -40,5 +40,4 @@ class User
     def hash_string(s)
       Digest::SHA2.hexdigest(s)
     end
-    
 end

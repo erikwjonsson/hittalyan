@@ -1,10 +1,19 @@
-﻿%form{id: "filter", action: "/filter", method: "post"}
+﻿%form(name="filtersettings" ng-submit="submit()" novalidate)
   %fieldset
     %legend Filterinställningar
-    %label{for: "rooms"} Rum:
-    %input{type: "text", name: "rooms", id: "rooms"}
-    %label{for: "rent"} Hyra:
-    %input{type: "text", name: "rent", id: "rent"}
-    %label{for: "area"} Area:
-    %input{type: "text", name: "area", id: "area"}
-    %input{type: "submit", name: "save", value: "Spara"}
+    %label(for="rooms") Rum:
+    %input(type="text"
+           name="rooms"
+           ng-model="rooms"
+           id="rooms")
+    %label(for="rent") Hyra:
+    %input(type="text"
+           name="rent"
+           ng-model="rent"
+           id="rent")
+    %label(for="area") Area:
+    %input(type="text"
+           name="area"
+           ng-model="area"
+           id="area")
+    %input(type="submit" name="save" value="Spara")

@@ -1,5 +1,3 @@
-﻿%h1= "Apartments matching filter for User: #{content[:user].name}"
-%ul
-  %li= content[:apts].length
-  -content[:apts].each_with_index do |apts, index|
-    %li= "moo"
+﻿%ul
+  %li(ng-repeat="apartment in apartments")
+    {{$index + 1}} {{apartment.address}}.

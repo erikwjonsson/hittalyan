@@ -50,7 +50,7 @@ function SignupController($scope, $http, $location) {
                     password: $scope.password};
       $http.post("signup", $scope.data).
         success(function(data, status) {
-          $location.path('/');
+          $location.path('/medlemssidor');
         }).
         error(function(data, status) {
         });
@@ -60,6 +60,33 @@ function SignupController($scope, $http, $location) {
 
 function MembersController($scope) {
   $scope.message = "Look within and you will find the answers you seek.";
+};
+
+function FiltersController($scope, $http) {
+  $scope.submit = function() {
+    if ( $scope.filtersettings.$valid == true) {
+      $scope.data = {rooms: $scope.rooms,
+                    rent: $scope.rent,
+                    area: $scope.area};
+      $http.post("filter", $scope.data).
+        success(function(data, status) {
+          alert(data);
+        }).
+        error(function(data, status) {
+          alert("Natural 1");
+        });
+    };
+  };
+};
+
+function ApartmentsController($scope, $http) {
+  $http.get("medlemssidor/apartments_list").
+    success(function(data, status) {
+      $scope.apartments = data;
+    }).
+    error(function(data, status) {
+      $scope.apartments = "Något slags fel";
+    });
 };
 
 function TestController($scope, $http, $location) {

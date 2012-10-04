@@ -89,12 +89,14 @@ Cuba.define do
           render_haml "filtersettings", user.filter
         end
         
-        on "apartments" do
+        on "apartments_template" do
+          render_haml "apartments"
+        end
+        
+        on "apartments_list" do
           user = current_user(req)
           filt_apts = filtered_apartments(user.filter)
-          content = {apts: filt_apts,
-                     user: user}
-          render_haml "apartments", content
+          res.write ActiveSupport::JSON.encode(filt_apts)
         end
         render_haml "medlemssidor"
       end
@@ -110,7 +112,7 @@ Cuba.define do
     
     on ":catchall" do
       puts "Nu kom nån jävel allt fel"
-      res.status = 404
+      res.status = 404 #not found
       res.write "Nu kom du allt fel din jävel!"
     end
   end
@@ -128,10 +130,8 @@ Cuba.define do
 		on "login" do
 			on param('email'), param('password') do |email, password|
 				user = User.authenticate(email, password)
-        puts "login post. email: #{email} pasword: #{password}"
 				if user
 					init_session(req, user)
-          res.write "user här"
 				else
           res.status = 401 #unauthorized
 					res.write "Ogiltig e-postadress eller lösenord."
@@ -148,7 +148,7 @@ Cuba.define do
       begin
         user = User.create!(email: email,
                     hashed_password: password, # becomes hashed when created
-                    name: 'Urist McMuffin',
+                    name: 'Urist McMuffin', #this to be removed as we no want name no more
                     notify_by: [:email, :sms])
       rescue
         res.status = 400
@@ -157,15 +157,13 @@ Cuba.define do
     
     on "filter", param('rooms'), param('rent'), param('area') do |rooms, rent, area|
       res.write "Filter POST UN-nested<br/>
-                 Rooms: #{rooms}<br/>
+                 Rooms: #{rooms.class}<br/>
                  Rent: #{rent}<br/>
-                 Area: #{area}<br/>
-                 <a href=\"/medlemssidor\">Medlemssidor</a>"
+                 Area: #{area}<br/>"
       user = current_user(req)
-      user.create_filter(
-                        rooms: rooms,
-                        rent: rent,
-                        area: area)
+      user.create_filter(rooms: rooms,
+                         rent: rent,
+                         area: area)
     end
     
     on ":catchall" do
@@ -174,5 +172,4 @@ Cuba.define do
       res.write "Nu kom du allt fel din jävel!"
     end
   end
-  
 end
