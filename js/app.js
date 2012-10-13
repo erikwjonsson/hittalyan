@@ -18,14 +18,14 @@ angular.module('cubancabal', [])
   .run( function($rootScope, $location) {
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
       if ( next.templateUrl == "login" ) {
-        if ( $rootScope.loggedIn ) {
+        if ( localStorage.loggedIn ) {
           $location.path('/medlemssidor');
           next.templateUrl = 'medlemssidor';
         }
       }
 
       if ( next.templateUrl.indexOf("medlemssidor") != -1) {
-        if ( $rootScope.loggedIn == false || $rootScope.loggedIn == null) {
+        if ( localStorage.loggedIn == "false" || localStorage.loggedIn == null) {
           $location.path('/login');
           next.templateUrl = 'login';
         }
