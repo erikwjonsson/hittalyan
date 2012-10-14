@@ -1,0 +1,47 @@
+﻿
+/*Make bootstrap grok some Angular*/
+input.ng-dirty.ng-invalid,
+textarea.ng-dirty.ng-invalid,
+select.ng-dirty.ng-invalid {
+  color: #b94a48;
+  border-color: #ee5f5b;
+}
+
+input:focus.ng-dirty.ng-invalid:focus,
+textarea:focus.ng-dirty.ng-invalid:focus,
+select:focus.ng-dirty.ng-invalid:focus {
+  border-color: #e9322d;
+  -webkit-box-shadow: 0 0 6px #f8b9b7;
+     -moz-box-shadow: 0 0 6px #f8b9b7;
+          box-shadow: 0 0 6px #f8b9b7;
+}
+
+input:required:focus{
+  border-width: 0px;
+  -webkit-box-shadow: 0 0 0px black;
+     -moz-box-shadow: 0 0 0px black;
+          box-shadow: 0 0 0px black;
+}
+
+#loginform input.ng-dirty.ng-invalid,
+#loginform textarea.ng-dirty.ng-invalid,
+#loginform select.ng-dirty.ng-invalid,
+#loginform :required {
+  color: black;
+  border-width: 0px;
+}
+
+#loginform input:focus.ng-dirty.ng-invalid:focus,
+#loginform textarea:focus.ng-dirty.ng-invalid:focus,
+#loginform select:focus.ng-dirty.ng-invalid:focus {
+  border-width: 0px;
+  -webkit-box-shadow: 0 0 0px #f8b9b7;
+     -moz-box-shadow: 0 0 0px #f8b9b7;
+          box-shadow: 0 0 0px #f8b9b7;
+}
+
+/*Make room for the top bar*/
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}

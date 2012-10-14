@@ -23,11 +23,12 @@ angular.module('cubancabal', [])
           next.templateUrl = 'medlemssidor';
         }
       }
-
-      if ( next.templateUrl.indexOf("medlemssidor") != -1) {
-        if ( localStorage.loggedIn == "false" || localStorage.loggedIn == null) {
-          $location.path('/login');
-          next.templateUrl = 'login';
+      if ( next.templateUrl ) {
+        if ( next.templateUrl.indexOf("medlemssidor") != -1) {
+          if ( localStorage.loggedIn == "false" || localStorage.loggedIn == null) {
+            $location.path('/login');
+            next.templateUrl = 'login';
+          }
         }
       }        
     });

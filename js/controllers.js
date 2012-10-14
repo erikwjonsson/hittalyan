@@ -1,8 +1,12 @@
-﻿'use strict';
+'use strict';
 
 /* Controllers */
 
 function IndexController($scope, $http, $location) {
+  $scope.isLoggedIn = function() {
+    return localStorage.loggedIn == "true";
+  };
+
   $scope.logout = function() {
     $http.post("logout").
       success(function() {
@@ -21,20 +25,32 @@ function LandingController($scope) {
 };
 
 function LoginController($scope, $http, $location) {
+  var invalidInput = function() {
+    $scope.password = "";
+    localStorage.loggedIn = "false";
+    alert("Nu skrev du allt fel din jävel");
+  };
+
   $scope.submit = function() {
     if ( $scope.login.$valid == true) {
       $scope.data = {email: $scope.email,
                      password: $scope.password};
       $http.post("login", $scope.data).
         success(function(data, status) {
+          $scope.email = "";
+          $scope.password = "";
           localStorage.loggedIn = "true";
           $location.path('/medlemssidor');
         }).
         error(function(data, status) {
-          localStorage.loggedIn = "false";
+          if ( status == "401") {
+            invalidInput();
+          };
           $scope.message = data;
-          alert(localStorage.loggedIn);
         });
+    }
+    else {
+      invalidInput();
     };
   };
 };

@@ -7,7 +7,7 @@
            id="email"
            ng-model="email"
            required)
-    %span(ng-show="signup.email.$invalid") Invalid email
+    %span(ng-show="signup.email.$invalid && signup.email.$dirty") Invalid email
     
     %label(for="password") Lösenord:
     %input(type="password"
@@ -20,4 +20,7 @@
     %span(ng-show="signup.password.$error.minlength") Password too shorty
     %span(ng-show="signup.password.$error.maxlength") Password too longer
     
-    %input(type="submit" name="signup" value="Down the rabbit hole")
+    %input(type="submit"
+           class="btn"
+           name="signup"
+           value="Down the rabbit hole")
