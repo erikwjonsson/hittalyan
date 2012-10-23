@@ -32,6 +32,8 @@
                 %a(href="#/medlemssidor" ng-show="isLoggedIn()") Medlemssidor
               %li(ng-show="isLoggedIn()")
                 %a(ng-click="logout()" ng-show="isLoggedIn()") Logga ut
+              %li(ng-hide="isLoggedIn()")
+                %a(href="#/losenordsaterstallning" ng-hide="isLoggedIn()") Glömt Lösenord?
 
             %form#loginform.navbar-form.pull-right(name="login"
                                                    ng-hide="isLoggedIn()"

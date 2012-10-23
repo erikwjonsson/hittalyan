@@ -10,10 +10,12 @@ angular.module('cubancabal', [])
       when('/medlemssidor/filtersettings', {templateUrl: '/medlemssidor/filtersettings', controller: FiltersController}).
       when('/medlemssidor/apartments', {templateUrl: '/medlemssidor/apartments_template', controller: ApartmentsController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
-      when('/signup', {templateUrl: 'signup', controller: SignupController}).
+      when('/registrera', {templateUrl: 'signup', controller: SignupController}).
       when('/om', {templateUrl: 'om',   controller: LandingController}).
       when('/test', {templateUrl: 'test',   controller: TestController}).
-      when('/vanliga-fragor', {templateUrl: 'vanliga-fragor', controller: FAQController})
+      when('/vanliga-fragor', {templateUrl: 'vanliga-fragor', controller: FAQController}).
+      when('/losenordsaterstallning', {templateUrl: 'passwordreset', controller: PasswordResetController}).
+      otherwise({redirectTo: '/'});
 }])
   .run( function($rootScope, $location) {
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
@@ -34,8 +36,7 @@ angular.module('cubancabal', [])
     });
     
     $rootScope.$on( "$routeChangeError", function(event, next, current) {
-      $location.path('/')
+      $location.path('/');
       // $rootScope
-      
     })
   });

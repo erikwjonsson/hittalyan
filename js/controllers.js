@@ -105,6 +105,21 @@ function ApartmentsController($scope, $http) {
     });
 };
 
+function PasswordResetController($scope, $http) {
+  $scope.submit = function() {
+    if ( $scope.passwordreset.$valid == true) {
+      $scope.data = {email: $scope.email};
+      $http.post("passwordreset", $scope.data).
+        success(function(data, status) {
+          alert(data);
+        }).
+        error(function(data, status) {
+          alert("Natural 1");
+        });
+    };
+  };
+};
+
 function TestController($scope) {
   
 };

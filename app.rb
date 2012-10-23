@@ -109,6 +109,10 @@ Cuba.define do
     on "signup" do
       render_haml "signup"
     end
+
+    on "passwordreset" do
+      render_haml "passwordreset"
+    end
     
     on ":catchall" do
       puts "Nu kom nån jävel allt fel"
