@@ -105,6 +105,30 @@ function ApartmentsController($scope, $http) {
     });
 };
 
+function PasswordController($scope, $http) {
+  $scope.submit = function() {
+    if ( $scope.new_password == $scope.repeat_password ) {
+      if ( $scope.passwordChange.$valid == true){
+        $scope.data = {old_password: $scope.old_password,
+                       new_password: $scope.new_password};
+        $http.post("change_password", $scope.data).
+          success(function(data, status) {
+            alert(data);
+            $scope.new_password = "";
+            $scope.repeat_password = "";
+            $scope.old_password = "";
+          }).
+          error(function(data, status) {
+            alert("Natural 1");
+          });
+      };
+    }
+    else {
+      alert("Lösenorden överrensstämmer inte");
+    };
+  };
+};
+
 function PasswordResetController($scope, $http) {
   $scope.submit = function() {
     if ( $scope.passwordreset.$valid == true) {
@@ -122,7 +146,7 @@ function PasswordResetController($scope, $http) {
 
 function PasswordResetConfirmationController($scope, $http, $routeParams) {
   $scope.message = "Lösenordet återställs. Var god vänta...."
-  
+
   $scope.data = {hash: $routeParams['hash']};
   $http.post("passwordreset", $scope.data).
     success(function(data, status) {

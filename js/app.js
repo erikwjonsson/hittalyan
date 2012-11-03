@@ -8,7 +8,8 @@ angular.module('cubancabal', [])
       when('/', {templateUrl: 'landing',   controller: LandingController}).
       when('/medlemssidor', {templateUrl: 'medlemssidor', controller: MembersController}).
       when('/medlemssidor/filtersettings', {templateUrl: '/medlemssidor/filtersettings', controller: FiltersController}).
-      when('/medlemssidor/apartments', {templateUrl: '/medlemssidor/apartments_template', controller: ApartmentsController}).
+      when('/medlemssidor/apartments', {templateUrl: '/medlemssidor/apartments', controller: ApartmentsController}).
+      when('/medlemssidor/losenord', {templateUrl: '/medlemssidor/change_password', controller: PasswordController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
       when('/registrera', {templateUrl: 'signup', controller: SignupController}).
       when('/om', {templateUrl: 'om',   controller: LandingController}).

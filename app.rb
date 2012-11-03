@@ -91,7 +91,7 @@ Cuba.define do
           render_haml "filtersettings", user.filter
         end
         
-        on "apartments_template" do
+        on "apartments" do
           render_haml "apartments"
         end
         
@@ -99,6 +99,10 @@ Cuba.define do
           user = current_user(req)
           filt_apts = filtered_apartments(user.filter)
           res.write ActiveSupport::JSON.encode(filt_apts)
+        end
+
+        on "change_password" do
+          render_haml "change_password"
         end
         render_haml "medlemssidor"
       end
@@ -118,7 +122,7 @@ Cuba.define do
       end
       render_haml "passwordreset"
     end
-    
+
     on ":catchall" do
       puts "Nu kom nån jävel allt fel"
       res.status = 404 #not found
@@ -197,6 +201,16 @@ Cuba.define do
                     body)
         res.write "Mail skickat"
       end
+    end
+
+    on "change_password", param('old_password'), param('new_password') do |old_password, new_password|
+      # There should be some sort of extra check here against old_password
+      # to make sure the user hasn't simply forgotten to log out and some opportunistic
+      # bastard is trying to change the password.
+      user = current_user(req)
+      user.update_attributes!(hashed_password: new_password)
+
+      res.write "Lösenord ändrat"
     end
 
     on ":catchall" do
