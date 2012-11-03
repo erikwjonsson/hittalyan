@@ -8,6 +8,7 @@ require 'cuba/render'
 require 'securerandom'
 require 'rack/post-body-to-params'
 require 'pony'
+require 'date'
 
 
 Cuba.plugin Cuba::Render
@@ -180,7 +181,11 @@ Cuba.define do
 
     on "passwordreset" do
       on param('email') do |email|
-        reset = Reset.create!(email: email)
+        if reset = Reset.find_by(email: email)
+          reset.refresh
+        else
+          reset = Reset.create!(email: email)
+        end
         body = ["Klicka länken inom 12 timmar, annars...",
                 "Länk: http://localhost:4856/#/losenordsaterstallning/#{reset.hashed_link}"].join("\n")
         shoot_email(email,
@@ -190,16 +195,27 @@ Cuba.define do
       end
 
       on param('hash') do |hash|
-        user = User.find_by(email: Reset.find_by(hashed_link: hash).email)
-        new_pass = SecureRandom.hex
-        user.update_attributes!(hashed_password: new_pass)
-        body = ["Ditt nya lösenord: #{new_pass}",
-                "Vi rekommenderar att du ändrar lösenordet till något lättare, och kanske kortare, att komma ihåg.",
-                "Det kan du göra via din medlemssida."].join("\n")
-        shoot_email(user.email,
-                    "Nytt lösenord",
-                    body)
-        res.write "Mail skickat"
+        if reset = Reset.find_by(hashed_link: hash)
+          if (Time.now - reset.created_at) < 43200 # 12 hours
+            user = User.find_by(email: reset.email)
+            new_pass = SecureRandom.hex
+            body = ["Ditt nya lösenord: #{new_pass}",
+                    "Vi rekommenderar att du ändrar lösenordet till något lättare, och kanske kortare, att komma ihåg.",
+                    "Det kan du göra via din medlemssida."].join("\n")
+            shoot_email(user.email,
+                        "Nytt lösenord",
+                        body)
+            user.update_attributes!(hashed_password: new_pass)
+            reset.delete # So the link cannot be used anymore
+            res.write "Mail skickat"
+          else
+            res.status = 404 # For lack of a better status code
+            res.write "Länk förlegad"
+          end # Yes, looks like crap. But it works. There's nothing a few if's cant't fix.
+        else
+          res.status = 404 # For lack of a better status code
+          res.write "Länk förlegad"
+        end
       end
     end
 
@@ -207,6 +223,8 @@ Cuba.define do
       # There should be some sort of extra check here against old_password
       # to make sure the user hasn't simply forgotten to log out and some opportunistic
       # bastard is trying to change the password.
+      # Also, appropriate action taken, status codes etc.
+      # Should obviously not allow the change of password unless old_password checks out.
       user = current_user(req)
       user.update_attributes!(hashed_password: new_password)
 

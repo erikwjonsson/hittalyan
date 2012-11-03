@@ -151,9 +151,10 @@ function PasswordResetConfirmationController($scope, $http, $routeParams) {
   $http.post("passwordreset", $scope.data).
     success(function(data, status) {
       $scope.message = "Lösenord återställt. Ett mail kommer inom kort med ditt nya lösenord.";
-      alert(data)
+      alert(data);
     }).
     error(function(data, status) {
+      $scope.message = data;
       alert("Natural 1");
     });
 };
