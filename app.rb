@@ -186,13 +186,16 @@ Cuba.define do
       end
 
       on param('hash') do |hash|
-        reset = Reset.find_by(hashed_link: hash)
-        user = User.find_by(email: reset.email)
-        puts user.hashed_password
-        user.update_attributes!(hashed_password: "somethingorother")
-        puts user.hashed_password
-
-        res.write user.hashed_password
+        user = User.find_by(email: Reset.find_by(hashed_link: hash).email)
+        new_pass = SecureRandom.hex
+        user.update_attributes!(hashed_password: new_pass)
+        body = ["Ditt nya lösenord: #{new_pass}",
+                "Vi rekommenderar att du ändrar lösenordet till något lättare, och kanske kortare, att komma ihåg.",
+                "Det kan du göra via din medlemssida."].join("\n")
+        shoot_email(user.email,
+                    "Nytt lösenord",
+                    body)
+        res.write "Mail skickat"
       end
     end
 
