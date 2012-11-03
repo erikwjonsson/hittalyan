@@ -7,7 +7,6 @@ class Reset
   field :email, type: String # User
   field :created_at, type: String # So we can know age
   field :hashed_link, type: String # Unique, based on created_at and email
-
   @@salt = '106c8556d820df55f45a18b999eeca45'
 
 	validates :email, :created_at, :hashed_link, presence: true

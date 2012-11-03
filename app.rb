@@ -157,7 +157,6 @@ Cuba.define do
       begin
         user = User.create!(email: email,
                     hashed_password: password, # becomes hashed when created
-                    name: 'Urist McMuffin', #this to be removed as we no want name no more
                     notify_by: [:email, :sms])
       rescue
         res.status = 400
@@ -177,8 +176,7 @@ Cuba.define do
 
     on "passwordreset" do
       on param('email') do |email|
-        reset = Reset.create!(email: email,
-                              created_at: Time.now)
+        reset = Reset.create!(email: email)
         body = ["Klicka länken inom 12 timmar, annars...",
                 "Länk: http://localhost:4856/#/losenordsaterstallning/#{reset.hashed_link}"].join("\n")
         shoot_email(email,
