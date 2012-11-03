@@ -21,6 +21,7 @@ Mongoid.load!('mongoid.yml', :development)
 # Cuba.use Rack::Protection
 # Cuba.use Rack::Protection::RemoteReferrer
 # Cuba.use Rack::Logger
+<<<<<<< Updated upstream
 
 def filtered_apartments(filter)
   apartments = Apartment.all
@@ -29,6 +30,17 @@ def filtered_apartments(filter)
     filter.rooms === apartment.rooms &&
     filter.area  === apartment.area)
   end
+=======
+# Cuba.use Rack::PostBodyToParams
+# Cuba.use Rack::Static, :urls => ["/js", "/css", "/libs", "/favicon.ico"], :root => ROOT_PATH
+
+(1..5).each do |i|
+  ResetTest.create!(name: "Number #{i}",
+                    created_at: Time.now.utc)
+  puts i
+  puts Time.now.utc
+  sleep(2)
+>>>>>>> Stashed changes
 end
 
 user = User.find_by(name: "kermit")

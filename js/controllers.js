@@ -55,7 +55,7 @@ function LoginController($scope, $http, $location) {
   };
 };
 
-function FAQController($scope) {
+function FAQController($scope, $routeParams) {
   $scope.message = "Look within and you will find the answers you seek.";
 };
 
@@ -118,6 +118,20 @@ function PasswordResetController($scope, $http) {
         });
     };
   };
+};
+
+function PasswordResetConfirmationController($scope, $http, $routeParams) {
+  $scope.message = "Lösenordet återställs. Var god vänta...."
+  
+  $scope.data = {hash: $routeParams['hash']};
+  $http.post("passwordreset", $scope.data).
+    success(function(data, status) {
+      $scope.message = "Lösenord återställt. Ett mail kommer inom kort med ditt nya lösenord.";
+      alert(data)
+    }).
+    error(function(data, status) {
+      alert("Natural 1");
+    });
 };
 
 function TestController($scope) {

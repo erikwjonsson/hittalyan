@@ -15,6 +15,7 @@ angular.module('cubancabal', [])
       when('/test', {templateUrl: 'test',   controller: TestController}).
       when('/vanliga-fragor', {templateUrl: 'vanliga-fragor', controller: FAQController}).
       when('/losenordsaterstallning', {templateUrl: 'passwordreset', controller: PasswordResetController}).
+      when('/losenordsaterstallning/:hash', {templateUrl: 'passwordreset/confirmation', controller: PasswordResetConfirmationController}).
       otherwise({redirectTo: '/'});
 }])
   .run( function($rootScope, $location) {

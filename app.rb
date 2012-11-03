@@ -7,6 +7,8 @@ require 'haml'
 require 'cuba/render'
 require 'securerandom'
 require 'rack/post-body-to-params'
+require 'pony'
+
 
 Cuba.plugin Cuba::Render
 
@@ -111,6 +113,9 @@ Cuba.define do
     end
 
     on "passwordreset" do
+      on "confirmation" do
+        render_haml "passwordresetconfirmation"
+      end
       render_haml "passwordreset"
     end
     
@@ -169,7 +174,30 @@ Cuba.define do
                          rent: rent,
                          area: area)
     end
-    
+
+    on "passwordreset" do
+      on param('email') do |email|
+        reset = Reset.create!(email: email,
+                              created_at: Time.now)
+        body = ["Klicka länken inom 12 timmar, annars...",
+                "Länk: http://localhost:4856/#/losenordsaterstallning/#{reset.hashed_link}"].join("\n")
+        shoot_email(email,
+                    "Lösenordsåterställning",
+                    body)
+        res.write "Mail skickat"
+      end
+
+      on param('hash') do |hash|
+        reset = Reset.find_by(hashed_link: hash)
+        user = User.find_by(email: reset.email)
+        puts user.hashed_password
+        user.update_attributes!(hashed_password: "somethingorother")
+        puts user.hashed_password
+
+        res.write user.hashed_password
+      end
+    end
+
     on ":catchall" do
       puts "Nu kom nån jävel allt fel"
       res.status = 404 #not found
