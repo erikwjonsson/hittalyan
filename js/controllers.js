@@ -18,7 +18,7 @@ function IndexController($scope, $http, $location) {
         $location.path('/');
       });
   };
-};
+}
 
 function LandingController($scope) {
   $scope.message = "There is no spoon. Revenge!";
@@ -32,7 +32,7 @@ function LoginController($scope, $http, $location) {
   };
 
   $scope.submit = function() {
-    if ( $scope.login.$valid == true) {
+    if ( $scope.login.$valid == true ) {
       $scope.data = {email: $scope.email,
                      password: $scope.password};
       $http.post("login", $scope.data).
@@ -51,13 +51,13 @@ function LoginController($scope, $http, $location) {
     }
     else {
       invalidInput();
-    };
+    }
   };
-};
+}
 
 function FAQController($scope, $routeParams) {
   $scope.message = "Look within and you will find the answers you seek.";
-};
+}
 
 function SignupController($scope, $http, $location) {
   $scope.submit = function() {
@@ -70,13 +70,13 @@ function SignupController($scope, $http, $location) {
         }).
         error(function(data, status) {
         });
-    };
+    }
   };
-};
+}
 
 function MembersController($scope) {
   $scope.message = "Look within and you will find the answers you seek.";
-};
+}
 
 function FiltersController($scope, $http) {
   $scope.submit = function() {
@@ -91,9 +91,9 @@ function FiltersController($scope, $http) {
         error(function(data, status) {
           alert("Natural 1");
         });
-    };
+    }
   };
-};
+}
 
 function ApartmentsController($scope, $http) {
   $http.get("medlemssidor/apartments_list").
@@ -102,8 +102,8 @@ function ApartmentsController($scope, $http) {
     }).
     error(function(data, status) {
       $scope.apartments = "Något slags fel";
-    });
-};
+    })
+}
 
 function PasswordController($scope, $http) {
   $scope.submit = function() {
@@ -121,13 +121,13 @@ function PasswordController($scope, $http) {
           error(function(data, status) {
             alert("Natural 1");
           });
-      };
+      }
     }
     else {
       alert("Lösenorden överrensstämmer inte");
-    };
+    }
   };
-};
+}
 
 function PasswordResetController($scope, $http) {
   $scope.submit = function() {
@@ -140,25 +140,35 @@ function PasswordResetController($scope, $http) {
         error(function(data, status) {
           alert("Natural 1");
         });
-    };
+    }
   };
-};
+}
 
-function PasswordResetConfirmationController($scope, $http, $routeParams) {
-  $scope.message = "Lösenordet återställs. Var god vänta...."
+function PasswordResetConfirmationController($scope, $http, $routeParams, $location) {
+  // $scope.message = "Lösenordet återställs. Var god vänta...."
 
-  $scope.data = {hash: $routeParams['hash']};
-  $http.post("passwordreset", $scope.data).
-    success(function(data, status) {
-      $scope.message = "Lösenord återställt. Ett mail kommer inom kort med ditt nya lösenord.";
-      alert(data);
-    }).
-    error(function(data, status) {
-      $scope.message = data;
-      alert("Natural 1");
-    });
-};
+  $scope.submit = function() {
+    if ( $scope.new_password == $scope.repeat_password ) {
+      if ( $scope.passwordresetconfirmation.$valid == true) {
+        $scope.data = {hash: $routeParams['hash'],
+                       new_password: $scope.new_password};
+        $http.post("passwordreset", $scope.data).
+          success(function(data, status) {
+            alert(data);
+            $location.path('/');
+          }).
+          error(function(data, status) {
+            $scope.message = data;
+            alert("Natural 1");
+          });
+      }
+    }
+    else {
+      alert("Lösenorden överrensstämmer inte");
+    }
+  };
+}
 
 function TestController($scope) {
   
-};
+}

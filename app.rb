@@ -194,20 +194,20 @@ Cuba.define do
         res.write "Mail skickat"
       end
 
-      on param('hash') do |hash|
+      on param('hash'), param('new_password') do |hash, new_pass|
         if reset = Reset.find_by(hashed_link: hash)
           if (Time.now - reset.created_at) < 43200 # 12 hours
             user = User.find_by(email: reset.email)
-            new_pass = SecureRandom.hex
-            body = ["Ditt nya lösenord: #{new_pass}",
-                    "Vi rekommenderar att du ändrar lösenordet till något lättare, och kanske kortare, att komma ihåg.",
-                    "Det kan du göra via din medlemssida."].join("\n")
-            shoot_email(user.email,
-                        "Nytt lösenord",
-                        body)
+            # new_pass = SecureRandom.hex
+            # body = ["Ditt nya lösenord: #{new_pass}",
+            #         "Vi rekommenderar att du ändrar lösenordet till något lättare, och kanske kortare, att komma ihåg.",
+            #         "Det kan du göra via din medlemssida."].join("\n")
+            # shoot_email(user.email,
+            #             "Nytt lösenord",
+            #             body)
             user.update_attributes!(hashed_password: new_pass)
             reset.delete # So the link cannot be used anymore
-            res.write "Mail skickat"
+            res.write "Lösen ändrat till #{new_pass}"
           else
             res.status = 404 # For lack of a better status code
             res.write "Länk förlegad"
