@@ -31,6 +31,10 @@ input:required:focus{
   border-width: 0px;
 }
 
+#loginform a {
+  color: #999;
+}
+
 #loginform input:focus.ng-dirty.ng-invalid:focus,
 #loginform textarea:focus.ng-dirty.ng-invalid:focus,
 #loginform select:focus.ng-dirty.ng-invalid:focus {
@@ -40,8 +44,39 @@ input:required:focus{
           box-shadow: 0 0 0px #f8b9b7;
 }
 
+body { 
+	background: url(/images/stockholmsvy.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.hero-unit h1{
+  font-size: 55px;
+}
+
 /*Make room for the top bar*/
 body {
   padding-top: 60px;
   padding-bottom: 40px;
+}
+
+.box {
+  /*background-color: #eee; # same as standard hero unit*/
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.padhack {
+  padding: 15px;
+}
+
+.opaque {
+  background: rgb(255, 255, 255) transparent; /* default fallback */
+  background: rgba(255, 255, 255, 0.8); /* nice browsers */
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
+  }
 }

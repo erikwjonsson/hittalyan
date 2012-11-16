@@ -1,28 +1,36 @@
-﻿
+﻿.hero-unit.opaque
+  :markdown
+    # Du saknar år i bostadskön och vill ha ett förstahandskontrakt i Stockholm. 
+    ## Det måste inte vara så svårt som det låter.
+    
+    Många lägenheter förmedlas på andra sätt än genom en bostadskö. 
+    De annonseras ofta ut under mycket kort tid. Ibland ligger de bara ute någon minut.
+    Vi håller koll på alla större privata hyresvärdar åt dig och 
+    **när en intressant lägenhet dyker upp får du veta det. Direkt.**
+    
+  %a.btn.btn-primary.btn-large Registrera dig »
 
-/ Main hero unit for a primary marketing message or call to action
-.hero-unit
-  %h1 Hello, world!
-  %p This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
-  %p
-    %a.btn.btn-primary.btn-large Learn more »
-/ Example row of columns
 .row
-  .span4
-    %h2 Heading
-    %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-    %p
-      %a.btn{:href => "#"} View details »
-  .span4
-    %h2 Heading
-    %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-    %p
-      %a.btn{:href => "#"} View details »
-  .span4
-    %h2 Heading
-    %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-    %p
-      %a.btn{:href => "#"} View details »
-%hr
-  %footer
-    %p © Torsk Software 2012
+  .span4.box.opaque
+    .padhack
+      :markdown
+        ## E-post eller SMS
+        _Samma minut_ som en lägenhet annonseras ut skickar vi ett 
+        e-postmeddelande eller SMS till dig.
+  .span4.box.opaque
+    .padhack
+      :markdown
+        ## Hyra, yta, läge...
+        Välj enkelt vad du vill betala i hyra, 
+        vilken yta du behöver och vilket läge du vill ha. 
+        På så vis får du alltid lägenhetstips som passar dig.
+  .span4.box.opaque
+    .padhack
+      :markdown
+        ## Vad kostar det?
+        Du kan registrera dig och kolla runt på våra medlemssidor i lugn och ro 
+        för att få en bättre bild av hur tjänsten fungerar.
+        Om du sedan vill aktivera utskick av lägenhetstips kostar det 285 kronor 
+        för en månad.
+      %p
+        %a.btn{:href => "#"} Registrera dig »
