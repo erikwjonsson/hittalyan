@@ -3,6 +3,6 @@ development:
     default:
       database: cubancabal
       hosts:
-        - localhost:27017
+        - getenv("MONGOLAB_URI")
   options:
       raise_not_found_error: false
