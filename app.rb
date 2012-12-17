@@ -163,8 +163,9 @@ Cuba.define do
         user = User.create!(email: email,
                     hashed_password: password, # becomes hashed when created
                     notify_by: [:email, :sms])
-      rescue
+      rescue Exception => err
         res.status = 400
+        res.write "#{err}"
       end
     end
     
