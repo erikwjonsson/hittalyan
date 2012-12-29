@@ -127,7 +127,7 @@ Cuba.define do
     on ":catchall" do
       puts "Nu kom nån jävel allt fel"
       res.status = 404 # not found
-      res.write "Nu kom du allt fel din jävel!"
+      res.write "Nu kom du allt fel din javel!"
     end
   end
   
@@ -233,7 +233,7 @@ Cuba.define do
     on ":catchall" do
       log.info('Nu kom nån jävel allt fel')
       res.status = 404 # not found
-      res.write "Nu kom du allt fel din jävel!"
+      res.write "Nu kom du allt fel din javel!"
     end
   end
 end
