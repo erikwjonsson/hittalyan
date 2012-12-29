@@ -163,6 +163,11 @@ Cuba.define do
         user = User.create!(email: email,
                     hashed_password: password, # becomes hashed when created
                     notify_by: [:email, :sms])
+        # test user for unit testing purposes
+        if email == 'hank@rug.burn'
+          user.delete
+          res.write 'You\'ve got Hank!'
+        end
       rescue => err
         res.status = 400 # bad request
         res.write "#{err}"
