@@ -126,7 +126,7 @@ Cuba.define do
 
     on ":catchall" do
       puts "Nu kom nån jävel allt fel"
-      res.status = 404 #not found
+      res.status = 404 # not found
       res.write "Nu kom du allt fel din jävel!"
     end
   end
@@ -147,7 +147,7 @@ Cuba.define do
 				if user
 					init_session(req, user)
 				else
-          res.status = 401 #unauthorized
+          res.status = 401 # unauthorized
 					res.write "Ogiltig e-postadress eller lösenord."
 				end
 			end
@@ -163,8 +163,8 @@ Cuba.define do
         user = User.create!(email: email,
                     hashed_password: password, # becomes hashed when created
                     notify_by: [:email, :sms])
-      rescue Exception => err
-        res.status = 400
+      rescue => err
+        res.status = 400 # bad request
         res.write "#{err}"
       end
     end
@@ -199,13 +199,6 @@ Cuba.define do
         if reset = Reset.find_by(hashed_link: hash)
           if (Time.now - reset.created_at) < 43200 # 12 hours
             user = User.find_by(email: reset.email)
-            # new_pass = SecureRandom.hex
-            # body = ["Ditt nya lösenord: #{new_pass}",
-            #         "Vi rekommenderar att du ändrar lösenordet till något lättare, och kanske kortare, att komma ihåg.",
-            #         "Det kan du göra via din medlemssida."].join("\n")
-            # shoot_email(user.email,
-            #             "Nytt lösenord",
-            #             body)
             user.update_attributes!(hashed_password: new_pass)
             reset.delete # So the link cannot be used anymore
             res.write "Lösen ändrat till #{new_pass}"
@@ -234,7 +227,7 @@ Cuba.define do
 
     on ":catchall" do
       log.info('Nu kom nån jävel allt fel')
-      res.status = 404 #not found
+      res.status = 404 # not found
       res.write "Nu kom du allt fel din jävel!"
     end
   end

@@ -14,6 +14,7 @@ class User
   
   validates_presence_of :email, :hashed_password
   validates_length_of :hashed_password, maximum: 64
+  validates_uniqueness_of :email
   
   before_validation do |document|
     document.hashed_password = encrypt(document.hashed_password)
