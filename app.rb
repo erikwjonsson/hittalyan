@@ -161,8 +161,7 @@ Cuba.define do
     on "signup", param('email'), param('password') do |email, password|
       begin
         user = User.create!(email: email,
-                    hashed_password: password, # becomes hashed when created
-                    notify_by: [:email, :sms])
+                            hashed_password: password) # becomes hashed when created
         # test user for unit testing purposes
         if email == 'hank@rug.burn'
           user.delete
@@ -170,6 +169,7 @@ Cuba.define do
         end
       rescue => err
         res.status = 403 # bad request
+        log.info "#{p err}"
         res.write "#{err}"
       end
     end

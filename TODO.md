@@ -16,3 +16,10 @@ Medlemssidan        #design
 	Filtersettings    #design, some funktionalitet
 	Apartments        #design, some funktionalitet
 	Lösenordsändring  #design
+
+"hashed_password": "c635b39d558de66d85b5d6b60b30d69b5163f417bc59f75f8eb235e49a9ecba6",
+  "notify_by": [      #Borde inte vara här!
+    "email",          #Borde inte vara här!
+    "sms"             #Borde inte vara här!
+  ],
+  "notify_by_email": false,
