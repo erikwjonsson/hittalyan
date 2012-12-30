@@ -169,7 +169,7 @@ Cuba.define do
           res.write 'You\'ve got Hank!'
         end
       rescue => err
-        res.status = 400 # bad request
+        res.status = 403 # bad request
         res.write "#{err}"
       end
     end
