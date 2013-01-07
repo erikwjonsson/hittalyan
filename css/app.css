@@ -80,3 +80,10 @@ body {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
   }
 }
+
+form input {
+  margin: 5px;
+}
+
+
+

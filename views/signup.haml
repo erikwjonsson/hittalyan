@@ -1,4 +1,4 @@
-%form(name="signup" ng-submit="submit()" novalidate)
+%form.padhack.box.opaque(name="signup" ng-submit="submit()" novalidate)
   %fieldset
     %legend Registrera dig här!
     %label(for="email") Din e-postadress:
@@ -7,7 +7,7 @@
            id="email"
            ng-model="email"
            required)
-    %span(ng-show="signup.email.$invalid && signup.email.$dirty") Invalid email
+    %span(ng-show="signup.email.$invalid && signup.email.$dirty") Ogiltig e-postadress.
     
     %label(for="password") Lösenord:
     %input(type="password"
@@ -17,10 +17,10 @@
            required
            ng-minlength="6"
            ng-maxlength="36")
-    %span(ng-show="signup.password.$error.minlength") Password too shorty
-    %span(ng-show="signup.password.$error.maxlength") Password too longer
-    
+    %span(ng-show="signup.password.$error.minlength") Lösenordet är för kort.
+    %span(ng-show="signup.password.$error.maxlength") Lösenordet är för långt.
+    %br
     %input(type="submit"
            class="btn"
            name="signup"
-           value="Down the rabbit hole")
+           value="Registrera")

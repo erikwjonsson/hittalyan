@@ -50,9 +50,10 @@
                            required
                            ng-minlength="6"
                            ng-maxlength="36")
-                %input.btn(type="submit"
-                           name="login"
-                           value="Logga in")
+                %input(type="submit"
+                       class="btn"
+                       name="login"
+                       value="Logga in")
           / /.nav-collapse
     .container
       %div{'ng-view' => true}

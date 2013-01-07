@@ -56,7 +56,6 @@ function LoginController($scope, $http, $location) {
 }
 
 function FAQController($scope, $routeParams) {
-  $scope.message = "Look within and you will find the answers you seek.";
 }
 
 function SignupController($scope, $http, $location) {
@@ -75,7 +74,6 @@ function SignupController($scope, $http, $location) {
 }
 
 function MembersController($scope) {
-  $scope.message = "Look within and you will find the answers you seek.";
 }
 
 function FiltersController($scope, $http) {
