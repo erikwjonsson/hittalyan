@@ -4,3 +4,10 @@ production:
       uri: mongodb://af_cubancabal-lingonberryprod:dpoqovae4grh52dr22fulu0569@ds045757.mongolab.com:45757/af_cubancabal-lingonberryprod
   options:
       raise_not_found_error: false
+
+development:
+  sessions:
+    default:
+      uri: mongodb://af_cubancabal-lingonberryprod:dpoqovae4grh52dr22fulu0569@ds045757.mongolab.com:45757/af_cubancabal-lingonberryprod
+  options:
+      raise_not_found_error: false

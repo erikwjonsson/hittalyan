@@ -1,5 +1,7 @@
 ﻿
 /*Make bootstrap grok some Angular*/
+
+/*Ng says invalid for whatever reason. Red*/
 input.ng-dirty.ng-invalid,
 textarea.ng-dirty.ng-invalid,
 select.ng-dirty.ng-invalid {
@@ -7,21 +9,37 @@ select.ng-dirty.ng-invalid {
   border-color: #ee5f5b;
 }
 
-input:focus.ng-dirty.ng-invalid:focus,
-textarea:focus.ng-dirty.ng-invalid:focus,
-select:focus.ng-dirty.ng-invalid:focus {
-  border-color: #e9322d;
+/*Invalid and in focus. Glowy red*/
+input:focus.ng-dirty.ng-invalid,
+textarea:focus.ng-dirty.ng-invalid,
+select:focus.ng-dirty.ng-invalid {
+  color: #b94a48;
+  border-color: #ee5f5b;
   -webkit-box-shadow: 0 0 6px #f8b9b7;
      -moz-box-shadow: 0 0 6px #f8b9b7;
           box-shadow: 0 0 6px #f8b9b7;
 }
 
-input:required:focus{
+/*Valid. Blue*/
+input.ng-valid {
+  color: #00a8ed;
+  border-color: #00a8ed;
+}
+
+/*Valid and in focus. Glowy blue*/
+input:focus.ng-valid {
+  color: #00a8ed;
+  border-color: #00a8ed;
+}
+
+"ng-valid-maxlength ng-dirty ng-valid-required ng-valid ng-valid-minlength"
+
+/*input:required:focus{
   border-width: 0px;
   -webkit-box-shadow: 0 0 0px black;
      -moz-box-shadow: 0 0 0px black;
-          box-shadow: 0 0 0px black;
-}
+          box-shadow: 0 0 0px black;*/
+
 
 #loginform input.ng-dirty.ng-invalid,
 #loginform textarea.ng-dirty.ng-invalid,

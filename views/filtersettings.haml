@@ -1,22 +1,25 @@
-﻿%form(name="filtersettings" ng-submit="submit()" novalidate)
-  %fieldset
-    %legend Filterinställningar
-    %label(for="rooms") Rum:
-    %input(type="text"
-           name="rooms"
-           ng-model="rooms"
-           id="rooms")
-    %label(for="rent") Hyra:
-    %input(type="text"
-           name="rent"
-           ng-model="rent"
-           id="rent")
-    %label(for="area") Area:
-    %input(type="text"
-           name="area"
-           ng-model="area"
-           id="area")
-    %input(type="submit"
-           class="btn"
-           name="save"
-           value="Spara")
+﻿.row
+  .span12.box.opaque
+    .padhack
+      %form(name="filtersettings" ng-submit="submit()" novalidate)
+        %fieldset
+          %legend Filterinställningar
+          %label(for="rooms") Rum:
+          %input(type="text"
+                 name="rooms"
+                 ng-model="rooms"
+                 id="rooms")
+          %label(for="rent") Hyra:
+          %input(type="text"
+                 name="rent"
+                 ng-model="rent"
+                 id="rent")
+          %label(for="area") Area:
+          %input(type="text"
+                 name="area"
+                 ng-model="area"
+                 id="area")
+          %input(type="submit"
+                 class="btn"
+                 name="save"
+                 value="Spara")
