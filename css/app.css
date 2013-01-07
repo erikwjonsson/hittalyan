@@ -85,5 +85,7 @@ form input {
   margin: 5px;
 }
 
-
+html {
+	overflow-y: scroll; 
+}
 
