@@ -167,10 +167,10 @@ Cuba.define do
           user.delete
           res.write 'You\'ve got Hank!'
         end
-      rescue => err
-        res.status = 403 # bad request
-        log.info "#{p err}"
-        res.write "#{err}"
+      rescue Mongoid::Errors::Validations => ex
+        error_codes = MongoidExceptionCodifier.codify(ex)
+        res.status = 400 # bad request
+        res.write "#{error_codes}"
       end
     end
     

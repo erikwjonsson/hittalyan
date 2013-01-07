@@ -21,14 +21,14 @@ class User
     document.hashed_password = encrypt(document.hashed_password)
   end
   
+  def has_password?(submitted_password)
+    self.hashed_password == encrypt(submitted_password)
+  end
+
   def self.authenticate(email, submitted_password)
     user = self.find_by(email: email)
     return nil unless user
     return user if user.has_password?(submitted_password)
-  end
-  
-  def has_password?(submitted_password)
-    self.hashed_password == encrypt(submitted_password)
   end
   
   private
