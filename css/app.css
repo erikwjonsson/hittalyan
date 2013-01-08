@@ -1,4 +1,18 @@
 ﻿
+/*Forcing vertical scrollbar to prevent jumping*/
+html {
+  overflow-y: scroll; 
+}
+
+/*GREEN for ok. Semantics*/
+.okness {
+  color: #198a00;
+}
+
+.checkmark {
+  margin-left: 5px;
+}
+
 /*Make bootstrap grok some Angular*/
 
 /*Ng says invalid for whatever reason. Red*/
@@ -32,36 +46,7 @@ input:focus.ng-valid {
   border-color: #00a8ed;
 }
 
-"ng-valid-maxlength ng-dirty ng-valid-required ng-valid ng-valid-minlength"
-
-/*input:required:focus{
-  border-width: 0px;
-  -webkit-box-shadow: 0 0 0px black;
-     -moz-box-shadow: 0 0 0px black;
-          box-shadow: 0 0 0px black;*/
-
-
-#loginform input.ng-dirty.ng-invalid,
-#loginform textarea.ng-dirty.ng-invalid,
-#loginform select.ng-dirty.ng-invalid,
-#loginform :required {
-  color: black;
-  border-width: 0px;
-}
-
-#loginform a {
-  color: #999;
-}
-
-#loginform input:focus.ng-dirty.ng-invalid:focus,
-#loginform textarea:focus.ng-dirty.ng-invalid:focus,
-#loginform select:focus.ng-dirty.ng-invalid:focus {
-  border-width: 0px;
-  -webkit-box-shadow: 0 0 0px #f8b9b7;
-     -moz-box-shadow: 0 0 0px #f8b9b7;
-          box-shadow: 0 0 0px #f8b9b7;
-}
-
+/*Background image for entire app*/
 body { 
 	background: url(/images/stockholmsvy.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
@@ -70,6 +55,7 @@ body {
 	background-size: cover;
 }
 
+/*Landing hero, duh.*/
 .hero-unit h1{
   font-size: 55px;
 }
@@ -80,30 +66,24 @@ body {
   padding-bottom: 40px;
 }
 
+/*Rounding of those dangerous corners*/
 .box {
-  /*background-color: #eee; # same as standard hero unit*/
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
 
+/*Hacking padding bootstrap.row.span. Needs to be put in a div.*/
 .padhack {
   padding: 15px;
 }
 
+/*Set element background to white and make that same BACKGROUND transparent*/
 .opaque {
   background: rgb(255, 255, 255) transparent; /* default fallback */
   background: rgba(255, 255, 255, 0.8); /* nice browsers */
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
   }
-}
-
-form input {
-  margin: 5px;
-}
-
-html {
-	overflow-y: scroll; 
 }
 
