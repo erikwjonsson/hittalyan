@@ -24,8 +24,8 @@ Cuba.use Rack::Session::Cookie
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger
+Cuba.use Rack::Static, :urls => ["/js", "/css", "/fonts", "/images", "/libs", "/favicon.ico"], :root => ROOT_PATH
 Cuba.use Rack::PostBodyToParams
-Cuba.use Rack::Static, :urls => ["/js", "/css", "/images", "/libs", "/favicon.ico"], :root => ROOT_PATH
 
 def init_session(req, user)
   sid = SecureRandom.uuid
