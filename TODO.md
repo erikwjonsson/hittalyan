@@ -23,3 +23,10 @@ Medlemssidan        #design
     "sms"             #Borde inte vara här!
   ],
   "notify_by_email": false,
+
+Välja och söka efter läge.
+  Användaren får möjlighet att på "fri hand" markera ut område på en karta i vilket
+  denne är intresserad av lägenheter.
+  Karta från google maps där anvädaren får placera ut en förutbestämd(?) figur.
+  På något viss klurara vi ut vad som har markerats och filtrerar sökning efter det.
+  Geofencing?
