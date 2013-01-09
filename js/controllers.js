@@ -77,11 +77,20 @@ function MembersController($scope) {
 }
 
 function FiltersController($scope, $http) {
+  $scope.roomValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  $scope.rentValues = [1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000,
+                       5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500,
+                       10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500,
+                       14000, 14500]
+  $scope.areaValues = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80,
+                       90, 95, 100 ,105, 110, 115, 120, 125, 130, 135, 140,145]
   $scope.submit = function() {
     if ( $scope.filtersettings.$valid == true) {
-      $scope.data = {rooms: $scope.rooms,
-                    rent: $scope.rent,
-                    area: $scope.area};
+      $scope.data = {roomsMin: $scope.roomsMin,
+                     roomsMax: $scope.roomsMax,
+                     rent: $scope.rent,
+                     areaMin: $scope.areaMin,
+                     areaMax: $scope.areaMax};
       $http.post("filter", $scope.data).
         success(function(data, status) {
           alert(data);

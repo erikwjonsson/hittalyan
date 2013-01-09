@@ -4,21 +4,46 @@
       %form(name="filtersettings" ng-submit="submit()" novalidate)
         %fieldset
           %legend Filterinställningar
-          %label(for="rooms") Rum:
-          %input(type="text"
-                 name="rooms"
-                 ng-model="rooms"
-                 id="rooms")
-          %label(for="rent") Hyra:
-          %input(type="text"
-                 name="rent"
-                 ng-model="rent"
-                 id="rent")
+          %label(for="rooms") Antal rum:
+          %select(ng-model="roomsMin"
+                  name="rooms"
+                  class="select")
+            %option(value="" 
+                    disabled="disabled")Minimalt antal rum
+            %option(ng-repeat="val in roomValues"
+                    value="{{val}}") {{val}}
+          %select(ng-model="roomsMax"
+                  class="slct")
+            %option(value=""
+                    disabled="disabled")Maximalt antal rum
+            %option(ng-repeat="val in roomValues"
+                    value="{{val}}") {{val}}
+            %option(value="999") 10+
+
           %label(for="area") Area:
-          %input(type="text"
-                 name="area"
-                 ng-model="area"
-                 id="area")
+          %select(ng-model="areaMin"
+                  name="area")
+            %option(value="" 
+                    disabled="disabled")Minimal area
+            %option(ng-repeat="val in areaValues"
+                    value="{{val}}") {{val}}
+          %select(ng-model="areaMax")
+            %option(value=""
+                    disabled="disabled")Maximal area
+            %option(ng-repeat="val in areaValues"
+                    value="{{val}}") {{val}}
+            %option(value="9999") 150+
+
+          %label(for="rent") Hyra:
+          %select(ng-model="rent"
+                  name="rent")
+            %option(value="" 
+                    disabled="disabled")Maximal hyra
+            %option(ng-repeat="val in rentValues"
+                    value="{{val}}") {{val}}
+            %option(value="999999") 15000+
+
+          %br
           %input(type="submit"
                  class="btn"
                  name="save"

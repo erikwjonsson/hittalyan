@@ -49,7 +49,7 @@ end
 def filtered_apartments(filter)
   apartments = Apartment.all
   apartments.select do |apartment|
-    (filter.rent === apartment.rent &&
+    (filter.rent >= apartment.rent &&
     filter.rooms === apartment.rooms &&
     filter.area  === apartment.area)
   end
@@ -88,11 +88,11 @@ Cuba.define do
       if user == nil
         res.status = 401
       else
-        on "filtersettings" do
+        on "installningar" do
           render_haml "filtersettings", user.filter
         end
         
-        on "apartments" do
+        on "lagenheter" do
           render_haml "apartments"
         end
         
@@ -174,15 +174,16 @@ Cuba.define do
       end
     end
     
-    on "filter", param('rooms'), param('rent'), param('area') do |rooms, rent, area|
+    on "filter", param('roomsMin'), param('roomsMax'), param('rent'),
+                 param('areaMin'), param('areaMax') do |rooms_min, rooms_max, rent, area_min, area_max|
       res.write "Filter POST UN-nested<br/>
-                 Rooms: #{rooms.class}<br/>
+                 Rooms_min: #{rooms_min}<br/>
                  Rent: #{rent}<br/>
-                 Area: #{area}<br/>"
+                 Area_max: #{area_max}<br/>"
       user = current_user(req)
-      user.create_filter(rooms: rooms,
+      user.create_filter(rooms: Range.new(rooms_min.to_i, rooms_max.to_i),
                          rent: rent,
-                         area: area)
+                         area: Range.new(area_min.to_i, area_max.to_i))
     end
 
     on "passwordreset" do
