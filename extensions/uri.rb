@@ -27,4 +27,7 @@ class URI::HTTP
     end
   end
 
+  def as_json
+    self.to_s
+  end
 end
