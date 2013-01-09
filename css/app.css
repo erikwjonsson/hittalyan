@@ -84,6 +84,16 @@ body {
   background: rgba(255, 255, 255, 0.8); /* nice browsers */
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
-  }
 }
 
+#links {
+  padding-left: 40%;
+  /*padding-right: 35%;*/
+  padding-bottom: 20px;
+}
+
+#apartments-list td {
+  /*background-color: pink;*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

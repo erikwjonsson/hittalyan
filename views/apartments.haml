@@ -1,6 +1,15 @@
 .row
   .span12.box.opaque
     .padhack
-      %ul
-        %li(ng-repeat="apartment in apartments")
-          {{$index + 1}} {{apartment.address}}.
+      %span(id="links")
+        %a(href="medlemssidor") Medlemssidor
+        |
+        %a(href="medlemssidor/installningar") Inställningar
+        %hr
+      %table(id="apartments-list")
+        %tr(ng-repeat="apartment in apartments")
+          %td
+            %img(src="images/arnoldpumping_small.jpg")
+          %td
+            %a(href="{{apartment.url}}") Till hyresvärden
+            %br {{apartment.address}}
