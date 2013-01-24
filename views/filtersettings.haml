@@ -1,6 +1,11 @@
 ﻿.row
   .span12.box.opaque
     .padhack
+      %span(id="links")
+        %a(href="#/medlemssidor") Medlemssidor
+        |
+        %a(href="#/medlemssidor/lagenheter") Lägenheter
+        %hr
       %form(name="filtersettings" ng-submit="submit()" novalidate)
         %fieldset
           %legend Filterinställningar
