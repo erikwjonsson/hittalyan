@@ -91,6 +91,10 @@ Cuba.define do
         on "installningar" do
           render_haml "filtersettings", user.filter
         end
+
+        on "filter_values" do
+          res.write ActiveSupport::JSON.encode(user.filter.to_hash)
+        end
         
         on "lagenheter" do
           render_haml "apartments"
