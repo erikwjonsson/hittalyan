@@ -24,7 +24,7 @@ function LandingController($scope) {
   $scope.message = "There is no spoon. Revenge!";
 };
 
-function LoginController($scope, $http, $location) {
+function LoginController($scope, $http, $routeParams, $location) {
   var invalidInput = function() {
     $scope.password = "";
     localStorage.loggedIn = "false";
@@ -59,15 +59,30 @@ function FAQController($scope, $routeParams) {
 }
 
 function SignupController($scope, $http, $location) {
+  var invalidInput = function() {
+    $scope.password = "";
+    localStorage.loggedIn = "false";
+    alert("Nu skrev du allt fel din jävel");
+    $location.path('/login');
+  };
+
   $scope.submit = function() {
     if ( $scope.signup.$valid == true) {
       $scope.data = {email: $scope.email,
                     password: $scope.password};
       $http.post("signup", $scope.data).
         success(function(data, status) {
-          $location.path('/medlemssidor');
+          $http.post("login", $scope.data).
+            success(function(data, status) {
+              localStorage.loggedIn = "true";
+              $location.path('/medlemssidor');
+            }).
+            error(function(data, status) {
+              invalidInput();
+            });
         }).
         error(function(data, status) {
+          invalidInput();
         });
     }
   };
