@@ -123,7 +123,7 @@ function ApartmentsController($scope, $http) {
       $scope.apartments = data;
     }).
     error(function(data, status) {
-      $scope.apartments = "Något slags fel";
+      $scope.apartments = [{address: "Något slags fel"}];
     })
 }
 
