@@ -92,26 +92,154 @@ function MembersController($scope) {
 }
 
 function FiltersController($scope, $http) {
-  $scope.roomValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  $scope.rentValues = [1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000,
-                       5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500,
-                       10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500,
-                       14000, 14500]
-  $scope.areaValues = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80,
-                       90, 95, 100 ,105, 110, 115, 120, 125, 130, 135, 140,145]
+  $scope.roomValuesMin = [{name: "0", value: 0},
+                          {name: "1", value: 1},
+                          {name: "2", value: 2},
+                          {name: "3", value: 3},
+                          {name: "4", value: 4},
+                          {name: "5", value: 5},
+                          {name: "6", value: 6},
+                          {name: "7", value: 7},
+                          {name: "8", value: 8},
+                          {name: "9", value: 9}];
+  $scope.roomValuesMax = [{name: "0", value: 0},
+                          {name: "1", value: 1},
+                          {name: "2", value: 2},
+                          {name: "3", value: 3},
+                          {name: "4", value: 4},
+                          {name: "5", value: 5},
+                          {name: "6", value: 6},
+                          {name: "7", value: 7},
+                          {name: "8", value: 8},
+                          {name: "9", value: 9},
+                          {name: "10+", value: 999}];
+  $scope.rentValues = [{name: "0", value: 0},
+                       {name: "1000", value: 1000},
+                       {name: "1500", value: 1500},
+                       {name: "2000", value: 2000},
+                       {name: "2500", value: 2500},
+                       {name: "3000", value: 3000},
+                       {name: "3500", value: 3500},
+                       {name: "4000", value: 4000},
+                       {name: "4500", value: 4500},
+                       {name: "5000", value: 5000},
+                       {name: "5500", value: 5500},
+                       {name: "6000", value: 6000},
+                       {name: "6500", value: 6500},
+                       {name: "7000", value: 7000},
+                       {name: "7500", value: 7500}, 
+                       {name: "8000", value: 8000},
+                       {name: "8500", value: 8500},
+                       {name: "9000", value: 9000},
+                       {name: "9500", value: 9500},
+                       {name: "10000", value: 10000},
+                       {name: "10500", value: 10500}, 
+                       {name: "11000", value: 11000},
+                       {name: "11500", value: 11500},
+                       {name: "12000", value: 12000},
+                       {name: "12500", value: 12500},
+                       {name: "13000", value: 13000},
+                       {name: "13500", value: 13500},
+                       {name: "14000", value: 14000},
+                       {name: "14500", value: 14500},
+                       {name: "15000+", value: 999999}];
+  $scope.areaValuesMin = [{name: "0", value: 0},
+                          {name: "10", value: 10},
+                          {name: "15", value: 15},
+                          {name: "20", value: 20},
+                          {name: "25", value: 25},
+                          {name: "30", value: 30},
+                          {name: "35", value: 35},
+                          {name: "40", value: 40},
+                          {name: "45", value: 45},
+                          {name: "50", value: 50},
+                          {name: "55", value: 55},
+                          {name: "60", value: 60},
+                          {name: "65", value: 65},
+                          {name: "70", value: 70},
+                          {name: "75", value: 75},
+                          {name: "80", value: 80},
+                          {name: "90", value: 90},
+                          {name: "95", value: 95},
+                          {name: "100", value: 100},
+                          {name: "105", value: 105},
+                          {name: "110", value: 110},
+                          {name: "115", value: 115},
+                          {name: "120", value: 120},
+                          {name: "125", value: 125},
+                          {name: "130", value: 130},
+                          {name: "135", value: 135},
+                          {name: "140", value: 140},
+                          {name: "145", value: 145}];
+  $scope.areaValuesMax = [{name: "0", value: 0},
+                          {name: "10", value: 10},
+                          {name: "15", value: 15},
+                          {name: "20", value: 20},
+                          {name: "25", value: 25},
+                          {name: "30", value: 30},
+                          {name: "35", value: 35},
+                          {name: "40", value: 40},
+                          {name: "45", value: 45},
+                          {name: "50", value: 50},
+                          {name: "55", value: 55},
+                          {name: "60", value: 60},
+                          {name: "65", value: 65},
+                          {name: "70", value: 70},
+                          {name: "75", value: 75},
+                          {name: "80", value: 80},
+                          {name: "85", value: 85},
+                          {name: "90", value: 90},
+                          {name: "95", value: 95},
+                          {name: "100", value: 100},
+                          {name: "105", value: 105},
+                          {name: "110", value: 110},
+                          {name: "115", value: 115},
+                          {name: "120", value: 120},
+                          {name: "125", value: 125},
+                          {name: "130", value: 130},
+                          {name: "135", value: 135},
+                          {name: "140", value: 140},
+                          {name: "145", value: 145},
+                          {name: "150+", value: 9999}];
+  $http.get("medlemssidor/filter_values").
+    success(function(data, status) {
+      $scope.roomsMin = $scope.roomValuesMin[data.roomsMin];
+      if (data.roomsMax == 999) {
+        $scope.roomsMax = $scope.roomValuesMax[$scope.roomValuesMax.length - 1];
+      } else{
+        $scope.roomsMax = $scope.roomValuesMax[data.roomsMax];
+      };
+      if (data.rent == 999999) {
+        $scope.rent = $scope.rentValues[$scope.rentValues.length - 1];
+      } else{
+        $scope.rent = $scope.rentValues[data.rent/500 -1];
+      };
+      $scope.areaMin = $scope.areaValuesMin[data.areaMin/5 -1];
+      if (data.areaMax == 9999) {
+        $scope.areaMax = $scope.areaValuesMax[$scope.areaValuesMax.length - 1];
+      } else{
+        $scope.areaMax = $scope.areaValuesMax[data.areaMax/5 -1];
+      };
+    }).
+    error(function(data, status) {
+      alert(data)
+    });
   $scope.submit = function() {
     if ( $scope.filtersettings.$valid == true) {
-      $scope.data = {roomsMin: $scope.roomsMin,
-                     roomsMax: $scope.roomsMax,
-                     rent: $scope.rent,
-                     areaMin: $scope.areaMin,
-                     areaMax: $scope.areaMax};
+      $scope.data = {roomsMin: $scope.roomsMin.value,
+                     roomsMax: $scope.roomsMax.value,
+                     rent: $scope.rent.value,
+                     areaMin: $scope.areaMin.value,
+                     areaMax: $scope.areaMax.value};
+      $scope.working = true
       $http.post("filter", $scope.data).
         success(function(data, status) {
-          alert(data);
+          $scope.message = "Inställningar sparade";
+          $scope.working = false
         }).
         error(function(data, status) {
-          alert("Natural 1");
+          $scope.message = "Inställningar INTE sparade";
+          $scope.working = false
         });
     }
   };
@@ -192,5 +320,4 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
 }
 
 function TestController($scope) {
-  
 }

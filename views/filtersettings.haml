@@ -7,44 +7,35 @@
           %label(for="rooms") Antal rum:
           %select(ng-model="roomsMin"
                   name="rooms"
-                  class="select")
+                  ng-options="r.name for r in roomValuesMin")
             %option(value="" 
                     disabled="disabled")Minimalt antal rum
-            %option(ng-repeat="val in roomValues"
-                    value="{{val}}") {{val}}
           %select(ng-model="roomsMax"
-                  class="slct")
+                  ng-options="r.name for r in roomValuesMax")
             %option(value=""
                     disabled="disabled")Maximalt antal rum
-            %option(ng-repeat="val in roomValues"
-                    value="{{val}}") {{val}}
-            %option(value="999") 10+
-
           %label(for="area") Area:
           %select(ng-model="areaMin"
-                  name="area")
+                  name="area"
+                  ng-options="a.name for a in areaValuesMin")
             %option(value="" 
                     disabled="disabled")Minimal area
-            %option(ng-repeat="val in areaValues"
-                    value="{{val}}") {{val}}
-          %select(ng-model="areaMax")
+          %select(ng-model="areaMax"
+                  ng-options="a.name for a in areaValuesMax")
             %option(value=""
                     disabled="disabled")Maximal area
-            %option(ng-repeat="val in areaValues"
-                    value="{{val}}") {{val}}
-            %option(value="9999") 150+
-
           %label(for="rent") Hyra:
           %select(ng-model="rent"
-                  name="rent")
+                  name="rent"
+                  ng-options="r.name for r in rentValues")
             %option(value="" 
-                    disabled="disabled")Maximal hyra
-            %option(ng-repeat="val in rentValues"
-                    value="{{val}}") {{val}}
-            %option(value="999999") 15000+
-
+                    disabled="disabled")Maximal Hyra
           %br
           %input(type="submit"
                  class="btn"
                  name="save"
                  value="Spara")
+          %span(ng-show="working")
+            %i.icon-spinner.checkmark.icon-spin.icon-large
+          %span(ng-hide="working")
+            {{message}}
