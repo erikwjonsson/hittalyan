@@ -59,30 +59,33 @@ function FAQController($scope, $routeParams) {
 }
 
 function SignupController($scope, $http, $location) {
-  var invalidInput = function() {
-    $scope.password = "";
-    localStorage.loggedIn = "false";
-    alert("Nu skrev du allt fel din jävel");
-    $location.path('/login');
-  };
-
   $scope.submit = function() {
     if ( $scope.signup.$valid == true) {
       $scope.data = {email: $scope.email,
-                    password: $scope.password};
+                     password: $scope.password};
+      $scope.message = "Registrerar...";
+      $scope.working = true;
+      $scope.cross = false;
       $http.post("signup", $scope.data).
         success(function(data, status) {
+          $scope.message = "Registrering lyckad. Loggar in..."
           $http.post("login", $scope.data).
             success(function(data, status) {
+              $scope.message = "Inloggad. Omdirigerar..."
               localStorage.loggedIn = "true";
               $location.path('/medlemssidor');
             }).
             error(function(data, status) {
-              invalidInput();
+              $scope.message = "Registrering lyckad men inloggning misslyckad"
+              $scope.working = false;
+              $scope.cross = true;
+              localStorage.loggedIn = "false";
             });
         }).
         error(function(data, status) {
-          invalidInput();
+          $scope.message = "Registrering misslyckad"
+          $scope.working = false;
+          $scope.cross = true;
         });
     }
   };
@@ -234,7 +237,7 @@ function FiltersController($scope, $http) {
       $scope.working = true;
       $scope.checkmark = false;
       $scope.cross = false;
-      $scope.message = "Sparar";
+      $scope.message = "Sparar...";
       $http.post("filter", $scope.data).
         success(function(data, status) {
           $scope.message = "Inställningar sparade";

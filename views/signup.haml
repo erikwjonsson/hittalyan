@@ -33,3 +33,9 @@
                  class="btn"
                  name="signup"
                  value="Registrera")
+          %span(ng-show="working")
+            %i.icon-spinner.checkmark.icon-spin.icon-large
+            {{message}}
+          %span(ng-show="cross")
+            %i.icon-remove.checkmark.wrongness.icon-large
+            {{message}}
