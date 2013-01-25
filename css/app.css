@@ -9,6 +9,11 @@ html {
   color: #198a00;
 }
 
+/*RED for wrong. Semantics*/
+.wrongness {
+  color: #FF0000;
+}
+
 .checkmark {
   margin-left: 5px;
 }
