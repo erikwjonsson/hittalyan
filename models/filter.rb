@@ -1,9 +1,9 @@
 class Filter
   include Mongoid::Document
   embedded_in :user
-  field :rooms, type: Range, default: (0..0)
-  field :rent, type: Integer, default: 0
-  field :area, type: Range, default: (0..0)
+  field :rooms, type: Range, default: (1..1)
+  field :rent, type: Integer, default: 1000
+  field :area, type: Range, default: (10..10)
 
   def to_hash
     hashified = {roomsMin: user.filter.rooms.first,

@@ -166,6 +166,7 @@ Cuba.define do
       begin
         user = User.create!(email: email,
                             hashed_password: password) # becomes hashed when created
+        user.create_filter()
         # test user for unit testing purposes
         if email == 'hank@rug.burn'
           user.delete
