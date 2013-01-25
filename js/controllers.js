@@ -231,15 +231,22 @@ function FiltersController($scope, $http) {
                      rent: $scope.rent.value,
                      areaMin: $scope.areaMin.value,
                      areaMax: $scope.areaMax.value};
-      $scope.working = true
+      $scope.working = true;
+      $scope.checkmark = false;
+      $scope.cross = false;
+      $scope.message = "Sparar";
       $http.post("filter", $scope.data).
         success(function(data, status) {
           $scope.message = "Inställningar sparade";
-          $scope.working = false
+          $scope.working = false;
+          $scope.checkmark = true;
+          $scope.cross = false;
         }).
         error(function(data, status) {
           $scope.message = "Inställningar INTE sparade";
-          $scope.working = false
+          $scope.working = false;
+          $scope.checkmark = false;
+          $scope.cross = true;
         });
     }
   };

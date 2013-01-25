@@ -42,5 +42,10 @@
                  value="Spara")
           %span(ng-show="working")
             %i.icon-spinner.checkmark.icon-spin.icon-large
-          %span(ng-hide="working")
+            {{message}}
+          %span(ng-show="checkmark")
+            %i.icon-ok.checkmark.okness.icon-large
+            {{message}}
+          %span(ng-show="cross")
+            %i.icon-remove.checkmark.wrongness.icon-large
             {{message}}
