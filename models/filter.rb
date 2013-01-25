@@ -6,10 +6,10 @@ class Filter
   field :area, type: Range, default: (0..0)
 
   def to_hash
-    hashified = {roomsMin: user.filter.rooms.min,
-                 roomsMax: user.filter.rooms.max,
+    hashified = {roomsMin: user.filter.rooms.first,
+                 roomsMax: user.filter.rooms.last,
                  rent: user.filter.rent,
-                 areaMin: user.filter.area.min,
-                 areaMax: user.filter.area.max}
+                 areaMin: user.filter.area.first,
+                 areaMax: user.filter.area.last}
   end
 end
