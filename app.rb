@@ -20,7 +20,7 @@ require_from_directory 'models'
 Mongoid.load!('mongoid.yml')
 
 ROOT_PATH = File.expand_path(File.dirname(__FILE__))
-Cuba.use Rack::Session::Cookie
+Cuba.use Rack::Session::Cookie, :expire_after => 60*60*24*60 #sec*min*h*day two months
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger
