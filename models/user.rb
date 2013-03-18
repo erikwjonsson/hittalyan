@@ -16,6 +16,13 @@ class User
   # Note that hashed_password isn't hashed at the point of validation
   validates :hashed_password, presence: true, length: { minimum: 6, maximum: 64}
   
+  before_validation do |document|
+    # When a user registers, downcase the email address.
+    # This will downcase the email unnecessarily whenever the document
+    # is updated. But life is life, what to do? 
+    document.email.downcase!
+  end
+
   # This is where hashed_password becomes true to it's name
   after_validation do |document|
     document.hashed_password = encrypt(document.hashed_password)
