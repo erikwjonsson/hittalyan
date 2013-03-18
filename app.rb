@@ -9,7 +9,7 @@ require 'securerandom'
 require 'rack/post-body-to-params'
 require 'pony'
 require 'date'
-
+require 'rest-client'
 
 Cuba.plugin Cuba::Render
 
@@ -193,17 +193,19 @@ Cuba.define do
 
     on "passwordreset" do
       on param('email') do |email|
-        if reset = Reset.find_by(email: email)
-          reset.refresh
-        else
-          reset = Reset.create!(email: email)
+        if User.find_by(email: email)
+          if reset = Reset.find_by(email: email) #If reset exists, refresh.
+            reset.refresh
+          else
+            reset = Reset.create!(email: email)
+          end
+          body = ["Klicka länken inom 12 timmar, annars...",
+                  "Länk: http://cubancabal.aws.af.cm/#/losenordsaterstallning/#{reset.hashed_link}"].join("\n")
+          shoot_email(email,
+                      "Lösenordsåterställning",
+                      body)
         end
-        body = ["Klicka länken inom 12 timmar, annars...",
-                "Länk: http://localhost:4856/#/losenordsaterstallning/#{reset.hashed_link}"].join("\n")
-        shoot_email(email,
-                    "Lösenordsåterställning",
-                    body)
-        res.write "Mail skickat"
+          res.write "Mail skickat, kan du tro."
       end
 
       on param('hash'), param('new_password') do |hash, new_pass|

@@ -15,28 +15,36 @@ def log
   env['rack.logger']
 end
 
-
 # emailer
-def shoot_email(email, subject, body)
-  Pony.mail({
-    to: email,
-    via: :smtp,
-    via_options: {
-      address:              'smtp.gmail.com',
-      port:                 '587',
-      enable_starttls_auto: true,
-      user_name:            'londomolari123', # Obviously this isn't what we're going to be using
-      password:             'ABcd12!?',				# No matter how cool and obscure it is
-      authentication:       :plain, # :plain, :login, :cram_md5, no auth by default
-      domain:               "localhost.localdomain" # the HELO domain provided by the client to the server
-    },
-    charset: 'UTF-8',
-    body: body,
-    subject: subject # Something else, perhaps?
-  })
-  puts "Email sent to #{email}"
-end
+# def shoot_email(email, subject, body)
+#   Pony.mail({
+#     to: email,
+#     via: :smtp,
+#     via_options: {
+#       address:              'smtp.gmail.com',
+#       port:                 '587',
+#       enable_starttls_auto: true,
+#       user_name:            'londomolari123', # Obviously this isn't what we're going to be using
+#       password:             'ABcd12!?',				# No matter how cool and obscure it is
+#       authentication:       :plain, # :plain, :login, :cram_md5, no auth by default
+#       domain:               "localhost.localdomain" # the HELO domain provided by the client to the server
+#     },
+#     charset: 'UTF-8',
+#     body: body,
+#     subject: subject # Something else, perhaps?
+#   })
+#   puts "Email sent to #{email}"
+# end
 
+def shoot_email(email, subject, body)
+  puts "Shooting email to #{email}"
+  RestClient.post "https://api:key-0rvupmvv2y18ty9o2z6vkwc8qo2l3b85"\
+  "@api.mailgun.net/v2/lingonberryprod.mailgun.org/messages",
+  from: "Hittalyan <lingonberryprod@gmail.com>",
+  to: email,
+  subject: subject,
+  text: body
+end
 
 class MongoidExceptionCodifier
   TOO_SHORT_PASSWORD = 'Hashed password is too short (minimum is 6 characters)'
