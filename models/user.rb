@@ -26,7 +26,7 @@ class User
   end
 
   def self.authenticate(email, submitted_password)
-    user = self.find_by(email: email)
+    user = self.find_by(email: email.downcase)
     return nil unless user
     return user if user.has_password?(submitted_password)
   end
