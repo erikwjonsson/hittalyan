@@ -1,6 +1,21 @@
-﻿localStorage.message: {{localStorage.message}}
-%br 
-message: {{message}}
-%br
-$scope.message: {{$scope.message}}
-%br
+﻿.row
+  .span12.box.opaque
+    .padhack
+      %button(type="submit" class="btn") Dumkopf!
+      %table
+        %legend Välj firringar
+        %tr
+          %td
+            SMS
+          %td
+            %input(type="checkbox" ng-model="smsNotification") {{smsNotification}}
+        %tr
+          %td
+            Mail
+          %td
+            %input(type="checkbox" ng-model="emailNotification") {{emailNotification}}
+        %tr
+          %td
+            Push
+          %td
+            %input(type="checkbox" ng-model="pushNotification") {{pushNotification}}

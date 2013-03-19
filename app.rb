@@ -88,6 +88,12 @@ Cuba.define do
       if user == nil
         res.status = 401
       else
+        on "notify_by" do
+          notify_by = {email: user.notify_by_email,
+                       sms: user.notify_by_sms,
+                       push: user.notify_by_push_note}
+          res.write ActiveSupport::JSON.encode(notify_by)
+        end
         on "installningar" do
           render_haml "filtersettings", user.filter
         end
@@ -199,6 +205,13 @@ Cuba.define do
       user.create_filter(rooms: Range.new(rooms_min.to_i, rooms_max.to_i),
                          rent: rent,
                          area: Range.new(area_min.to_i, area_max.to_i))
+    end
+
+    on "notify_by", param('email'), param('sms'), param('push') do |email, sms, push|
+      user = current_user(req)
+      user.update_attributes!(notify_by_email: email,
+                              notify_by_sms: sms,
+                              notify_by_push_note: push)
     end
 
     on "passwordreset" do

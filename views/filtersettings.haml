@@ -50,6 +50,25 @@
             %i.icon-remove.checkmark.wrongness.icon-large
             {{message}}
 
+      %table
+        %legend Välj firringar
+        %tr
+          %td
+            SMS
+          %td
+            %input(type="checkbox" ng-model="smsNotification") {{smsNotification}}
+        %tr
+          %td
+            Mail
+          %td
+            %input(type="checkbox" ng-model="emailNotification") {{emailNotification}}
+        %tr
+          %td
+            Push
+          %td
+            %input(type="checkbox" ng-model="pushNotification") {{pushNotification}}
+      %button(type="button" class="btn" ng-click="saveNotify()") Spara
+
       %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
         %fieldset
           %legend Avsluta konto

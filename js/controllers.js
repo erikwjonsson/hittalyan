@@ -227,6 +227,27 @@ function FiltersController($scope, $http, $location) {
     error(function(data, status) {
       alert(data)
     });
+  $http.get("medlemssidor/notify_by").
+    success(function(data, status) {
+      $scope.emailNotification = data.email;
+      $scope.smsNotification = data.sms;
+      $scope.pushNotification = data.push;
+    }).
+    error(function(data, status) {
+      alert(data)
+    });
+  $scope.saveNotify = function() {
+    $scope.data = {email: $scope.emailNotification,
+                   sms: $scope.smsNotification,
+                   push: $scope.pushNotification};
+    $http.post("notify_by", $scope.data).
+      success(function(data, status) {
+        alert("Success");
+      }).
+      error(function(data, status) {
+        alert("Fail");
+      });
+  };
   $scope.submit = function() {
     if ( $scope.filtersettings.$valid == true) {
       $scope.data = {roomsMin: $scope.roomsMin.value,
@@ -343,5 +364,14 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
   };
 }
 
-function TestController($scope) {
+function TestController($scope, $http) {
+  $http.get("medlemssidor/notify_by").
+    success(function(data, status) {
+      $scope.emailNotification = data.email;
+      $scope.smsNotification = data.sms;
+      $scope.pushNotification = data.push;
+    }).
+    error(function(data, status) {
+      alert(data)
+    });
 }
