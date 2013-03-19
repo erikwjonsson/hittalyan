@@ -49,3 +49,21 @@
           %span(ng-show="cross")
             %i.icon-remove.checkmark.wrongness.icon-large
             {{message}}
+
+      %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
+        %fieldset
+          %legend Avsluta konto
+          %label(for="termination-password") Lösenord:
+          %input(type="password"
+                name="termination-password"
+                placeholder="Lösenord"
+                id="termination-password"
+                ng-model="terminationPassword"
+                required
+                ng-minlength="6"
+                ng-maxlength="36")
+          %br
+          %input(type="submit"
+                 class="btn"
+                 name="terminate-account"
+                 value="Avsluta konto")

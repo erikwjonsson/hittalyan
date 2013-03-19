@@ -178,6 +178,16 @@ Cuba.define do
         res.write "#{error_codes}"
       end
     end
+
+    on "account_termination", param('password') do |password|
+      user = current_user(req)
+      if user.has_password?(password)
+        user.session.delete
+        user.delete
+      else
+        res.status = 401 #Unathorized
+      end
+    end
     
     on "filter", param('roomsMin'), param('roomsMax'), param('rent'),
                  param('areaMin'), param('areaMax') do |rooms_min, rooms_max, rent, area_min, area_max|

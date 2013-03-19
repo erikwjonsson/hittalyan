@@ -94,7 +94,7 @@ function SignupController($scope, $http, $location) {
 function MembersController($scope) {
 }
 
-function FiltersController($scope, $http) {
+function FiltersController($scope, $http, $location) {
   $scope.roomValuesMin = [{name: "0", value: 0},
                           {name: "1", value: 1},
                           {name: "2", value: 2},
@@ -250,6 +250,20 @@ function FiltersController($scope, $http) {
           $scope.working = false;
           $scope.checkmark = false;
           $scope.cross = true;
+        });
+    }
+  };
+  $scope.terminateAccount = function() {
+    if ($scope.accountTermination.$valid == true) {
+      $scope.data = {password: $scope.terminationPassword};
+      $http.post("account_termination", $scope.data).
+        success(function(data, status) {
+          alert("Ditt konto är avslutat.");
+          localStorage.loggedIn = "false";
+          $location.path('/');
+        }).
+        error(function(data, status) {
+          alert("Ditt konto kunde ej avslutas. Försök igen senare.");
         });
     }
   };
