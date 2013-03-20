@@ -95,8 +95,7 @@ function MembersController($scope) {
 }
 
 function FiltersController($scope, $http, $location) {
-  $scope.roomValuesMin = [{name: "0", value: 0},
-                          {name: "1", value: 1},
+  $scope.roomValuesMin = [{name: "1", value: 1},
                           {name: "2", value: 2},
                           {name: "3", value: 3},
                           {name: "4", value: 4},
@@ -105,8 +104,7 @@ function FiltersController($scope, $http, $location) {
                           {name: "7", value: 7},
                           {name: "8", value: 8},
                           {name: "9", value: 9}];
-  $scope.roomValuesMax = [{name: "0", value: 0},
-                          {name: "1", value: 1},
+  $scope.roomValuesMax = [{name: "1", value: 1},
                           {name: "2", value: 2},
                           {name: "3", value: 3},
                           {name: "4", value: 4},
@@ -116,8 +114,7 @@ function FiltersController($scope, $http, $location) {
                           {name: "8", value: 8},
                           {name: "9", value: 9},
                           {name: "10+", value: 999}];
-  $scope.rentValues = [{name: "0", value: 0},
-                       {name: "1000", value: 1000},
+  $scope.rentValues = [{name: "1000", value: 1000},
                        {name: "1500", value: 1500},
                        {name: "2000", value: 2000},
                        {name: "2500", value: 2500},
@@ -146,8 +143,7 @@ function FiltersController($scope, $http, $location) {
                        {name: "14000", value: 14000},
                        {name: "14500", value: 14500},
                        {name: "15000+", value: 999999}];
-  $scope.areaValuesMin = [{name: "0", value: 0},
-                          {name: "10", value: 10},
+  $scope.areaValuesMin = [{name: "10", value: 10},
                           {name: "15", value: 15},
                           {name: "20", value: 20},
                           {name: "25", value: 25},
@@ -174,8 +170,7 @@ function FiltersController($scope, $http, $location) {
                           {name: "135", value: 135},
                           {name: "140", value: 140},
                           {name: "145", value: 145}];
-  $scope.areaValuesMax = [{name: "0", value: 0},
-                          {name: "10", value: 10},
+  $scope.areaValuesMax = [{name: "10", value: 10},
                           {name: "15", value: 15},
                           {name: "20", value: 20},
                           {name: "25", value: 25},
@@ -206,22 +201,22 @@ function FiltersController($scope, $http, $location) {
                           {name: "150+", value: 9999}];
   $http.get("medlemssidor/filter_values").
     success(function(data, status) {
-      $scope.roomsMin = $scope.roomValuesMin[data.roomsMin];
+      $scope.roomsMin = $scope.roomValuesMin[data.roomsMin - 1];
       if (data.roomsMax == 999) {
         $scope.roomsMax = $scope.roomValuesMax[$scope.roomValuesMax.length - 1];
       } else{
-        $scope.roomsMax = $scope.roomValuesMax[data.roomsMax];
+        $scope.roomsMax = $scope.roomValuesMax[data.roomsMax - 1];
       };
       if (data.rent == 999999) {
         $scope.rent = $scope.rentValues[$scope.rentValues.length - 1];
       } else{
-        $scope.rent = $scope.rentValues[data.rent/500 -1];
+        $scope.rent = $scope.rentValues[data.rent/500 -2];
       };
-      $scope.areaMin = $scope.areaValuesMin[data.areaMin/5 -1];
+      $scope.areaMin = $scope.areaValuesMin[data.areaMin/5 -2];
       if (data.areaMax == 9999) {
         $scope.areaMax = $scope.areaValuesMax[$scope.areaValuesMax.length - 1];
       } else{
-        $scope.areaMax = $scope.areaValuesMax[data.areaMax/5 -1];
+        $scope.areaMax = $scope.areaValuesMax[data.areaMax/5 -2];
       };
     }).
     error(function(data, status) {
