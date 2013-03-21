@@ -24,7 +24,7 @@ class User
   end
 
   # This is where hashed_password becomes true to it's name
-  after_validation do |document|
+  before_create do |document|
     document.hashed_password = encrypt(document.hashed_password)
   end
   
@@ -36,6 +36,13 @@ class User
     user = self.find_by(email: email.downcase)
     return nil unless user
     return user if user.has_password?(submitted_password)
+  end
+
+  def change_password(new_password)
+    self.hashed_password == encrypt(new_password)
+    # We really want to validate the new_passord before it gets hashed.
+    # We jut don't know how. Crap.
+    self.save(validate: false)
   end
   
   private

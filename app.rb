@@ -10,6 +10,7 @@ require 'rack/post-body-to-params'
 require 'pony'
 require 'date'
 require 'rest-client'
+require 'payson_api'
 
 Cuba.plugin Cuba::Render
 
@@ -26,6 +27,11 @@ Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger
 Cuba.use Rack::Static, :urls => ["/js", "/css", "/fonts", "/images", "/libs", "/favicon.ico"], :root => ROOT_PATH
 Cuba.use Rack::PostBodyToParams
+
+PaysonAPI.configure do |config|
+  config.api_user_id = '1'
+  config.api_password = 'fddb19ac-7470-42b6-a91d-072cb1495f0a'
+end
 
 def init_session(req, user)
   sid = SecureRandom.uuid
@@ -143,11 +149,51 @@ Cuba.define do
   
   #POST----------------------------------------
   on post do
-    on "test", param('message') do |m|
-      if m == "moo"
-        res.status = 200
+    on "test" do
+      return_url = 'http://localhost:4856/#/test'
+      cancel_url = 'http://localhost:4856/#/login'
+      ipn_url = 'http://localhost:4856/#/test'
+      memo = 'Thi be teh deskription foh de thigy'
+
+      receivers = []
+      receivers << PaysonAPI::Receiver.new(
+        email = 'testagent-1@payson.se',
+        amount = 125,
+        first_name = 'Sven',
+        last_name = 'Svensson',
+        primary = true)
+
+      sender = PaysonAPI::Sender.new(
+        email = 'lingonberyyprod@gmail.org',
+        first_name = 'Thunar',
+        last_name = 'Rolfsson')
+
+      order_items = []
+      order_items << PaysonAPI::OrderItem.new(
+        description = 'Hittalyan månads dakjdkah',
+        unit_price = 100,
+        quantity = 1,
+        tax = 0.25,
+        sku = 'MY-ITEM-1')
+
+      payment = PaysonAPI::Request::Payment.new(
+        return_url,
+        cancel_url,
+        ipn_url,
+        memo,
+        sender,
+        receivers)
+      payment.order_items = order_items
+
+      response = PaysonAPI::Client.initiate_payment(payment)
+
+      if response.success?
+        res.write response.forward_url
+        puts "Successful payment be done, sire."
       else
-        res.status = 401
+        puts response.errors
+        res.status = 400
+        res.write "Payment failed"
       end
     end
   
@@ -235,7 +281,7 @@ Cuba.define do
         if reset = Reset.find_by(hashed_link: hash)
           if (Time.now - reset.created_at) < 43200 # 12 hours
             user = User.find_by(email: reset.email)
-            user.update_attributes!(hashed_password: new_pass)
+            user.change_password(new_pass)
             reset.delete # So the link cannot be used anymore
             res.write "Lösen ändrat till #{new_pass}"
           else
@@ -256,7 +302,7 @@ Cuba.define do
       # Also, appropriate action taken, status codes etc.
       # Should obviously not allow the change of password unless old_password checks out.
       user = current_user(req)
-      user.update_attributes!(hashed_password: new_password)
+      user.change_password(new_password)
 
       res.write "Lösenord ändrat"
     end
