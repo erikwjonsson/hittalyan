@@ -69,6 +69,20 @@
             %input(type="checkbox" ng-model="pushNotification") {{pushNotification}}
       %button(type="button" class="btn" ng-click="saveNotify()") Spara
 
+      %form(name="mobileNumberForm" ng-submit="submitNumber()" novalidate)
+        %fieldset
+          %legend Mobilnummer
+          %input(type="text"
+                name="mobile-number"
+                placeholder="Mobilnummer"
+                id="mobile-number"
+                ng-model="mobileNumber"
+                required)
+          %input(type="submit"
+                 class="btn"
+                 name="save"
+                 value="Spara")
+
       %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
         %fieldset
           %legend Avsluta konto

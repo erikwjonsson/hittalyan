@@ -221,6 +221,7 @@ function FiltersController($scope, $http, $location) {
       $scope.emailNotification = data.notify_by_email;
       $scope.smsNotification = data.notify_by_sms;
       $scope.pushNotification = data.notify_by_push_note;
+      $scope.mobileNumber = data.mobile_number;
     }).
     error(function(data, status) {
       alert(data)
@@ -276,6 +277,17 @@ function FiltersController($scope, $http, $location) {
           alert("Ditt konto kunde ej avslutas. Försök igen senare.");
         });
     }
+  };
+  $scope.submitNumber = function() {
+    $scope.data = {mobile_number: $scope.mobileNumber}
+    $http.post("mobile_number", $scope.data).
+      success(function(data, status) {
+        $scope.mobileNumber = data;
+        alert(data);
+      }).
+      error(function(data, status) {
+        alert(data);
+      });
   };
 }
 

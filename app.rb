@@ -264,6 +264,12 @@ Cuba.define do
                               notify_by_push_note: push)
     end
 
+    on "mobile_number", param('mobile_number') do |mobile_number|
+      user = current_user(req)
+      user.change_mobile_number(mobile_number)
+      res.write user.mobile_number
+    end
+
     on "passwordreset" do
       on param('email') do |email|
         if User.find_by(email: email)
