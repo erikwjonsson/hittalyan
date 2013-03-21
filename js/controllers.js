@@ -355,10 +355,10 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
 
 function TestController($scope, $http, $location) {
   $scope.submit = function() {
-    $http.post("test").
+    $scope.data = {mobile_number: $scope.mobileNumber}
+    $http.post("test", $scope.data).
       success(function(data, status) {
         alert(data);
-        window.location = data
       }).
       error(function(data, status) {
         alert(data);

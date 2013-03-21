@@ -1,10 +1,16 @@
 ﻿.row
   .span12.box.opaque
     .padhack
-      %form(name="payment" ng-submit="submit()" novalidate)
+      %form(name="mobileNumberForm" ng-submit="submit()" novalidate)
         %fieldset
-          %legend Betala här!
+          %legend Mobilnummer
+          %input(type="text"
+                name="mobile-number"
+                placeholder="Mobilnummer"
+                id="mobile-number"
+                ng-model="mobileNumber"
+                required)
           %input(type="submit"
                  class="btn"
-                 name="paybtn"
-                 value="Betala")
+                 name="save"
+                 value="Spara")

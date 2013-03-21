@@ -149,52 +149,56 @@ Cuba.define do
   
   #POST----------------------------------------
   on post do
-    on "test" do
-      return_url = 'http://localhost:4856/#/test'
-      cancel_url = 'http://localhost:4856/#/login'
-      ipn_url = 'http://localhost:4856/#/test'
-      memo = 'Thi be teh deskription foh de thigy'
+    on "test", param('mobile_number') do |mobile_number|
+      user = current_user(req)
+      user.change_mobile_number(mobile_number)
+      res.write user.mobile_number
 
-      receivers = []
-      receivers << PaysonAPI::Receiver.new(
-        email = 'testagent-1@payson.se',
-        amount = 125,
-        first_name = 'Sven',
-        last_name = 'Svensson',
-        primary = true)
+      # return_url = 'http://localhost:4856/#/test'
+      # cancel_url = 'http://localhost:4856/#/login'
+      # ipn_url = 'http://localhost:4856/#/test'
+      # memo = 'Thi be teh deskription foh de thigy'
 
-      sender = PaysonAPI::Sender.new(
-        email = 'lingonberyyprod@gmail.org',
-        first_name = 'Thunar',
-        last_name = 'Rolfsson')
+      # receivers = []
+      # receivers << PaysonAPI::Receiver.new(
+      #   email = 'testagent-1@payson.se',
+      #   amount = 125,
+      #   first_name = 'Sven',
+      #   last_name = 'Svensson',
+      #   primary = true)
 
-      order_items = []
-      order_items << PaysonAPI::OrderItem.new(
-        description = 'Hittalyan månads dakjdkah',
-        unit_price = 100,
-        quantity = 1,
-        tax = 0.25,
-        sku = 'MY-ITEM-1')
+      # sender = PaysonAPI::Sender.new(
+      #   email = 'lingonberyyprod@gmail.org',
+      #   first_name = 'Thunar',
+      #   last_name = 'Rolfsson')
 
-      payment = PaysonAPI::Request::Payment.new(
-        return_url,
-        cancel_url,
-        ipn_url,
-        memo,
-        sender,
-        receivers)
-      payment.order_items = order_items
+      # order_items = []
+      # order_items << PaysonAPI::OrderItem.new(
+      #   description = 'Hittalyan månads dakjdkah',
+      #   unit_price = 100,
+      #   quantity = 1,
+      #   tax = 0.25,
+      #   sku = 'MY-ITEM-1')
 
-      response = PaysonAPI::Client.initiate_payment(payment)
+      # payment = PaysonAPI::Request::Payment.new(
+      #   return_url,
+      #   cancel_url,
+      #   ipn_url,
+      #   memo,
+      #   sender,
+      #   receivers)
+      # payment.order_items = order_items
 
-      if response.success?
-        res.write response.forward_url
-        puts "Successful payment be done, sire."
-      else
-        puts response.errors
-        res.status = 400
-        res.write "Payment failed"
-      end
+      # response = PaysonAPI::Client.initiate_payment(payment)
+
+      # if response.success?
+      #   res.write response.forward_url
+      #   puts "Successful payment be done, sire."
+      # else
+      #   puts response.errors
+      #   res.status = 400
+      #   res.write "Payment failed"
+      # end
     end
   
 		on "login" do

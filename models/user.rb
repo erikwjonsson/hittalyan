@@ -58,7 +58,33 @@ class User
                          areaMin: filter.area.first,
                          areaMax: filter.area.last}}
   end
+
+  def change_mobile_number(new_mobile_number)
+    new_mobile_number = new_mobile_number.gsub(/\s+/, "")
+
+    if new_mobile_number[0..1] == '00'
+      # International number, same meaning as +.
+      new_mobile_number.sub!('00', '+')
+    elsif new_mobile_number[0] == '0'
+      # Starts with 0 but isn't a country code, default to Swedish number.
+      new_mobile_number.sub!('0', '+46')
+    elsif new_mobile_number[0] != '+'
+      # Comment for humans: If we got this far the number didn't start with a
+      # single or double 0 and... it didn't even start with a plus.
+      # Gasp! It must be from outer space, yao.
+      raise MalformedMobileNumber 
+    end
+    
+    self.mobile_number = new_mobile_number
+    self.save(validate: false)
+  end
   
+  class MalformedMobileNumber < Exception
+    def message
+      "We do not accept extra-terrestrial phone numbers. Sorry."
+    end
+  end
+
   private
     
     def encrypt(s)
