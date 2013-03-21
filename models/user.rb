@@ -3,6 +3,7 @@ require 'digest'
 class User
   include Mongoid::Document
   field :email, type: String
+  field :mobile_number, type: String
   field :hashed_password, type: String
 	field :notify_by_email, type: Boolean, default: false
 	field :notify_by_sms, type: Boolean, default: false
