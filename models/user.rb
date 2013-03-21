@@ -45,6 +45,19 @@ class User
     # We jut don't know how. Crap.
     self.save(validate: false)
   end
+
+  def settings_to_hash()
+    settings = {mobile_number: self.mobile_number,
+                notify_by_email: self.notify_by_email,
+                notify_by_sms: self.notify_by_sms,
+                notify_by_push_note: self.notify_by_push_note,
+                active: self.active,
+                filter: {roomsMin: filter.rooms.first,
+                         roomsMax: filter.rooms.last,
+                         rent: filter.rent,
+                         areaMin: filter.area.first,
+                         areaMax: filter.area.last}}
+  end
   
   private
     

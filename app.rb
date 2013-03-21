@@ -104,8 +104,8 @@ Cuba.define do
           render_haml "filtersettings", user.filter
         end
 
-        on "filter_values" do
-          res.write ActiveSupport::JSON.encode(user.filter.to_hash)
+        on "get_settings" do
+          res.write ActiveSupport::JSON.encode(user.settings_to_hash)
         end
         
         on "lagenheter" do

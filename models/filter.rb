@@ -5,11 +5,12 @@ class Filter
   field :rent, type: Integer, default: 999999
   field :area, type: Range, default: (10..9999)
 
-  def to_hash
-    hashified = {roomsMin: user.filter.rooms.first,
-                 roomsMax: user.filter.rooms.last,
-                 rent: user.filter.rent,
-                 areaMin: user.filter.area.first,
-                 areaMax: user.filter.area.last}
-  end
+  # Deprecated, see user.settings_to_hash.
+  # def to_hash
+  #   hashified = {roomsMin: self.rooms.first,
+  #                roomsMax: self.rooms.last,
+  #                rent: self.rent,
+  #                areaMin: self.area.first,
+  #                areaMax: self.area.last}
+  # end
 end

@@ -199,34 +199,28 @@ function FiltersController($scope, $http, $location) {
                           {name: "140", value: 140},
                           {name: "145", value: 145},
                           {name: "150+", value: 9999}];
-  $http.get("medlemssidor/filter_values").
+  $http.get("medlemssidor/get_settings").
     success(function(data, status) {
-      $scope.roomsMin = $scope.roomValuesMin[data.roomsMin - 1];
-      if (data.roomsMax == 999) {
+      $scope.roomsMin = $scope.roomValuesMin[data.filter.roomsMin - 1];
+      if (data.filter.roomsMax == 999) {
         $scope.roomsMax = $scope.roomValuesMax[$scope.roomValuesMax.length - 1];
       } else{
-        $scope.roomsMax = $scope.roomValuesMax[data.roomsMax - 1];
+        $scope.roomsMax = $scope.roomValuesMax[data.filter.roomsMax - 1];
       };
-      if (data.rent == 999999) {
+      if (data.filter.rent == 999999) {
         $scope.rent = $scope.rentValues[$scope.rentValues.length - 1];
       } else{
-        $scope.rent = $scope.rentValues[data.rent/500 -2];
+        $scope.rent = $scope.rentValues[data.filter.rent/500 -2];
       };
-      $scope.areaMin = $scope.areaValuesMin[data.areaMin/5 -2];
-      if (data.areaMax == 9999) {
+      $scope.areaMin = $scope.areaValuesMin[data.filter.areaMin/5 -2];
+      if (data.filter.areaMax == 9999) {
         $scope.areaMax = $scope.areaValuesMax[$scope.areaValuesMax.length - 1];
       } else{
-        $scope.areaMax = $scope.areaValuesMax[data.areaMax/5 -2];
+        $scope.areaMax = $scope.areaValuesMax[data.filter.areaMax/5 -2];
       };
-    }).
-    error(function(data, status) {
-      alert(data)
-    });
-  $http.get("medlemssidor/notify_by").
-    success(function(data, status) {
-      $scope.emailNotification = data.email;
-      $scope.smsNotification = data.sms;
-      $scope.pushNotification = data.push;
+      $scope.emailNotification = data.notify_by_email;
+      $scope.smsNotification = data.notify_by_sms;
+      $scope.pushNotification = data.notify_by_push_note;
     }).
     error(function(data, status) {
       alert(data)
