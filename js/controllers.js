@@ -359,14 +359,15 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
   };
 }
 
-function TestController($scope, $http) {
-  $http.get("medlemssidor/notify_by").
-    success(function(data, status) {
-      $scope.emailNotification = data.email;
-      $scope.smsNotification = data.sms;
-      $scope.pushNotification = data.push;
-    }).
-    error(function(data, status) {
-      alert(data)
-    });
+function TestController($scope, $http, $location) {
+  $scope.submit = function() {
+    $http.post("test").
+      success(function(data, status) {
+        alert(data);
+        window.location = data
+      }).
+      error(function(data, status) {
+        alert(data);
+      });
+  };
 }
