@@ -1,16 +1,4 @@
 ﻿.row
   .span12.box.opaque
     .padhack
-      %form(name="mobileNumberForm" ng-submit="submit()" novalidate)
-        %fieldset
-          %legend Mobilnummer
-          %input(type="text"
-                name="mobile-number"
-                placeholder="Mobilnummer"
-                id="mobile-number"
-                ng-model="mobileNumber"
-                required)
-          %input(type="submit"
-                 class="btn"
-                 name="save"
-                 value="Spara")
+      %button(type="button" class="btn" ng-click="pay()") Betala
