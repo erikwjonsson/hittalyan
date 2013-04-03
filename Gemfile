@@ -11,3 +11,17 @@ gem 'rdiscount'
 gem 'thin'
 gem 'rest-client'
 gem 'payson_api'
+
+group :development do
+  # Asset pipeline
+	gem 'rack-livereload'
+  gem 'guard-livereload'
+  gem 'rake-pipeline'
+  gem 'rake-pipeline-web-filters'
+  gem 'coffee-script'
+  gem 'yui-compressor'
+  gem 'uglifier'
+  gem 'sass'
+  gem 'compass'
+  
+end

@@ -3,15 +3,8 @@
   %head
     %meta{charset: "utf-8"}
     %title HittaLyan
-    %link(href="libs/bootstrap/css/bootstrap.css" rel="stylesheet")
-    %link(href="css/font-awesome.min.css" rel="stylesheet")
-    %link(href="css/app.css" rel="stylesheet")
-    %script{src: "//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"}
-    %script{src: "libs/angular-resource.min.js"}
-    %script{src: "js/app.js"}
-    %script{src: "js/controllers.js"}
-    %script(src="http://code.jquery.com/jquery-latest.js")
-    %script(src="libs/bootstrap/js/bootstrap.min.js")
+    %link{href: "#{Dir['public/application*.css'].first.split('/')[1]}", rel: "stylesheet"}
+    %script{src: "#{Dir['public/application*.js'].first.split('/')[1]}"}
   %body{'ng-controller' => "IndexController"}
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
