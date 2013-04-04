@@ -105,6 +105,11 @@ def send_view(view)
   res.write File.read(File.join('public', "#{view}.html"))
 end
 
+def send_json(document)
+  res['Content-Type'] = 'application/json; charset=utf-8'
+  res.write document
+end
+
 def filtered_apartments(filter)
   apartments = Apartment.all
   apartments.select do |apartment|
@@ -151,14 +156,14 @@ Cuba.define do
           notify_by = {email: user.notify_by_email,
                        sms: user.notify_by_sms,
                        push: user.notify_by_push_note}
-          res.write ActiveSupport::JSON.encode(notify_by)
+          send_json ActiveSupport::JSON.encode(notify_by)
         end
         on "installningar" do
-          send_view "filtersettings", user.filter
+          send_view "filtersettings"
         end
 
         on "get_settings" do
-          res.write ActiveSupport::JSON.encode(user.settings_to_hash)
+          send_json ActiveSupport::JSON.encode(user.settings_to_hash)
         end
         
         on "lagenheter" do
@@ -168,7 +173,7 @@ Cuba.define do
         on "apartments_list" do
           user = current_user(req)
           filt_apts = filtered_apartments(user.filter)
-          res.write ActiveSupport::JSON.encode(filt_apts)
+          send_json ActiveSupport::JSON.encode(filt_apts)
         end
 
         on "change_password" do
