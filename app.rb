@@ -68,7 +68,8 @@ def application_js
   '/' + Dir["#{PUBLIC_PATH}/application*.js"].first.split('/')[-1]
 end
 
-Cuba.use Rack::Session::Cookie, :expire_after => 60*60*24*60 #sec*min*h*day two months
+Cuba.use Rack::Session::Cookie, :expire_after => 60*60*24*60, #sec*min*h*day two months
+                                :secret => "Even a potato in a dark cellar has a certain low cunning about him."
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger
