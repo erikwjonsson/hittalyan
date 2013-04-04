@@ -52,9 +52,6 @@ if ENVIRONMENT == :development
   #Cuba.use Rack::LiveReload
 end
 
-Cuba.plugin Cuba::Render
-
-
 require_relative 'helpers'
 require_from_directory 'extensions'
 require_from_directory 'models'
@@ -103,8 +100,9 @@ def current_user(req)
   end
 end
 
-def render_haml(view, content = nil)
-  res.write render(File.join('views', "#{view}.haml"), {content: content}, {format: :html5})
+
+def send_view(view)
+  res.write File.read(File.join('public', "#{view}.html"))
 end
 
 def filtered_apartments(filter)
@@ -121,11 +119,11 @@ Cuba.define do
   #GET-----------------------------------------
   on get do
     on "test" do
-      render_haml "test"
+      send_view "test"
     end
   
     on "" do
-      render_haml "index"
+      send_view "index"
     end
     
     on  "loggedin" do
@@ -133,15 +131,15 @@ Cuba.define do
     end
     
     on "landing" do
-      render_haml "landing"
+      send_view "landing"
     end
     
     on "vanliga-fragor" do
-      render_haml "faq"
+      send_view "faq"
     end
     
     on "om" do
-      render_haml "about"
+      send_view "about"
     end
     
     on "medlemssidor" do
@@ -156,7 +154,7 @@ Cuba.define do
           res.write ActiveSupport::JSON.encode(notify_by)
         end
         on "installningar" do
-          render_haml "filtersettings", user.filter
+          send_view "filtersettings", user.filter
         end
 
         on "get_settings" do
@@ -164,7 +162,7 @@ Cuba.define do
         end
         
         on "lagenheter" do
-          render_haml "apartments"
+          send_view "apartments"
         end
         
         on "apartments_list" do
@@ -174,25 +172,25 @@ Cuba.define do
         end
 
         on "change_password" do
-          render_haml "change_password"
+          send_view "change_password"
         end
-        render_haml "medlemssidor"
+        send_view "medlemssidor"
       end
     end
     
     on "login" do
-      render_haml "login"
+      send_view "login"
     end
     
     on "signup" do
-      render_haml "signup"
+      send_view "signup"
     end
 
     on "passwordreset" do
       on "confirmation" do
-        render_haml "passwordresetconfirmation"
+        send_view "passwordresetconfirmation"
       end
-      render_haml "passwordreset"
+      send_view "passwordreset"
     end
 
     on ":catchall" do
