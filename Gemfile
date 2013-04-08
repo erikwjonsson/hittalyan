@@ -8,9 +8,10 @@ gem 'thin'
 gem 'rest-client'
 gem 'payson_api'
 
-group :development do
+if ENV['RACK_ENV'] == 'development'
+  puts 'Development environment on scanners, captain. Engaging gem tractor.'
   # Asset pipeline
-	gem 'rack-livereload'
+  gem 'rack-livereload'
   gem 'guard-livereload'
   gem 'rake-pipeline'
   gem 'rake-pipeline-web-filters'
@@ -22,5 +23,7 @@ group :development do
   gem 'tilt'
   gem 'haml'
   gem 'rdiscount'
-  
+else
+  puts 'Nothing on scanners, captain. We seem to have fallen through the'\
+       ' asscrack of space. Scan for RACK_ENV.'
 end
