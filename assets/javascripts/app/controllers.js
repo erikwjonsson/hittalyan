@@ -289,6 +289,16 @@ function FiltersController($scope, $http, $location) {
         alert(data);
       });
   };
+  $scope.pay = function() {
+    $http.post("payson_pay").
+      success(function(data, status) {
+        alert(data);
+        window.location = data;
+      }).
+      error(function(data, status) {
+        alert(data);
+      });
+  };
 }
 
 function ApartmentsController($scope, $http) {
@@ -365,15 +375,16 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
   };
 }
 
-function TestController($scope, $http, $location) {
-  $scope.submit = function() {
-    $scope.data = {mobile_number: $scope.mobileNumber}
-    $http.post("test", $scope.data).
-      success(function(data, status) {
-        alert(data);
-      }).
-      error(function(data, status) {
-        alert(data);
-      });
-  };
+function PaymentController() {
+
+}
+
+function TestController($scope) {
+  // function getPathFromUrl(url) {
+  //   var path = url.split("?")[0];
+  //   var fragment = url.split("#")[1];
+  //   var newURL = path + fragment;
+  //   $scope.newURL = newURL;
+  // }
+  getPathFromUrl(window.location);
 }

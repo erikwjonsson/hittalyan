@@ -9,6 +9,7 @@ class User
 	field :notify_by_sms, type: Boolean, default: false
 	field :notify_by_push_note, type: Boolean, default: false
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
+  field :premium_days, type: Integer, default: 0
   has_one :session
   embeds_one :filter
   @@salt = 'aa2c2c739ba0c61dc84345b1c2dc222f'

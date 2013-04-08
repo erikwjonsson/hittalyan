@@ -200,7 +200,7 @@ Cuba.define do
     end
 
     on ":catchall" do
-      puts "Nu kom nån jävel allt fel"
+      puts "Nu kom nån jävel allt fel get"
       res.status = 404 # not found
       res.write "Nu kom du allt fel din javel!"
     end
@@ -208,56 +208,80 @@ Cuba.define do
   
   #POST----------------------------------------
   on post do
-    on "test", param('mobile_number') do |mobile_number|
+    on "test" do
+      
+    end
+
+    on "payson_pay" do
+      return_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/installningar'
+      cancel_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/installningar'
+      ipn_url = 'http://cubancabal.aws.af.cm/ipn'
+      memo = 'Thi be teh deskription foh de thigy'
       user = current_user(req)
-      user.change_mobile_number(mobile_number)
-      res.write user.mobile_number
 
-      # return_url = 'http://localhost:4856/#/test'
-      # cancel_url = 'http://localhost:4856/#/login'
-      # ipn_url = 'http://localhost:4856/#/test'
-      # memo = 'Thi be teh deskription foh de thigy'
+      receivers = []
+      receivers << PaysonAPI::Receiver.new(
+        email = 'testagent-1@payson.se',
+        amount = 125,
+        first_name = 'Sven',
+        last_name = 'Svensson',
+        primary = true)
 
-      # receivers = []
-      # receivers << PaysonAPI::Receiver.new(
-      #   email = 'testagent-1@payson.se',
-      #   amount = 125,
-      #   first_name = 'Sven',
-      #   last_name = 'Svensson',
-      #   primary = true)
+      sender = PaysonAPI::Sender.new(
+        email = user.email,
+        first_name = 'Thunar',
+        last_name = 'Rolfsson')
 
-      # sender = PaysonAPI::Sender.new(
-      #   email = 'lingonberyyprod@gmail.org',
-      #   first_name = 'Thunar',
-      #   last_name = 'Rolfsson')
+      order_items = []
+      order_items << PaysonAPI::OrderItem.new(
+        description = 'Hittalyan månads dakjdkah',
+        unit_price = 100,
+        quantity = 1,
+        tax = 0.25,
+        sku = 'MY-ITEM-1')
 
-      # order_items = []
-      # order_items << PaysonAPI::OrderItem.new(
-      #   description = 'Hittalyan månads dakjdkah',
-      #   unit_price = 100,
-      #   quantity = 1,
-      #   tax = 0.25,
-      #   sku = 'MY-ITEM-1')
+      payment = PaysonAPI::Request::Payment.new(
+        return_url,
+        cancel_url,
+        ipn_url,
+        memo,
+        sender,
+        receivers)
+      payment.order_items = order_items
 
-      # payment = PaysonAPI::Request::Payment.new(
-      #   return_url,
-      #   cancel_url,
-      #   ipn_url,
-      #   memo,
-      #   sender,
-      #   receivers)
-      # payment.order_items = order_items
+      response = PaysonAPI::Client.initiate_payment(payment)
 
-      # response = PaysonAPI::Client.initiate_payment(payment)
+      if response.success?
+        res.write response.forward_url
+        puts "Payment from #{user.email} initiated"
+      else
+        puts response.errors
+        res.status = 400
+        res.write response.errors
+      end
+    end
 
-      # if response.success?
-      #   res.write response.forward_url
-      #   puts "Successful payment be done, sire."
-      # else
-      #   puts response.errors
-      #   res.status = 400
-      #   res.write "Payment failed"
-      # end
+    on "ipn" do
+      request_body = req.body.read
+      ipn_response = PaysonAPI::Response::IPN.new(request_body)
+      ipn_request = PaysonAPI::Request::IPN.new(ipn_response.raw)
+      validate = PaysonAPI::Client.validate_ipn(ipn_request)
+      if validate.verified? && req.POST['status'] == "COMPLETED"
+        puts "Payment verified and COMPLETED"
+        email = req.POST['senderEmail']
+        puts "Fetching user #{email}..."
+        user = User.find_by(email: email)
+        puts user.class
+        puts user
+        puts "Found user: #{user.email}"
+        puts "Crediting days to user..."
+        user.update_attribute(:premium_days, (user.premium_days + 30))
+        puts "Days credited"
+        # user.save!
+        puts "'User.save!':d"
+      else
+        puts "Something went wrong"
+      end
     end
   
 		on "login" do
@@ -377,7 +401,7 @@ Cuba.define do
     end
 
     on ":catchall" do
-      log.info('Nu kom nån jävel allt fel')
+      puts "Nu kom nån jävel allt fel post"
       res.status = 404 # not found
       res.write "Nu kom du allt fel din javel!"
     end
