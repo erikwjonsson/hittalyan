@@ -375,15 +375,16 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
   };
 }
 
-function TestController($scope, $http, $location) {
-  $scope.pay = function() {
-    $http.post("test").
-      success(function(data, status) {
-        alert(data);
-        window.location = data;
-      }).
-      error(function(data, status) {
-        alert(data);
-      });
-  };
+function PaymentController() {
+
+}
+
+function TestController($scope) {
+  // function getPathFromUrl(url) {
+  //   var path = url.split("?")[0];
+  //   var fragment = url.split("#")[1];
+  //   var newURL = path + fragment;
+  //   $scope.newURL = newURL;
+  // }
+  getPathFromUrl(window.location);
 }
