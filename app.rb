@@ -1,89 +1,8 @@
 ﻿#encoding: utf-8
-require 'cuba'
-require 'rack/protection'
-require 'mongoid'
-require 'rack/logger'
-require 'haml'
-require 'cuba/render'
-require 'securerandom'
-require 'rack/post-body-to-params'
-require 'pony'
-require 'date'
-require 'rest-client'
-require 'payson_api'
-
-def get_environment
-  raise RackEnvNotSet unless ENV['RACK_ENV']
-  environment = ENV['RACK_ENV'].to_sym
-
-  allowed_environments = [:development, :test, :production]
-  if allowed_environments.include?(environment)
-    environment
-  else
-    raise UnallowedEnvironmentException.new(ENV['RACK_ENV'], allowed_environments)
-  end
-end
-
-class UnallowedEnvironmentError < StandardError
-  def initialize(incorrent_environment, allowed_environments)
-    @incorrent_environment = incorrent_environment
-    @allowed_environments = allowed_environments
-  end
-
-  def message
-    "The environment #{@incorrent_environment} is not allowed. Allowed"\
-    "environments are #{@allowed_environments.join(', ')}."
-  end
-end
-
-class RackEnvNotSet < StandardError
-  def message
-    "The environment variable RACK_ENV is not set."
-  end
-end
-
-ENVIRONMENT = get_environment
+require_relative 'init'
 
 if ENVIRONMENT == :development
-  #require 'rake-pipeline'
-  #require 'rake-pipeline/middleware'
-  #Cuba.use Rake::Pipeline::Middleware, 'Assetfile'
-  #require 'rack-livereload'
-  #Cuba.use Rack::LiveReload
-end
-
-require_relative 'helpers'
-require_from_directory 'extensions'
-require_from_directory 'models'
-
-Mongoid.load!('mongoid.yml')
-
-PUBLIC_PATH = File.expand_path(File.join(File.dirname(__FILE__), 'public/'))
-
-def application_css
-  '/' + Dir["#{PUBLIC_PATH}/application*.css"].first.split('/')[-1]
-end
-
-def application_js
-  '/' + Dir["#{PUBLIC_PATH}/application*.js"].first.split('/')[-1]
-end
-
-Cuba.use Rack::Session::Cookie, :expire_after => 60*60*24*60, #sec*min*h*day two months
-                                :secret => "Even a potato in a dark cellar has a certain low cunning about him."
-Cuba.use Rack::Protection
-Cuba.use Rack::Protection::RemoteReferrer
-Cuba.use Rack::Logger
-Cuba.use Rack::Static, :urls => ['/images',
-                                 '/fonts',
-                                 application_css,
-                                 application_js,
-                                 '/favicon.ico'],
-                        :root => PUBLIC_PATH
-Cuba.use Rack::PostBodyToParams
-
-PaysonAPI.configure do |config|
-  config.api_user_id = '1'
-  config.api_password = 'fddb19ac-7470-42b6-a91d-072cb1495f0a'
+  # If environment do this shit, otherwise do something else. Shit.
 end
 
 def init_session(req, user)
@@ -100,7 +19,6 @@ def current_user(req)
     nil
   end
 end
-
 
 def send_view(view)
   res.write File.read(File.join('public', "#{view}.html"))
