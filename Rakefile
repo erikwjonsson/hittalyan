@@ -12,7 +12,7 @@ namespace :assets do
 
   desc "Compile assets."
   task :precompile do
-    pipelines = %w[assetcompilation.rb fingerprinting.rb viewcompilation.rb ]
+    pipelines = %w[assetcompilation.rb fingerprinting.rb viewcompilation.rb]
     pipelines.each do |pipeline|
       puts "Running the #{pipeline.sub('.rb', '')} pipeline."
       system("bundle exec rakep build --assetfile=pipelines/#{pipeline}")
