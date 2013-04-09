@@ -34,7 +34,7 @@ function LoginController($scope, $http, $routeParams, $location) {
         success(function(data, status) {
           $scope.email = "";
           $scope.password = "";
-          localStorage.loggedIn = "true";
+          loginFormSuccess();
           $location.path('/medlemssidor');
         }).
         error(function(data, status) {
@@ -67,7 +67,7 @@ function SignupController($scope, $http, $location) {
           $http.post("login", $scope.data).
             success(function(data, status) {
               $scope.message = "Inloggad. Omdirigerar..."
-              localStorage.loggedIn = "true";
+              loginFormSuccess();
               $location.path('/medlemssidor');
             }).
             error(function(data, status) {
@@ -392,3 +392,7 @@ function loginFormFail($scope) {
   localStorage.loggedIn = "false";
   alert("Nu skrev du allt fel din jävel");
 };
+
+function loginFormSuccess() {
+  localStorage.loggedIn = "true";
+}
