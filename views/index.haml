@@ -24,10 +24,9 @@
                 %a(href="#/registrera" ng-hide="isLoggedIn()") Registrera
               %li(ng-show="isLoggedIn()")
                 %a(href="#/medlemssidor" ng-show="isLoggedIn()") Medlemssidor
-              %li(ng-show="isLoggedIn()")
-                %a(ng-click="logout()" ng-show="isLoggedIn()") Logga ut
               %li(ng-hide="isLoggedIn()")
-                %a(href="#/losenordsaterstallning" ng-hide="isLoggedIn()") Glömt Lösenord?
+                %a(href="#/losenordsaterstallning"
+                   ng-hide="isLoggedIn()") Glömt Lösenord?
 
             %form#loginform.navbar-form.pull-right(name="login"
                                                    ng-hide="isLoggedIn()"
@@ -48,7 +47,10 @@
                      class="btn"
                      name="login"
                      value="Logga in")
-          / /.nav-collapse
+            %span.pull-right(ng-show="isLoggedIn()")
+              {{userName()}}
+              %a(href=""
+                 ng-click="logout()"
+                 ng-show="isLoggedIn()") Logga ut
     .container
       %div{'ng-view' => true}
-    

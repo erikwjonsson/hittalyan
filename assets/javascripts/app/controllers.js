@@ -2,22 +2,8 @@
 
 /* Controllers */
 
-function IndexController($scope, $http, $location) {
-  $scope.isLoggedIn = function() {
-    return localStorage.loggedIn == "true";
-  };
-
-  $scope.logout = function() {
-    $http.post("logout").
-      success(function() {
-        localStorage.loggedIn = "false";
-        $location.path('/');
-      }).
-      error(function() {
-        localStorage.loggedIn = "false";
-        $location.path('/');
-      });
-  };
+function IndexController($rootScope, $scope, $http, $location) {
+  defineViewHelperMethodsInRootScope($rootScope, $http, $location);
 }
 
 function LandingController($scope) {
@@ -384,17 +370,45 @@ function TestController($scope) {
   getPathFromUrl(window.location);
 }
 
-// General (helper-)functions
+// General Controller helper functions
 
 // Assumes form with field called password to be emptied on failed login.
 function loginFormFail($scope) {
   $scope.password = "";
   localStorage.loggedIn = "false";
+  localStorage.userName = "";
   alert("Nu skrev du allt fel din jävel");
-};
+}
 
 function loginFormSuccess(email) {
   localStorage.loggedIn = "true";
   localStorage.userName = email;
-  alert(localStorage.userName);
+}
+
+function logout($http, $location) {
+  $http.post("logout").
+    success(function() {
+      localStorage.loggedIn = "false";
+      $location.path('/');
+    }).
+    error(function() {
+      localStorage.loggedIn = "false";
+      $location.path('/');
+    });
+};
+
+// Special function for defining view helper methods in $rootScope
+// Use sparingly. Subject to re-evaluation.
+function defineViewHelperMethodsInRootScope($rootScope, $http, $location) {
+  $rootScope.userName = function() {
+    return localStorage.userName;
+  };
+
+  $rootScope.isLoggedIn = function() {
+    return localStorage.loggedIn == "true";
+  };
+
+  $rootScope.logout = function() {
+    logout($http, $location);
+  };
 }
