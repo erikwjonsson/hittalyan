@@ -73,9 +73,10 @@ function SignupController($scope, $http, $location) {
 }
 
 function MembersController($scope) {
+  deTokenify();
 }
 
-function FiltersController($scope, $http, $location) {
+function SettingsController($scope, $http, $location) {
   $scope.roomValuesMin = [{name: "1", value: 1},
                           {name: "2", value: 2},
                           {name: "3", value: 3},
@@ -361,13 +362,7 @@ function PaymentController() {
 }
 
 function TestController($scope) {
-  // function getPathFromUrl(url) {
-  //   var path = url.split("?")[0];
-  //   var fragment = url.split("#")[1];
-  //   var newURL = path + fragment;
-  //   $scope.newURL = newURL;
-  // }
-  getPathFromUrl(window.location);
+  deTokenify();
 }
 
 // General Controller helper functions
@@ -396,6 +391,13 @@ function logout($http, $location) {
       $location.path('/');
     });
 };
+
+function deTokenify() {
+  if (window.location.search != "") {
+    var url = window.location;
+    window.location = url.origin + url.pathname + url.hash;
+  };
+}
 
 // Special function for defining view helper methods in $rootScope
 // Use sparingly. Subject to re-evaluation.

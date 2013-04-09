@@ -131,8 +131,8 @@ Cuba.define do
     end
 
     on "payson_pay" do
-      return_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/installningar'
-      cancel_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/installningar'
+      return_url = 'http://cubancabal.aws.af.cm/#/medlemssidor'
+      cancel_url = 'http://cubancabal.aws.af.cm/#/medlemssidor'
       ipn_url = 'http://cubancabal.aws.af.cm/ipn'
       memo = 'Thi be teh deskription foh de thigy'
       user = current_user(req)

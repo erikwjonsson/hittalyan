@@ -7,7 +7,7 @@ angular.module('cubancabal', [])
   $routeProvider.
       when('/', {templateUrl: 'landing',   controller: LandingController}).
       when('/medlemssidor', {templateUrl: 'medlemssidor', controller: MembersController}).
-      when('/medlemssidor/installningar', {templateUrl: '/medlemssidor/installningar', controller: FiltersController}).
+      when('/medlemssidor/installningar', {templateUrl: '/medlemssidor/installningar', controller: SettingsController}).
       when('/medlemssidor/lagenheter', {templateUrl: '/medlemssidor/lagenheter', controller: ApartmentsController}).
       when('/medlemssidor/losenord', {templateUrl: '/medlemssidor/change_password', controller: PasswordController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
