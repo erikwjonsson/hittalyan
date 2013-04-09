@@ -117,6 +117,29 @@ Cuba.define do
       send_view "passwordreset"
     end
 
+    on "emails" do
+      on "unsubscribe" do
+        on "notifications/:unsubscribe_id" do |unsubscribe_id|
+          user = User.find_by(unsubscribe_id: unsubscribe_id)
+          user.update_attributes(notify_by_email: false)
+          res.write "E-postutskick om lägenheter har avaktiverats."
+        end
+      
+        on "communications/:unsubscribe_id" do |unsubscribe_id|
+          user = User.find_by(unsubscribe_id: unsubscribe_id)
+          user.update_attributes(permits_to_be_emailed: false)
+          res.write "Du kommer ej längre få e-postutskick med information från oss."
+        end
+
+        on "all/:unsubscribe_id" do |unsubscribe_id| 
+          user = User.find_by(unsubscribe_id: unsubscribe_id)
+          user.update_attributes(notify_by_email: false)
+          user.update_attributes(permits_to_be_emailed: false)
+          res.write "Du kommer inte få någon mer e-post från oss."
+        end
+      end
+    end
+
     on ":catchall" do
       puts "Nu kom nån jävel allt fel get"
       res.status = 404 # not found

@@ -8,11 +8,14 @@ class User
 	field :notify_by_email, type: Boolean, default: false
 	field :notify_by_sms, type: Boolean, default: false
 	field :notify_by_push_note, type: Boolean, default: false
+  field :permits_to_be_emailed, type: Boolean, default: true
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
   field :premium_days, type: Integer, default: 0
+  field :unsubscribe_id, type: String
   has_one :session
   embeds_one :filter
   @@salt = 'aa2c2c739ba0c61dc84345b1c2dc222f'
+  @@unsubscribe_salt = 'lu5rnzg9wgly9a2l1ftbdij7edb6e6'
   
   validates :email, presence: true, uniqueness: true, length: { maximum: 64 }
   # Note that hashed_password isn't hashed at the point of validation
@@ -28,8 +31,13 @@ class User
   # This is where hashed_password becomes true to it's name
   before_create do |document|
     document.hashed_password = encrypt(document.hashed_password)
+    document.unsubscribe_id = encrypt(email + Time.now.to_s + @@unsubscribe_salt)
   end
   
+  def unsubscribe_link(req, from_what)
+    "http://{req.host}/unsubscribe/#{from_what}/#{unsubscribe_link}"
+  end
+
   def has_password?(submitted_password)
     self.hashed_password == encrypt(submitted_password)
   end
