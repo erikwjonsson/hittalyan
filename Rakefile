@@ -1,7 +1,7 @@
 desc "Clean the pipe, pour in those assets, then rack it up!"
 task :serve do
   Rake::Task['assets:rebuild'].invoke
-  exec('rackup')
+  exec('rackup -p 4856')
 end
 
 namespace :assets do
