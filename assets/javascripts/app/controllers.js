@@ -25,7 +25,7 @@ function LandingController($scope) {
 };
 
 function LoginController($scope, $http, $routeParams, $location) {
-  var invalidInput = function() {
+  var loginFail = function() {
     $scope.password = "";
     localStorage.loggedIn = "false";
     alert("Nu skrev du allt fel din jävel");
@@ -44,13 +44,13 @@ function LoginController($scope, $http, $routeParams, $location) {
         }).
         error(function(data, status) {
           if ( status == "401") {
-            invalidInput();
+            loginFail();
           };
           $scope.message = data;
         });
     }
     else {
-      invalidInput();
+      loginFail();
     }
   };
 }
