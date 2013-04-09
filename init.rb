@@ -18,7 +18,7 @@ Dir.chdir root_directory do
   require 'date'
   require 'rest-client'
   require 'payson_api'
-  require_relative 'lib/partyhelpers'
+  require_relative 'lib/getenvironment'
   require_relative 'helpers'
   require_from_directory 'extensions'
   require_from_directory 'models'
