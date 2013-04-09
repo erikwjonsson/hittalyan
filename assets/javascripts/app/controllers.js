@@ -25,11 +25,6 @@ function LandingController($scope) {
 };
 
 function LoginController($scope, $http, $routeParams, $location) {
-  var loginFail = function() {
-    $scope.password = "";
-    localStorage.loggedIn = "false";
-    alert("Nu skrev du allt fel din jävel");
-  };
 
   $scope.submit = function() {
     if ( $scope.login.$valid == true ) {
@@ -44,13 +39,13 @@ function LoginController($scope, $http, $routeParams, $location) {
         }).
         error(function(data, status) {
           if ( status == "401") {
-            loginFail();
+            loginFormFail($scope);
           };
           $scope.message = data;
         });
     }
     else {
-      loginFail();
+      loginFormFail($scope);
     }
   };
 }
@@ -388,3 +383,12 @@ function TestController($scope) {
   // }
   getPathFromUrl(window.location);
 }
+
+// General (helper-)functions
+
+// Assumes form with field called password to be emptied on failed login.
+function loginFormFail($scope) {
+  $scope.password = "";
+  localStorage.loggedIn = "false";
+  alert("Nu skrev du allt fel din jävel");
+};
