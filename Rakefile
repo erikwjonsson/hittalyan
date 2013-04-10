@@ -4,6 +4,20 @@ task :serve do
   exec('rackup -p 4856')
 end
 
+desc "Deploy to Appfog."
+task :deploy do
+  Rake::Task['assets:rebuild'].invoke
+  system('env RACK_ENV=production bundle')
+  system('af login lingonberryprod@gmail')
+  system('af update cubancabal')
+  system('af start cubancabal')
+end
+
+task :bundle do
+  puts "Bundling..."
+  system('bundle install --quiet')
+end
+
 namespace :assets do
   PUBLIC_PATH = File.expand_path(File.join(File.dirname(__FILE__), 'public/'))
 
@@ -11,7 +25,7 @@ namespace :assets do
   end
 
   desc "Compile assets."
-  task :precompile do
+  task :precompile => [:bundle] do
     pipelines = %w[assetcompilation.rb fingerprinting.rb viewcompilation.rb]
     pipelines.each do |pipeline|
       puts "Running the #{pipeline.sub('.rb', '')} pipeline."
@@ -24,7 +38,7 @@ namespace :assets do
   end
 
   desc "Clean output directory (but only files passed through the pipeline)."
-  task :clean do
+  task :clean => [:bundle] do
     def application_css_files
       Dir["#{PUBLIC_PATH}/application*.css"]
     end

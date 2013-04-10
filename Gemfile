@@ -7,9 +7,10 @@ gem 'rack-post-body-to-params'
 gem 'thin'
 gem 'rest-client'
 gem 'payson_api'
+gem 'af'
 
 if ENV['RACK_ENV'] == 'development'
-  puts 'Development environment on scanners, captain. Engaging gem tractor.'
+  # puts 'Development environment on scanners, captain. Engaging gem tractor.'
   # Asset pipeline
   gem 'rack-livereload'
   gem 'guard-livereload'

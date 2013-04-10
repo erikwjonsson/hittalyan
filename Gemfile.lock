@@ -11,6 +11,16 @@ GEM
     activesupport (3.2.7)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.2.8)
+    af (0.3.18.11)
+      addressable (~> 2.2.6)
+      interact (~> 0.4.0)
+      json_pure (>= 1.5.1, < 1.7.0)
+      rb-readline (~> 0.4.2)
+      rest-client (>= 1.6.1, < 1.7.0)
+      rubyzip (~> 0.9.4)
+      terminal-table (~> 1.4.2)
+      uuidtools (~> 2.1.0)
     bson (1.6.4)
     bson_ext (1.6.4)
       bson (~> 1.6.4)
@@ -50,7 +60,9 @@ GEM
     haml (3.1.7)
     http_parser.rb (0.5.3)
     i18n (0.6.0)
+    interact (0.4.8)
     json (1.7.7)
+    json_pure (1.6.7)
     listen (0.7.3)
     lumberjack (1.0.3)
     method_source (0.8.1)
@@ -84,11 +96,14 @@ GEM
     rake-pipeline-web-filters (0.7.0)
       rack
       rake-pipeline (~> 0.6)
+    rb-readline (0.4.2)
     rdiscount (1.6.8)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rubyzip (0.9.9)
     sass (3.2.7)
     slop (3.4.4)
+    terminal-table (1.4.5)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -99,6 +114,7 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    uuidtools (2.1.3)
     yui-compressor (0.9.6)
       POpen4 (>= 0.1.4)
 
@@ -107,6 +123,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  af
   bson_ext
   coffee-script
   compass
