@@ -7,10 +7,10 @@ end
 desc "Deploy to Appfog."
 task :deploy do
   Rake::Task['assets:rebuild'].invoke
-  system('env RACK_ENV=production bundle')
-  system('af login lingonberryprod@gmail')
-  system('af update cubancabal')
+  system('af login lingonberryprod@gmail.com')
+  system('env RACK_ENV="production" af update cubancabal')
   system('af start cubancabal')
+  Rake::Task['bundle'].invoke
 end
 
 task :bundle do
