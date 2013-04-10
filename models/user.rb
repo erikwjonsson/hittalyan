@@ -31,11 +31,19 @@ class User
   # This is where hashed_password becomes true to it's name
   before_create do |document|
     document.hashed_password = encrypt(document.hashed_password)
-    document.unsubscribe_id = encrypt(email + Time.now.to_s + @@unsubscribe_salt)
+    generate_unsubscribe_id
   end
   
-  def unsubscribe_link(req, from_what)
-    "http://{req.host}/unsubscribe/#{from_what}/#{unsubscribe_link}"
+  def unsubscribe_from_email_notifications_link
+    unsubscribe_link(:notifications)
+  end
+
+  def unsubscribe_from_email_communications_link
+    unsubscribe_link(:communications)
+  end
+
+  def unsubscribe_from_all_emails_link
+    unsubscribe_link(:all)
   end
 
   def has_password?(submitted_password)
@@ -102,5 +110,16 @@ class User
     
     def hash_string(s)
       Digest::SHA2.hexdigest(s)
+    end
+
+    def generate_unsubscribe_id
+      self.unsubscribe_id = encrypt(email + Time.now.to_s + @@unsubscribe_salt)
+    end
+
+    # req - Rack request object
+    # from_what - all/notifications/
+    def unsubscribe_link(from_what)
+      generate_unsubscribe_id unless self.unsubscribe_id
+      URI::join(WEBSITE_ADDRESS, "/emails/unsubscribe/#{from_what.to_s}/#{self.unsubscribe_id}").to_s
     end
 end
