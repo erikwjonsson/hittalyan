@@ -5,9 +5,9 @@ class User
   field :email, type: String
   field :mobile_number, type: String
   field :hashed_password, type: String
-	field :notify_by_email, type: Boolean, default: false
-	field :notify_by_sms, type: Boolean, default: false
-	field :notify_by_push_note, type: Boolean, default: false
+  field :notify_by_email, type: Boolean, default: false
+  field :notify_by_sms, type: Boolean, default: false
+  field :notify_by_push_note, type: Boolean, default: false
   field :permits_to_be_emailed, type: Boolean, default: true
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
   field :premium_days, type: Integer, default: 0
@@ -33,7 +33,7 @@ class User
     document.hashed_password = encrypt(document.hashed_password)
     generate_unsubscribe_id
   end
-  
+
   def unsubscribe_from_email_notifications_link
     unsubscribe_link(:notifications)
   end
@@ -45,7 +45,7 @@ class User
   def unsubscribe_from_all_emails_link
     unsubscribe_link(:all)
   end
-
+  
   def has_password?(submitted_password)
     self.hashed_password == encrypt(submitted_password)
   end
@@ -101,7 +101,7 @@ class User
       "We do not accept extra-terrestrial phone numbers. Sorry."
     end
   end
-
+  
   private
     
     def encrypt(s)
