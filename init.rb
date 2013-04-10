@@ -11,8 +11,6 @@ Dir.chdir root_directory do
   require 'rack/protection'
   require 'mongoid'
   require 'rack/logger'
-  require 'haml'
-  require 'cuba/render'
   require 'securerandom'
   require 'rack/post-body-to-params'
   require 'date'
