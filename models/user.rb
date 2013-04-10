@@ -8,11 +8,14 @@ class User
 	field :notify_by_email, type: Boolean, default: false
 	field :notify_by_sms, type: Boolean, default: false
 	field :notify_by_push_note, type: Boolean, default: false
+  field :permits_to_be_emailed, type: Boolean, default: true
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
   field :premium_days, type: Integer, default: 0
+  field :unsubscribe_id, type: String
   has_one :session
   embeds_one :filter
   @@salt = 'aa2c2c739ba0c61dc84345b1c2dc222f'
+  @@unsubscribe_salt = 'lu5rnzg9wgly9a2l1ftbdij7edb6e6'
   
   validates :email, presence: true, uniqueness: true, length: { maximum: 64 }
   # Note that hashed_password isn't hashed at the point of validation
@@ -28,8 +31,21 @@ class User
   # This is where hashed_password becomes true to it's name
   before_create do |document|
     document.hashed_password = encrypt(document.hashed_password)
+    generate_unsubscribe_id
   end
   
+  def unsubscribe_from_email_notifications_link
+    unsubscribe_link(:notifications)
+  end
+
+  def unsubscribe_from_email_communications_link
+    unsubscribe_link(:communications)
+  end
+
+  def unsubscribe_from_all_emails_link
+    unsubscribe_link(:all)
+  end
+
   def has_password?(submitted_password)
     self.hashed_password == encrypt(submitted_password)
   end
@@ -94,5 +110,16 @@ class User
     
     def hash_string(s)
       Digest::SHA2.hexdigest(s)
+    end
+
+    def generate_unsubscribe_id
+      self.unsubscribe_id = encrypt(email + Time.now.to_s + @@unsubscribe_salt)
+    end
+
+    # req - Rack request object
+    # from_what - all/notifications/
+    def unsubscribe_link(from_what)
+      generate_unsubscribe_id unless self.unsubscribe_id
+      URI::join(WEBSITE_ADDRESS, "/emails/unsubscribe/#{from_what.to_s}/#{self.unsubscribe_id}").to_s
     end
 end

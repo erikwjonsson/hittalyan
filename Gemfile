@@ -23,7 +23,4 @@ if ENV['RACK_ENV'] == 'development'
   gem 'tilt'
   gem 'haml'
   gem 'rdiscount'
-else
-  puts 'Nothing on scanners, captain. We seem to have fallen through the'\
-       ' asscrack of space. Scan for RACK_ENV.'
 end
