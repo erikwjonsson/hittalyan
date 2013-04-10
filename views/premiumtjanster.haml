@@ -1,0 +1,11 @@
+.row
+  .span12.box.opaque
+    .padhack
+      %span(id="links")
+        %a(href="#/medlemssidor") Medlemssidor
+        |
+        %a(href="#/medlemssidor/lagenheter") Lägenheter
+        %hr
+      %span Dagar kvar: {{daysLeft}} SMS kvar: {{smsLeft}}
+      %hr
+      %button(type="button" class="btn" ng-click="pay()") Betala

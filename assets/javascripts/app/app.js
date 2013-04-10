@@ -10,6 +10,7 @@ angular.module('cubancabal', [])
       when('/medlemssidor/installningar', {templateUrl: '/medlemssidor/installningar', controller: SettingsController}).
       when('/medlemssidor/lagenheter', {templateUrl: '/medlemssidor/lagenheter', controller: ApartmentsController}).
       when('/medlemssidor/losenord', {templateUrl: '/medlemssidor/change_password', controller: PasswordController}).
+      when('/medlemssidor/premiumtjanster', {templateUrl: '/medlemssidor/premiumtjanster', controller: PremiumServicesController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
       when('/registrera', {templateUrl: 'signup', controller: SignupController}).
       when('/om', {templateUrl: 'om',   controller: LandingController}).

@@ -73,7 +73,6 @@ function SignupController($scope, $http, $location) {
 }
 
 function MembersController($scope) {
-  deTokenify();
 }
 
 function SettingsController($scope, $http, $location) {
@@ -271,16 +270,6 @@ function SettingsController($scope, $http, $location) {
         alert(data);
       });
   };
-  $scope.pay = function() {
-    $http.post("payson_pay").
-      success(function(data, status) {
-        alert(data);
-        window.location = data;
-      }).
-      error(function(data, status) {
-        alert(data);
-      });
-  };
 }
 
 function ApartmentsController($scope, $http) {
@@ -357,8 +346,31 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
   };
 }
 
-function PaymentController() {
-
+function PremiumServicesController($scope, $http) {
+  deTokenify();
+  $scope.daysLeft = 5;
+  $scope.smsLeft = 12;
+  // getPremiumInfo;
+  $http.get("medlemssidor/get_settings").
+    success(function(data, status) {
+      // setPremiumInfo;
+      $scope.daysLeft = data.premium_days;
+      $scope.smsLeft = data.sms_left;
+      // alert(data);
+    }).
+    error(function(data, status) {
+      alert(data);
+    });
+  $scope.pay = function() {
+    $http.post("payson_pay").
+      success(function(data, status) {
+        alert(data);
+        window.location = data;
+      }).
+      error(function(data, status) {
+        alert(data);
+      });
+  };
 }
 
 function TestController($scope) {

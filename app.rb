@@ -98,6 +98,9 @@ Cuba.define do
         on "change_password" do
           send_view "change_password"
         end
+        on "premiumtjanster" do
+          send_view "premiumtjanster"
+        end
         send_view "medlemssidor"
       end
     end
@@ -154,12 +157,12 @@ Cuba.define do
     end
 
     on "payson_pay" do
-      return_url = 'http://cubancabal.aws.af.cm/#/medlemssidor'
-      cancel_url = 'http://cubancabal.aws.af.cm/#/medlemssidor'
+      return_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/premiumtjanster'
+      cancel_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/premiumtjanster'
       ipn_url = 'http://cubancabal.aws.af.cm/ipn'
       unless production?
-        return_url = 'http://localhost:4856/#/medlemssidor'
-        cancel_url = 'http://localhost:4856/#/medlemssidor'
+        return_url = 'http://localhost:4856/#/medlemssidor/premiumtjanster'
+        cancel_url = 'http://localhost:4856/#/medlemssidor/premiumtjanster'
         ipn_url = 'http://localhost:4856/ipn'
       end
       memo = 'Thi be teh deskription foh de thigy'
@@ -223,24 +226,23 @@ Cuba.define do
         puts "Crediting days to user..."
         user.update_attribute(:premium_days, (user.premium_days + 30))
         puts "Days credited"
-        # user.save!
         puts "'User.save!':d"
       else
         puts "Something went wrong"
       end
     end
   
-		on "login" do
-			on param('email'), param('password') do |email, password|
-				user = User.authenticate(email, password)
-				if user
-					init_session(req, user)
-				else
+    on "login" do
+      on param('email'), param('password') do |email, password|
+        user = User.authenticate(email, password)
+        if user
+          init_session(req, user)
+        else
           res.status = 401 # unauthorized
-					res.write "Ogiltig e-postadress eller lösenord."
-				end
-			end
-		end
+          res.write "Ogiltig e-postadress eller lösenord."
+        end
+      end
+    end
     
     on "logout" do
       user = current_user(req)

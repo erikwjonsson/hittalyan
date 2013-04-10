@@ -11,6 +11,7 @@ class User
   field :permits_to_be_emailed, type: Boolean, default: true
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
   field :premium_days, type: Integer, default: 0
+  field :sms_left, type: Integer, default: 0
   field :unsubscribe_id, type: String
   has_one :session
   embeds_one :filter
@@ -69,6 +70,8 @@ class User
                 notify_by_sms: self.notify_by_sms,
                 notify_by_push_note: self.notify_by_push_note,
                 active: self.active,
+                premium_days: self.premium_days,
+                sms_left: self.sms_left,
                 filter: {roomsMin: filter.rooms.first,
                          roomsMax: filter.rooms.last,
                          rent: filter.rent,
