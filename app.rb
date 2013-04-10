@@ -134,6 +134,11 @@ Cuba.define do
       return_url = 'http://cubancabal.aws.af.cm/#/medlemssidor'
       cancel_url = 'http://cubancabal.aws.af.cm/#/medlemssidor'
       ipn_url = 'http://cubancabal.aws.af.cm/ipn'
+      unless production?
+        return_url = 'http://localhost:4856/#/medlemssidor'
+        cancel_url = 'http://localhost:4856/#/medlemssidor'
+        ipn_url = 'http://localhost:4856/ipn'
+      end
       memo = 'Thi be teh deskription foh de thigy'
       user = current_user(req)
 

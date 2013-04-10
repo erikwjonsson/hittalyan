@@ -27,3 +27,11 @@ class RackEnvNotSet < StandardError
     "The environment variable RACK_ENV is not set."
   end
 end
+
+def production?
+  if ENVIRONMENT == :production
+    return true
+  else
+    return false
+  end
+end

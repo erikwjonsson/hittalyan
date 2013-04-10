@@ -394,8 +394,8 @@ function logout($http, $location) {
 
 function deTokenify() {
   if (window.location.search != "") {
-    var url = window.location;
-    window.location = url.origin + url.pathname + url.hash;
+    var l = window.location;
+    window.location = l.protocol + "//" + l.host + l.pathname + l.hash;
   };
 }
 
