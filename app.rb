@@ -171,7 +171,7 @@ Cuba.define do
       receivers = []
       receivers << PaysonAPI::Receiver.new(
         email = 'testagent-1@payson.se',
-        amount = 125,
+        amount = (Packages::Standard.unit_price_in_ore/100)*(Packages::Standard.tax_in_percentage_units/100 + 1),
         first_name = 'Sven',
         last_name = 'Svensson',
         primary = true)
@@ -182,12 +182,7 @@ Cuba.define do
         last_name = 'Rolfsson')
 
       order_items = []
-      order_items << PaysonAPI::OrderItem.new(
-        description = 'Hittalyan månads dakjdkah',
-        unit_price = 100,
-        quantity = 1,
-        tax = 0.25,
-        sku = 'MY-ITEM-1')
+      order_items << Packages::Standard.as_order_item
 
       payment = PaysonAPI::Request::Payment.new(
         return_url,
@@ -224,9 +219,14 @@ Cuba.define do
         puts user
         puts "Found user: #{user.email}"
         puts "Crediting days to user..."
-        user.update_attribute(:premium_days, (user.premium_days + 30))
+        sku = ipn_response.order_items.first.sku
+
+        package = Packages::PACKAGE_BY_SKU[sku]
+        user.inc(:premium_days, package.premium_days)
+        user.inc(:sms_account, package.sms_account)
+
+        # user.update_attribute(:premium_days, (user.premium_days + 30))
         puts "Days credited"
-        puts "'User.save!':d"
       else
         puts "Something went wrong"
       end
