@@ -355,7 +355,7 @@ function PremiumServicesController($scope, $http) {
     success(function(data, status) {
       // setPremiumInfo;
       $scope.daysLeft = data.premium_days;
-      $scope.smsLeft = data.sms_left;
+      $scope.smsLeft = data.sms_account;
       // alert(data);
     }).
     error(function(data, status) {
