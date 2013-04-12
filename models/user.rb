@@ -3,6 +3,8 @@ require 'digest'
 class User
   include Mongoid::Document
   field :email, type: String
+  field :first_name, type: String, default: ""
+  field :last_name, type: String, default: ""
   field :mobile_number, type: String
   field :hashed_password, type: String
   field :notify_by_email, type: Boolean, default: false
@@ -66,6 +68,8 @@ class User
 
   def settings_to_hash()
     settings = {mobile_number: self.mobile_number,
+                first_name: self.first_name,
+                last_name: self.last_name,
                 notify_by_email: self.notify_by_email,
                 notify_by_sms: self.notify_by_sms,
                 notify_by_push_note: self.notify_by_push_note,

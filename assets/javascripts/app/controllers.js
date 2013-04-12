@@ -203,6 +203,8 @@ function SettingsController($scope, $http, $location) {
       $scope.smsNotification = data.notify_by_sms;
       $scope.pushNotification = data.notify_by_push_note;
       $scope.mobileNumber = data.mobile_number;
+      $scope.firstName = data.first_name;
+      $scope.lastName = data.last_name;
     }).
     error(function(data, status) {
       alert(data)
@@ -259,11 +261,12 @@ function SettingsController($scope, $http, $location) {
         });
     }
   };
-  $scope.submitNumber = function() {
-    $scope.data = {mobile_number: $scope.mobileNumber}
-    $http.post("mobile_number", $scope.data).
+  $scope.submitPersonalInfo = function() {
+    data = {data: {mobile_number: $scope.mobileNumber,
+                   first_name: $scope.firstName,
+                   last_name: $scope.lastName}};
+    $http.post("personal_information", data).
       success(function(data, status) {
-        $scope.mobileNumber = data;
         alert(data);
       }).
       error(function(data, status) {
@@ -348,28 +351,67 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
 
 function PremiumServicesController($scope, $http) {
   deTokenify();
-  $scope.daysLeft = 5;
-  $scope.smsLeft = 12;
-  // getPremiumInfo;
+  $scope.daysLeft = 0;
+  $scope.smsLeft = 0;
+  $scope.showForm = false;
+  settingsData = {};
+
   $http.get("medlemssidor/get_settings").
     success(function(data, status) {
-      // setPremiumInfo;
-      $scope.daysLeft = data.premium_days;
-      $scope.smsLeft = data.sms_account;
+      settingsData = data;
+      $scope.daysLeft = settingsData.premium_days;
+      $scope.smsLeft = settingsData.sms_account;
+      $scope.firstName = settingsData.first_name;
+      $scope.lastName = settingsData.last_name;
+      $scope.mobileNumber = settingsData.mobile_number;
       // alert(data);
     }).
     error(function(data, status) {
       alert(data);
     });
-  $scope.pay = function() {
-    $http.post("payson_pay").
-      success(function(data, status) {
-        alert(data);
-        window.location = data;
-      }).
-      error(function(data, status) {
-        alert(data);
-      });
+
+  $http.get("medlemssidor/packages").
+    success(function(data, status) {
+      $scope.packages = data;
+      // alert(data);
+    }).
+    error(function(data, status) {
+      alert(data);
+    });
+
+  $scope.submitNameInfo = function() {
+    if ( $scope.nameForm.$valid == true) {
+      data = {data: {mobile_number: $scope.mobileNumber,
+                     first_name: $scope.firstName,
+                     last_name: $scope.lastName}};
+      $http.post("personal_information", data).
+        success(function(data, status) {
+          alert("success");
+          settingsData.first_name = $scope.first_name;
+          settingsData.last_name = $scope.last_name;
+          $scope.buyPackage($scope.sku);
+        }).
+        error(function(data, status) {
+          alert("error");
+        });
+    }
+  };
+
+  $scope.buyPackage = function(sku) {
+    $scope.sku = sku
+    if (settingsData.first_name != "" && settingsData.last_name != "") {
+      data = {'sku': sku}
+      $http.post("payson_pay", data).
+        success(function(data, status) {
+          alert(data);
+          window.location = data;
+        }).
+        error(function(data, status) {
+          alert(data);
+        });
+    } else{
+      $scope.showForm = true; 
+    };
   };
 }
 

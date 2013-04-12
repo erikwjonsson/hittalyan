@@ -8,4 +8,32 @@
         %hr
       %span Dagar kvar: {{daysLeft}} SMS kvar: {{smsLeft}}
       %hr
-      %button(type="button" class="btn" ng-click="pay()") Betala
+
+      %table
+        %tr
+          %td image: {{image}}
+          %td {{packages.STANDARD.description}}
+          %td
+            %button(type="button" class="btn" ng-click="buyPackage('STANDARD')") Köp
+
+      %form(name="nameForm" ng-submit="submitNameInfo()" ng-show="showForm" novalidate)
+        %fieldset
+          %span Betalningstjänsten kräver ditt för- och efternamn.
+          %label(for="first-name") Förnamn:
+          %input(type="text"
+                name="first-name"
+                placeholder="Förnamn"
+                id="first-name"
+                ng-model="firstName"
+                required)
+          %label(for="lastname") Efternamn:
+          %input(type="text"
+                name="last-name"
+                placeholder="Efternamn"
+                id="last-name"
+                ng-model="lastName"
+                required)
+          %input(type="submit"
+                 class="btn"
+                 name="save"
+                 value="Gå vidare")

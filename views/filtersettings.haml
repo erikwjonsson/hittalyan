@@ -69,15 +69,27 @@
             %input(type="checkbox" ng-model="pushNotification") {{pushNotification}}
       %button(type="button" class="btn" ng-click="saveNotify()") Spara
 
-      %form(name="mobileNumberForm" ng-submit="submitNumber()" novalidate)
+      %form(name="personalInformationForm" ng-submit="submitPersonalInfo()" novalidate)
         %fieldset
-          %legend Mobilnummer
+          %legend Personlig information
+          %label(for="mobile-number") Mobilnummer:
           %input(type="text"
                 name="mobile-number"
                 placeholder="Mobilnummer"
                 id="mobile-number"
-                ng-model="mobileNumber"
-                required)
+                ng-model="mobileNumber")
+          %label(for="first-name") Förnamn:
+          %input(type="text"
+                name="first-name"
+                placeholder="Förnamn"
+                id="first-name"
+                ng-model="firstName")
+          %label(for="lastname") Efternamn:
+          %input(type="text"
+                name="last-name"
+                placeholder="Efternamn"
+                id="last-name"
+                ng-model="lastName")
           %input(type="submit"
                  class="btn"
                  name="save"

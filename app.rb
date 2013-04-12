@@ -84,6 +84,17 @@ Cuba.define do
         on "get_settings" do
           send_json ActiveSupport::JSON.encode(user.settings_to_hash)
         end
+
+        on "packages" do
+          packages = Packages::PACKAGE_BY_SKU.values
+          pretty_packages = {}
+          packages.each do |p|
+            pretty_packages[p.sku] = {name: p.name,
+                                      description: p.description,
+                                      unit_price_in_ore: p.unit_price_in_ore}
+          end
+          send_json ActiveSupport::JSON.encode(pretty_packages)
+        end
         
         on "lagenheter" do
           send_view "apartments"
@@ -156,7 +167,7 @@ Cuba.define do
       
     end
 
-    on "payson_pay" do
+    on "payson_pay", param('sku') do |sku|
       return_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/premiumtjanster'
       cancel_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/premiumtjanster'
       ipn_url = 'http://cubancabal.aws.af.cm/ipn'
@@ -171,18 +182,18 @@ Cuba.define do
       receivers = []
       receivers << PaysonAPI::Receiver.new(
         email = 'testagent-1@payson.se',
-        amount = (Packages::Standard.unit_price_in_ore/100)*(Packages::Standard.tax_in_percentage_units/100 + 1),
-        first_name = 'Sven',
-        last_name = 'Svensson',
+        amount = (Packages::Standard.unit_price_in_ore/100)*(Packages::Standard.tax_in_percentage_units/100.0 + 1),
+        first_name = 'Pablo',
+        last_name = 'Gonza',
         primary = true)
 
       sender = PaysonAPI::Sender.new(
         email = user.email,
-        first_name = 'Thunar',
-        last_name = 'Rolfsson')
+        first_name = user.first_name,
+        last_name = user.last_name)
 
       order_items = []
-      order_items << Packages::Standard.as_order_item
+      order_items << Packages::PACKAGE_BY_SKU[sku].as_order_item
 
       payment = PaysonAPI::Request::Payment.new(
         return_url,
@@ -224,8 +235,6 @@ Cuba.define do
         package = Packages::PACKAGE_BY_SKU[sku]
         user.inc(:premium_days, package.premium_days)
         user.inc(:sms_account, package.sms_account)
-
-        # user.update_attribute(:premium_days, (user.premium_days + 30))
         puts "Days credited"
       else
         puts "Something went wrong"
@@ -295,10 +304,12 @@ Cuba.define do
                               notify_by_push_note: push)
     end
 
-    on "mobile_number", param('mobile_number') do |mobile_number|
+    on "personal_information", param('data') do |data|
       user = current_user(req)
-      user.change_mobile_number(mobile_number)
-      res.write user.mobile_number
+      user.change_mobile_number(data['mobile_number'])
+      user.update_attributes!(first_name: data['first_name'],
+                              last_name: data['last_name'])
+      res.write "'#{user.as_document}'"
     end
 
     on "passwordreset" do

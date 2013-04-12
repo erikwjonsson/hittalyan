@@ -28,7 +28,7 @@ class Package
     PaysonAPI::OrderItem.new(self.payson_description,
                              self.unit_price_in_ore/100,
                              self.quantity,
-                             self.tax_in_percentage_units/100,
+                             self.tax_in_percentage_units/100.0,
                              self.sku)
     end
 end
