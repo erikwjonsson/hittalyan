@@ -155,7 +155,7 @@ Cuba.define do
     end
 
     on ":catchall" do
-      puts "Nu kom nån jävel allt fel get"
+      LOG.info "Nu kom nån jävel allt fel get"
       res.status = 404 # not found
       res.write "Nu kom du allt fel din javel!"
     end
@@ -181,29 +181,20 @@ Cuba.define do
     end
 
     on "ipn" do
-      request_body = req.body.read
-      ipn_response = PaysonAPI::Response::IPN.new(request_body)
-      require 'pp'
-      pp ipn_response
-      ipn_request = PaysonAPI::Request::IPN.new(ipn_response.raw)
-      validate = PaysonAPI::Client.validate_ipn(ipn_request)
-      if validate.verified? && req.POST['status'] == "COMPLETED"
-        puts "Payment verified and COMPLETED"
-        email = req.POST['senderEmail']
-        puts "Fetching user #{email}..."
-        user = User.find_by(email: email)
-        puts user.class
-        puts user
-        puts "Found user: #{user.email}"
-        puts "Crediting days to user..."
-        sku = ipn_response.order_items.first.sku
+      payment_uuid = req.POST['custom']
+      payment = Payment.find_by(payment_uuid: payment_uuid)
+      payment.ipn_response(req)
 
+      if payment.validate
+        email = req.POST['senderEmail']
+        user = User.find_by(email: email)
+        sku = payment.package_sku
         package = Packages::PACKAGE_BY_SKU[sku]
         user.inc(:premium_days, package.premium_days)
         user.inc(:sms_account, package.sms_account)
-        puts "Days credited"
+        payment.update_attribute(:status, "EXECUTED")
       else
-        puts "Something went wrong"
+        LOG.error "Something went wrong"
       end
     end
   
@@ -326,7 +317,7 @@ Cuba.define do
     end
 
     on ":catchall" do
-      puts "Nu kom nån jävel allt fel post"
+      LOG.info "Nu kom nån jävel allt fel post"
       res.status = 404 # not found
       res.write "Nu kom du allt fel din javel!"
     end
