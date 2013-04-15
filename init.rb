@@ -17,7 +17,10 @@ require 'date'
 require 'rest-client'
 require 'payson_api'
 require_relative 'lib/getenvironment'
+ENVIRONMENT = get_environment
 require_relative 'helpers'
+WEBSITE_ADDRESS = website_address
+BRAND_NAME = "HittaLyan"
 require_from_directory 'extensions'
 require_from_directory 'models'
 require_from_directory 'models/packages'
@@ -26,7 +29,6 @@ require_from_directory 'models/packages'
 # Global constants and variables
 # ===============================
 
-ENVIRONMENT = get_environment
 PUBLIC_PATH = File.expand_path(File.join(File.dirname(__FILE__), 'public/'))
 
 # ===================

@@ -48,6 +48,16 @@ def shoot_email(email, subject, body)
   text: body
 end
 
+def website_address
+  if production?
+    "http://www.hittalyan.se/"
+  elsif development?
+    "http://localhost:4856/"
+  elsif test?
+    "http://cubancabal.aws.af.cm/"
+  end
+end
+
 class MongoidExceptionCodifier
   TOO_SHORT_PASSWORD = 'Hashed password is too short (minimum is 6 characters)'
   EMAIL_ALREADY_REGISTERED = 'Email is already taken'
