@@ -173,7 +173,8 @@ Cuba.define do
                                       package_sku: sku)
       begin
         payment.initiate_payment
-      rescue PaymentInitiationError
+      rescue PaymentInitiationError => e
+        log_exception(e)
         res.status = 400
       end
       res.write(payment.forward_url) unless res.status == 400

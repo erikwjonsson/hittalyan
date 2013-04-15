@@ -68,7 +68,7 @@ class PaysonPayment < Payment
     payment.order_items = [@package.as_order_item]
 
     response = PaysonAPI::Client.initiate_payment(payment) # Response
-    raise PaymentProcessingError.new(response) unless response.success?
+    raise PaymentInitiationError.new(response) unless response.success?
     @forward_url = response.forward_url
   end
 

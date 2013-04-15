@@ -17,6 +17,12 @@ def log
   env['rack.logger']
 end
 
+def log_exception(e)
+  LOG.error e
+  LOG.error e.message
+  LOG.error e.backtrace.join("\n")
+end
+
 # emailer
 # def shoot_email(email, subject, body)
 #   Pony.mail({
