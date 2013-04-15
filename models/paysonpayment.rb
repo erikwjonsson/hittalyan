@@ -63,7 +63,8 @@ class PaysonPayment < Payment
       IPN_URL,
       MEMO,
       sender,
-      [receiver])
+      [receiver],
+      self.payment_uuid) # Comment
     payment.order_items = [@package.as_order_item]
 
     response = PaysonAPI::Client.initiate_payment(payment) # Response
