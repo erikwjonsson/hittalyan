@@ -206,6 +206,23 @@ Cuba.define do
         puts "Something went wrong"
       end
     end
+
+    on "ipn" do
+      ipn_response = PaysonAPI::Response::IPN.new(req.body.read)
+      ipn_request = PaysonAPI::Request::IPN.new(ipn_response.raw)
+
+      payment = Payment.find_by(:payment_uuid, ipn_response.comment)
+      case payment.validate(ipn_request)
+      when true
+        user = User.find_by(email: payment.user_email)
+        package = Packages::PACKAGE_BY_SKU[Payment.package_sku]
+
+        user.apply_package(package)
+      when false
+        puts "Something went wrong."
+        res.status = 400
+      end
+    end
   
     on "login" do
       on param('email'), param('password') do |email, password|
