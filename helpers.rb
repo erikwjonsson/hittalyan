@@ -17,6 +17,12 @@ def log
   env['rack.logger']
 end
 
+def log_exception(e)
+  LOG.error e
+  LOG.error e.message
+  LOG.error e.backtrace.join("\n")
+end
+
 # emailer
 # def shoot_email(email, subject, body)
 #   Pony.mail({
@@ -46,6 +52,16 @@ def shoot_email(email, subject, body)
   to: email,
   subject: subject,
   text: body
+end
+
+def website_address
+  if production?
+    "http://www.hittalyan.se/"
+  elsif development?
+    "http://localhost:4856/"
+  elsif test?
+    "http://cubancabal.aws.af.cm/"
+  end
 end
 
 class MongoidExceptionCodifier

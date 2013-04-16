@@ -155,7 +155,7 @@ Cuba.define do
     end
 
     on ":catchall" do
-      puts "Nu kom nån jävel allt fel get"
+      LOG.info "Nu kom nån jävel allt fel get"
       res.status = 404 # not found
       res.write "Nu kom du allt fel din javel!"
     end
@@ -168,76 +168,33 @@ Cuba.define do
     end
 
     on "payson_pay", param('sku') do |sku|
-      return_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/premiumtjanster'
-      cancel_url = 'http://cubancabal.aws.af.cm/#/medlemssidor/premiumtjanster'
-      ipn_url = 'http://cubancabal.aws.af.cm/ipn'
-      unless production?
-        return_url = 'http://localhost:4856/#/medlemssidor/premiumtjanster'
-        cancel_url = 'http://localhost:4856/#/medlemssidor/premiumtjanster'
-        ipn_url = 'http://localhost:4856/ipn'
-      end
-      memo = 'Thi be teh deskription foh de thigy'
       user = current_user(req)
-
-      receivers = []
-      receivers << PaysonAPI::Receiver.new(
-        email = 'testagent-1@payson.se',
-        amount = (Packages::Standard.unit_price_in_ore/100)*(Packages::Standard.tax_in_percentage_units/100.0 + 1),
-        first_name = 'Pablo',
-        last_name = 'Gonza',
-        primary = true)
-
-      sender = PaysonAPI::Sender.new(
-        email = user.email,
-        first_name = user.first_name,
-        last_name = user.last_name)
-
-      order_items = []
-      order_items << Packages::PACKAGE_BY_SKU[sku].as_order_item
-
-      payment = PaysonAPI::Request::Payment.new(
-        return_url,
-        cancel_url,
-        ipn_url,
-        memo,
-        sender,
-        receivers)
-      payment.order_items = order_items
-
-      response = PaysonAPI::Client.initiate_payment(payment)
-
-      if response.success?
-        res.write response.forward_url
-        puts "Payment from #{user.email} initiated"
-      else
-        puts response.errors
+      payment = PaysonPayment.create!(user_email: user.email,
+                                      package_sku: sku)
+      begin
+        payment.initiate_payment
+      rescue PaymentInitiationError => e
+        log_exception(e)
         res.status = 400
-        res.write response.errors
       end
+      res.write(payment.forward_url) unless res.status == 400
     end
 
     on "ipn" do
-      request_body = req.body.read
-      ipn_response = PaysonAPI::Response::IPN.new(request_body)
-      ipn_request = PaysonAPI::Request::IPN.new(ipn_response.raw)
-      validate = PaysonAPI::Client.validate_ipn(ipn_request)
-      if validate.verified? && req.POST['status'] == "COMPLETED"
-        puts "Payment verified and COMPLETED"
-        email = req.POST['senderEmail']
-        puts "Fetching user #{email}..."
-        user = User.find_by(email: email)
-        puts user.class
-        puts user
-        puts "Found user: #{user.email}"
-        puts "Crediting days to user..."
-        sku = ipn_response.order_items.first.sku
+      payment_uuid = req.POST['custom']
+      payment = Payment.find_by(payment_uuid: payment_uuid)
+      payment.ipn_response(req)
 
+      if payment.validate
+        email = req.POST['senderEmail']
+        user = User.find_by(email: email)
+        sku = payment.package_sku
         package = Packages::PACKAGE_BY_SKU[sku]
         user.inc(:premium_days, package.premium_days)
         user.inc(:sms_account, package.sms_account)
-        puts "Days credited"
+        payment.update_attribute(:status, "EXECUTED")
       else
-        puts "Something went wrong"
+        LOG.error "Something went wrong"
       end
     end
   
@@ -360,7 +317,7 @@ Cuba.define do
     end
 
     on ":catchall" do
-      puts "Nu kom nån jävel allt fel post"
+      LOG.info "Nu kom nån jävel allt fel post"
       res.status = 404 # not found
       res.write "Nu kom du allt fel din javel!"
     end

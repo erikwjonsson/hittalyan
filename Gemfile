@@ -6,7 +6,7 @@ gem 'cuba'
 gem 'rack-post-body-to-params'
 gem 'thin'
 gem 'rest-client'
-gem 'payson_api'
+gem 'payson_api', '0.3.0'
 gem 'af'
 
 if ENV['RACK_ENV'] == 'development'

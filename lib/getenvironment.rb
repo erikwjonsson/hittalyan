@@ -35,3 +35,19 @@ def production?
     return false
   end
 end
+
+def development?
+  if ENVIRONMENT == :development
+    return true
+  else
+    return false
+  end
+end
+
+def test?
+  if ENVIRONMENT == :test
+    return true
+  else
+    return false
+  end
+end
