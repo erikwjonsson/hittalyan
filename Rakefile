@@ -9,6 +9,7 @@ def strip_gemfile_of_development_gems(dir)
   File.open(gemfile_path, 'w') do |file|
     file.write(production_lines.join(''))
   end
+
 end
 
 def set_up_deployment_directory
@@ -50,6 +51,7 @@ task :deploy do
   in_a_deployment_directory do
     # Need to call bundle like this instead of using the task,
     # otherwise we enter the wrong directory.
+    system('pwd')
     system('bundle install')
     system('af login lingonberryprod@gmail.com')
     system('env RACK_ENV="production" af update cubancabal')

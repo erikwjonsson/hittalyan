@@ -9,6 +9,10 @@ gem 'rest-client'
 gem 'payson_api', '0.3.0'
 gem 'af'
 
+
+# Do not change the following comment. Rakefile uses it for deployment to AppFog.
+
+# --DEVELOPMENT GEMS--
 if ENV['RACK_ENV'] == 'development'
   # puts 'Development environment on scanners, captain. Engaging gem tractor.'
   # Asset pipeline
