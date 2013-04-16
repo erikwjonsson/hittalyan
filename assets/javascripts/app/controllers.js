@@ -207,7 +207,7 @@ function SettingsController($scope, $http, $location) {
       $scope.lastName = data.last_name;
     }).
     error(function(data, status) {
-      alert(data)
+      //alert(data)
     });
   $scope.saveNotify = function() {
     $scope.data = {email: $scope.emailNotification,
@@ -215,10 +215,10 @@ function SettingsController($scope, $http, $location) {
                    push: $scope.pushNotification};
     $http.post("notify_by", $scope.data).
       success(function(data, status) {
-        alert("Success");
+        //alert("Success");
       }).
       error(function(data, status) {
-        alert("Fail");
+        //alert("Fail");
       });
   };
   $scope.submit = function() {
@@ -267,10 +267,10 @@ function SettingsController($scope, $http, $location) {
                    last_name: $scope.lastName}};
     $http.post("personal_information", data).
       success(function(data, status) {
-        alert(data);
+        //alert(data);
       }).
       error(function(data, status) {
-        alert(data);
+        //alert(data);
       });
   };
 }
@@ -293,13 +293,13 @@ function PasswordController($scope, $http) {
                        new_password: $scope.new_password};
         $http.post("change_password", $scope.data).
           success(function(data, status) {
-            alert(data);
+            //alert(data);
             $scope.new_password = "";
             $scope.repeat_password = "";
             $scope.old_password = "";
           }).
           error(function(data, status) {
-            alert("Natural 1");
+            //alert("Natural 1");
           });
       }
     }
@@ -315,10 +315,10 @@ function PasswordResetController($scope, $http) {
       $scope.data = {email: $scope.email};
       $http.post("passwordreset", $scope.data).
         success(function(data, status) {
-          alert(data);
+          //alert(data);
         }).
         error(function(data, status) {
-          alert("Natural 1");
+          alert("Lösenordet kunde ej återställas. Försök igen senare.");
         });
     }
   };
@@ -334,12 +334,12 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
                        new_password: $scope.new_password};
         $http.post("passwordreset", $scope.data).
           success(function(data, status) {
-            alert(data);
+            //alert(data);
             $location.path('/');
           }).
           error(function(data, status) {
             $scope.message = data;
-            alert("Natural 1");
+            //alert("Natural 1");
           });
       }
     }
@@ -367,7 +367,7 @@ function PremiumServicesController($scope, $http) {
       // alert(data);
     }).
     error(function(data, status) {
-      alert(data);
+      //alert(data);
     });
 
   $http.get("medlemssidor/packages").
@@ -376,7 +376,7 @@ function PremiumServicesController($scope, $http) {
       // alert(data);
     }).
     error(function(data, status) {
-      alert(data);
+      //alert(data);
     });
 
   $scope.submitNameInfo = function() {
@@ -386,13 +386,13 @@ function PremiumServicesController($scope, $http) {
                      last_name: $scope.lastName}};
       $http.post("personal_information", data).
         success(function(data, status) {
-          alert("success");
+          //alert("success");
           settingsData.first_name = $scope.first_name;
           settingsData.last_name = $scope.last_name;
           $scope.buyPackage($scope.sku);
         }).
         error(function(data, status) {
-          alert("error");
+          //alert("error");
         });
     }
   };
@@ -403,11 +403,11 @@ function PremiumServicesController($scope, $http) {
       data = {'sku': sku}
       $http.post("payson_pay", data).
         success(function(data, status) {
-          alert(data);
+          //alert(data);
           window.location = data;
         }).
         error(function(data, status) {
-          alert(data);
+          //alert(data);
         });
     } else{
       $scope.showForm = true; 
@@ -426,7 +426,7 @@ function loginFormFail($scope) {
   $scope.password = "";
   localStorage.loggedIn = "false";
   localStorage.userName = "";
-  alert("Nu skrev du allt fel din jävel");
+  alert("Felaktigt användarnamn eller lösenord.");
 }
 
 function loginFormSuccess(email) {

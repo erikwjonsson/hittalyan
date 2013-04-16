@@ -160,7 +160,6 @@ Cuba.define do
     on ":catchall" do
       LOG.info "Nu kom nån jävel allt fel get"
       res.status = 404 # not found
-      res.write "Nu kom du allt fel din javel!"
     end
   end
   
@@ -231,7 +230,7 @@ Cuba.define do
       rescue Mongoid::Errors::Validations => ex
         error_codes = MongoidExceptionCodifier.codify(ex)
         res.status = 400 # bad request
-        res.write "#{error_codes}"
+        res.write "#{error_codes}" unless production?
       end
     end
 
@@ -269,7 +268,7 @@ Cuba.define do
       user.change_mobile_number(data['mobile_number'])
       user.update_attributes!(first_name: data['first_name'],
                               last_name: data['last_name'])
-      res.write "'#{user.as_document}'"
+      res.write "'#{user.as_document}'" unless production?
     end
 
     on "passwordreset" do

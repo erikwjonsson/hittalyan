@@ -1,11 +1,21 @@
 ﻿.row
   .span12.box.opaque
     .padhack
-      %span(id="links")
-        %a(href="#/medlemssidor") Medlemssidor
-        |
-        %a(href="#/medlemssidor/lagenheter") Lägenheter
-        %hr
+      %h1 Inställningar
+.row.top-buffer
+  .span2.box.opaque
+    .padhack  
+      %ul.nav.nav-list.vertical-nav-box
+        %li
+          %a{href: "#/medlemssidor/installningar"} Inställningar
+        %li
+          %a{href: "#/medlemssidor/lagenheter"} Lägenheter
+        %li
+          %a{href: "#/medlemssidor/losenord"} Ändra lösenord
+        %li
+          %a{href: "#/medlemssidor/premiumtjanster"} Premiumtjänster
+  .span10.box.opaque
+    .padhack
       %form(name="filtersettings" ng-submit="submit()" novalidate)
         %fieldset
           %legend Filterinställningar
