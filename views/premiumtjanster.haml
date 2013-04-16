@@ -1,17 +1,19 @@
 .row
   .span12.box.opaque
     .padhack
+      %h1 Premiumtjänster
       %span(id="links")
         %a(href="#/medlemssidor") Medlemssidor
         |
         %a(href="#/medlemssidor/lagenheter") Lägenheter
         %hr
-      %span Dagar kvar: {{daysLeft}} SMS kvar: {{smsLeft}}
+      %span Du har {{daysLeft}} dagar kvar och {{smsLeft}} SMS kvar på HittaLyan Premium.
       %hr
-
-      %table
+      %h2 Paket som du kan köpa
+      %table#packages
         %tr
-          %td image: {{image}}
+          %td
+            %img(src="images/shopping_bag.png")
           %td {{packages.STANDARD.description}}
           %td
             %button(type="button" class="btn" ng-click="buyPackage('STANDARD')") Köp

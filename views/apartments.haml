@@ -10,16 +10,25 @@
         %legend Lägenheter
         %tr(ng-repeat="apartment in apartments")
           %td
-            %img(src="images/arnoldpumping_small.jpg")
+            %a(href="{{apartment.url}}")
+              %img(src="images/home_icon.png"
+                   title="Av SpoonGraphics (http://commons.wikimedia.org/wiki/File:Home_icon_blue.png).")
           %td
             %br
+            %strong Adress: 
             {{apartment.address}}
             %br
-            Rum: {{apartment.rooms}}
+            %strong Rum: 
+            {{apartment.rooms}}
             %br
-            Area: {{apartment.area}} kvm
+            %strong Yta: 
+            {{apartment.area}} kvm
             %br
-            Hyra: {{apartment.rent}} kr
+            %strong Hyra: 
+            {{apartment.rent}} kr
             %br
+            %em
+              Lägenheten publicerades 
+              {{ apartment.advertisement_found_at | date: 'yyyy-MM-dd HH:mm:ss' }}
             %br
             %a(href="{{apartment.url}}") Till hyresvärden

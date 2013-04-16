@@ -29,12 +29,15 @@ def send_json(document)
   res.write document
 end
 
-def filtered_apartments(filter)
+# filter - Filter object
+# days_ago - int
+def filtered_apartments_since(filter, days_ago)
   apartments = Apartment.all
   apartments.select do |apartment|
     (filter.rent >= apartment.rent &&
     filter.rooms === apartment.rooms &&
-    filter.area  === apartment.area)
+    filter.area  === apartment.area) &&
+    apartment.advertisement_found_at >= days_ago.days.ago
   end
 end
 
@@ -102,8 +105,8 @@ Cuba.define do
         
         on "apartments_list" do
           user = current_user(req)
-          filt_apts = filtered_apartments(user.filter)
-          send_json ActiveSupport::JSON.encode(filt_apts)
+          filt_apts = filtered_apartments_since(user.filter, 7)
+          send_json ActiveSupport::JSON.encode(filt_apts.reverse!)
         end
 
         on "change_password" do
