@@ -61,20 +61,16 @@ class User
   
   # Needs both a new_password (duh) and old_password for extra security
   def change_password(new_password, old_password)
-    raise WrongPassword unless self.has_password?(old_password)
-    self.hashed_password == encrypt(new_password)
-    # We really want to validate the new_passord before it gets hashed.
-    # We jut don't know how. Crap.
-    self.save(validate: false)
+    raise WrongPassword unless has_password?(old_password)
+    change_password!(new_password)
   end
   
   # Only needs new_password. Use with care since possibly someone without proper
   # authority could arbitrarily change the password.
   def change_password!(new_password)
-    self.hashed_password == encrypt(new_password)
     # We really want to validate the new_passord before it gets hashed.
     # We jut don't know how. Crap.
-    self.save(validate: false)
+    self.update_attribute(:hashed_password, encrypt(new_password))
   end
   
   class WrongPassword < StandardError
