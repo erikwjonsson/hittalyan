@@ -1,4 +1,11 @@
 ﻿/*GREEN for ok. Semantics*/
+/*First time doesn't seem to have any effect. It's a sucky mystery.*/
+.okness {
+  color: #198a00;
+}
+
+/*GREEN for ok. Semantics*/
+/*First time doesn't seem to have any effect. It's a sucky mystery.*/
 .okness {
   color: #198a00;
 }
