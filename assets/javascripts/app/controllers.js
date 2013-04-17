@@ -288,27 +288,28 @@ function SettingsController($scope, $http, $location) {
 
   $scope.submitPasswordSettings = function() {
     if ( $scope.new_password == $scope.repeat_password ) {
-      if ( $scope.passwordChange.$valid == true){
-        $scope.data = {old_password: $scope.old_password,
-                       new_password: $scope.new_password};
+      if ( $scope.passwordChange.$valid == true) {
+        $scope.data = {new_password: $scope.new_password,
+                       old_password: $scope.old_password};
         feedBackSymbolWorking($scope.passwordSettings, "Sparar...");
         $http.post("change_password", $scope.data).
           success(function(data, status) {
             //alert(data);
-            $scope.new_password = "";
-            $scope.repeat_password = "";
-            $scope.old_password = "";
             feedBackSymbolOk($scope.passwordSettings, "Inställningar sparade");
           }).
           error(function(data, status) {
             //alert("Natural 1");
-            feedBackSymbolNotOk($scope.passwordSettings, "Inställningar INTE sparade");
+            feedBackSymbolNotOk($scope.passwordSettings, "Ditt gamla lösenord verkar inte stämma");
           });
       }
     }
     else {
-      alert("Lösenorden överrensstämmer inte");
+      // alert("Lösenorden överrensstämmer inte");
+      feedBackSymbolNotOk($scope.passwordSettings, "Lösenorden överrensstämmer inte");
     }
+    $scope.new_password = "";
+    $scope.repeat_password = "";
+    $scope.old_password = "";
   };
 
   $scope.terminateAccount = function() {
