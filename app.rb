@@ -175,7 +175,7 @@ Cuba.define do
                                       package_sku: sku)
       begin
         payment.initiate_payment
-      rescue PaymentInitiationError => e
+      rescue Payment::InitiationError => e
         log_exception(e)
         res.status = 400
       end
