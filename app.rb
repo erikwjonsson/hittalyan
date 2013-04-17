@@ -313,9 +313,14 @@ Cuba.define do
       # Also, appropriate action taken, status codes etc.
       # Should obviously not allow the change of password unless old_password checks out.
       user = current_user(req)
-      user.change_password(new_password)
 
-      res.write "Lösenord ändrat"
+      begin
+        user.change_password(new_password, old_password)
+      rescue User::WrongPassword => e
+        log_exception(e)
+        res.status = 401
+        res.write ""
+      end
     end
 
     on "message", param('email'), param('message') do |email, message|
