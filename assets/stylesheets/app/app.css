@@ -66,11 +66,11 @@ body {
 }
 
 /*Make room for the top bar*/
-body {
+/*body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
-
+*/
 /*Rounding of those dangerous corners*/
 .box {
   -webkit-border-radius: 5px;
@@ -106,12 +106,8 @@ body {
 #packages {
 }
 
-#payson-info {
-  width: 150px;
-  height: 55px;
-  background: url('https://www.payson.se/sites/all/files/images/external/payson150x55.png');
-  float: left; 
-  text-indent: -6789px;
+.push-right {
+  padding-right: 50px;
 }
 
 .payson-button {
@@ -133,3 +129,35 @@ body {
 .large-textarea {
   width: 500px;
 }
+
+
+
+
+
+
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/*Set element background to white and make that same BACKGROUND transparent*/
+.dark-opaque {
+  color: #e7eef0; # approximately the regular opaque color when on our background.
+  background: rgb(0, 0, 0) transparent; /* default fallback */
+  background: rgba(0, 0, 0, 0.8); /* nice browsers */
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
+}
+
+

@@ -6,51 +6,60 @@
     %link{href: "#{Dir['public/application-*.css'].first.split('/')[1]}", rel: "stylesheet"}
     %script{src: "#{Dir['public/application-*.js'].first.split('/')[1]}"}
   %body{'ng-controller' => "IndexController"}
-    .navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand{:href => "#"} HittaLyan
-          .nav-collapse.collapse
-            %ul.nav
-              %li
-                %a(href="#/vanliga-fragor") Vanliga frågor
-              %li
-                %a(href="#/om") Om
-              %li(ng-hide="isLoggedIn()")
-                %a(href="#/registrera" ng-hide="isLoggedIn()") Registrera
-              %li(ng-show="isLoggedIn()")
-                %a(href="#/medlemssidor" ng-show="isLoggedIn()") Medlemssidor
-              %li(ng-hide="isLoggedIn()")
-                %a(href="#/losenordsaterstallning"
-                   ng-hide="isLoggedIn()") Glömt Lösenord?
+    #wrap
+      .navbar.navbar-inverse.navbar-fixed-top
+        .navbar-inner
+          .container
+            %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.brand{:href => "#"} HittaLyan
+            .nav-collapse.collapse
+              %ul.nav
+                %li
+                  %a(href="#/vanliga-fragor") Vanliga frågor
+                %li
+                  %a(href="#/om") Om
+                %li(ng-hide="isLoggedIn()")
+                  %a(href="#/registrera" ng-hide="isLoggedIn()") Registrera
+                %li(ng-show="isLoggedIn()")
+                  %a(href="#/medlemssidor" ng-show="isLoggedIn()") Medlemssidor
+                %li(ng-hide="isLoggedIn()")
+                  %a(href="#/losenordsaterstallning"
+                     ng-hide="isLoggedIn()") Glömt Lösenord?
 
-            %form#loginform.navbar-form.pull-right(name="login"
-                                                   ng-hide="isLoggedIn()"
-                                                   ng-submit="submit()"
-                                                   novalidate
-                                                   ng-controller="LoginController")
-              %input.span2(type="email"
-                           ng-model="email"
-                           placeholder="E-post"
-                           required)
-              %input.span2(type="password"
-                           placeholder="Lösenord"
-                           ng-model="password"
-                           required
-                           ng-minlength="6"
-                           ng-maxlength="36")
-              %input(type="submit"
-                     class="btn"
-                     name="login"
-                     value="Logga in")
-            %span.pull-right(ng-show="isLoggedIn()")
-              {{userName()}}
-              %a(href=""
-                 ng-click="logout()"
-                 ng-show="isLoggedIn()") Logga ut
-    .container
-      %div{'ng-view' => true}
+              %form#loginform.navbar-form.pull-right(name="login"
+                                                     ng-hide="isLoggedIn()"
+                                                     ng-submit="submit()"
+                                                     novalidate
+                                                     ng-controller="LoginController")
+                %input.span2(type="email"
+                             ng-model="email"
+                             placeholder="E-post"
+                             required)
+                %input.span2(type="password"
+                             placeholder="Lösenord"
+                             ng-model="password"
+                             required
+                             ng-minlength="6"
+                             ng-maxlength="36")
+                %input(type="submit"
+                       class="btn"
+                       name="login"
+                       value="Logga in")
+              %span.pull-right(ng-show="isLoggedIn()")
+                {{userName()}}
+                %a(href=""
+                   ng-click="logout()"
+                   ng-show="isLoggedIn()") Logga ut
+      .container
+        %div{'ng-view' => true}
+      .footer.top-buffer.dark-opaque
+        .padhack
+          %span.push-right
+            © Lingonberry Productions
+          %a(href="https://www.payson.se" rel="nofollow" title="Payson internetbetalningar")
+            Kortbetalning på nätet
+            %img(src="images/payson150x55.png")
+          
