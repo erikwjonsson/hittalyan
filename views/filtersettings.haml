@@ -63,22 +63,22 @@
           /   {{message}}
 
       %table
-        %legend Välj firringar
+        %legend Meddelandesätt
         %tr
           %td
             SMS
           %td
-            %input(type="checkbox" ng-model="smsNotification") {{smsNotification}}
+            %input(type="checkbox" ng-model="smsNotification")
         %tr
           %td
             Mail
           %td
-            %input(type="checkbox" ng-model="emailNotification") {{emailNotification}}
+            %input(type="checkbox" ng-model="emailNotification")
         %tr
           %td
             Push
           %td
-            %input(type="checkbox" ng-model="pushNotification") {{pushNotification}}
+            %input(type="checkbox" ng-model="pushNotification")
       %button(type="button" class="btn" ng-click="submitNotificationSettings()") Spara
       %span(ng-bind-html="notificationSettings.feedBackSymbol")
       %span {{notificationSettings.message}}
