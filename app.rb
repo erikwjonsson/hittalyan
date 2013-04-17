@@ -292,7 +292,7 @@ Cuba.define do
         if reset = Reset.find_by(hashed_link: hash)
           if (Time.now - reset.created_at) < 43200 # 12 hours
             user = User.find_by(email: reset.email)
-            user.change_password(new_pass)
+            user.change_password!(new_pass)
             reset.delete # So the link cannot be used anymore
             res.write "Lösen ändrat till #{new_pass}"
           else
