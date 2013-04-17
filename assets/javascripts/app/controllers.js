@@ -8,7 +8,25 @@ function IndexController($rootScope, $scope, $http, $location) {
 
 function LandingController($scope) {
   $scope.message = "There is no spoon. Revenge!";
-};
+}
+
+function AboutController($scope, $http) {
+  $scope.messageSent = false;
+
+  $scope.submit = function() {
+    if ($scope.contact.$valid == true) {
+      var data = {email: $scope.email,
+                  message: $scope.message};
+
+      $http.post("message", data)
+            .success(function(data, status) {
+              $scope.email = "";
+              $scope.message = "";
+            });
+            $scope.messageSent = true;
+    }
+  };
+}
 
 function LoginController($scope, $http, $routeParams, $location) {
 

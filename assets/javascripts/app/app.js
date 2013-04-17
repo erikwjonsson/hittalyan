@@ -13,7 +13,7 @@ angular.module('cubancabal', [])
       when('/medlemssidor/premiumtjanster', {templateUrl: '/medlemssidor/premiumtjanster', controller: PremiumServicesController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
       when('/registrera', {templateUrl: 'signup', controller: SignupController}).
-      when('/om', {templateUrl: 'om',   controller: LandingController}).
+      when('/om', {templateUrl: 'om',   controller: AboutController}).
       when('/test', {templateUrl: 'test',   controller: TestController}).
       when('/vanliga-fragor', {templateUrl: 'vanliga-fragor', controller: FAQController}).
       when('/losenordsaterstallning', {templateUrl: 'passwordreset', controller: PasswordResetController}).

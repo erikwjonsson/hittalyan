@@ -318,6 +318,10 @@ Cuba.define do
       res.write "Lösenord ändrat"
     end
 
+    on "message", param('email'), param('message') do |email, message|
+      Mailer.shoot_email(Mailer::OUR_STANDARD_EMAIL, "Meddelande via kontaktformulär", message, email)
+    end 
+
     on ":catchall" do
       LOG.info "Nu kom nån jävel allt fel post"
       res.status = 404 # not found
