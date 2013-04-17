@@ -1,5 +1,5 @@
 require 'fileutils'
-require 'SecureRandom'
+require 'securerandom'
 
 def strip_gemfile_of_development_gems(dir)
   gemfile_path = File.join(dir, "Gemfile")
