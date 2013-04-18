@@ -183,33 +183,14 @@ Cuba.define do
     end
 
     on "ipn" do
-      payment_uuid = req.POST['custom']
-      payment = Payment.find_by(payment_uuid: payment_uuid)
-      payment.ipn_response(req)
-
-      if payment.validate
-        email = req.POST['senderEmail']
-        user = User.find_by(email: email)
-        sku = payment.package_sku
-        package = Packages::PACKAGE_BY_SKU[sku]
-        user.inc(:premium_days, package.premium_days)
-        user.inc(:sms_account, package.sms_account)
-        payment.update_attribute(:status, "EXECUTED")
-      else
-        LOG.error "Something went wrong"
-      end
-    end
-
-    on "ipn" do
       ipn_response = PaysonAPI::Response::IPN.new(req.body.read)
       ipn_request = PaysonAPI::Request::IPN.new(ipn_response.raw)
 
-      payment = Payment.find_by(:payment_uuid, ipn_response.comment)
-      case payment.validate(ipn_request)
+      payment = PaysonPayment.find_by(payment_uuid: req.POST['custom'])
+      case payment.validate(ipn_response, ipn_request)
       when true
         user = User.find_by(email: payment.user_email)
-        package = Packages::PACKAGE_BY_SKU[Payment.package_sku]
-
+        package = Packages::PACKAGE_BY_SKU[payment.package_sku]
         user.apply_package(package)
       when false
         puts "Something went wrong."
