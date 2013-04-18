@@ -69,9 +69,7 @@ task :deploy do
   
   in_a_deployment_directory do
     system('af login lingonberryprod@gmail.com')
-    puts "Running 'env RACK_ENV=\"production\" af update #{appfog_app_name}'"
     system("env RACK_ENV=\"production\" af update #{appfog_app_name}")
-    puts "Running 'af start #{appfog_app_name}'"
     system("af start #{appfog_app_name}")
     # Resetting Gemfile.lock. Messes up git otherwise.
     system('bundle install --quiet')
