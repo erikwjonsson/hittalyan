@@ -58,14 +58,27 @@ class User
     return nil unless user
     return user if user.has_password?(submitted_password)
   end
-
-  def change_password(new_password)
-    self.hashed_password == encrypt(new_password)
+  
+  # Needs both a new_password (duh) and old_password for extra security
+  def change_password(new_password, old_password)
+    raise WrongPassword unless has_password?(old_password)
+    change_password!(new_password)
+  end
+  
+  # Only needs new_password. Use with care since possibly someone without proper
+  # authority could arbitrarily change the password.
+  def change_password!(new_password)
     # We really want to validate the new_passord before it gets hashed.
     # We jut don't know how. Crap.
-    self.save(validate: false)
+    self.update_attribute(:hashed_password, encrypt(new_password))
   end
-
+  
+  class WrongPassword < StandardError
+    def message
+      "Submitted password does not match."
+    end
+  end
+  
   def settings_to_hash()
     settings = {mobile_number: self.mobile_number,
                 first_name: self.first_name,
@@ -103,7 +116,7 @@ class User
     self.save(validate: false)
   end
   
-  class MalformedMobileNumber < Exception
+  class MalformedMobileNumber < StandardError
     def message
       "We do not accept extra-terrestrial phone numbers. Sorry."
     end

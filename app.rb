@@ -175,7 +175,7 @@ Cuba.define do
                                       package_sku: sku)
       begin
         payment.initiate_payment
-      rescue PaymentInitiationError => e
+      rescue Payment::InitiationError => e
         log_exception(e)
         res.status = 400
       end
@@ -292,7 +292,7 @@ Cuba.define do
         if reset = Reset.find_by(hashed_link: hash)
           if (Time.now - reset.created_at) < 43200 # 12 hours
             user = User.find_by(email: reset.email)
-            user.change_password(new_pass)
+            user.change_password!(new_pass)
             reset.delete # So the link cannot be used anymore
             res.write "Lösen ändrat till #{new_pass}"
           else
@@ -306,16 +306,15 @@ Cuba.define do
       end
     end
 
-    on "change_password", param('old_password'), param('new_password') do |old_password, new_password|
-      # There should be some sort of extra check here against old_password
-      # to make sure the user hasn't simply forgotten to log out and some opportunistic
-      # bastard is trying to change the password.
-      # Also, appropriate action taken, status codes etc.
-      # Should obviously not allow the change of password unless old_password checks out.
+    on "change_password", param('new_password'), param('old_password') do |new_password, old_password|
       user = current_user(req)
-      user.change_password(new_password)
 
-      res.write "Lösenord ändrat"
+      begin
+        user.change_password(new_password, old_password)
+      rescue User::WrongPassword
+        res.status = 401
+        res.write ""
+      end
     end
 
     on "message", param('email'), param('message') do |email, message|

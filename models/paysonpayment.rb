@@ -1,18 +1,16 @@
 #encoding: utf-8
 
-class PaymentInitiationError < StandardError
-  def initialize(response)
-    @response = response
-  end
-
-  def message
-    "There was an error initiating payment.\n#{@response.errors}"
-  end
-end
-
 class Payment
   include Mongoid::Document
+  class InitiationError < StandardError
+    def initialize(response)
+      @response = response
+    end
 
+    def message
+      "There was an error initiating payment.\n#{@response.errors}"
+    end
+  end
 end
 
 class PaysonPayment < Payment
