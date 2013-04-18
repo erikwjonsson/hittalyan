@@ -1,14 +1,11 @@
 ﻿.row
   .span12.box.opaque
     .padhack
-      %span(id="links")
-        %a(href="#/medlemssidor/lagenheter") Lägenheter
-        |
-        %a(href="#/medlemssidor/installningar") Inställningar
-        %hr
       %h1 Medlemssidor
-      %h2 Vath too do?
-      %ul
+.row.top-buffer
+  .span2.box.opaque
+    .padhack  
+      %ul.nav.nav-list.vertical-nav-box
         %li
           %a{href: "#/medlemssidor/installningar"} Inställningar
         %li
@@ -17,3 +14,9 @@
           %a{href: "#/medlemssidor/losenord"} Ändra lösenord
         %li
           %a{href: "#/medlemssidor/premiumtjanster"} Premiumtjänster
+  .span10.box.opaque
+    .padhack
+      :markdown
+        Välkommen till dina medlemssidor.
+        Via menyn till vänster kan du ändra inställningar för lägenhetsutskick eller köpa ett premiumkonto för att få flera dagar eller SMS.
+        

@@ -17,6 +17,7 @@ require 'date'
 require 'rest-client'
 require 'payson_api'
 require_relative 'lib/getenvironment'
+require_relative 'lib/mailer'
 ENVIRONMENT = get_environment
 require_relative 'helpers'
 WEBSITE_ADDRESS = website_address

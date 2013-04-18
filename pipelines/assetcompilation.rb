@@ -18,6 +18,7 @@ input "assets/javascripts" do
     concat %w[
       vendor/angular.min.js
       vendor/angular-resource.min.js
+      vendor/angular-sanitize.min.js
     ], "application.js"
   end
 end

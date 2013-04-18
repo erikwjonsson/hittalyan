@@ -29,12 +29,15 @@ def send_json(document)
   res.write document
 end
 
-def filtered_apartments(filter)
+# filter - Filter object
+# days_ago - int
+def filtered_apartments_since(filter, days_ago)
   apartments = Apartment.all
   apartments.select do |apartment|
     (filter.rent >= apartment.rent &&
     filter.rooms === apartment.rooms &&
-    filter.area  === apartment.area)
+    filter.area  === apartment.area) &&
+    apartment.advertisement_found_at >= days_ago.days.ago
   end
 end
 
@@ -102,8 +105,8 @@ Cuba.define do
         
         on "apartments_list" do
           user = current_user(req)
-          filt_apts = filtered_apartments(user.filter)
-          send_json ActiveSupport::JSON.encode(filt_apts)
+          filt_apts = filtered_apartments_since(user.filter, 7)
+          send_json ActiveSupport::JSON.encode(filt_apts.reverse!)
         end
 
         on "change_password" do
@@ -155,9 +158,8 @@ Cuba.define do
     end
 
     on ":catchall" do
-      puts "Nu kom nån jävel allt fel get"
+      LOG.info "Nu kom nån jävel allt fel get"
       res.status = 404 # not found
-      res.write "Nu kom du allt fel din javel!"
     end
   end
   
@@ -173,7 +175,7 @@ Cuba.define do
                                       package_sku: sku)
       begin
         payment.initiate_payment
-      rescue PaymentInitiationError => e
+      rescue Payment::InitiationError => e
         log_exception(e)
         res.status = 400
       end
@@ -181,29 +183,20 @@ Cuba.define do
     end
 
     on "ipn" do
-      request_body = req.body.read
-      ipn_response = PaysonAPI::Response::IPN.new(request_body)
-      require 'pp'
-      pp ipn_response
-      ipn_request = PaysonAPI::Request::IPN.new(ipn_response.raw)
-      validate = PaysonAPI::Client.validate_ipn(ipn_request)
-      if validate.verified? && req.POST['status'] == "COMPLETED"
-        puts "Payment verified and COMPLETED"
-        email = req.POST['senderEmail']
-        puts "Fetching user #{email}..."
-        user = User.find_by(email: email)
-        puts user.class
-        puts user
-        puts "Found user: #{user.email}"
-        puts "Crediting days to user..."
-        sku = ipn_response.order_items.first.sku
+      payment_uuid = req.POST['custom']
+      payment = Payment.find_by(payment_uuid: payment_uuid)
+      payment.ipn_response(req)
 
+      if payment.validate
+        email = req.POST['senderEmail']
+        user = User.find_by(email: email)
+        sku = payment.package_sku
         package = Packages::PACKAGE_BY_SKU[sku]
         user.inc(:premium_days, package.premium_days)
         user.inc(:sms_account, package.sms_account)
-        puts "Days credited"
+        payment.update_attribute(:status, "EXECUTED")
       else
-        puts "Something went wrong"
+        LOG.error "Something went wrong"
       end
     end
 
@@ -254,7 +247,7 @@ Cuba.define do
       rescue Mongoid::Errors::Validations => ex
         error_codes = MongoidExceptionCodifier.codify(ex)
         res.status = 400 # bad request
-        res.write "#{error_codes}"
+        res.write "#{error_codes}" unless production?
       end
     end
 
@@ -292,7 +285,7 @@ Cuba.define do
       user.change_mobile_number(data['mobile_number'])
       user.update_attributes!(first_name: data['first_name'],
                               last_name: data['last_name'])
-      res.write "'#{user.as_document}'"
+      res.write "'#{user.as_document}'" unless production?
     end
 
     on "passwordreset" do
@@ -316,7 +309,7 @@ Cuba.define do
         if reset = Reset.find_by(hashed_link: hash)
           if (Time.now - reset.created_at) < 43200 # 12 hours
             user = User.find_by(email: reset.email)
-            user.change_password(new_pass)
+            user.change_password!(new_pass)
             reset.delete # So the link cannot be used anymore
             res.write "Lösen ändrat till #{new_pass}"
           else
@@ -330,20 +323,23 @@ Cuba.define do
       end
     end
 
-    on "change_password", param('old_password'), param('new_password') do |old_password, new_password|
-      # There should be some sort of extra check here against old_password
-      # to make sure the user hasn't simply forgotten to log out and some opportunistic
-      # bastard is trying to change the password.
-      # Also, appropriate action taken, status codes etc.
-      # Should obviously not allow the change of password unless old_password checks out.
+    on "change_password", param('new_password'), param('old_password') do |new_password, old_password|
       user = current_user(req)
-      user.change_password(new_password)
 
-      res.write "Lösenord ändrat"
+      begin
+        user.change_password(new_password, old_password)
+      rescue User::WrongPassword
+        res.status = 401
+        res.write ""
+      end
     end
 
+    on "message", param('email'), param('message') do |email, message|
+      Mailer.shoot_email(Mailer::OUR_STANDARD_EMAIL, "Meddelande via kontaktformulär", message, email)
+    end 
+
     on ":catchall" do
-      puts "Nu kom nån jävel allt fel post"
+      LOG.info "Nu kom nån jävel allt fel post"
       res.status = 404 # not found
       res.write "Nu kom du allt fel din javel!"
     end

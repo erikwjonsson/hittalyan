@@ -2,18 +2,17 @@
 
 /* App Module */
 
-angular.module('cubancabal', [])
+angular.module('cubancabal', ['ngSanitize'])
   .config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/', {templateUrl: 'landing',   controller: LandingController}).
       when('/medlemssidor', {templateUrl: 'medlemssidor', controller: MembersController}).
       when('/medlemssidor/installningar', {templateUrl: '/medlemssidor/installningar', controller: SettingsController}).
       when('/medlemssidor/lagenheter', {templateUrl: '/medlemssidor/lagenheter', controller: ApartmentsController}).
-      when('/medlemssidor/losenord', {templateUrl: '/medlemssidor/change_password', controller: PasswordController}).
       when('/medlemssidor/premiumtjanster', {templateUrl: '/medlemssidor/premiumtjanster', controller: PremiumServicesController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
       when('/registrera', {templateUrl: 'signup', controller: SignupController}).
-      when('/om', {templateUrl: 'om',   controller: LandingController}).
+      when('/om', {templateUrl: 'om',   controller: AboutController}).
       when('/test', {templateUrl: 'test',   controller: TestController}).
       when('/vanliga-fragor', {templateUrl: 'vanliga-fragor', controller: FAQController}).
       when('/losenordsaterstallning', {templateUrl: 'passwordreset', controller: PasswordResetController}).

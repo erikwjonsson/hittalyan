@@ -1,3 +1,44 @@
+require 'fileutils'
+require 'securerandom'
+
+def strip_gemfile_of_development_gems(dir)
+  gemfile_path = File.join(dir, "Gemfile")
+  lines = File.readlines(gemfile_path)
+  
+  production_lines = lines.take_while {|line| !line.downcase.include?('--development gems--')}
+  File.open(gemfile_path, 'w') do |file|
+    file.write(production_lines.join(''))
+  end
+
+end
+
+def set_up_deployment_directory
+  # Create deployment directory
+  system('env RACK_ENV="production" bundle install')
+  current_dir = File.expand_path(File.dirname(__FILE__), 'public/')
+  deployment_directory_path = File.join(current_dir, "tmp/deploy-#{SecureRandom.hex}")
+  puts "Will deploy from #{deployment_directory_path}"
+  Dir.mkdir(deployment_directory_path)
+
+  # Copy files to deployment directory
+  directories_to_exclude = %w[tmp]
+  files = Dir.glob('*') - directories_to_exclude
+  FileUtils.cp_r(files, deployment_directory_path)
+
+  # Fix Gemfile
+  strip_gemfile_of_development_gems(deployment_directory_path)
+
+  return deployment_directory_path
+end
+
+def in_a_deployment_directory
+  deployment_directory_path = set_up_deployment_directory
+  Dir.chdir deployment_directory_path do
+    yield
+  end
+  FileUtils.rm_rf(deployment_directory_path)
+end
+
 desc "Clean the pipe, pour in those assets, then rack it up!"
 task :serve do
   Rake::Task['assets:rebuild'].invoke
@@ -7,13 +48,16 @@ end
 desc "Deploy to Appfog."
 task :deploy do
   Rake::Task['assets:rebuild'].invoke
-  system('af login lingonberryprod@gmail.com')
-  system('env RACK_ENV="production" af update cubancabal')
-  system('af start cubancabal')
-  Rake::Task['bundle'].invoke
+  
+  in_a_deployment_directory do
+    system('af login lingonberryprod@gmail.com')
+    system('env RACK_ENV="production" af update cubancabal')
+    system('af start cubancabal')
+  end
 end
 
 task :bundle do
+  system('pwd')
   puts "Bundling..."
   system('bundle install --quiet')
 end

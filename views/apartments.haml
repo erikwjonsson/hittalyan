@@ -1,25 +1,43 @@
 .row
   .span12.box.opaque
     .padhack
-      %span(id="links")
-        %a(href="#/medlemssidor") Medlemssidor
-        |
-        %a(href="#/medlemssidor/installningar") Inställningar
-        %hr
+      %h1 Lägenheter
+.row.top-buffer
+  .span2.box.opaque
+    .padhack  
+      %ul.nav.nav-list.vertical-nav-box
+        %li
+          %a{href: "#/medlemssidor/installningar"} Inställningar
+        %li
+          %a{href: "#/medlemssidor/lagenheter"} Lägenheter
+        %li
+          %a{href: "#/medlemssidor/losenord"} Ändra lösenord
+        %li
+          %a{href: "#/medlemssidor/premiumtjanster"} Premiumtjänster
+  .span10.box.opaque
+    .padhack
       %table(id="apartments-list")
         %legend Lägenheter
         %tr(ng-repeat="apartment in apartments")
           %td
-            %img(src="images/arnoldpumping_small.jpg")
+            %a(href="{{apartment.url}}")
+              %img(src="images/home_icon.png"
+                   title="Av SpoonGraphics (http://commons.wikimedia.org/wiki/File:Home_icon_blue.png).")
           %td
-            %br
+            %strong Adress: 
             {{apartment.address}}
             %br
-            Rum: {{apartment.rooms}}
+            %strong Rum: 
+            {{apartment.rooms}}
             %br
-            Area: {{apartment.area}} kvm
+            %strong Yta: 
+            {{apartment.area}} kvm
             %br
-            Hyra: {{apartment.rent}} kr
+            %strong Hyra: 
+            {{apartment.rent}} kr
             %br
+            %em
+              Lägenheten publicerades 
+              {{apartment.advertisement_found_at | date: 'yyyy-MM-dd HH:mm:ss'}}
             %br
-            %a(href="{{apartment.url}}") Till hyresvärden
+            %a(href="{{apartment.url}}") Se lägenheten hos {{apartment.landlord}}

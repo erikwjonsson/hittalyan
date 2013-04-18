@@ -1,10 +1,11 @@
-﻿
-/*Forcing vertical scrollbar to prevent jumping*/
-html {
-  overflow-y: scroll; 
+﻿/*GREEN for ok. Semantics*/
+/*First time doesn't seem to have any effect. It's a sucky mystery.*/
+.okness {
+  color: #198a00;
 }
 
 /*GREEN for ok. Semantics*/
+/*First time doesn't seem to have any effect. It's a sucky mystery.*/
 .okness {
   color: #198a00;
 }
@@ -65,6 +66,12 @@ body {
   font-size: 55px;
 }
 
+.markety-box p {
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+}
+
 /*Make room for the top bar*/
 body {
   padding-top: 60px;
@@ -101,4 +108,56 @@ body {
   /*background-color: pink;*/
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.footer-item {
+  padding-right: 50px;
+}
+
+.payson-button {
+  background-image: url(/images/payson_betala_btn.png); /* 16px x 16px */
+}
+
+.top-buffer { margin-top:20px; }
+
+.vertical-nav-box {
+  max-width: 140px;
+  padding: 8px 0;
+}
+
+/*Forcing vertical scrollbar to prevent jumping*/
+body {
+  overflow-y: scroll; 
+}
+
+.large-textarea {
+  width: 500px;
+}
+
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/*Set element background to white and make that same BACKGROUND transparent*/
+.dark-opaque {
+  color: #e7eef0; # approximately the regular opaque color when on our background.
+  background: rgb(0, 0, 0) transparent; /* default fallback */
+  background: rgba(0, 0, 0, 0.8); /* nice browsers */
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
+}
+
+.footer {
+  
+}
+
+/* Push the footer down to the bottom. */
+.short-page-push {
+  padding-bottom: 400px;
 }

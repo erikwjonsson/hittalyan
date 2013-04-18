@@ -1,4 +1,19 @@
 .row
   .span12.box.opaque
     .padhack
-      Om oss: VI(kungligt vi) är bäst!
+      %h1 Om oss
+      :markdown
+        HittaLyan är en tjänst för att hjälpa dig att hitta en bostad.
+        Det är gratis att bli medlem, men för att fullt ut kunna utnyttja tjänsten betalar du månadsvis för ett premiumpaket.
+        Vi som står bakom tjänsten är ett företag som heter Lingonberry Productions.
+      %h2 Kontakta oss
+      :markdown
+        Du kan kontakta oss via det här formuläret.
+      %div.alert.alert-success(ng-show="messageSent")
+        Ditt meddelande har skickats.
+      %form#contact-form(name="contact" ng-submit="submit()")
+        %input(ng-model="email" name="email" type="text" placeholder="Din e-postadress" required)
+        %br
+        %textarea.large-textarea(ng-model="message" name="message "rows="10" placeholder="Skriv ditt meddelande här" required)
+        %br
+        %input(type="submit" class="btn" value="Skicka")

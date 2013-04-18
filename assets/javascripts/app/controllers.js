@@ -8,7 +8,25 @@ function IndexController($rootScope, $scope, $http, $location) {
 
 function LandingController($scope) {
   $scope.message = "There is no spoon. Revenge!";
-};
+}
+
+function AboutController($scope, $http) {
+  $scope.messageSent = false;
+
+  $scope.submit = function() {
+    if ($scope.contact.$valid == true) {
+      var data = {email: $scope.email,
+                  message: $scope.message};
+
+      $http.post("message", data)
+            .success(function(data, status) {
+              $scope.email = "";
+              $scope.message = "";
+            });
+            $scope.messageSent = true;
+    }
+  };
+}
 
 function LoginController($scope, $http, $routeParams, $location) {
 
@@ -76,6 +94,13 @@ function MembersController($scope) {
 }
 
 function SettingsController($scope, $http, $location) {
+  // Making room for namespaces
+  $scope.filterSettings = {};
+  $scope.notificationSettings = {};
+  $scope.personalSettings = {};
+  $scope.passwordSettings = {};
+  $scope.accountTermination = {};
+
   $scope.roomValuesMin = [{name: "1", value: 1},
                           {name: "2", value: 2},
                           {name: "3", value: 3},
@@ -180,6 +205,7 @@ function SettingsController($scope, $http, $location) {
                           {name: "140", value: 140},
                           {name: "145", value: 145},
                           {name: "150+", value: 9999}];
+
   $http.get("medlemssidor/get_settings").
     success(function(data, status) {
       $scope.roomsMin = $scope.roomValuesMin[data.filter.roomsMin - 1];
@@ -207,71 +233,100 @@ function SettingsController($scope, $http, $location) {
       $scope.lastName = data.last_name;
     }).
     error(function(data, status) {
-      alert(data)
+      //alert(data)
     });
-  $scope.saveNotify = function() {
-    $scope.data = {email: $scope.emailNotification,
-                   sms: $scope.smsNotification,
-                   push: $scope.pushNotification};
-    $http.post("notify_by", $scope.data).
-      success(function(data, status) {
-        alert("Success");
-      }).
-      error(function(data, status) {
-        alert("Fail");
-      });
-  };
-  $scope.submit = function() {
+
+  $scope.submitFilterSettings = function() {
     if ( $scope.filtersettings.$valid == true) {
       $scope.data = {roomsMin: $scope.roomsMin.value,
                      roomsMax: $scope.roomsMax.value,
                      rent: $scope.rent.value,
                      areaMin: $scope.areaMin.value,
                      areaMax: $scope.areaMax.value};
-      $scope.working = true;
-      $scope.checkmark = false;
-      $scope.cross = false;
-      $scope.message = "Sparar...";
+      feedBackSymbolWorking($scope.filterSettings, "Sparar...");
       $http.post("filter", $scope.data).
         success(function(data, status) {
-          $scope.message = "Inställningar sparade";
-          $scope.working = false;
-          $scope.checkmark = true;
-          $scope.cross = false;
+          feedBackSymbolOk($scope.filterSettings, "Inställningar sparade");
         }).
         error(function(data, status) {
-          $scope.message = "Inställningar INTE sparade";
-          $scope.working = false;
-          $scope.checkmark = false;
-          $scope.cross = true;
+          feedBackSymbolNotOk($scope.filterSettings, "Inställningar INTE sparade");
         });
     }
   };
+
+  $scope.submitNotificationSettings = function() {
+    $scope.data = {email: $scope.emailNotification,
+                   sms: $scope.smsNotification,
+                   push: $scope.pushNotification};
+    feedBackSymbolWorking($scope.notificationSettings, "Sparar...");
+    $http.post("notify_by", $scope.data).
+      success(function(data, status) {
+        feedBackSymbolOk($scope.notificationSettings, "Inställningar sparade");
+        //alert("Success");
+      }).
+      error(function(data, status) {
+        feedBackSymbolNotOk($scope.notificationSettings, "Inställningar INTE sparade");
+        //alert("Fail");
+      });
+  };
+
+  $scope.submitPersonalSettings = function() {
+    var data = {data: {mobile_number: $scope.mobileNumber,
+                   first_name: $scope.firstName,
+                   last_name: $scope.lastName}};
+    feedBackSymbolWorking($scope.personalSettings, "Sparar...");
+    $http.post("personal_information", data).
+      success(function(data, status) {
+        //alert(data);
+        feedBackSymbolOk($scope.personalSettings, "Inställningar sparade");
+      }).
+      error(function(data, status) {
+        //alert(data);
+        feedBackSymbolNotOk($scope.personalSettings, "Inställningar INTE sparade");
+      });
+  };
+
+  $scope.submitPasswordSettings = function() {
+    if ( $scope.new_password == $scope.repeat_password ) {
+      if ( $scope.passwordChange.$valid == true) {
+        $scope.data = {new_password: $scope.new_password,
+                       old_password: $scope.old_password};
+        feedBackSymbolWorking($scope.passwordSettings, "Sparar...");
+        $http.post("change_password", $scope.data).
+          success(function(data, status) {
+            //alert(data);
+            feedBackSymbolOk($scope.passwordSettings, "Inställningar sparade");
+          }).
+          error(function(data, status) {
+            //alert("Natural 1");
+            feedBackSymbolNotOk($scope.passwordSettings, "Ditt gamla lösenord verkar inte stämma");
+          });
+      }
+    }
+    else {
+      // alert("Lösenorden överrensstämmer inte");
+      feedBackSymbolNotOk($scope.passwordSettings, "Lösenorden överrensstämmer inte");
+    }
+    $scope.new_password = "";
+    $scope.repeat_password = "";
+    $scope.old_password = "";
+  };
+
   $scope.terminateAccount = function() {
     if ($scope.accountTermination.$valid == true) {
       $scope.data = {password: $scope.terminationPassword};
+      feedBackSymbolWorking($scope.accountTermination, "Avslutar konto...");
       $http.post("account_termination", $scope.data).
         success(function(data, status) {
           alert("Ditt konto är avslutat.");
-          localStorage.loggedIn = "false";
-          $location.path('/');
+          feedBackSymbolOk($scope.accountTermination, "Konto avslutat");
+          logout($http, $location)
         }).
         error(function(data, status) {
-          alert("Ditt konto kunde ej avslutas. Försök igen senare.");
+          // alert("Ditt konto kunde ej avslutas. Försök igen senare.");
+          feedBackSymbolNotOk($scope.accountTermination, "Ditt konto kunde ej avslutas. Försök igen senare.");
         });
     }
-  };
-  $scope.submitPersonalInfo = function() {
-    data = {data: {mobile_number: $scope.mobileNumber,
-                   first_name: $scope.firstName,
-                   last_name: $scope.lastName}};
-    $http.post("personal_information", data).
-      success(function(data, status) {
-        alert(data);
-      }).
-      error(function(data, status) {
-        alert(data);
-      });
   };
 }
 
@@ -285,29 +340,29 @@ function ApartmentsController($scope, $http) {
     })
 }
 
-function PasswordController($scope, $http) {
-  $scope.submit = function() {
-    if ( $scope.new_password == $scope.repeat_password ) {
-      if ( $scope.passwordChange.$valid == true){
-        $scope.data = {old_password: $scope.old_password,
-                       new_password: $scope.new_password};
-        $http.post("change_password", $scope.data).
-          success(function(data, status) {
-            alert(data);
-            $scope.new_password = "";
-            $scope.repeat_password = "";
-            $scope.old_password = "";
-          }).
-          error(function(data, status) {
-            alert("Natural 1");
-          });
-      }
-    }
-    else {
-      alert("Lösenorden överrensstämmer inte");
-    }
-  };
-}
+// function PasswordController($scope, $http) {
+//   $scope.submit = function() {
+//     if ( $scope.new_password == $scope.repeat_password ) {
+//       if ( $scope.passwordChange.$valid == true){
+//         $scope.data = {old_password: $scope.old_password,
+//                        new_password: $scope.new_password};
+//         $http.post("change_password", $scope.data).
+//           success(function(data, status) {
+//             //alert(data);
+//             $scope.new_password = "";
+//             $scope.repeat_password = "";
+//             $scope.old_password = "";
+//           }).
+//           error(function(data, status) {
+//             //alert("Natural 1");
+//           });
+//       }
+//     }
+//     else {
+//       alert("Lösenorden överrensstämmer inte");
+//     }
+//   };
+// }
 
 function PasswordResetController($scope, $http) {
   $scope.submit = function() {
@@ -315,10 +370,10 @@ function PasswordResetController($scope, $http) {
       $scope.data = {email: $scope.email};
       $http.post("passwordreset", $scope.data).
         success(function(data, status) {
-          alert(data);
+          //alert(data);
         }).
         error(function(data, status) {
-          alert("Natural 1");
+          alert("Lösenordet kunde ej återställas. Försök igen senare.");
         });
     }
   };
@@ -334,12 +389,12 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
                        new_password: $scope.new_password};
         $http.post("passwordreset", $scope.data).
           success(function(data, status) {
-            alert(data);
+            //alert(data);
             $location.path('/');
           }).
           error(function(data, status) {
             $scope.message = data;
-            alert("Natural 1");
+            //alert("Natural 1");
           });
       }
     }
@@ -367,7 +422,7 @@ function PremiumServicesController($scope, $http) {
       // alert(data);
     }).
     error(function(data, status) {
-      alert(data);
+      //alert(data);
     });
 
   $http.get("medlemssidor/packages").
@@ -376,7 +431,7 @@ function PremiumServicesController($scope, $http) {
       // alert(data);
     }).
     error(function(data, status) {
-      alert(data);
+      //alert(data);
     });
 
   $scope.submitNameInfo = function() {
@@ -386,13 +441,13 @@ function PremiumServicesController($scope, $http) {
                      last_name: $scope.lastName}};
       $http.post("personal_information", data).
         success(function(data, status) {
-          alert("success");
+          //alert("success");
           settingsData.first_name = $scope.first_name;
           settingsData.last_name = $scope.last_name;
           $scope.buyPackage($scope.sku);
         }).
         error(function(data, status) {
-          alert("error");
+          //alert("error");
         });
     }
   };
@@ -403,11 +458,11 @@ function PremiumServicesController($scope, $http) {
       data = {'sku': sku}
       $http.post("payson_pay", data).
         success(function(data, status) {
-          alert(data);
+          //alert(data);
           window.location = data;
         }).
         error(function(data, status) {
-          alert(data);
+          //alert(data);
         });
     } else{
       $scope.showForm = true; 
@@ -422,11 +477,26 @@ function TestController($scope) {
 // General Controller helper functions
 
 // Assumes form with field called password to be emptied on failed login.
+function feedBackSymbolOk(scope, message) {
+  scope.feedBackSymbol = "<i class='icon-ok checkmark okness icon-large'></i>";
+  scope.message = message;
+}
+
+function feedBackSymbolNotOk(scope, message) {
+  scope.feedBackSymbol = "<i class='icon-remove checkmark wrongness icon-large'></i>";
+  scope.message = message;
+}
+
+function feedBackSymbolWorking(scope, message) {
+  scope.feedBackSymbol = "<i class='icon-spinner checkmark icon-spin icon-large'></i>";
+  scope.message = message;
+}
+
 function loginFormFail($scope) {
   $scope.password = "";
   localStorage.loggedIn = "false";
   localStorage.userName = "";
-  alert("Nu skrev du allt fel din jävel");
+  alert("Felaktigt användarnamn eller lösenord.");
 }
 
 function loginFormSuccess(email) {
@@ -439,10 +509,12 @@ function logout($http, $location) {
     success(function() {
       localStorage.loggedIn = "false";
       $location.path('/');
+      localStorage.userName = null;
     }).
     error(function() {
       localStorage.loggedIn = "false";
       $location.path('/');
+      localStorage.userName = null;
     });
 };
 

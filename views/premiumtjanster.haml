@@ -1,20 +1,33 @@
 .row
   .span12.box.opaque
     .padhack
-      %span(id="links")
-        %a(href="#/medlemssidor") Medlemssidor
-        |
-        %a(href="#/medlemssidor/lagenheter") Lägenheter
-        %hr
-      %span Dagar kvar: {{daysLeft}} SMS kvar: {{smsLeft}}
+      %h1 Premiumtjänster
+.row.top-buffer
+  .span2.box.opaque
+    .padhack  
+      %ul.nav.nav-list.vertical-nav-box
+        %li
+          %a{href: "#/medlemssidor/installningar"} Inställningar
+        %li
+          %a{href: "#/medlemssidor/lagenheter"} Lägenheter
+        %li
+          %a{href: "#/medlemssidor/losenord"} Ändra lösenord
+        %li
+          %a{href: "#/medlemssidor/premiumtjanster"} Premiumtjänster
+  .span10.box.opaque
+    .padhack
+      %span Du har {{daysLeft}} dagar kvar och {{smsLeft}} SMS kvar på HittaLyan Premium.
       %hr
-
-      %table
+      %h2 Paket som du kan köpa
+      %p Betala direkt med Payson. Payson samarbetar med Visa/Mastercard och internetbankerna Swedbank, Handelsbanken, SEB och Nordea.
+      %table#packages.top-buffer
         %tr
-          %td image: {{image}}
+          %td
+            %img(src="images/shopping_bag.png")
           %td {{packages.STANDARD.description}}
           %td
-            %button(type="button" class="btn" ng-click="buyPackage('STANDARD')") Köp
+            %a(href="" rel="nofollow" ng-click="buyPackage('STANDARD')")
+              %img(src="images/payson_betala_btn.png")            
 
       %form(name="nameForm" ng-submit="submitNameInfo()" ng-show="showForm" novalidate)
         %fieldset

@@ -131,7 +131,7 @@ DEPENDENCIES
   guard-livereload
   haml
   mongoid (~> 3.0.0)
-  payson_api
+  payson_api (= 0.3.0)
   rack-livereload
   rack-post-body-to-params
   rack-protection

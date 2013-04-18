@@ -1,12 +1,22 @@
 ﻿.row
   .span12.box.opaque
     .padhack
-      %span(id="links")
-        %a(href="#/medlemssidor") Medlemssidor
-        |
-        %a(href="#/medlemssidor/lagenheter") Lägenheter
-        %hr
-      %form(name="filtersettings" ng-submit="submit()" novalidate)
+      %h1 Inställningar
+.row.top-buffer
+  .span2.box.opaque
+    .padhack  
+      %ul.nav.nav-list.vertical-nav-box
+        %li
+          %a{href: "#/medlemssidor/installningar"} Inställningar
+        %li
+          %a{href: "#/medlemssidor/lagenheter"} Lägenheter
+        %li
+          %a{href: "#/medlemssidor/losenord"} Ändra lösenord
+        %li
+          %a{href: "#/medlemssidor/premiumtjanster"} Premiumtjänster
+  .span10.box.opaque
+    .padhack
+      %form(name="filtersettings" ng-submit="submitFilterSettings()" novalidate)
         %fieldset
           %legend Filterinställningar
           %label(for="rooms") Antal rum:
@@ -40,36 +50,40 @@
                  class="btn"
                  name="save"
                  value="Spara")
-          %span(ng-show="working")
-            %i.icon-spinner.checkmark.icon-spin.icon-large
-            {{message}}
-          %span(ng-show="checkmark")
-            %i.icon-ok.checkmark.okness.icon-large
-            {{message}}
-          %span(ng-show="cross")
-            %i.icon-remove.checkmark.wrongness.icon-large
-            {{message}}
+          %span(ng-bind-html="filterSettings.feedBackSymbol")
+          %span {{filterSettings.message}}
+          / %span(ng-show="working")
+          /   %i.icon-spinner.checkmark.icon-spin.icon-large
+          /   {{message}}
+          / %span(ng-show="checkmark")
+          /   %span(ng-bind-html-unsafe="message")
+          /   {{message}}
+          / %span(ng-show="cross")
+          /   %i.icon-remove.checkmark.wrongness.icon-large
+          /   {{message}}
 
       %table
-        %legend Välj firringar
+        %legend Meddelandesätt
         %tr
           %td
             SMS
           %td
-            %input(type="checkbox" ng-model="smsNotification") {{smsNotification}}
+            %input(type="checkbox" ng-model="smsNotification")
         %tr
           %td
             Mail
           %td
-            %input(type="checkbox" ng-model="emailNotification") {{emailNotification}}
+            %input(type="checkbox" ng-model="emailNotification")
         %tr
           %td
             Push
           %td
-            %input(type="checkbox" ng-model="pushNotification") {{pushNotification}}
-      %button(type="button" class="btn" ng-click="saveNotify()") Spara
+            %input(type="checkbox" ng-model="pushNotification")
+      %button(type="button" class="btn" ng-click="submitNotificationSettings()") Spara
+      %span(ng-bind-html="notificationSettings.feedBackSymbol")
+      %span {{notificationSettings.message}}
 
-      %form(name="personalInformationForm" ng-submit="submitPersonalInfo()" novalidate)
+      %form(name="personalInformationForm" ng-submit="submitPersonalSettings()" novalidate)
         %fieldset
           %legend Personlig information
           %label(for="mobile-number") Mobilnummer:
@@ -90,10 +104,48 @@
                 placeholder="Efternamn"
                 id="last-name"
                 ng-model="lastName")
+          %br
           %input(type="submit"
                  class="btn"
                  name="save"
                  value="Spara")
+          %span(ng-bind-html="personalSettings.feedBackSymbol")
+          %span {{personalSettings.message}}
+
+      %form(name="passwordChange" ng-submit="submitPasswordSettings()" novalidate)
+        %fieldset
+          %legend Ändra Lösenord
+          %label(for="new_password") Nytt lösenord:
+          %input(type="password"
+                 name="new_password"
+                 id="new_password"
+                 ng-model="new_password"
+                 required
+                 ng-minlength="6"
+                 ng-maxlength="36")
+          %label(for="repeat_password") Upprepa:
+          %input(type="password"
+                 name="repeat_password"
+                 id="repeat_password"
+                 ng-model="repeat_password"
+                 required
+                 ng-minlength="6"
+                 ng-maxlength="36")
+          %label(for="area") Ditt gamla lösenord:
+          %input(type="password"
+                 name="old_password"
+                 id="old_password"
+                 ng-model="old_password"
+                 required
+                 ng-minlength="6"
+                 ng-maxlength="36")
+          %br
+          %input(type="submit"
+                 class="btn"
+                 name="save"
+                 value="Spara")
+          %span(ng-bind-html="passwordSettings.feedBackSymbol")
+          %span {{passwordSettings.message}}
 
       %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
         %fieldset
@@ -112,3 +164,5 @@
                  class="btn"
                  name="terminate-account"
                  value="Avsluta konto")
+          %span(ng-bind-html="accountTermination.feedBackSymbol")
+          %span {{accountTermination.message}}
