@@ -36,7 +36,7 @@ def in_a_deployment_directory
   Dir.chdir deployment_directory_path do
     yield
   end
-  # FileUtils.rm_rf(deployment_directory_path)
+  FileUtils.rm_rf(deployment_directory_path)
 end
 
 desc "Clean the pipe, pour in those assets, then rack it up!"
@@ -50,10 +50,6 @@ task :deploy do
   Rake::Task['assets:rebuild'].invoke
   
   in_a_deployment_directory do
-    # Need to call bundle like this instead of using the task,
-    # otherwise we enter the wrong directory.
-    system('pwd')
-    # system('bundle install')
     system('af login lingonberryprod@gmail.com')
     system('env RACK_ENV="production" af update cubancabal')
     system('af start cubancabal')
