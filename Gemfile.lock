@@ -27,10 +27,6 @@ GEM
     builder (3.0.0)
     chunky_png (1.2.8)
     coderay (1.0.9)
-    coffee-script (2.2.0)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.6.2)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -124,23 +120,22 @@ PLATFORMS
 
 DEPENDENCIES
   af
-  bson_ext
-  coffee-script
-  compass
-  cuba
-  guard-livereload
-  haml
+  bson_ext (~> 1.6.4)
+  compass (= 0.12.2)
+  cuba (~> 3.1.0)
+  guard-livereload (= 1.1.3)
+  haml (= 3.1.7)
   mongoid (~> 3.0.0)
   payson_api (= 0.3.0)
-  rack-livereload
-  rack-post-body-to-params
+  rack-livereload (= 0.3.12)
+  rack-post-body-to-params (~> 0.1.5)
   rack-protection
-  rake-pipeline
-  rake-pipeline-web-filters
-  rdiscount
-  rest-client
-  sass
-  thin
-  tilt
-  uglifier
-  yui-compressor
+  rake-pipeline (= 0.7.0)
+  rake-pipeline-web-filters (= 0.7.0)
+  rdiscount (= 1.6.8)
+  rest-client (~> 1.6.7)
+  sass (= 3.2.7)
+  thin (~> 1.5.0)
+  tilt (= 1.3.3)
+  uglifier (= 1.3.0)
+  yui-compressor (= 0.9.6)
