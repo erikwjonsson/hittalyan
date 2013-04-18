@@ -73,31 +73,9 @@ class PaysonPayment < Payment
     @forward_url = response.forward_url
   end
   
-  def ipn_response(req=nil)
-    if req
-      @ipn_response = PaysonAPI::Response::IPN.new(req.body.read)
-    elsif @ipn_response
-      return @ipn_response
-    else
-      return nil
-    end
-  end
-  
-  def ipn_request(ipn_response=nil)
-    if ipn_response
-      @ipn_request = PaysonAPI::Request::IPN.new(ipn_response.raw)
-    elsif @ipn_request
-      return @ipn_request
-    elsif @ipn_response
-      @ipn_request = PaysonAPI::Request::IPN.new(@ipn_response.raw)
-    else
-      return nil
-    end
-  end
-
-  def validate
+  def validate(ipn_response, ipn_request)
     validation = PaysonAPI::Client.validate_ipn(ipn_request)
-    if validation.verified? && completed?
+    if validation.verified? && ipn_response.status == "COMPLETED"
       self.update_attribute(:status, "COMPLETED")
       return true
     else
@@ -108,9 +86,6 @@ class PaysonPayment < Payment
   
   private
   
-  def completed?
-    @ipn_response.status == "COMPLETED"
-  end
 
   def amount
     @package ||= Packages::PACKAGE_BY_SKU[self.package_sku]
