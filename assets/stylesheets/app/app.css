@@ -73,11 +73,11 @@ body {
 }
 
 /*Make room for the top bar*/
-/*body {
+body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
-*/
+
 /*Rounding of those dangerous corners*/
 .box {
   -webkit-border-radius: 5px;
@@ -110,10 +110,7 @@ body {
   padding-bottom: 10px;
 }
 
-#packages {
-}
-
-.push-right {
+.footer-item {
   padding-right: 50px;
 }
 
@@ -138,17 +135,6 @@ body {
 }
 
 
-
-
-
-
-
-html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
-}
-
 /* Wrapper for page content to push down footer */
 #wrap {
   min-height: 100%;
@@ -167,4 +153,11 @@ body {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
 }
 
+.footer {
+  
+}
 
+/* Push the footer down to the bottom. */
+.short-page-push {
+  padding-bottom: 400px;
+}
