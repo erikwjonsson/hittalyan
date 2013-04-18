@@ -13,8 +13,10 @@ def strip_gemfile_of_development_gems(dir)
 end
 
 def set_up_deployment_directory
-  # Create deployment directory
+  # Fix for Gonza. Ugly, brutish and working.
   system('env RACK_ENV="production" bundle install')
+  
+  # Create deployment directory
   current_dir = File.expand_path(File.dirname(__FILE__), 'public/')
   deployment_directory_path = File.join(current_dir, "tmp/deploy-#{SecureRandom.hex}")
   puts "Will deploy from #{deployment_directory_path}"
@@ -39,6 +41,22 @@ def in_a_deployment_directory
   FileUtils.rm_rf(deployment_directory_path)
 end
 
+def branch
+  `git rev-parse --abbrev-ref HEAD`.chomp
+end
+
+def production?
+  branch == "production"
+end
+
+def appfog_app_name
+  if production?
+    "hittalyan"
+  else
+    "cubancabal"
+  end
+end
+
 desc "Clean the pipe, pour in those assets, then rack it up!"
 task :serve do
   Rake::Task['assets:rebuild'].invoke
@@ -51,8 +69,12 @@ task :deploy do
   
   in_a_deployment_directory do
     system('af login lingonberryprod@gmail.com')
-    system('env RACK_ENV="production" af update cubancabal')
-    system('af start cubancabal')
+    puts "Running 'env RACK_ENV=\"production\" af update #{appfog_app_name}'"
+    system("env RACK_ENV=\"production\" af update #{appfog_app_name}")
+    puts "Running 'af start #{appfog_app_name}'"
+    system("af start #{appfog_app_name}")
+    # Resetting Gemfile.lock. Messes up git otherwise.
+    system('bundle install --quiet')
   end
 end
 
