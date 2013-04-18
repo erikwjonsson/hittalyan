@@ -7,6 +7,7 @@ class Package
 
   field :premium_days, type: Integer, default: 0
   field :sms_account, type: Integer, default: 0
+  field :active, type: Boolean, default: false
   
   field :tax_in_percentage_units, type: Integer, default: 25
   field :quantity, type: Integer, default: 1

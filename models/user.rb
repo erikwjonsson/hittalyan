@@ -115,6 +115,12 @@ class User
     self.mobile_number = new_mobile_number
     self.save(validate: false)
   end
+
+  def apply_package(package)
+    self.inc(:premium_days, (package.premium_days || 0))
+    self.inc(:sms_account, (package.sms_account || 0))
+    self.update_attribute(:active, package.active) if package.active 
+  end
   
   class MalformedMobileNumber < StandardError
     def message
