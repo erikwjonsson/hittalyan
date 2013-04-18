@@ -14,6 +14,7 @@ end
 
 def set_up_deployment_directory
   # Create deployment directory
+  system('env RACK_ENV="production" bundle install')
   current_dir = File.expand_path(File.dirname(__FILE__), 'public/')
   deployment_directory_path = File.join(current_dir, "tmp/deploy-#{SecureRandom.hex}")
   puts "Will deploy from #{deployment_directory_path}"
@@ -35,7 +36,7 @@ def in_a_deployment_directory
   Dir.chdir deployment_directory_path do
     yield
   end
-  FileUtils.rm_rf(deployment_directory_path)
+  # FileUtils.rm_rf(deployment_directory_path)
 end
 
 desc "Clean the pipe, pour in those assets, then rack it up!"
@@ -52,7 +53,7 @@ task :deploy do
     # Need to call bundle like this instead of using the task,
     # otherwise we enter the wrong directory.
     system('pwd')
-    system('bundle install')
+    # system('bundle install')
     system('af login lingonberryprod@gmail.com')
     system('env RACK_ENV="production" af update cubancabal')
     system('af start cubancabal')
