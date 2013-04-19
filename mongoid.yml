@@ -1,21 +1,21 @@
 production:
   sessions:
     default:
-      uri: mongodb://af_cubancabal-lingonberryprod:dpoqovae4grh52dr22fulu0569@ds045757.mongolab.com:45757/af_cubancabal-lingonberryprod
+      uri: mongodb://af_cubancabal-lingonberryprod:dpoqovae4grh52dr22fulu0569@ds047217.mongolab.com:47217/hittalyan-production
   options:
       raise_not_found_error: false
 
 development:
   sessions:
     default:
-      uri: mongodb://af_cubancabal-lingonberryprod:dpoqovae4grh52dr22fulu0569@ds045757.mongolab.com:45757/af_cubancabal-lingonberryprod
+      uri: mongodb://af_cubancabal-lingonberryprod:dpoqovae4grh52dr22fulu0569@ds037647.mongolab.com:37647/hittalyan-test
   options:
       raise_not_found_error: false
 
 test:
   sessions:
     default:
-      uri: mongodb://af_cubancabal-lingonberryprod:dpoqovae4grh52dr22fulu0569@ds045757.mongolab.com:45757/af_cubancabal-lingonberryprod
+      uri: mongodb://af_cubancabal-lingonberryprod:dpoqovae4grh52dr22fulu0569@ds037647.mongolab.com:37647/hittalyan-test
   options:
       raise_not_found_error: false
       
