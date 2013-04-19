@@ -159,5 +159,19 @@ body {
 
 /* Push the footer down to the bottom. */
 .short-page-push {
-  padding-bottom: 400px;
+  padding-bottom: 450px;
 }
+
+.about-page-push {
+  padding-bottom: 23px;
+}
+
+/* Align text in nav bar the same as links */
+.navbar .nav > li > span {
+  float: none;
+  padding: 10px 15px;
+}
+.nav > li > span {
+    display: block;
+}
+

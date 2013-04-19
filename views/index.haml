@@ -22,7 +22,7 @@
                 %li
                   %a(href="#/om") Om
                 %li(ng-hide="isLoggedIn()")
-                  %a(href="#/registrera" ng-hide="isLoggedIn()") Registrera
+                  %a(href="#/registrera" ng-hide="isLoggedIn()") Bli medlem
                 %li(ng-show="isLoggedIn()")
                   %a(href="#/medlemssidor" ng-show="isLoggedIn()") Medlemssidor
                 %li(ng-hide="isLoggedIn()")
@@ -48,11 +48,13 @@
                        class="btn"
                        name="login"
                        value="Logga in")
-              %span.pull-right(ng-show="isLoggedIn()")
-                {{userName()}}
-                %a(href=""
-                   ng-click="logout()"
-                   ng-show="isLoggedIn()") Logga ut
+              %ul.nav.pull-right(ng-show="isLoggedIn()")
+                %li
+                  %span() {{userName()}}
+                %li
+                  %a(href=""
+                     ng-click="logout()"
+                     ng-show="isLoggedIn()") Logga ut
       .container
         %div{'ng-view' => true}
       .footer.top-buffer.dark-opaque
