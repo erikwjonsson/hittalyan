@@ -159,5 +159,9 @@ body {
 
 /* Push the footer down to the bottom. */
 .short-page-push {
-  padding-bottom: 400px;
+  padding-bottom: 450px;
+}
+
+.about-page-push {
+  padding-bottom: 23px;
 }
