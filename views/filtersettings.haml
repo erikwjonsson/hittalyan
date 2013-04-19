@@ -13,8 +13,6 @@
         %li
           %a{href: "#/medlemssidor/lagenheter"} Lägenheter
         %li
-          %a{href: "#/medlemssidor/losenord"} Ändra lösenord
-        %li
           %a{href: "#/medlemssidor/premiumtjanster"} Premiumtjänster
   .span10.box.opaque
     .padhack
@@ -54,36 +52,22 @@
                  value="Spara")
           %span(ng-bind-html="filterSettings.feedBackSymbol")
           %span {{filterSettings.message}}
-          / %span(ng-show="working")
-          /   %i.icon-spinner.checkmark.icon-spin.icon-large
-          /   {{message}}
-          / %span(ng-show="checkmark")
-          /   %span(ng-bind-html-unsafe="message")
-          /   {{message}}
-          / %span(ng-show="cross")
-          /   %i.icon-remove.checkmark.wrongness.icon-large
-          /   {{message}}
 
-      %table
-        %legend Meddelandesätt
-        %tr
-          %td
-            SMS
-          %td
-            %input(type="checkbox" ng-model="smsNotification")
-        %tr
-          %td
-            Mail
-          %td
-            %input(type="checkbox" ng-model="emailNotification")
-        %tr
-          %td
-            Push
-          %td
-            %input(type="checkbox" ng-model="pushNotification")
-      %button(type="button" class="btn" ng-click="submitNotificationSettings()") Spara
-      %span(ng-bind-html="notificationSettings.feedBackSymbol")
-      %span {{notificationSettings.message}}
+      %form(name="notificationSettingsForm" ng-submit="submitNotificationSettings()" novalidate)
+        %fieldset
+          %legend Meddelandesätt
+          %label(for="sms")
+            %input(type="checkbox" id="sms" ng-model="smsNotification") SMS
+          %label
+            %input(type="checkbox" ng-model="emailNotification") E-post
+          %label
+            %input(type="checkbox" ng-model="pushNotification") Pushmeddelande
+          %input(type="submit"
+                 class="btn"
+                 name="save"
+                 value="Spara")
+          %span(ng-bind-html="notificationSettings.feedBackSymbol")
+          %span {{notificationSettings.message}}
 
       %form(name="personalInformationForm" ng-submit="submitPersonalSettings()" novalidate)
         %fieldset
