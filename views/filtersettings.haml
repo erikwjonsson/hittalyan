@@ -53,26 +53,21 @@
           %span(ng-bind-html="filterSettings.feedBackSymbol")
           %span {{filterSettings.message}}
 
-      %table
-        %legend Meddelandesätt
-        %tr
-          %td
-            SMS
-          %td
-            %input(type="checkbox" ng-model="smsNotification")
-        %tr
-          %td
-            Mail
-          %td
-            %input(type="checkbox" ng-model="emailNotification")
-        %tr
-          %td
-            Push
-          %td
-            %input(type="checkbox" ng-model="pushNotification")
-      %button(type="button" class="btn" ng-click="submitNotificationSettings()") Spara
-      %span(ng-bind-html="notificationSettings.feedBackSymbol")
-      %span {{notificationSettings.message}}
+      %form(name="notificationSettingsForm" ng-submit="submitNotificationSettings()" novalidate)
+        %fieldset
+          %legend Meddelandesätt
+          %label(for="sms")
+            %input(type="checkbox" id="sms" ng-model="smsNotification") SMS
+          %label
+            %input(type="checkbox" ng-model="emailNotification") E-post
+          %label
+            %input(type="checkbox" ng-model="pushNotification") Pushmeddelande
+          %input(type="submit"
+                 class="btn"
+                 name="save"
+                 value="Spara")
+          %span(ng-bind-html="notificationSettings.feedBackSymbol")
+          %span {{notificationSettings.message}}
 
       %form(name="personalInformationForm" ng-submit="submitPersonalSettings()" novalidate)
         %fieldset
