@@ -48,11 +48,13 @@
                        class="btn"
                        name="login"
                        value="Logga in")
-              %span.pull-right(ng-show="isLoggedIn()")
-                {{userName()}}
-                %a(href=""
-                   ng-click="logout()"
-                   ng-show="isLoggedIn()") Logga ut
+              %ul.nav.pull-right(ng-show="isLoggedIn()")
+                %li
+                  %span() {{userName()}}
+                %li
+                  %a(href=""
+                     ng-click="logout()"
+                     ng-show="isLoggedIn()") Logga ut
       .container
         %div{'ng-view' => true}
       .footer.top-buffer.dark-opaque
