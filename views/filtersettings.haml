@@ -18,7 +18,7 @@
     .padhack
       %form(name="filtersettings" ng-submit="submitFilterSettings()" novalidate)
         %fieldset
-          %legend Filterinställningar
+          %legend Intressefilter
           %label(for="rooms") Antal rum:
           %select(ng-model="roomsMin"
                   name="rooms"
@@ -56,11 +56,11 @@
       %form(name="notificationSettingsForm" ng-submit="submitNotificationSettings()" novalidate)
         %fieldset
           %legend Meddelandesätt
-          %label(for="sms")
-            %input(type="checkbox" id="sms" ng-model="smsNotification") SMS
-          %label
+          %label.checkbox
+            %input(type="checkbox" ng-model="smsNotification") SMS
+          %label.checkbox
             %input(type="checkbox" ng-model="emailNotification") E-post
-          %label
+          %label.checkbox
             %input(type="checkbox" ng-model="pushNotification") Pushmeddelande
           %input(type="submit"
                  class="btn"
@@ -72,12 +72,6 @@
       %form(name="personalInformationForm" ng-submit="submitPersonalSettings()" novalidate)
         %fieldset
           %legend Personlig information
-          %label(for="mobile-number") Mobilnummer:
-          %input(type="text"
-                name="mobile-number"
-                placeholder="Mobilnummer"
-                id="mobile-number"
-                ng-model="mobileNumber")
           %label(for="first-name") Förnamn:
           %input(type="text"
                 name="first-name"
@@ -90,6 +84,12 @@
                 placeholder="Efternamn"
                 id="last-name"
                 ng-model="lastName")
+          %label(for="mobile-number") Mobilnummer:
+          %input(type="text"
+                name="mobile-number"
+                placeholder="Mobilnummer"
+                id="mobile-number"
+                ng-model="mobileNumber")
           %br
           %input(type="submit"
                  class="btn"
