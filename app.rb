@@ -84,7 +84,7 @@ Cuba.define do
           send_view "filtersettings"
         end
 
-        on "get_settings" do
+        on "settings" do
           send_json ActiveSupport::JSON.encode(user.settings_to_hash)
         end
 
@@ -229,6 +229,19 @@ Cuba.define do
         error_codes = MongoidExceptionCodifier.codify(ex)
         res.status = 400 # bad request
         res.write "#{error_codes}" unless production?
+      end
+    end
+    
+    on "medlemssidor" do
+      user = current_user(req)
+      if user == nil
+        res.status = 401
+      else
+        on "settings", param('data') do |data|
+          require 'pp'
+          pp data
+          user.update_settings(data)
+        end
       end
     end
 

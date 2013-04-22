@@ -97,9 +97,11 @@ class User
   end
 
   def change_mobile_number(new_mobile_number)
+    return unless new_mobile_number
     new_mobile_number = new_mobile_number.gsub(/\s+/, "")
-
-    if new_mobile_number[0..1] == '00'
+    
+    if new_mobile_number == ""
+    elsif new_mobile_number[0..1] == '00'
       # International number, same meaning as +.
       new_mobile_number.sub!('00', '+')
     elsif new_mobile_number[0] == '0'
@@ -120,6 +122,33 @@ class User
     self.inc(:premium_days, (package.premium_days || 0))
     self.inc(:sms_account, (package.sms_account || 0))
     self.update_attribute(:active, package.active) if package.active 
+  end
+  
+  def update_settings(data)
+    update_filter_settings(data['filter_settings'])
+    update_notification_settings(data['notification_settings'])
+    update_personal_information_settings(data['personal_information_settings'])
+  end
+  
+  def update_filter_settings(filter_settings)
+    s = filter_settings
+    self.create_filter(rooms: Range.new(s['rooms_min'].to_i, s['rooms_max'].to_i),
+                       rent: s['rent'].to_i,
+                       area: Range.new(s['area_min'].to_i, s['area_max'].to_i))
+  end
+  
+  def update_notification_settings(notification_settings)
+    s = notification_settings
+    self.update_attributes!(notify_by_email: s['email'],
+                            notify_by_sms: s['sms'],
+                            notify_by_push_note: s['push'])
+  end
+  
+  def update_personal_information_settings(personal_information_settings)
+    s = personal_information_settings
+    self.update_attributes!(first_name: s['first_name'],
+                            last_name: s['last_name'])
+    change_mobile_number(s['mobile_number'])
   end
   
   class MalformedMobileNumber < StandardError

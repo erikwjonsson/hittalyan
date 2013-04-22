@@ -100,6 +100,7 @@ function SettingsController($scope, $http, $location) {
   $scope.personalSettings = {};
   $scope.passwordSettings = {};
   $scope.accountTermination = {};
+  $scope.allSettings = {};
 
   $scope.roomValuesMin = [{name: "1", value: 1},
                           {name: "2", value: 2},
@@ -206,7 +207,7 @@ function SettingsController($scope, $http, $location) {
                           {name: "145", value: 145},
                           {name: "150+", value: 9999}];
 
-  $http.get("medlemssidor/get_settings").
+  $http.get("medlemssidor/settings").
     success(function(data, status) {
       $scope.roomsMin = $scope.roomValuesMin[data.filter.roomsMin - 1];
       if (data.filter.roomsMax == 999) {
@@ -287,7 +288,36 @@ function SettingsController($scope, $http, $location) {
         });
     }
   };
-
+  
+  $scope.submitAllSettings = function() {
+    if ( $scope.allSettingsForm.$valid == true) {
+      var filterSettings = {rooms_min: $scope.roomsMin.value,
+                            rooms_max: $scope.roomsMax.value,
+                            rent: $scope.rent.value,
+                            area_min: $scope.areaMin.value,
+                            area_max: $scope.areaMax.value};
+      var notificationSettings = {email: $scope.emailNotification,
+                                  sms: $scope.smsNotification,
+                                  push: $scope.pushNotification};
+      var personalInformationSettings = {mobile_number: $scope.mobileNumber,
+                                         first_name: $scope.firstName,
+                                         last_name: $scope.lastName};
+      var data = {data: {filter_settings: filterSettings,
+                         notification_settings: notificationSettings,
+                         personal_information_settings: personalInformationSettings}};
+      feedBackSymbolWorking($scope.personalSettings, "Sparar...");
+      $http.post("medlemssidor/settings", data).
+        success(function(data, status) {
+          //alert(data);
+          feedBackSymbolOk($scope.allSettings, "Inställningar sparade");
+        }).
+        error(function(data, status) {
+          //alert(data);
+          feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
+        });
+    }
+  };
+  
   $scope.submitPasswordSettings = function() {
     if ( $scope.new_password == $scope.repeat_password ) {
       if ( $scope.passwordChange.$valid == true) {

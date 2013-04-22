@@ -16,7 +16,7 @@
           %a{href: "#/medlemssidor/premiumtjanster"} Premiumtjänster
   .span10.box.opaque
     .padhack
-      %form(name="filtersettings" ng-submit="submitFilterSettings()" novalidate)
+      %form(name="allSettingsForm" ng-submit="submitAllSettings()" novalidate)
         %fieldset
           %legend Intressefilter
           %label(for="rooms") Antal rum:
@@ -45,15 +45,6 @@
                   ng-options="r.name for r in rentValues")
             %option(value="" 
                     disabled="disabled")Maximal Hyra
-          %br
-          %input(type="submit"
-                 class="btn"
-                 name="save"
-                 value="Spara")
-          %span(ng-bind-html="filterSettings.feedBackSymbol")
-          %span {{filterSettings.message}}
-
-      %form(name="notificationSettingsForm" ng-submit="submitNotificationSettings()" novalidate)
         %fieldset
           %legend Meddelandesätt
           %label.checkbox
@@ -62,14 +53,6 @@
             %input(type="checkbox" ng-model="emailNotification") E-post
           %label.checkbox
             %input(type="checkbox" ng-model="pushNotification") Pushmeddelande
-          %input(type="submit"
-                 class="btn"
-                 name="save"
-                 value="Spara")
-          %span(ng-bind-html="notificationSettings.feedBackSymbol")
-          %span {{notificationSettings.message}}
-
-      %form(name="personalInformationForm" ng-submit="submitPersonalSettings()" novalidate)
         %fieldset
           %legend Personlig information
           %label(for="first-name") Förnamn:
@@ -96,8 +79,11 @@
                  class="btn"
                  name="save"
                  value="Spara")
-          %span(ng-bind-html="personalSettings.feedBackSymbol")
-          %span {{personalSettings.message}}
+          %span(ng-bind-html="allSettings.feedBackSymbol")
+          %span {{allSettings.message}}
+          %hr
+          %hr
+          %hr
 
       %form(name="passwordChange" ng-submit="submitPasswordSettings()" novalidate)
         %fieldset
