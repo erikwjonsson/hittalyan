@@ -69,13 +69,15 @@
                 placeholder="Efternamn"
                 id="last-name"
                 ng-model="lastName")
-          %label(for="mobile-number") Mobilnummer:
+          %label(for="mobileNumber") Mobilnummer:
           %input(type="text"
-                name="mobile-number"
+                name="mobileNumber"
                 placeholder="Mobilnummer"
                 ng-required="smsNotification"
-                id="mobile-number"
+                id="mobileNumber"
                 ng-model="mobileNumber")
+          %span(ng-show="allSettingsForm.mobileNumber.$error.required")
+            Mobilnummer måste anges om SMS-utskick önskas
           %br
           %input(type="submit"
                  class="btn"
