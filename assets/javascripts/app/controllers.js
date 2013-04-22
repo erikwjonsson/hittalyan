@@ -271,19 +271,21 @@ function SettingsController($scope, $http, $location) {
   };
 
   $scope.submitPersonalSettings = function() {
-    var data = {data: {mobile_number: $scope.mobileNumber,
-                   first_name: $scope.firstName,
-                   last_name: $scope.lastName}};
-    feedBackSymbolWorking($scope.personalSettings, "Sparar...");
-    $http.post("personal_information", data).
-      success(function(data, status) {
-        //alert(data);
-        feedBackSymbolOk($scope.personalSettings, "Inställningar sparade");
-      }).
-      error(function(data, status) {
-        //alert(data);
-        feedBackSymbolNotOk($scope.personalSettings, "Inställningar INTE sparade");
-      });
+    if ( $scope.personalInformationForm.$valid == true) {
+      var data = {data: {mobile_number: $scope.mobileNumber,
+                         first_name: $scope.firstName,
+                         last_name: $scope.lastName}};
+      feedBackSymbolWorking($scope.personalSettings, "Sparar...");
+      $http.post("personal_information", data).
+        success(function(data, status) {
+          //alert(data);
+          feedBackSymbolOk($scope.personalSettings, "Inställningar sparade");
+        }).
+        error(function(data, status) {
+          //alert(data);
+          feedBackSymbolNotOk($scope.personalSettings, "Inställningar INTE sparade");
+        });
+    }
   };
 
   $scope.submitPasswordSettings = function() {
