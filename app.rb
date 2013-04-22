@@ -53,7 +53,7 @@ Cuba.define do
       send_view "index"
     end
     
-    on  "loggedin" do
+    on "loggedin" do
       res.status = 401 unless current_user(req)
     end
     
@@ -74,12 +74,6 @@ Cuba.define do
       if user == nil
         res.status = 401
       else
-        on "notify_by" do
-          notify_by = {email: user.notify_by_email,
-                       sms: user.notify_by_sms,
-                       push: user.notify_by_push_note}
-          send_json ActiveSupport::JSON.encode(notify_by)
-        end
         on "installningar" do
           send_view "filtersettings"
         end
@@ -238,48 +232,31 @@ Cuba.define do
         res.status = 401
       else
         on "settings", param('data') do |data|
-          require 'pp'
-          pp data
           user.update_settings(data)
         end
+        on "personal_information", param('data') do |data|
+          user.change_mobile_number(data['mobile_number'])
+          user.update_attributes!(first_name: data['first_name'],
+                                  last_name: data['last_name'])
+          res.write "'#{user.as_document}'" unless production?
+        end
+        on "account_termination", param('password') do |password|
+          if user.has_password?(password)
+            user.session.delete
+            user.delete
+          else
+            res.status = 401 #Unathorized
+          end
+        end
+        on "change_password", param('new_password'), param('old_password') do |new_password, old_password|
+          begin
+            user.change_password(new_password, old_password)
+          rescue User::WrongPassword
+            res.status = 401
+            res.write ""
+          end
+        end
       end
-    end
-
-    on "account_termination", param('password') do |password|
-      user = current_user(req)
-      if user.has_password?(password)
-        user.session.delete
-        user.delete
-      else
-        res.status = 401 #Unathorized
-      end
-    end
-    
-    on "filter", param('roomsMin'), param('roomsMax'), param('rent'),
-                 param('areaMin'), param('areaMax') do |rooms_min, rooms_max, rent, area_min, area_max|
-      res.write "Filter POST UN-nested<br/>
-                 Rooms_min: #{rooms_min}<br/>
-                 Rent: #{rent}<br/>
-                 Area_max: #{area_max}<br/>"
-      user = current_user(req)
-      user.create_filter(rooms: Range.new(rooms_min.to_i, rooms_max.to_i),
-                         rent: rent,
-                         area: Range.new(area_min.to_i, area_max.to_i))
-    end
-
-    on "notify_by", param('email'), param('sms'), param('push') do |email, sms, push|
-      user = current_user(req)
-      user.update_attributes!(notify_by_email: email,
-                              notify_by_sms: sms,
-                              notify_by_push_note: push)
-    end
-
-    on "personal_information", param('data') do |data|
-      user = current_user(req)
-      user.change_mobile_number(data['mobile_number'])
-      user.update_attributes!(first_name: data['first_name'],
-                              last_name: data['last_name'])
-      res.write "'#{user.as_document}'" unless production?
     end
 
     on "passwordreset" do
@@ -314,17 +291,6 @@ Cuba.define do
           res.status = 404 # For lack of a better status code
           res.write "Länk förlegad"
         end
-      end
-    end
-
-    on "change_password", param('new_password'), param('old_password') do |new_password, old_password|
-      user = current_user(req)
-
-      begin
-        user.change_password(new_password, old_password)
-      rescue User::WrongPassword
-        res.status = 401
-        res.write ""
       end
     end
 

@@ -95,9 +95,6 @@ function MembersController($scope) {
 
 function SettingsController($scope, $http, $location) {
   // Making room for namespaces
-  $scope.filterSettings = {};
-  $scope.notificationSettings = {};
-  $scope.personalSettings = {};
   $scope.passwordSettings = {};
   $scope.accountTermination = {};
   $scope.allSettings = {};
@@ -236,58 +233,6 @@ function SettingsController($scope, $http, $location) {
     error(function(data, status) {
       //alert(data)
     });
-
-  $scope.submitFilterSettings = function() {
-    if ( $scope.filtersettings.$valid == true) {
-      $scope.data = {roomsMin: $scope.roomsMin.value,
-                     roomsMax: $scope.roomsMax.value,
-                     rent: $scope.rent.value,
-                     areaMin: $scope.areaMin.value,
-                     areaMax: $scope.areaMax.value};
-      feedBackSymbolWorking($scope.filterSettings, "Sparar...");
-      $http.post("filter", $scope.data).
-        success(function(data, status) {
-          feedBackSymbolOk($scope.filterSettings, "Inställningar sparade");
-        }).
-        error(function(data, status) {
-          feedBackSymbolNotOk($scope.filterSettings, "Inställningar INTE sparade");
-        });
-    }
-  };
-
-  $scope.submitNotificationSettings = function() {
-    $scope.data = {email: $scope.emailNotification,
-                   sms: $scope.smsNotification,
-                   push: $scope.pushNotification};
-    feedBackSymbolWorking($scope.notificationSettings, "Sparar...");
-    $http.post("notify_by", $scope.data).
-      success(function(data, status) {
-        feedBackSymbolOk($scope.notificationSettings, "Inställningar sparade");
-        //alert("Success");
-      }).
-      error(function(data, status) {
-        feedBackSymbolNotOk($scope.notificationSettings, "Inställningar INTE sparade");
-        //alert("Fail");
-      });
-  };
-
-  $scope.submitPersonalSettings = function() {
-    if ( $scope.personalInformationForm.$valid == true) {
-      var data = {data: {mobile_number: $scope.mobileNumber,
-                         first_name: $scope.firstName,
-                         last_name: $scope.lastName}};
-      feedBackSymbolWorking($scope.personalSettings, "Sparar...");
-      $http.post("personal_information", data).
-        success(function(data, status) {
-          //alert(data);
-          feedBackSymbolOk($scope.personalSettings, "Inställningar sparade");
-        }).
-        error(function(data, status) {
-          //alert(data);
-          feedBackSymbolNotOk($scope.personalSettings, "Inställningar INTE sparade");
-        });
-    }
-  };
   
   $scope.submitAllSettings = function() {
     if ( $scope.allSettingsForm.$valid == true) {
@@ -305,7 +250,7 @@ function SettingsController($scope, $http, $location) {
       var data = {data: {filter_settings: filterSettings,
                          notification_settings: notificationSettings,
                          personal_information_settings: personalInformationSettings}};
-      feedBackSymbolWorking($scope.personalSettings, "Sparar...");
+      feedBackSymbolWorking($scope.allSettings, "Sparar...");
       $http.post("medlemssidor/settings", data).
         success(function(data, status) {
           //alert(data);
@@ -324,7 +269,7 @@ function SettingsController($scope, $http, $location) {
         $scope.data = {new_password: $scope.new_password,
                        old_password: $scope.old_password};
         feedBackSymbolWorking($scope.passwordSettings, "Sparar...");
-        $http.post("change_password", $scope.data).
+        $http.post("medlemssidor/change_password", $scope.data).
           success(function(data, status) {
             //alert(data);
             feedBackSymbolOk($scope.passwordSettings, "Inställningar sparade");
@@ -348,7 +293,7 @@ function SettingsController($scope, $http, $location) {
     if ($scope.accountTermination.$valid == true) {
       $scope.data = {password: $scope.terminationPassword};
       feedBackSymbolWorking($scope.accountTermination, "Avslutar konto...");
-      $http.post("account_termination", $scope.data).
+      $http.post("medlemssidor/account_termination", $scope.data).
         success(function(data, status) {
           alert("Ditt konto är avslutat.");
           feedBackSymbolOk($scope.accountTermination, "Konto avslutat");
@@ -443,7 +388,7 @@ function PremiumServicesController($scope, $http) {
   $scope.showForm = false;
   settingsData = {};
 
-  $http.get("medlemssidor/get_settings").
+  $http.get("medlemssidor/settings").
     success(function(data, status) {
       settingsData = data;
       $scope.daysLeft = settingsData.premium_days;
@@ -471,7 +416,7 @@ function PremiumServicesController($scope, $http) {
       data = {data: {mobile_number: $scope.mobileNumber,
                      first_name: $scope.firstName,
                      last_name: $scope.lastName}};
-      $http.post("personal_information", data).
+      $http.post("medlemssidor/personal_information", data).
         success(function(data, status) {
           //alert("success");
           settingsData.first_name = $scope.first_name;
