@@ -12,7 +12,7 @@ class User
   field :notify_by_push_note, type: Boolean, default: false
   field :permits_to_be_emailed, type: Boolean, default: true
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
-  field :premium_days, type: Integer, default: 0
+  field :premium_until, type: Time
   field :sms_account, type: Integer, default: 0
   field :unsubscribe_id, type: String
   has_one :session
@@ -87,7 +87,7 @@ class User
                 notify_by_sms: self.notify_by_sms,
                 notify_by_push_note: self.notify_by_push_note,
                 active: self.active,
-                premium_days: self.premium_days,
+                premium_until: self.premium_until,
                 sms_account: self.sms_account,
                 filter: {roomsMin: filter.rooms.first,
                          roomsMax: filter.rooms.last,
@@ -119,8 +119,8 @@ class User
   end
 
   def apply_package(package)
-    self.inc(:premium_days, (package.premium_days || 0))
-    self.inc(:sms_account, (package.sms_account || 0))
+    add_premium_days(package.premium_days) if package.premium_days
+    self.inc(:sms_account, package.sms_account) if package.sms_account
     self.update_attribute(:active, package.active) if package.active 
   end
   
@@ -158,6 +158,16 @@ class User
   end
   
   private
+
+    def add_premium_days(days_to_add)
+      time_from = if self.premium_until && self.premium_until > 1.day.from_now.midnight
+                    self.premium_until
+                  else
+                    1.day.from_now.midnight
+                  end
+      puts "TIME FROM #{time_from}"
+      self.update_attribute(:premium_until, (time_from + days_to_add.days))
+    end
     
     def encrypt(s)
       hash_string(@@salt + s)
