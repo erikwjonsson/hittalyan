@@ -406,7 +406,7 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
 
 function PremiumServicesController($scope, $http) {
   deTokenify();
-  $scope.daysLeft = 0;
+  $scope.premiumUntil = null;
   $scope.smsLeft = 0;
   $scope.showForm = false;
   settingsData = {};
@@ -414,7 +414,7 @@ function PremiumServicesController($scope, $http) {
   $http.get("medlemssidor/get_settings").
     success(function(data, status) {
       settingsData = data;
-      $scope.daysLeft = settingsData.premium_days;
+      $scope.premiumUntil = settingsData.premium_until;
       $scope.smsLeft = settingsData.sms_account;
       $scope.firstName = settingsData.first_name;
       $scope.lastName = settingsData.last_name;
