@@ -283,13 +283,13 @@ function SettingsController($scope, $http, $location) {
         // alert("Lösenorden överrensstämmer inte");
         feedBackSymbolNotOk($scope.passwordSettings, "Nytt och upprepat lösenord överrensstämmer inte");
       }
-      $scope.new_password = "";
-      $scope.repeat_password = "";
-      $scope.old_password = "";
     }
     else {
       feedBackSymbolNotOk($scope.passwordSettings, "Fält saknas");
     }
+    $scope.new_password = "";
+    $scope.repeat_password = "";
+    $scope.old_password = "";
   };
 
   $scope.terminateAccount = function() {
