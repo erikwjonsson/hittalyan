@@ -2,8 +2,9 @@
 
 /* App Module */
 
-angular.module('cubancabal', ['ngSanitize'])
-  .config(['$routeProvider', function($routeProvider) {
+var cubancabal = angular.module('cubancabal', ['ngSanitize'])
+
+cubancabal.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/', {templateUrl: 'landing',   controller: LandingController}).
       when('/medlemssidor', {templateUrl: 'medlemssidor', controller: MembersController}).
@@ -18,27 +19,28 @@ angular.module('cubancabal', ['ngSanitize'])
       when('/losenordsaterstallning', {templateUrl: 'passwordreset', controller: PasswordResetController}).
       when('/losenordsaterstallning/:hash', {templateUrl: 'passwordreset/confirmation', controller: PasswordResetConfirmationController}).
       otherwise({redirectTo: '/'});
-}])
-  .run( function($rootScope, $location) {
-    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-      if ( next.templateUrl == "login" ) {
-        if ( localStorage.loggedIn ) {
-          $location.path('/medlemssidor');
-          next.templateUrl = 'medlemssidor';
+}]);
+
+cubancabal.run( function($rootScope, $location) {
+  $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+    if ( next.templateUrl == "login" ) {
+      if ( localStorage.loggedIn ) {
+        $location.path('/medlemssidor');
+        next.templateUrl = 'medlemssidor';
+      }
+    }
+    if ( next.templateUrl ) {
+      if ( next.templateUrl.indexOf("medlemssidor") != -1) {
+        if ( localStorage.loggedIn == "false" || localStorage.loggedIn == null) {
+          $location.path('/login');
+          next.templateUrl = 'login';
         }
       }
-      if ( next.templateUrl ) {
-        if ( next.templateUrl.indexOf("medlemssidor") != -1) {
-          if ( localStorage.loggedIn == "false" || localStorage.loggedIn == null) {
-            $location.path('/login');
-            next.templateUrl = 'login';
-          }
-        }
-      }        
-    });
-    
-    $rootScope.$on( "$routeChangeError", function(event, next, current) {
-      $location.path('/');
-      // $rootScope
-    })
+    }        
   });
+  
+  $rootScope.$on( "$routeChangeError", function(event, next, current) {
+    $location.path('/');
+    // $rootScope
+  })
+});
