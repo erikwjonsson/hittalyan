@@ -56,7 +56,7 @@
               %td
                 %select(ng-model="areaMax"
                         name="areaMax"
-                        d="areaMax"
+                        id="areaMax"
                         ng-options="a.name for a in areaValuesMax")
                 %option(value=""
                         disabled="disabled")Maximal area
@@ -71,7 +71,27 @@
                         ng-options="r.name for r in rentValues")
                   %option(value="" 
                           disabled="disabled")Maximal Hyra
-          
+
+          %label
+            Städer:
+            %br
+            %select(ng-model="city"
+                    name="city"
+                    id="city"
+                    ng-options="city.name for city in cities")
+              %option(value=""
+                      disabled="disabled")Välj stad
+            %a(ng-click="addCity()") Lägg till Stad
+          %label
+            Valda städer:
+            %br
+            %span(ng-repeat="city in citiesChosen"
+                  class="city")
+              {{city}}
+              %i(class="icon-remove checkmar icon-large"
+                 ng-click="removeCity(city)")
+            %br
+        
         %fieldset
           %legend Meddelandesätt
           %label.checkbox

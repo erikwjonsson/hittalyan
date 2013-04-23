@@ -98,6 +98,13 @@ function SettingsController($scope, $http, $location) {
   $scope.passwordSettings = {};
   $scope.accountTermination = {};
   $scope.allSettings = {};
+  
+  $scope.cities = [{name: "Stockholm", value: 0},
+                   {name: "Malmö", value: 1},
+                   {name: "Gävle", value: 2},
+                   {name: "Eskilstuna", value: 3}];
+  $scope.citiesChosen = ["Stockholm", "Gävle"];
+  $scope.city = $scope.cities[0];
 
   $scope.roomValuesMin = [{name: "1", value: 1},
                           {name: "2", value: 2},
@@ -266,6 +273,15 @@ function SettingsController($scope, $http, $location) {
     }
   };
   
+  $scope.addCity = function() {
+    // $scope.citiesChosen.push($scope.city.name)
+    $scope.citiesChosen.pushUnique($scope.city.name);
+  };
+  
+  $scope.removeCity = function(city) {
+    $scope.citiesChosen.remove(city);
+  };
+  
   $scope.submitPasswordSettings = function() {
     if ( $scope.passwordChange.$valid == true ) {
       if ( $scope.new_password == $scope.repeat_password) {
@@ -432,6 +448,38 @@ function PremiumServicesController($scope, $http) {
 function TestController($scope) {
   deTokenify();
 }
+
+// Extensions
+
+// Check if value exists in array
+Array.prototype.exists = function(element) {
+  for(var i=0; i<this.length; i++) {
+    if(this[i] == element ){
+      return true;
+    }
+  }
+  return false;
+}
+
+// Push to array if unique value
+Array.prototype.pushUnique = function(new_element) {
+  if (this.exists(new_element) == true) {
+    return false;
+  }
+  return this.push(new_element);
+}
+
+// Remove element from array by value
+Array.prototype.remove = function() {
+  var what, a = arguments, L = a.length, ax;
+  while (L && this.length) {
+    what = a[--L];
+    while ((ax = this.indexOf(what)) !== -1) {
+      this.splice(ax, 1);
+    }
+  }
+  return this;
+};
 
 // General Controller helper functions
 
