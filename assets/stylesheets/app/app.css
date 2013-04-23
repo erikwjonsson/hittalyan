@@ -19,6 +19,15 @@
   margin-left: 5px;
 }
 
+.city {
+  margin-right: 2px;
+  margin-left:  2px;
+/*  background-color: #DBDBDB;*/
+  border: 1px solid;
+  border-color: rgb(204, 204, 204);
+  padding: 2px;
+}
+
 /*Make bootstrap grok some Angular*/
 
 /*Ng says invalid for whatever reason. Red*/
