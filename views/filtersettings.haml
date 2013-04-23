@@ -19,33 +19,59 @@
       %form(name="allSettingsForm" ng-submit="submitAllSettings()" novalidate)
         %fieldset
           %legend Intressefilter
-          %label(for="rooms") Antal rum:
-          %select(ng-model="roomsMin"
-                  name="rooms"
-                  ng-options="r.name for r in roomValuesMin")
-            %option(value="" 
-                    disabled="disabled")Minimalt antal rum
-          %select(ng-model="roomsMax"
-                  ng-options="r.name for r in roomValuesMax")
-            %option(value=""
-                    disabled="disabled")Maximalt antal rum
-          %label(for="area") Area:
-          %select(ng-model="areaMin"
-                  name="area"
-                  ng-options="a.name for a in areaValuesMin")
-            %option(value="" 
-                    disabled="disabled")Minimal area
-          %select(ng-model="areaMax"
-                  ng-options="a.name for a in areaValuesMax")
-            %option(value=""
-                    disabled="disabled")Maximal area
-          %label(for="rent") Hyra:
-          %select(ng-model="rent"
-                  name="rent"
-                  ng-options="r.name for r in rentValues")
-            %option(value="" 
-                    disabled="disabled")Maximal Hyra
-        
+          %table(id="rooms" name="roomsTable")
+            %tr
+              %td
+                %label(for="roomsMin") Minimalt antal rum:
+              %td
+                %label(for="roomsMax") Maximalt antal rum:
+            %tr
+              %td
+                %select(ng-model="roomsMin"
+                        name="roomsMin"
+                        id="roomsMin"
+                        ng-options="r.name for r in roomValuesMin")
+                  %option(value="" 
+                          disabled="disabled")Minimalt antal rum
+              %td
+                %select(ng-model="roomsMax"
+                        name="roomsMax"
+                        id="roomsMax"
+                        ng-options="r.name for r in roomValuesMax")
+                  %option(value=""
+                          disabled="disabled")Maximalt antal rum
+            %tr
+              %td
+                %label(for="roomsMin") Minimal area:
+              %td
+                %label(for="roomsMax") Maximal area:
+            %tr
+              %td
+                %select(ng-model="areaMin"
+                        name="areaMin"
+                        id="areaMin"
+                        ng-options="a.name for a in areaValuesMin")
+                %option(value="" 
+                        disabled="disabled")Minimal area
+              %td
+                %select(ng-model="areaMax"
+                        name="areaMax"
+                        d="areaMax"
+                        ng-options="a.name for a in areaValuesMax")
+                %option(value=""
+                        disabled="disabled")Maximal area
+            %tr
+              %td
+                %label(for="rent") Maximal hyra:
+            %tr
+              %td
+                %select(ng-model="rent"
+                        name="rent"
+                        id="rent"
+                        ng-options="r.name for r in rentValues")
+                  %option(value="" 
+                          disabled="disabled")Maximal Hyra
+          
         %fieldset
           %legend Meddelandesätt
           %label.checkbox
@@ -97,15 +123,17 @@
                  ng-model="new_password"
                  required
                  ng-minlength="6"
-                 ng-maxlength="36")
-          %label(for="repeat_password") Upprepa:
+                 ng-maxlength="36"
+                 placeholder="Nytt lösenord")
+          %label(for="repeat_password") Upprepa lösenord:
           %input(type="password"
                  name="repeat_password"
                  id="repeat_password"
                  ng-model="repeat_password"
                  required
                  ng-minlength="6"
-                 ng-maxlength="36")
+                 ng-maxlength="36"
+                 placeholder="Upprepa lösenord")
           %label(for="area") Ditt gamla lösenord:
           %input(type="password"
                  name="old_password"
@@ -113,7 +141,8 @@
                  ng-model="old_password"
                  required
                  ng-minlength="6"
-                 ng-maxlength="36")
+                 ng-maxlength="36"
+                 placeholder="Ditt gamla lösenord")
           %br
           %input(type="submit"
                  class="btn"
@@ -125,20 +154,20 @@
       %hr
       %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
         %fieldset
-          %legend Avsluta konto
+          %legend Avsluta medlemskap
           %label(for="termination-password") Lösenord:
           %input(type="password"
                 name="termination-password"
-                placeholder="Lösenord"
                 id="termination-password"
                 ng-model="terminationPassword"
                 required
                 ng-minlength="6"
-                ng-maxlength="36")
+                ng-maxlength="36"
+                placeholder="Lösenord")
           %br
           %input(type="submit"
                  class="btn"
                  name="terminate-account"
-                 value="Avsluta konto")
+                 value="Avsluta medlemskap")
           %span(ng-bind-html="accountTermination.feedBackSymbol")
           %span {{accountTermination.message}}
