@@ -103,6 +103,7 @@
                 id="mobileNumber"
                 ng-model="mobileNumber")
           %span(ng-show="allSettingsForm.mobileNumber.$error.required")
+            %i(class='icon-remove checkmark wrongness icon-large')
             Mobilnummer måste anges om SMS-utskick önskas
           %br
           %input(type="submit"

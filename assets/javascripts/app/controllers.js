@@ -236,6 +236,7 @@ function SettingsController($scope, $http, $location) {
   
   $scope.submitAllSettings = function() {
     if ( $scope.allSettingsForm.$valid == true) {
+      feedBackSymbolWorking($scope.allSettings, "Sparar...");
       var filterSettings = {rooms_min: $scope.roomsMin.value,
                             rooms_max: $scope.roomsMax.value,
                             rent: $scope.rent.value,
@@ -250,7 +251,6 @@ function SettingsController($scope, $http, $location) {
       var data = {data: {filter_settings: filterSettings,
                          notification_settings: notificationSettings,
                          personal_information_settings: personalInformationSettings}};
-      feedBackSymbolWorking($scope.allSettings, "Sparar...");
       $http.post("medlemssidor/settings", data).
         success(function(data, status) {
           //alert(data);
@@ -260,6 +260,9 @@ function SettingsController($scope, $http, $location) {
           //alert(data);
           feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
         });
+    }
+    else {
+      feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
     }
   };
   
@@ -319,30 +322,6 @@ function ApartmentsController($scope, $http) {
       $scope.apartments = [{address: "Något slags fel"}];
     })
 }
-
-// function PasswordController($scope, $http) {
-//   $scope.submit = function() {
-//     if ( $scope.new_password == $scope.repeat_password ) {
-//       if ( $scope.passwordChange.$valid == true){
-//         $scope.data = {old_password: $scope.old_password,
-//                        new_password: $scope.new_password};
-//         $http.post("change_password", $scope.data).
-//           success(function(data, status) {
-//             //alert(data);
-//             $scope.new_password = "";
-//             $scope.repeat_password = "";
-//             $scope.old_password = "";
-//           }).
-//           error(function(data, status) {
-//             //alert("Natural 1");
-//           });
-//       }
-//     }
-//     else {
-//       alert("Lösenorden överrensstämmer inte");
-//     }
-//   };
-// }
 
 function PasswordResetController($scope, $http) {
   $scope.submit = function() {
