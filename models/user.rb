@@ -39,6 +39,8 @@ class User
   # Note that hashed_password isn't hashed at the point of validation
   validates :hashed_password, presence: true, length: { minimum: 6, maximum: 64}
   
+  validate :validate_and_coerce_mobile_number_format
+  
   before_validation do |document|
     # When a user registers, downcase the email address.
     # This will downcase the email unnecessarily whenever the document
@@ -50,6 +52,25 @@ class User
   before_create do |document|
     document.hashed_password = encrypt(document.hashed_password)
     generate_unsubscribe_id
+  end
+
+  def validate_and_coerce_mobile_number_format
+    return unless self.mobile_number
+    self.mobile_number = self.mobile_number.gsub(/\s+/, "")
+
+    if self.mobile_number == ""
+    elsif self.mobile_number[0..1] == '00'
+      # International number, same meaning as +.
+      self.mobile_number.sub!('00', '+')
+    elsif self.mobile_number[0] == '0'
+      # Starts with 0 but isn't a country code, default to Swedish number.
+      self.mobile_number.sub!('0', '+46')
+    elsif self.mobile_number[0] != '+'
+      # Comment for humans: If we got this far the number didn't start with a
+      # single or double 0 and... it didn't even start with a plus.
+      # Gasp! It must be from outer space, yao.
+      raise MalformedMobileNumber 
+    end
   end
 
   def unsubscribe_from_email_notifications_link
@@ -109,28 +130,6 @@ class User
                          rent: filter.rent,
                          areaMin: filter.area.first,
                          areaMax: filter.area.last}}
-  end
-
-  def change_mobile_number(new_mobile_number)
-    return unless new_mobile_number
-    new_mobile_number = new_mobile_number.gsub(/\s+/, "")
-    
-    if new_mobile_number == ""
-    elsif new_mobile_number[0..1] == '00'
-      # International number, same meaning as +.
-      new_mobile_number.sub!('00', '+')
-    elsif new_mobile_number[0] == '0'
-      # Starts with 0 but isn't a country code, default to Swedish number.
-      new_mobile_number.sub!('0', '+46')
-    elsif new_mobile_number[0] != '+'
-      # Comment for humans: If we got this far the number didn't start with a
-      # single or double 0 and... it didn't even start with a plus.
-      # Gasp! It must be from outer space, yao.
-      raise MalformedMobileNumber 
-    end
-    
-    self.mobile_number = new_mobile_number
-    self.save(validate: false)
   end
 
   def apply_package(package)

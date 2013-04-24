@@ -235,9 +235,9 @@ Cuba.define do
           user.update_settings(data)
         end
         on "personal_information", param('data') do |data|
-          user.change_mobile_number(data['mobile_number'])
           user.update_attributes!(first_name: data['first_name'],
-                                  last_name: data['last_name'])
+                                  last_name: data['last_name'],
+                                  mobile_number: data['mobile_number'])
           res.write "'#{user.as_document}'" unless production?
         end
         on "account_termination", param('password') do |password|
