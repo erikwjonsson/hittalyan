@@ -2,6 +2,21 @@ require 'digest'
 
 class User
   include Mongoid::Document
+  include LingonberryMongoidImportExport
+
+  externally_accessible :filter, # embedded document, all fields
+                        :email, 
+                        :first_name,
+                        :last_name,
+                        :mobile_number,
+                        :notify_by_email,
+                        :notify_by_sms,
+                        :notify_by_push_note,
+                        :permits_to_be_emailed
+
+  externally_readable   :active,
+                        :sms_account
+
   field :email, type: String
   field :first_name, type: String, default: ""
   field :last_name, type: String, default: ""
