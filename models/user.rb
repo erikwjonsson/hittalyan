@@ -161,8 +161,8 @@ class User
   def update_personal_information_settings(personal_information_settings)
     s = personal_information_settings
     self.update_attributes!(first_name: s['first_name'],
-                            last_name: s['last_name'])
-    change_mobile_number(s['mobile_number'])
+                            last_name: s['last_name'],
+                            mobile_number: s['mobile_number'])
   end
   
   class MalformedMobileNumber < StandardError
