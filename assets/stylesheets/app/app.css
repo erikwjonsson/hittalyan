@@ -73,11 +73,11 @@ body {
 }
 
 /*Make room for the top bar*/
-body {
+/*body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
-
+*/
 /*Rounding of those dangerous corners*/
 .box {
   -webkit-border-radius: 5px;
@@ -135,13 +135,39 @@ body {
 }
 
 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#mainnav {
+}
+
+
 /* Wrapper for page content to push down footer */
+
 #wrap {
-  min-height: 100%;
+  padding-top: 60px;
   height: auto !important;
+  min-height: 100%;
+  min-height: calc(100% - 60px);
   height: 100%;
-  /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
+  position: relative;
+}
+
+#footer {
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; 
+}
+
+#content {
+  /* This should match the height of the footer + desired padding.
+     Here: 100px for the footer and 40px padding */
+  padding-bottom: 140px;
 }
 
 /*Set element background to white and make that same BACKGROUND transparent*/
@@ -153,9 +179,6 @@ body {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
 }
 
-.footer {
-  
-}
 
 /* Push the footer down to the bottom. */
 .short-page-push {

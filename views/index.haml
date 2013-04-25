@@ -7,7 +7,7 @@
     %script{src: "#{Dir['public/application-*.js'].first.split('/')[1]}"}
   %body{'ng-controller' => "IndexController"}
     #wrap
-      .navbar.navbar-inverse.navbar-fixed-top
+      #mainnav.navbar.navbar-inverse.navbar-fixed-top
         .navbar-inner
           .container
             %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
@@ -55,9 +55,9 @@
                   %a(href=""
                      ng-click="logout()"
                      ng-show="isLoggedIn()") Logga ut
-      .container
+      #content.container
         %div{'ng-view' => true}
-      .footer.top-buffer.dark-opaque
+      #footer.top-buffer.dark-opaque
         .padhack
           %span.footer-item
             © Lingonberry Productions
