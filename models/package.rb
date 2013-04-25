@@ -1,5 +1,12 @@
 class Package
   include Mongoid::Document
+  include LingonberryMongoidImportExport
+
+  externally_readable :name,
+                      :description,
+                      :unit_price_in_ore,
+                      :sku
+
   field :name, type: String
   field :description, type: String
   field :payson_description, type: String

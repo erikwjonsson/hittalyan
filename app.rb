@@ -26,7 +26,7 @@ end
 
 def send_json(document)
   res['Content-Type'] = 'application/json; charset=utf-8'
-  res.write document
+  res.write ActiveSupport::JSON.encode(document)
 end
 
 # filter - Filter object
@@ -74,23 +74,25 @@ Cuba.define do
       if user == nil
         res.status = 401
       else
+        on "user" do
+          send_json(user.as_external_document)
+        end
+
+        on "packages" do
+          external_packages = Packages::PACKAGE_BY_SKU.each_with_object({}) do |(k, v), h|
+            h[k] = v.as_external_document
+          end
+          p external_packages
+          p user.as_external_document
+          send_json(external_packages)
+        end
+        
         on "installningar" do
           send_view "filtersettings"
         end
 
         on "settings" do
-          send_json ActiveSupport::JSON.encode(user.settings_to_hash)
-        end
-
-        on "packages" do
-          packages = Packages::PACKAGE_BY_SKU.values
-          pretty_packages = {}
-          packages.each do |p|
-            pretty_packages[p.sku] = {name: p.name,
-                                      description: p.description,
-                                      unit_price_in_ore: p.unit_price_in_ore}
-          end
-          send_json ActiveSupport::JSON.encode(pretty_packages)
+          send_json(user.settings_to_hash)
         end
         
         on "lagenheter" do
@@ -100,7 +102,7 @@ Cuba.define do
         on "apartments_list" do
           user = current_user(req)
           filt_apts = filtered_apartments_since(user.filter, 7)
-          send_json ActiveSupport::JSON.encode(filt_apts.reverse!)
+          send_json(filt_apts.reverse!)
         end
 
         on "change_password" do
@@ -231,9 +233,14 @@ Cuba.define do
       if user == nil
         res.status = 401
       else
+        on "user", param('data') do |client_user_model|
+          user.external_update!(client_user_model)
+        end
+
         on "settings", param('data') do |data|
           user.update_settings(data)
         end
+
         on "personal_information", param('data') do |data|
           user.update_attributes!(first_name: data['first_name'],
                                   last_name: data['last_name'],
