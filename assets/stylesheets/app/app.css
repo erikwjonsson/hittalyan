@@ -72,12 +72,6 @@ body {
   line-height: 30px;
 }
 
-/*Make room for the top bar*/
-/*body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-*/
 /*Rounding of those dangerous corners*/
 .box {
   -webkit-border-radius: 5px;
@@ -134,18 +128,36 @@ body {
   width: 500px;
 }
 
+/*Set element background to white and make that same BACKGROUND transparent*/
+.dark-opaque {
+  color: #e7eef0; # approximately the regular opaque color when on our background.
+  background: rgb(0, 0, 0) transparent; /* default fallback */
+  background: rgba(0, 0, 0, 0.8); /* nice browsers */
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
+}
+
+/* Align text in nav bar the same as links */
+.navbar .nav > li > span {
+  float: none;
+  padding: 10px 15px;
+}
+.nav > li > span {
+    display: block;
+}
+
+/*
+======= 
+LAYOUT
+=======
+Push content beneath navbar and put footer at the bottom.
+*/
 
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
 }
-
-#mainnav {
-}
-
-
-/* Wrapper for page content to push down footer */
 
 #wrap {
   padding-top: 60px;
@@ -170,31 +182,4 @@ html, body {
   padding-bottom: 140px;
 }
 
-/*Set element background to white and make that same BACKGROUND transparent*/
-.dark-opaque {
-  color: #e7eef0; # approximately the regular opaque color when on our background.
-  background: rgb(0, 0, 0) transparent; /* default fallback */
-  background: rgba(0, 0, 0, 0.8); /* nice browsers */
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
-}
-
-
-/* Push the footer down to the bottom. */
-.short-page-push {
-  padding-bottom: 450px;
-}
-
-.about-page-push {
-  padding-bottom: 23px;
-}
-
-/* Align text in nav bar the same as links */
-.navbar .nav > li > span {
-  float: none;
-  padding: 10px 15px;
-}
-.nav > li > span {
-    display: block;
-}
 
