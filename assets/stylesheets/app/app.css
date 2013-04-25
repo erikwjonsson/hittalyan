@@ -154,18 +154,18 @@ Push content beneath navbar and put footer at the bottom.
 */
 
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 #wrap {
-  padding-top: 60px;
+  padding-top: 60px; /* Push us beneath the navbar */
   height: auto !important;
-  min-height: 100%;
-  min-height: calc(100% - 60px);
+  min-height: 100%; /* For browser that don't support calc */
+  min-height: calc(100% - 60px); /* Compensate for navbar */
   height: 100%;
-  position: relative;
+  position: relative; /* To be able to position #footer with absolute */
 }
 
 #footer {
