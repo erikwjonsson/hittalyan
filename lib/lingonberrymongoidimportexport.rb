@@ -17,22 +17,23 @@
 # Update attributes with hash from client with external_update.
 
 module LingonberryMongoidImportExport
-  EXTERNALLY_ACCESSIBLE_FIELDS = []
-  EXTERNALLY_READABLE_FIELDS = []
-
+  
   def self.included(base)
+    base.const_set(:EXTERNALLY_READABLE_FIELDS, [])
+    base.const_set(:EXTERNALLY_ACCESSIBLE_FIELDS, [])
+
     base.send(:include, InstanceMethods)
     base.extend(ClassMethods)
   end
 
   module InstanceMethods
     def as_external_document
-     allowed_fields = (EXTERNALLY_ACCESSIBLE_FIELDS + EXTERNALLY_READABLE_FIELDS).map(&:to_s)
+     allowed_fields = (self.class.const_get(:EXTERNALLY_ACCESSIBLE_FIELDS) + self.class.const_get(:EXTERNALLY_READABLE_FIELDS)).map(&:to_s)
      self.as_document.slice(*allowed_fields)
     end
 
     def external_update!(document_as_hash)
-      allowed_updates = document_as_hash.slice(*EXTERNALLY_ACCESSIBLE_FIELDS.map(&:to_s))
+      allowed_updates = document_as_hash.slice(*self.class.const_get(:EXTERNALLY_ACCESSIBLE_FIELDS).map(&:to_s))
       update_attributes!(allowed_updates)
     end
   end
@@ -40,12 +41,12 @@ module LingonberryMongoidImportExport
   module ClassMethods
     # Externally accessible fields and embedded documents.
     def externally_accessible(*fields)
-      EXTERNALLY_ACCESSIBLE_FIELDS.push(*fields)
+      const_get(:EXTERNALLY_ACCESSIBLE_FIELDS).push(*fields)
     end
 
     # Externally readable fields and embedded documents.
     def externally_readable(*fields)
-      EXTERNALLY_READABLE_FIELDS.push(*fields)
+      const_get(:EXTERNALLY_READABLE_FIELDS).push(*fields)
     end
   end
 end
