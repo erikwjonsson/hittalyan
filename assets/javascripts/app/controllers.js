@@ -206,22 +206,22 @@ function SettingsController($scope, $http, $location) {
 
   $http.get("medlemssidor/settings").
     success(function(data, status) {
-      $scope.roomsMin = $scope.roomValuesMin[data.filter.roomsMin - 1];
-      if (data.filter.roomsMax == 999) {
+      $scope.roomsMin = $scope.roomValuesMin[data.filter.rooms.min - 1];
+      if (data.filter.rooms.max == 999) {
         $scope.roomsMax = $scope.roomValuesMax[$scope.roomValuesMax.length - 1];
       } else{
-        $scope.roomsMax = $scope.roomValuesMax[data.filter.roomsMax - 1];
+        $scope.roomsMax = $scope.roomValuesMax[data.filter.rooms.max - 1];
       };
       if (data.filter.rent == 999999) {
         $scope.rent = $scope.rentValues[$scope.rentValues.length - 1];
       } else{
         $scope.rent = $scope.rentValues[data.filter.rent/500 -2];
       };
-      $scope.areaMin = $scope.areaValuesMin[data.filter.areaMin/5 -2];
-      if (data.filter.areaMax == 9999) {
+      $scope.areaMin = $scope.areaValuesMin[data.filter.area.min/5 -2];
+      if (data.filter.area.max == 9999) {
         $scope.areaMax = $scope.areaValuesMax[$scope.areaValuesMax.length - 1];
       } else{
-        $scope.areaMax = $scope.areaValuesMax[data.filter.areaMax/5 -2];
+        $scope.areaMax = $scope.areaValuesMax[data.filter.area.max/5 -2];
       };
       $scope.emailNotification = data.notify_by_email;
       $scope.smsNotification = data.notify_by_sms;
@@ -456,7 +456,6 @@ function TestController($scope) {
 
 // General Controller helper functions
 
-// Assumes form with field called password to be emptied on failed login.
 function feedBackSymbolOk(scope, message) {
   scope.feedBackSymbol = "<i class='icon-ok checkmark okness icon-large'></i>";
   scope.message = message;
@@ -472,6 +471,7 @@ function feedBackSymbolWorking(scope, message) {
   scope.message = message;
 }
 
+// Assumes form with field called password to be emptied on failed login.
 function loginFormFail($scope) {
   $scope.password = "";
   localStorage.loggedIn = "false";

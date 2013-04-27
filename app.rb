@@ -92,7 +92,9 @@ Cuba.define do
         end
 
         on "settings" do
-          send_json(user.settings_to_hash)
+          require 'pp'
+          pp user.as_external_document
+          send_json(user.as_external_document)
         end
         
         on "lagenheter" do
