@@ -15,7 +15,8 @@ class User
                         :permits_to_be_emailed
 
   externally_readable   :active,
-                        :sms_account
+                        :sms_account,
+                        :premium_until
 
   field :email, type: String
   field :first_name, type: String, default: ""
