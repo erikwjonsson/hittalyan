@@ -206,6 +206,7 @@ function SettingsController($scope, $http, $location) {
 
   $http.get("medlemssidor/settings").
     success(function(data, status) {
+      $scope.settingsData = data;
       $scope.roomsMin = $scope.roomValuesMin[data.filter.rooms.min - 1];
       if (data.filter.rooms.max == 999) {
         $scope.roomsMax = $scope.roomValuesMax[$scope.roomValuesMax.length - 1];
@@ -223,12 +224,6 @@ function SettingsController($scope, $http, $location) {
       } else{
         $scope.areaMax = $scope.areaValuesMax[data.filter.area.max/5 -2];
       };
-      $scope.emailNotification = data.notify_by_email;
-      $scope.smsNotification = data.notify_by_sms;
-      $scope.pushNotification = data.notify_by_push_note;
-      $scope.mobileNumber = data.mobile_number;
-      $scope.firstName = data.first_name;
-      $scope.lastName = data.last_name;
     }).
     error(function(data, status) {
       //alert(data)
@@ -236,20 +231,14 @@ function SettingsController($scope, $http, $location) {
   
   $scope.submitAllSettings = function() {
     if ( $scope.allSettingsForm.$valid == true) {
-      var filterSettings = {rooms_min: $scope.roomsMin.value,
-                            rooms_max: $scope.roomsMax.value,
-                            rent: $scope.rent.value,
-                            area_min: $scope.areaMin.value,
-                            area_max: $scope.areaMax.value};
-      var notificationSettings = {email: $scope.emailNotification,
-                                  sms: $scope.smsNotification,
-                                  push: $scope.pushNotification};
-      var personalInformationSettings = {mobile_number: $scope.mobileNumber,
-                                         first_name: $scope.firstName,
-                                         last_name: $scope.lastName};
-      var data = {data: {filter_settings: filterSettings,
-                         notification_settings: notificationSettings,
-                         personal_information_settings: personalInformationSettings}};
+      var settingsData = $scope.settingsData
+      settingsData.filter.rooms.min = $scope.roomsMin.value;
+      settingsData.filter.rooms.max = $scope.roomsMax.value;
+      settingsData.filter.rent = $scope.rent.value;
+      settingsData.filter.area.min = $scope.areaMin.value;
+      settingsData.filter.area.max = $scope.areaMax.value;
+      var data = {data: settingsData}
+      
       feedBackSymbolWorking($scope.allSettings, "Sparar...");
       $http.post("medlemssidor/settings", data).
         success(function(data, status) {

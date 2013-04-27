@@ -75,11 +75,11 @@
         %fieldset
           %legend Meddelandesätt
           %label.checkbox
-            %input(type="checkbox" ng-model="smsNotification") SMS
+            %input(type="checkbox" ng-model="settingsData.notify_by_sms") SMS
           %label.checkbox
-            %input(type="checkbox" ng-model="emailNotification") E-post
+            %input(type="checkbox" ng-model="settingsData.notify_by_email") E-post
           %label.checkbox
-            %input(type="checkbox" ng-model="pushNotification") Pushmeddelande
+            %input(type="checkbox" ng-model="settingsData.notify_by_push_note") Pushmeddelande
         
         %fieldset
           %legend Personlig information
@@ -88,20 +88,20 @@
                 name="first-name"
                 placeholder="Förnamn"
                 id="first-name"
-                ng-model="firstName")
+                ng-model="settingsData.first_name")
           %label(for="lastname") Efternamn:
           %input(type="text"
                 name="last-name"
                 placeholder="Efternamn"
                 id="last-name"
-                ng-model="lastName")
+                ng-model="settingsData.last_name")
           %label(for="mobileNumber") Mobilnummer:
           %input(type="text"
                 name="mobileNumber"
                 placeholder="Mobilnummer"
                 ng-required="smsNotification"
                 id="mobileNumber"
-                ng-model="mobileNumber")
+                ng-model="settingsData.mobile_number")
           %span(ng-show="allSettingsForm.mobileNumber.$error.required")
             Mobilnummer måste anges om SMS-utskick önskas
           %br

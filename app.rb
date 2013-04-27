@@ -92,8 +92,6 @@ Cuba.define do
         end
 
         on "settings" do
-          require 'pp'
-          pp user.as_external_document
           send_json(user.as_external_document)
         end
         
@@ -240,7 +238,7 @@ Cuba.define do
         end
 
         on "settings", param('data') do |data|
-          user.update_settings(data)
+          user.external_update!(data)
         end
 
         on "personal_information", param('data') do |data|
