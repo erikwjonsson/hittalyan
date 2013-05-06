@@ -81,7 +81,7 @@
                     ng-options="city.name for city in cities")
               %option(value=""
                       disabled="disabled")Välj stad
-            %a(ng-click="addCity()") Lägg till Stad
+            %button(type="button" ng-click="addCity()") Lägg till stad
           %label
             Valda städer:
             %br
