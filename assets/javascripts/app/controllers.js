@@ -103,7 +103,7 @@ function SettingsController($scope, $http, $location) {
                    {name: "Malmö", value: 1},
                    {name: "Gävle", value: 2},
                    {name: "Eskilstuna", value: 3}];
-  $scope.citiesChosen = ["Stockholm", "Gävle"];
+  // $scope.citiesChosen = ["Stockholm", "Gävle"];
   $scope.city = $scope.cities[0];
 
   $scope.roomValuesMin = [{name: "1", value: 1},
@@ -263,12 +263,11 @@ function SettingsController($scope, $http, $location) {
   };
   
   $scope.addCity = function() {
-    // $scope.citiesChosen.push($scope.city.name)
-    $scope.citiesChosen.pushUnique($scope.city.name);
+    $scope.userData.filter.cities.pushUnique($scope.city.name);
   };
   
   $scope.removeCity = function(city) {
-    $scope.citiesChosen.remove(city);
+    $scope.userData.filter.cities.remove(city);
   };
   
   $scope.submitPasswordSettings = function() {

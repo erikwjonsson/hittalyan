@@ -85,7 +85,7 @@
           %label
             Valda städer:
             %br
-            %span(ng-repeat="city in citiesChosen"
+            %span(ng-repeat="city in userData.filter.cities"
                   class="city")
               {{city}}
               %i(class="icon-remove checkmar icon-large"
