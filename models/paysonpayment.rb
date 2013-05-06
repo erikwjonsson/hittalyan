@@ -17,8 +17,8 @@ class PaysonPayment < Payment
   attr_reader :forward_url
   include Mongoid::Document
   
-  RETURN_URL = WEBSITE_ADDRESS + '#/medlemssidor/premiumtjanster'
-  CANCEL_URL = WEBSITE_ADDRESS + '#/medlemssidor/premiumtjanster'
+  RETURN_URL = WEBSITE_ADDRESS + '#!/medlemssidor/premiumtjanster'
+  CANCEL_URL = WEBSITE_ADDRESS + '#!/medlemssidor/premiumtjanster'
   IPN_URL = WEBSITE_ADDRESS + 'ipn'
   MEMO = "Medlemspaket för #{BRAND_NAME}."
   

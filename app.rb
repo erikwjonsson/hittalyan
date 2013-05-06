@@ -29,6 +29,16 @@ def send_json(document)
   res.write ActiveSupport::JSON.encode(document)
 end
 
+# Very basic way of rendering Angular serverside
+# Only supports ng-view and presupposes the view should be included in
+# index.html.
+def send_serverside_rendered_view(view)
+  superview = File.read(File.join('public', "index.html"))
+  subview = File.read(File.join('public', "#{view}.html"))
+  subview_declaration = '<div ng-view></div>'
+  res.write superview.sub(subview_declaration, subview)
+end
+
 # filter - Filter object
 # days_ago - int
 def filtered_apartments_since(filter, days_ago)
@@ -45,6 +55,14 @@ Cuba.define do
 
   #GET-----------------------------------------
   on get do
+    # Support for Google's AJAX crawling scheme.
+    # Route and filename has to match.
+    on env['REQUEST_URI'].include?("_escaped_fragment_=") do
+      fragment = env['REQUEST_URI']
+      view_name = fragment.split('/').last
+      send_serverside_rendered_view(view_name)
+    end
+
     on "test" do
       send_view "test"
     end
@@ -62,11 +80,11 @@ Cuba.define do
     end
     
     on "vanliga-fragor" do
-      send_view "faq"
+      send_view "vanliga-fragor"
     end
     
     on "om" do
-      send_view "about"
+      send_view "om"
     end
     
     on "medlemssidor" do
@@ -119,8 +137,8 @@ Cuba.define do
       send_view "login"
     end
     
-    on "signup" do
-      send_view "signup"
+    on "registrera" do
+      send_view "registrera"
     end
 
     on "passwordreset" do
@@ -275,7 +293,7 @@ Cuba.define do
             reset = Reset.create!(email: email)
           end
           body = ["Klicka länken inom 12 timmar, annars...",
-                  "Länk: http://cubancabal.aws.af.cm/#/losenordsaterstallning/#{reset.hashed_link}"].join("\n")
+                  "Länk: http://cubancabal.aws.af.cm/#!/losenordsaterstallning/#{reset.hashed_link}"].join("\n")
           shoot_email(email,
                       "Lösenordsåterställning",
                       body)

@@ -2,7 +2,11 @@
 
 /* App Module */
 
-var cubancabal = angular.module('cubancabal', ['ngSanitize'])
+angular.module('HashBangURLs', []).config(['$locationProvider', function($location) {
+  $location.hashPrefix('!');
+}]);
+
+var cubancabal = angular.module('cubancabal', ['ngSanitize', 'HashBangURLs'])
 
 cubancabal.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
@@ -12,7 +16,7 @@ cubancabal.config(['$routeProvider', function($routeProvider) {
       when('/medlemssidor/lagenheter', {templateUrl: '/medlemssidor/lagenheter', controller: ApartmentsController}).
       when('/medlemssidor/premiumtjanster', {templateUrl: '/medlemssidor/premiumtjanster', controller: PremiumServicesController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
-      when('/registrera', {templateUrl: 'signup', controller: SignupController}).
+      when('/registrera', {templateUrl: 'registrera', controller: SignupController}).
       when('/om', {templateUrl: 'om',   controller: AboutController}).
       when('/test', {templateUrl: 'test',   controller: TestController}).
       when('/vanliga-fragor', {templateUrl: 'vanliga-fragor', controller: FAQController}).

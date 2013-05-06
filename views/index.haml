@@ -18,15 +18,15 @@
             .nav-collapse.collapse
               %ul.nav
                 %li
-                  %a(href="#/vanliga-fragor") Vanliga frågor
+                  %a(href="#!/vanliga-fragor") Vanliga frågor
                 %li
-                  %a(href="#/om") Om
+                  %a(href="#!/om") Om
                 %li(ng-hide="isLoggedIn()")
-                  %a(href="#/registrera" ng-hide="isLoggedIn()") Bli medlem
+                  %a(href="#!/registrera" ng-hide="isLoggedIn()") Bli medlem
                 %li(ng-show="isLoggedIn()")
-                  %a(href="#/medlemssidor" ng-show="isLoggedIn()") Medlemssidor
+                  %a(href="#!/medlemssidor" ng-show="isLoggedIn()") Medlemssidor
                 %li(ng-hide="isLoggedIn()")
-                  %a(href="#/losenordsaterstallning"
+                  %a(href="#!/losenordsaterstallning"
                      ng-hide="isLoggedIn()") Glömt Lösenord?
 
               %form#loginform.navbar-form.pull-right(name="login"
