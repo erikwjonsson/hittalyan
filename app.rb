@@ -37,6 +37,7 @@ def filtered_apartments_since(filter, days_ago)
     (filter.rent >= apartment.rent &&
     filter.rooms === apartment.rooms &&
     filter.area  === apartment.area) &&
+    filter.cities.include?(apartment.city) &&
     apartment.advertisement_found_at >= days_ago.days.ago
   end
 end
