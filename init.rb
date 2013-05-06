@@ -10,6 +10,7 @@ Dir.chdir root_directory
 require 'cuba'
 require 'rack/protection'
 require 'mongoid'
+require_relative 'lib/lingonberrymongoidimportexport'
 require 'rack/logger'
 require 'securerandom'
 require 'rack/post-body-to-params'
@@ -75,7 +76,8 @@ Cuba.use Rack::Static, :urls => ['/images',
                                  '/fonts',
                                  application_css,
                                  application_js,
-                                 '/favicon.ico'],
+                                 '/favicon.ico',
+                                 '/google718389522c114c98.html'],
                         :root => PUBLIC_PATH
 Cuba.use Rack::PostBodyToParams
 

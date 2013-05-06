@@ -2,6 +2,22 @@ require 'digest'
 
 class User
   include Mongoid::Document
+  include LingonberryMongoidImportExport
+
+  externally_accessible :filter, # embedded document, all fields
+                        :email, 
+                        :first_name,
+                        :last_name,
+                        :mobile_number,
+                        :notify_by_email,
+                        :notify_by_sms,
+                        :notify_by_push_note,
+                        :permits_to_be_emailed
+
+  externally_readable   :active,
+                        :sms_account,
+                        :premium_until
+
   field :email, type: String
   field :first_name, type: String, default: ""
   field :last_name, type: String, default: ""
@@ -24,6 +40,8 @@ class User
   # Note that hashed_password isn't hashed at the point of validation
   validates :hashed_password, presence: true, length: { minimum: 6, maximum: 64}
   
+  validate :validate_and_coerce_mobile_number_format
+  
   before_validation do |document|
     # When a user registers, downcase the email address.
     # This will downcase the email unnecessarily whenever the document
@@ -35,6 +53,25 @@ class User
   before_create do |document|
     document.hashed_password = encrypt(document.hashed_password)
     generate_unsubscribe_id
+  end
+
+  def validate_and_coerce_mobile_number_format
+    return unless self.mobile_number
+    self.mobile_number = self.mobile_number.gsub(/\s+/, "")
+
+    if self.mobile_number == ""
+    elsif self.mobile_number[0..1] == '00'
+      # International number, same meaning as +.
+      self.mobile_number.sub!('00', '+')
+    elsif self.mobile_number[0] == '0'
+      # Starts with 0 but isn't a country code, default to Swedish number.
+      self.mobile_number.sub!('0', '+46')
+    elsif self.mobile_number[0] != '+'
+      # Comment for humans: If we got this far the number didn't start with a
+      # single or double 0 and... it didn't even start with a plus.
+      # Gasp! It must be from outer space, yao.
+      raise MalformedMobileNumber 
+    end
   end
 
   def unsubscribe_from_email_notifications_link
@@ -96,28 +133,6 @@ class User
                          areaMax: filter.area.last}}
   end
 
-  def change_mobile_number(new_mobile_number)
-    return unless new_mobile_number
-    new_mobile_number = new_mobile_number.gsub(/\s+/, "")
-    
-    if new_mobile_number == ""
-    elsif new_mobile_number[0..1] == '00'
-      # International number, same meaning as +.
-      new_mobile_number.sub!('00', '+')
-    elsif new_mobile_number[0] == '0'
-      # Starts with 0 but isn't a country code, default to Swedish number.
-      new_mobile_number.sub!('0', '+46')
-    elsif new_mobile_number[0] != '+'
-      # Comment for humans: If we got this far the number didn't start with a
-      # single or double 0 and... it didn't even start with a plus.
-      # Gasp! It must be from outer space, yao.
-      raise MalformedMobileNumber 
-    end
-    
-    self.mobile_number = new_mobile_number
-    self.save(validate: false)
-  end
-
   def apply_package(package)
     add_premium_days(package.premium_days) if package.premium_days
     self.inc(:sms_account, package.sms_account) if package.sms_account
@@ -147,8 +162,8 @@ class User
   def update_personal_information_settings(personal_information_settings)
     s = personal_information_settings
     self.update_attributes!(first_name: s['first_name'],
-                            last_name: s['last_name'])
-    change_mobile_number(s['mobile_number'])
+                            last_name: s['last_name'],
+                            mobile_number: s['mobile_number'])
   end
   
   class MalformedMobileNumber < StandardError

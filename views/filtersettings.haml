@@ -51,15 +51,15 @@
                         name="areaMin"
                         id="areaMin"
                         ng-options="a.name for a in areaValuesMin")
-                %option(value="" 
-                        disabled="disabled")Minimal area
+                  %option(value="" 
+                          disabled="disabled")Minimal area
               %td
                 %select(ng-model="areaMax"
                         name="areaMax"
                         id="areaMax"
                         ng-options="a.name for a in areaValuesMax")
-                %option(value=""
-                        disabled="disabled")Maximal area
+                  %option(value=""
+                          disabled="disabled")Maximal area
             %tr
               %td
                 %label(for="rent") Maximal hyra:
@@ -95,11 +95,11 @@
         %fieldset
           %legend Meddelandesätt
           %label.checkbox
-            %input(type="checkbox" ng-model="smsNotification") SMS
+            %input(type="checkbox" ng-model="userData.notify_by_sms") SMS
           %label.checkbox
-            %input(type="checkbox" ng-model="emailNotification") E-post
-          %label.checkbox
-            %input(type="checkbox" ng-model="pushNotification") Pushmeddelande
+            %input(type="checkbox" ng-model="userData.notify_by_email") E-post
+          / %label.checkbox
+          /   %input(type="checkbox" ng-model="userData.notify_by_push_note") Pushmeddelande
         
         %fieldset
           %legend Personlig information
@@ -108,20 +108,20 @@
                 name="first-name"
                 placeholder="Förnamn"
                 id="first-name"
-                ng-model="firstName")
+                ng-model="userData.first_name")
           %label(for="lastname") Efternamn:
           %input(type="text"
                 name="last-name"
                 placeholder="Efternamn"
                 id="last-name"
-                ng-model="lastName")
+                ng-model="userData.last_name")
           %label(for="mobileNumber") Mobilnummer:
           %input(type="text"
                 name="mobileNumber"
                 placeholder="Mobilnummer"
                 ng-required="smsNotification"
                 id="mobileNumber"
-                ng-model="mobileNumber")
+                ng-model="userData.mobile_number")
           %span(ng-show="allSettingsForm.mobileNumber.$error.required")
             %i(class='icon-remove checkmark wrongness icon-large')
             Mobilnummer måste anges om SMS-utskick önskas
@@ -132,8 +132,10 @@
                  value="Spara")
           %span(ng-bind-html="allSettings.feedBackSymbol")
           %span {{allSettings.message}}
-      
-      %hr
+
+.row.top-buffer
+  .span10.offset2.box.opaque
+    .padhack
       %form(name="passwordChange" ng-submit="submitPasswordSettings()" novalidate)
         %fieldset
           %legend Ändra Lösenord
@@ -172,7 +174,9 @@
           %span(ng-bind-html="passwordSettings.feedBackSymbol")
           %span {{passwordSettings.message}}
       
-      %hr
+.row.top-buffer
+  .span10.offset2.box.opaque
+    .padhack
       %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
         %fieldset
           %legend Avsluta medlemskap

@@ -16,8 +16,8 @@
           %a{href: "#/medlemssidor/premiumtjanster"} Premiumtjänster
   .span10.box.opaque
     .padhack
-      %div.alert.alert-info(ng-show="premiumUntil")
-        Ditt premiumpaket gäller fram till {{premiumUntil | date: 'yyyy-MM-dd HH:mm:ss'}} och du har {{smsLeft}} SMS kvar.
+      %div.alert.alert-info(ng-show="userData.premium_until")
+        Ditt premiumpaket gäller fram till {{userData.premium_until | date: 'yyyy-MM-dd HH:mm:ss'}} och du har {{userData.sms_account}} SMS kvar.
       %h2 Paket som du kan köpa
       %p Betala direkt med Payson. Payson samarbetar med Visa/Mastercard och internetbankerna Swedbank, Handelsbanken, SEB och Nordea.
       %p Moms ingår i alla priser. Inga extra avgifter tillkommer.
@@ -31,7 +31,7 @@
           %td
             %img(src="images/shopping_bag.png")
           %td {{packages.STANDARD.description}}
-          %td {{packages.STANDARD.unit_price_in_ore/100}} kr
+          %td {{(packages.STANDARD.unit_price_in_ore/100)*1.25}} kr
           %td
             %a(href="" rel="nofollow" ng-click="buyPackage('STANDARD')")
               %img(src="images/payson_betala_btn.png")            
@@ -44,17 +44,16 @@
                 name="first-name"
                 placeholder="Förnamn"
                 id="first-name"
-                ng-model="firstName"
+                ng-model="userData.first_name"
                 required)
           %label(for="lastname") Efternamn:
           %input(type="text"
                 name="last-name"
                 placeholder="Efternamn"
                 id="last-name"
-                ng-model="lastName"
+                ng-model="userData.last_name"
                 required)
           %input(type="submit"
                  class="btn"
                  name="save"
                  value="Gå vidare")
-.short-page-push
