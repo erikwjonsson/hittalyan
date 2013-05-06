@@ -111,8 +111,10 @@
                  value="Spara")
           %span(ng-bind-html="allSettings.feedBackSymbol")
           %span {{allSettings.message}}
-      
-      %hr
+
+.row.top-buffer
+  .span10.offset2.box.opaque
+    .padhack
       %form(name="passwordChange" ng-submit="submitPasswordSettings()" novalidate)
         %fieldset
           %legend Ändra Lösenord
@@ -151,7 +153,9 @@
           %span(ng-bind-html="passwordSettings.feedBackSymbol")
           %span {{passwordSettings.message}}
       
-      %hr
+.row.top-buffer
+  .span10.offset2.box.opaque
+    .padhack
       %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
         %fieldset
           %legend Avsluta medlemskap
