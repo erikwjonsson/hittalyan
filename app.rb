@@ -90,10 +90,6 @@ Cuba.define do
         on "installningar" do
           send_view "filtersettings"
         end
-
-        on "settings" do
-          send_json(user.as_external_document)
-        end
         
         on "lagenheter" do
           send_view "apartments"
@@ -236,17 +232,7 @@ Cuba.define do
         on "user", param('data') do |client_user_model|
           user.external_update!(client_user_model)
         end
-
-        on "settings", param('data') do |data|
-          user.external_update!(data)
-        end
-
-        on "personal_information", param('data') do |data|
-          user.update_attributes!(first_name: data['first_name'],
-                                  last_name: data['last_name'],
-                                  mobile_number: data['mobile_number'])
-          res.write "'#{user.as_document}'" unless production?
-        end
+        
         on "account_termination", param('password') do |password|
           if user.has_password?(password)
             user.session.delete
@@ -255,6 +241,7 @@ Cuba.define do
             res.status = 401 #Unathorized
           end
         end
+        
         on "change_password", param('new_password'), param('old_password') do |new_password, old_password|
           begin
             user.change_password(new_password, old_password)
