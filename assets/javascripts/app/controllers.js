@@ -103,7 +103,6 @@ function SettingsController($scope, $http, $location) {
                    {name: "Malmö", value: 1},
                    {name: "Gävle", value: 2},
                    {name: "Eskilstuna", value: 3}];
-  // $scope.citiesChosen = ["Stockholm", "Gävle"];
   $scope.city = $scope.cities[0];
 
   $scope.roomValuesMin = [{name: "1", value: 1},
@@ -355,8 +354,6 @@ function PremiumServicesController($scope, $http) {
       $http.post("medlemssidor/user", data).
         success(function(data, status) {
           //alert("success");
-          // userData.first_name = $scope.first_name;
-          // userData.last_name = $scope.last_name;
           $scope.buyPackage($scope.sku);
         }).
         error(function(data, status) {
