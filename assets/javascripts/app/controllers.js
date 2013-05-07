@@ -98,6 +98,12 @@ function SettingsController($scope, $http, $location) {
   $scope.passwordSettings = {};
   $scope.accountTermination = {};
   $scope.allSettings = {};
+  
+  $scope.cities = [{name: "Stockholm", value: 0},
+                   {name: "Malmö", value: 1},
+                   {name: "Gävle", value: 2},
+                   {name: "Eskilstuna", value: 3}];
+  $scope.city = $scope.cities[0];
 
   $scope.roomValuesMin = [{name: "1", value: 1},
                           {name: "2", value: 2},
@@ -204,9 +210,9 @@ function SettingsController($scope, $http, $location) {
                           {name: "145", value: 145},
                           {name: "150+", value: 9999}];
 
-  $http.get("medlemssidor/settings").
+  $http.get("medlemssidor/user").
     success(function(data, status) {
-      $scope.settingsData = data;
+      $scope.userData = data;
       $scope.roomsMin = $scope.roomValuesMin[data.filter.rooms.min - 1];
       if (data.filter.rooms.max == 999) {
         $scope.roomsMax = $scope.roomValuesMax[$scope.roomValuesMax.length - 1];
@@ -231,16 +237,16 @@ function SettingsController($scope, $http, $location) {
   
   $scope.submitAllSettings = function() {
     if ( $scope.allSettingsForm.$valid == true) {
-      var settingsData = $scope.settingsData
-      settingsData.filter.rooms.min = $scope.roomsMin.value;
-      settingsData.filter.rooms.max = $scope.roomsMax.value;
-      settingsData.filter.rent = $scope.rent.value;
-      settingsData.filter.area.min = $scope.areaMin.value;
-      settingsData.filter.area.max = $scope.areaMax.value;
-      var data = {data: settingsData}
+      var userData = $scope.userData
+      userData.filter.rooms.min = $scope.roomsMin.value;
+      userData.filter.rooms.max = $scope.roomsMax.value;
+      userData.filter.rent = $scope.rent.value;
+      userData.filter.area.min = $scope.areaMin.value;
+      userData.filter.area.max = $scope.areaMax.value;
+      var data = {data: userData}
       
       feedBackSymbolWorking($scope.allSettings, "Sparar...");
-      $http.post("medlemssidor/settings", data).
+      $http.post("medlemssidor/user", data).
         success(function(data, status) {
           //alert(data);
           feedBackSymbolOk($scope.allSettings, "Inställningar sparade");
@@ -250,6 +256,17 @@ function SettingsController($scope, $http, $location) {
           feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
         });
     }
+    else {
+      feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
+    }
+  };
+  
+  $scope.addCity = function() {
+    $scope.userData.filter.cities.pushUnique($scope.city.name);
+  };
+  
+  $scope.removeCity = function(city) {
+    $scope.userData.filter.cities.remove(city);
   };
   
   $scope.submitPasswordSettings = function() {
@@ -309,29 +326,59 @@ function ApartmentsController($scope, $http) {
     })
 }
 
-// function PasswordController($scope, $http) {
-//   $scope.submit = function() {
-//     if ( $scope.new_password == $scope.repeat_password ) {
-//       if ( $scope.passwordChange.$valid == true){
-//         $scope.data = {old_password: $scope.old_password,
-//                        new_password: $scope.new_password};
-//         $http.post("change_password", $scope.data).
-//           success(function(data, status) {
-//             //alert(data);
-//             $scope.new_password = "";
-//             $scope.repeat_password = "";
-//             $scope.old_password = "";
-//           }).
-//           error(function(data, status) {
-//             //alert("Natural 1");
-//           });
-//       }
-//     }
-//     else {
-//       alert("Lösenorden överrensstämmer inte");
-//     }
-//   };
-// }
+function PremiumServicesController($scope, $http) {
+  deTokenify();
+  $scope.showForm = false;
+
+  $http.get("medlemssidor/user").
+    success(function(data, status) {
+      $scope.userData = data;
+      // alert(data);
+    }).
+    error(function(data, status) {
+      //alert(data);
+    });
+
+  $http.get("medlemssidor/packages").
+    success(function(data, status) {
+      $scope.packages = data;
+      // alert(data);
+    }).
+    error(function(data, status) {
+      //alert(data);
+    });
+
+  $scope.submitNameInfo = function() {
+    if ( $scope.nameForm.$valid == true) {
+      data = {data: $scope.userData};
+      $http.post("medlemssidor/user", data).
+        success(function(data, status) {
+          //alert("success");
+          $scope.buyPackage($scope.sku);
+        }).
+        error(function(data, status) {
+          //alert("error");
+        });
+    }
+  };
+
+  $scope.buyPackage = function(sku) {
+    $scope.sku = sku
+    if ($scope.userData.first_name != "" && $scope.userData.last_name != "") {
+      data = {'sku': sku}
+      $http.post("payson_pay", data).
+        success(function(data, status) {
+          //alert(data);
+          window.location = data;
+        }).
+        error(function(data, status) {
+          //alert(data);
+        });
+    } else{
+      $scope.showForm = true; 
+    };
+  };
+}
 
 function PasswordResetController($scope, $http) {
   $scope.submit = function() {
@@ -373,75 +420,41 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
   };
 }
 
-function PremiumServicesController($scope, $http) {
-  deTokenify();
-  $scope.premiumUntil = null;
-  $scope.smsLeft = 0;
-  $scope.showForm = false;
-  settingsData = {};
-
-  $http.get("medlemssidor/settings").
-    success(function(data, status) {
-      settingsData = data;
-      $scope.premiumUntil = settingsData.premium_until;
-      $scope.smsLeft = settingsData.sms_account;
-      $scope.firstName = settingsData.first_name;
-      $scope.lastName = settingsData.last_name;
-      $scope.mobileNumber = settingsData.mobile_number;
-      // alert(data);
-    }).
-    error(function(data, status) {
-      //alert(data);
-    });
-
-  $http.get("medlemssidor/packages").
-    success(function(data, status) {
-      $scope.packages = data;
-      // alert(data);
-    }).
-    error(function(data, status) {
-      //alert(data);
-    });
-
-  $scope.submitNameInfo = function() {
-    if ( $scope.nameForm.$valid == true) {
-      data = {data: {mobile_number: $scope.mobileNumber,
-                     first_name: $scope.firstName,
-                     last_name: $scope.lastName}};
-      $http.post("medlemssidor/personal_information", data).
-        success(function(data, status) {
-          //alert("success");
-          settingsData.first_name = $scope.first_name;
-          settingsData.last_name = $scope.last_name;
-          $scope.buyPackage($scope.sku);
-        }).
-        error(function(data, status) {
-          //alert("error");
-        });
-    }
-  };
-
-  $scope.buyPackage = function(sku) {
-    $scope.sku = sku
-    if (settingsData.first_name != "" && settingsData.last_name != "") {
-      data = {'sku': sku}
-      $http.post("payson_pay", data).
-        success(function(data, status) {
-          //alert(data);
-          window.location = data;
-        }).
-        error(function(data, status) {
-          //alert(data);
-        });
-    } else{
-      $scope.showForm = true; 
-    };
-  };
-}
-
 function TestController($scope) {
   deTokenify();
 }
+
+// Extensions
+
+// Check if value exists in array
+Array.prototype.exists = function(element) {
+  for(var i=0; i<this.length; i++) {
+    if(this[i] == element ){
+      return true;
+    }
+  }
+  return false;
+}
+
+// Push to array if unique value
+Array.prototype.pushUnique = function(new_element) {
+  if (this.exists(new_element) == true) {
+    return false;
+  }
+  return this.push(new_element);
+}
+
+// Remove element from array by value
+Array.prototype.remove = function() {
+  var what, a = arguments, L = a.length, ax;
+  while (L && this.length) {
+    what = a[--L];
+    while ((ax = this.indexOf(what)) !== -1) {
+      this.splice(ax, 1);
+    }
+  }
+  return this;
+};
 
 // General Controller helper functions
 
