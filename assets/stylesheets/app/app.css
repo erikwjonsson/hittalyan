@@ -28,6 +28,11 @@
   padding: 2px;
 }
 
+.city a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /*Make bootstrap grok some Angular*/
 
 /*Ng says invalid for whatever reason. Red*/
@@ -151,6 +156,12 @@ body {
 }
 .nav > li > span {
     display: block;
+}
+
+/* Used for custom elements in forms where Bootstrap doesn't specify padding,
+   e.g. the list of cities on the settings page. */
+.input-padding {
+  padding: 4px 6px 4px 6px;
 }
 
 /*

@@ -75,21 +75,23 @@
           %label
             Städer:
             %br
-            %select(ng-model="city"
-                    name="city"
-                    id="city"
-                    ng-options="city.name for city in cities")
-              %option(value=""
-                      disabled="disabled")Välj stad
-            %button(type="button" ng-click="addCity()") Lägg till stad
+            .form-horizontal
+              %select(ng-model="city"
+                      name="city"
+                      id="city"
+                      ng-options="city.name for city in cities")
+                %option(value=""
+                        disabled="disabled")Välj stad
+              %button(type="button" class="btn" ng-click="addCity()") Lägg till stad
           %label
             Valda städer:
             %br
-            %span(ng-repeat="city in userData.filter.cities"
-                  class="city")
-              {{city}}
-              %i(class="icon-remove checkmar icon-large"
-                 ng-click="removeCity(city)")
+            %div.input-padding
+              %span(ng-repeat="city in userData.filter.cities"
+                    class="city")
+                {{city}}
+                %a(href="" class="icon-remove checkmar icon-large"
+                   ng-click="removeCity(city)")
             %br
         
         %fieldset
