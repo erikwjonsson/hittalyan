@@ -115,55 +115,11 @@ class User
       "Submitted password does not match."
     end
   end
-  
-  def settings_to_hash()
-    settings = {mobile_number: self.mobile_number,
-                first_name: self.first_name,
-                last_name: self.last_name,
-                notify_by_email: self.notify_by_email,
-                notify_by_sms: self.notify_by_sms,
-                notify_by_push_note: self.notify_by_push_note,
-                active: self.active,
-                premium_until: self.premium_until,
-                sms_account: self.sms_account,
-                filter: {roomsMin: filter.rooms.first,
-                         roomsMax: filter.rooms.last,
-                         rent: filter.rent,
-                         areaMin: filter.area.first,
-                         areaMax: filter.area.last}}
-  end
 
   def apply_package(package)
     add_premium_days(package.premium_days) if package.premium_days
     self.inc(:sms_account, package.sms_account) if package.sms_account
     self.update_attribute(:active, package.active) if package.active 
-  end
-  
-  def update_settings(data)
-    update_filter_settings(data['filter_settings'])
-    update_notification_settings(data['notification_settings'])
-    update_personal_information_settings(data['personal_information_settings'])
-  end
-  
-  def update_filter_settings(filter_settings)
-    s = filter_settings
-    self.create_filter(rooms: Range.new(s['rooms_min'].to_i, s['rooms_max'].to_i),
-                       rent: s['rent'].to_i,
-                       area: Range.new(s['area_min'].to_i, s['area_max'].to_i))
-  end
-  
-  def update_notification_settings(notification_settings)
-    s = notification_settings
-    self.update_attributes!(notify_by_email: s['email'],
-                            notify_by_sms: s['sms'],
-                            notify_by_push_note: s['push'])
-  end
-  
-  def update_personal_information_settings(personal_information_settings)
-    s = personal_information_settings
-    self.update_attributes!(first_name: s['first_name'],
-                            last_name: s['last_name'],
-                            mobile_number: s['mobile_number'])
   end
   
   class MalformedMobileNumber < StandardError
@@ -172,6 +128,10 @@ class User
     end
   end
   
+  def subtract_sms
+    self.inc(:sms_account, -1) if self.sms_account > 0
+  end
+
   private
 
     def add_premium_days(days_to_add)
@@ -196,7 +156,6 @@ class User
       self.unsubscribe_id = encrypt(email + Time.now.to_s + @@unsubscribe_salt)
     end
 
-    # req - Rack request object
     # from_what - all/notifications/
     def unsubscribe_link(from_what)
       generate_unsubscribe_id unless self.unsubscribe_id
