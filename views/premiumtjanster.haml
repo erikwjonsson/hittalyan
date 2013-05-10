@@ -29,12 +29,28 @@
           %td Pris
         %tr
           %td
-            %img(src="images/shopping_bag.png")
+            %img(src="images/package_standard.png")
           %td {{packages.STANDARD.description}}
           %td {{(packages.STANDARD.unit_price_in_ore/100)*1.25}} kr
           %td
             %a(href="" rel="nofollow" ng-click="buyPackage('STANDARD')")
-              %img(src="images/payson_betala_btn.png")            
+              %img(src="images/payson_betala_btn.png")
+        %tr
+          %td
+            %img(src="images/package_beta.png")
+          %td {{packages.BETA.description}}
+          %td {{(packages.BETA.unit_price_in_ore/100)*1.25}} kr
+          %td
+            %a(href="" rel="nofollow" ng-click="buyPackage('BETA')")
+              %img(src="images/payson_betala_btn.png")
+        %tr(ng-show="testDev()")
+          %td
+            %img(src="images/package_test.png")
+          %td {{packages.TEST.description}}
+          %td {{(packages.TEST.unit_price_in_ore/100)*1.25}} kr
+          %td
+            %a(href="" rel="nofollow" ng-click="buyPackage('TEST')")
+              %img(src="images/payson_betala_btn.png")
 
       %form(name="nameForm" ng-submit="submitNameInfo()" ng-show="showForm" novalidate)
         %fieldset
