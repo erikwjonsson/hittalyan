@@ -72,6 +72,10 @@ Cuba.define do
       send_view "index"
     end
     
+    on "environment" do
+      res.write ENVIRONMENT.to_s
+    end
+    
     on "loggedin" do
       res.status = 401 unless current_user(req)
     end
