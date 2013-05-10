@@ -123,7 +123,15 @@ Cuba.define do
         on "change_password" do
           send_view "change_password"
         end
+        
         on "premiumtjanster" do
+          on "slutford" do
+            send_view "slutford"
+          end
+          
+          on "avbruten" do
+            send_view "avbruten"
+          end
           send_view "premiumtjanster"
         end
         send_view "medlemssidor"
