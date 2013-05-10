@@ -4,6 +4,7 @@
 
 function IndexController($rootScope, $scope, $http, $location) {
   defineViewHelperMethodsInRootScope($rootScope, $http, $location);
+  getEnvironment($http, $rootScope);
 }
 
 function LandingController($scope) {
@@ -500,6 +501,16 @@ function logout($http, $location) {
     });
 };
 
+function getEnvironment($http, $rootScope) {
+  $http.get("environment").
+    success(function(data, status) {
+      environment = data;
+    }).
+    error(function(data, status) {
+      environment = null;
+    });
+};
+
 function deTokenify() {
   if (window.location.search != "") {
     var l = window.location;
@@ -520,5 +531,21 @@ function defineViewHelperMethodsInRootScope($rootScope, $http, $location) {
 
   $rootScope.logout = function() {
     logout($http, $location);
+  };
+  
+  $rootScope.production = function() {
+    return environment == "production";
+  };
+  
+  $rootScope.development = function() {
+    return environment == "development";
+  };
+  
+  $rootScope.test = function() {
+    return environment == "test";
+  };
+  
+  $rootScope.testDev = function() {
+    return ($rootScope.development() || $rootScope.test())
   };
 }
