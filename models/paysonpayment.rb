@@ -41,10 +41,10 @@ class PaysonPayment < Payment
   
   def receiver
     PaysonAPI::Receiver.new(
-    'testagent-1@payson.se', # Email
+    'betalningar@lingonberryproductions.se', # Email
     amount,  # Amount
-    'Pablo', # First name
-    'Gonza', # Last name
+    'Joachim', # First name
+    'Karlsson', # Last name
     true)    # Primary
   end
   
@@ -68,7 +68,7 @@ class PaysonPayment < Payment
     payment.order_items = [@package.as_order_item]
 
     response = PaysonAPI::Client.initiate_payment(payment) # Response
-    raise PaymentInitiationError.new(response) unless response.success?
+    raise Payment::InitiationError.new(response) unless response.success?
     self.update_attribute(:status, "INITIALIZED")
     @forward_url = response.forward_url
   end
