@@ -44,8 +44,13 @@ Mongoid.load!('mongoid.yml')
 # =====================
 
 PaysonAPI.configure do |config|
-  config.api_user_id = '1'
-  config.api_password = 'fddb19ac-7470-42b6-a91d-072cb1495f0a'
+  if production?
+    config.api_user_id = '17355'
+    config.api_password = '9b235fc5-3e21-4362-a3be-0d498d47f5ad'
+  else
+    config.api_user_id = '1'
+    config.api_password = 'fddb19ac-7470-42b6-a91d-072cb1495f0a'
+  end
 end
 
 # =================
