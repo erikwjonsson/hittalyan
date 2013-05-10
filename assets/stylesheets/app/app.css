@@ -160,8 +160,8 @@ body {
 
 /* Used for custom elements in forms where Bootstrap doesn't specify padding,
    e.g. the list of cities on the settings page. */
-.input-padding {
-  padding: 4px 6px 4px 6px;
+.custom-input{
+  padding: 4px 0px 4px 0px;
 }
 
 /*

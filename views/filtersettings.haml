@@ -74,8 +74,7 @@
 
           %label
             Städer:
-            %br
-            .form-horizontal
+            .form-horizontal.custom-input
               %select(ng-model="city"
                       name="city"
                       id="city"
@@ -86,7 +85,7 @@
           %label
             Valda städer:
             %br
-            %div.input-padding
+            %div.custom-input
               %span(ng-repeat="city in userData.filter.cities"
                     class="city")
                 {{city}}
