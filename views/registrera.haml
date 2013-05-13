@@ -1,10 +1,17 @@
 .row
-  .span12.box.opaque
+  .span8.offset2.box.opaque
     .padhack
+      %h2 Bli medlem här!
+      :markdown
+        Att bli medlem är gratis. 
+        Som ny medlem får du tillgång till en begränsad form av tjänsten gratis.
+        Det gör att du kan kolla runt "bakom kulisserna" och se vad du får om du väljer att bli en betalande medlem (premiummedlem).
+
+        Allt du behöver göra är att fylla i din e-postadress och det lösenord du vill ha. 
       %form(name="signup" ng-submit="submit()" novalidate)
         %fieldset
-          %legend Bli medlem här!
-          %label(for="email") Din e-postadress:
+          %label(for="email")
+            %strong Din e-postadress:
           %input(type="email"
                  name="email"
                  placeholder="E-postadress"
@@ -15,7 +22,8 @@
           %span(ng-show="signup.email.$valid") 
             %i.icon-ok.checkmark.okness.icon-large
           
-          %label(for="password") Lösenord:
+          %label(for="password")
+            %strong Önskat lösenord:
           %input(type="password"
                  name="password"
                  placeholder="Lösenord"

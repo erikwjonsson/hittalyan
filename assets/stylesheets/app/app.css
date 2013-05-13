@@ -86,6 +86,12 @@ body {
   line-height: 30px;
 }
 
+.markety-box li {
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+}
+
 /*Rounding of those dangerous corners*/
 .box {
   -webkit-border-radius: 5px;
@@ -126,7 +132,7 @@ body {
   background-image: url(/images/payson_betala_btn.png); /* 16px x 16px */
 }
 
-.top-buffer { margin-top:20px; }
+.top-buffer { margin-top:30px; }
 
 .vertical-nav-box {
   max-width: 140px;
@@ -164,6 +170,10 @@ body {
   padding: 4px 0px 4px 0px;
 }
 
+.text-center {
+  text-align: center
+}
+
 /*
 ======= 
 LAYOUT
@@ -199,5 +209,23 @@ html, body {
      Here: 100px for the footer and 40px padding */
   padding-bottom: 140px;
 }
+
+/*
+=====================
+Bootstrap extensions
+=====================
+*/
+
+/**
+ * Extra large button extensions. Extends `.btn`.
+ */
+.btn-xlarge {
+  padding: 10px 22px;
+  font-size: 20px;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  }
 
 
