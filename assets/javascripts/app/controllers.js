@@ -382,6 +382,7 @@ function PremiumServicesController($scope, $http) {
 }
 
 function PasswordResetController($scope, $http) {
+  $scope.mailSent = false
   $scope.submit = function() {
     if ( $scope.passwordreset.$valid == true) {
       $scope.data = {email: $scope.email};
@@ -390,8 +391,9 @@ function PasswordResetController($scope, $http) {
           //alert(data);
         }).
         error(function(data, status) {
-          alert("Lösenordet kunde ej återställas. Försök igen senare.");
+          alert("E-postmeddelandet kunde ej skickas. Försök igen senare.");
         });
+      $scope.mailSent = true
     }
   };
 }

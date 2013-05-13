@@ -1,6 +1,6 @@
 module Mailer
   OUR_STANDARD_EMAIL = "HittaLyan <lingonberryprod@gmail.com>"
-  def self.shoot_email(recipient, subject, message, sender=OUR_STANDARD_EMAIL, format='text')
+  def self.shoot_email(recipient, subject, message, format='text', sender=OUR_STANDARD_EMAIL)
     email_params = {from: sender,
                     to: recipient,
                     subject: subject}

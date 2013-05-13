@@ -292,13 +292,16 @@ Cuba.define do
           else
             reset = Reset.create!(email: email)
           end
-          body = ["Klicka länken inom 12 timmar, annars...",
-                  "Länk: http://cubancabal.aws.af.cm/#!/losenordsaterstallning/#{reset.hashed_link}"].join("\n")
-          shoot_email(email,
+          body = ["<p>Hej!</p>",
+                  %[<p>Klicka <a href="http://cubancabal.aws.af.cm/#!/losenordsaterstallning/#{reset.hashed_link}">här</a> för att sätta ett nytt lösenord.</p>],
+                  "<p>Observera att länken endast är giltig i 12 timmar och att du måste klicka på länken i det senaste e-postmeddelandet om du tryckt flera gånger på att återställa ditt lösenord.</p>",
+                  "<p>Med vänlig hälsning,<br/>",
+                  "HittaLyan</p>"].join("\n")
+          Mailer.shoot_email(email,
                       "Lösenordsåterställning",
-                      body)
+                      body,
+                      'html')
         end
-          res.write "Mail skickat, kan du tro."
       end
 
       on param('hash'), param('new_password') do |hash, new_pass|
@@ -320,7 +323,7 @@ Cuba.define do
     end
 
     on "message", param('email'), param('message') do |email, message|
-      Mailer.shoot_email(Mailer::OUR_STANDARD_EMAIL, "Meddelande via kontaktformulär", message, email)
+      Mailer.shoot_email(Mailer::OUR_STANDARD_EMAIL, "Meddelande via kontaktformulär", message, 'text', email)
     end 
 
     on ":catchall" do
