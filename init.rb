@@ -61,11 +61,10 @@ end
 
 module Packages
   PACKAGE_BY_SKU = {}
-  EXTERNAL_PACKAGES = []
-  Package.all.each do |package|
+  PACKAGES = Package.all
+  PACKAGES.all.each do |package|
     self.const_set(package.name, package)
     PACKAGE_BY_SKU[package.sku] = package
-    EXTERNAL_PACKAGES << package.as_external_document
   end
 end
 
