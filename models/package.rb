@@ -5,7 +5,7 @@ class Package
   externally_readable :name,
                       :description,
                       :unit_price_in_ore,
-                      :sku
+                      :sku,
                       :priority
 
   field :name, type: String
