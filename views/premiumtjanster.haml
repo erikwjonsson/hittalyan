@@ -27,21 +27,13 @@
           %td
           %td Beskrivning
           %td Pris
-        %tr
+        %tr(ng-repeat="package in packages")
           %td
-            %img(src="images/package_standard.png")
-          %td {{packages.STANDARD.description}}
-          %td {{(packages.STANDARD.unit_price_in_ore/100)*1.25}} kr
+            %img(ng-src="{{imageURL(package.name)}}")
+          %td {{package.description}}
+          %td {{(package.unit_price_in_ore/100)*1.25}} kr
           %td
-            %a(href="" rel="nofollow" ng-click="buyPackage('STANDARD')")
-              %img(src="images/payson_betala_btn.png")
-        %tr(ng-show="testDev()")
-          %td
-            %img(src="images/package_test.png")
-          %td {{packages.TEST.description}}
-          %td {{(packages.TEST.unit_price_in_ore/100)*1.25}} kr
-          %td
-            %a(href="" rel="nofollow" ng-click="buyPackage('TEST')")
+            %a(href="" rel="nofollow" ng-click="buyPackage(package.sku)")
               %img(src="images/payson_betala_btn.png")
 
       %form(name="nameForm" ng-submit="submitNameInfo()" ng-show="showForm" novalidate)
