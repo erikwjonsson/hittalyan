@@ -105,7 +105,10 @@ Cuba.define do
           # external_packages = Packages::PACKAGE_BY_SKU.each_with_object({}) do |(k, v), h|
           #   h[k] = v.as_external_document
           # end
+          
           external_packages = Packages::EXTERNAL_PACKAGES
+          p external_packages
+          external_packages.delete_if { |x| p x["show_to_premium"] != user.active }
           p external_packages
           p user.as_external_document
           send_json(external_packages)
