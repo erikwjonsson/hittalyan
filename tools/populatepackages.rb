@@ -27,15 +27,8 @@ p << Package.new(name: 'Standard',
                  sms_account: 300,
                  active: true)
 
-p << Package.new(name: 'Beta',
-                 description: ''\
-                 'Betapaketet innehåller 30 dagars prenumeration på '\
-                 'lägenhetsutskick samt 10 sms.',
-                 payson_description: 'Standardpaket: 30 dagar, sms: 10',
-                 unit_price_in_ore: 100*100,
-                 premium_days: 30,
-                 sms_account: 10,
-                 active: true)
+# Remove all old packages
+Package.destroy_all
 
 # Save them all to database
 p.each(&:save)
