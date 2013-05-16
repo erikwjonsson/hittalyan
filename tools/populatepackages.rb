@@ -20,13 +20,15 @@ p << Package.new(name: 'Standard',
 # ==========================================
 # Test packages for development and testing
 # ==========================================
-p << Package.new(name: 'Test',
-                 description: 'Detta är ett TESTpaket för utvecklingssyften',
-                 payson_description: 'TESTpaket: 30 dagar, sms: 300',
-                 unit_price_in_ore: 10*100,
-                 premium_days: 30,
-                 sms_account: 300,
-                 active: true)
+unless production?
+  p << Package.new(name: 'Test',
+                   description: 'Detta är ett TESTpaket för utvecklingssyften',
+                   payson_description: 'TESTpaket: 30 dagar, sms: 300',
+                   unit_price_in_ore: 10*100,
+                   premium_days: 30,
+                   sms_account: 300,
+                   active: true)
+end
 
 # Remove all old packages
 Package.destroy_all
