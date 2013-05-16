@@ -343,6 +343,9 @@ function PremiumServicesController($scope, $http) {
   $http.get("medlemssidor/packages").
     success(function(data, status) {
       $scope.packages = data;
+      $scope.packages.sort(function(a, b) {
+        return a.priority - b.priority;
+      });
       // alert(data);
     }).
     error(function(data, status) {
@@ -379,6 +382,10 @@ function PremiumServicesController($scope, $http) {
       $scope.showForm = true; 
     };
   };
+  
+  $scope.imageURL = function(name) {
+    return "images/package_" + name.toLowerCase() + ".png"
+  }
 }
 
 function PasswordResetController($scope, $http) {
