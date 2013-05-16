@@ -11,6 +11,7 @@ class Package
   field :description, type: String
   field :payson_description, type: String
   field :unit_price_in_ore, type: Integer
+  field :priority, type: Integer
 
   field :premium_days, type: Integer, default: 0
   field :sms_account, type: Integer, default: 0
