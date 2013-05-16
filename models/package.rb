@@ -6,6 +6,7 @@ class Package
                       :description,
                       :unit_price_in_ore,
                       :sku
+                      :priority
 
   field :name, type: String
   field :description, type: String
