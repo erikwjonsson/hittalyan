@@ -56,12 +56,16 @@ end
 # =================
 # Fetches Packages
 # =================
+# I really don't know why this line doesn't work
+# EXTERNAL_PACKAGES = Package.all.map! { |p| p.as_external_document }
 
 module Packages
   PACKAGE_BY_SKU = {}
-  Package.all.each do |package| 
+  EXTERNAL_PACKAGES = []
+  Package.all.each do |package|
     self.const_set(package.name, package)
     PACKAGE_BY_SKU[package.sku] = package
+    EXTERNAL_PACKAGES << package.as_external_document
   end
 end
 
