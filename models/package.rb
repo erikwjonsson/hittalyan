@@ -6,13 +6,15 @@ class Package
                       :description,
                       :unit_price_in_ore,
                       :sku,
-                      :priority
+                      :priority,
+                      :show_to_premium
 
   field :name, type: String
   field :description, type: String
   field :payson_description, type: String
   field :unit_price_in_ore, type: Integer
   field :priority, type: Integer
+  field :show_to_premium, type: Boolean
 
   field :premium_days, type: Integer, default: 0
   field :sms_account, type: Integer, default: 0
