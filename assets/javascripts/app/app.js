@@ -29,8 +29,8 @@ cubancabal.config(['$routeProvider', function($routeProvider) {
 
 cubancabal.run( function($rootScope, $location) {
   $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-    if ( next.templateUrl == "login" ) {
-      if ( localStorage.loggedIn ) {
+    if ( localStorage.loggedIn == "true" ) {
+      if ( next.templateUrl == "login" || next.templateUrl == "landing" ) {
         $location.path('/medlemssidor');
         next.templateUrl = 'medlemssidor';
       }
