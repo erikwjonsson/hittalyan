@@ -107,7 +107,7 @@ Cuba.define do
           end
           
           # Delete packages that the user shouldn't be interested in seeing
-          external_packages.delete_if { |x| p x["show_to_premium"] != user.active }
+          external_packages.delete_if { |x| x["show_to_premium"] != user.active }
           
           p external_packages
           p user.as_external_document
