@@ -29,7 +29,7 @@
           %td#price Pris
         %tr(ng-repeat="package in packages")
           %td
-            %img(ng-src="{{imageURL(package.name)}}")
+            %img(ng-src="{{imageURL(package.sku)}}")
           %td {{package.description}}
           %td {{(package.unit_price_in_ore/100)*1.25}} kr
           %td

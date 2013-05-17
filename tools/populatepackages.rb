@@ -7,7 +7,8 @@ p = []
 # ==============================================
 # Production packages for production deployment
 # ==============================================
-p << Package.new(name: 'Standard',
+p << Package.new(sku: 'STANDARD',
+                 name: 'Standard',
                  description: ''\
                  'Standardpaketet innehåller 30 dagars prenumeration på '\
                  'lägenhetsutskick (300 SMS ingår om SMS-utskick önskas).',
@@ -18,7 +19,8 @@ p << Package.new(name: 'Standard',
                  active: true,
                  show_to_premium: false)
 
-p << Package.new(name: 'Förlängning',
+p << Package.new(sku: 'FORLANGNING',
+                 name: 'Förlängning',
                  description: ''\
                  'Förlängningspaketet innehåller 30 dagars prenumeration på '\
                  'lägenhetsutskick (300 SMS ingår om SMS-utskick önskas).',
@@ -29,7 +31,8 @@ p << Package.new(name: 'Förlängning',
                  active: true,
                  show_to_premium: true)
 
-p << Package.new(name: 'SMS300',
+p << Package.new(sku: 'SMS300',
+                 name: 'SMS300',
                  description: ''\
                  'SMS300-paketet innehåller 300 SMS.',
                  payson_description: 'SMS300: sms: 300',
@@ -41,7 +44,8 @@ p << Package.new(name: 'SMS300',
 # Test packages for development and testing
 # ==========================================
 unless production?
-  p << Package.new(name: 'Test',
+  p << Package.new(sku: 'TEST',
+                   name: 'Test',
                    description: 'Detta är ett TESTpaket för utvecklingssyften',
                    payson_description: 'TESTpaket: 30 dagar, sms: 300',
                    unit_price_in_ore: 10*100,
