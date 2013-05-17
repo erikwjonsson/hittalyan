@@ -22,7 +22,6 @@
 .city {
   margin-right: 2px;
   margin-left:  2px;
-/*  background-color: #DBDBDB;*/
   border: 1px solid;
   border-color: rgb(204, 204, 204);
   padding: 2px;
@@ -31,6 +30,18 @@
 .city a {
   text-decoration: none;
   color: inherit;
+}
+
+#packages {
+  border-spacing: 2px;
+}
+
+#packages td {
+  padding: 2px;
+}
+
+#packages #price {
+  min-width: 50px;
 }
 
 /*Make bootstrap grok some Angular*/
