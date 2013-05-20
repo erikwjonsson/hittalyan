@@ -23,16 +23,12 @@
       %p Moms ingår i alla priser. Inga extra avgifter tillkommer.
       %hr
       %table#packages.top-buffer
-        %tr
-          %td
-          %td Beskrivning
-          %td#price Pris
         %tr(ng-repeat="package in packages")
           %td
-            %img(ng-src="{{imageURL(package.sku)}}")
-          %td {{package.description}}
-          %td {{(package.unit_price_in_ore/100)*1.25}} kr
-          %td
+            %img.illustration(ng-src="{{imageURL(package.sku)}}")
+          %td.description {{package.description}}
+          %td.price {{(package.unit_price_in_ore/100)*1.25}} kr
+          %td.buy
             %a(href="" rel="nofollow" ng-click="buyPackage(package.sku)")
               %img(src="images/payson_betala_btn.png")
 

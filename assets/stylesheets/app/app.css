@@ -40,8 +40,24 @@
   padding: 2px;
 }
 
-#packages #price {
-  min-width: 50px;
+#packages .illustration {
+  width: 150px;
+  height: auto;
+  /*background-color: olive;*/
+}
+
+#packages .description {
+  /*background-color: yellow;*/
+}
+
+#packages .price {
+  min-width: 60px;
+  /*background-color: lime;*/
+}
+
+#packages .buy {
+  min-width: 100px;
+  /*background-color: red;*/
 }
 
 /*Make bootstrap grok some Angular*/

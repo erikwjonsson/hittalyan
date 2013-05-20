@@ -22,7 +22,7 @@ class Package
   
   field :tax_in_percentage_units, type: Integer, default: 25
   field :quantity, type: Integer, default: 1
-  field :sku, type: String, default: 'To be replaced with document.name.upcase'
+  field :sku, type: String
 
   validates :name, uniqueness: true, presence: true
   validates :description, uniqueness: true, presence: true
@@ -31,10 +31,6 @@ class Package
   validates :unit_price_in_ore, presence: true
   validates :tax_in_percentage_units, numericality: {equal_to: 25}
   validates :sku, uniqueness: true, presence: true
-
-  before_create do |document|
-    document.sku = document.name.upcase
-  end
 
   def as_order_item
     PaysonAPI::OrderItem.new(self.payson_description,
