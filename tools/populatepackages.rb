@@ -11,11 +11,11 @@ p << Package.new(sku: 'STANDARD',
                  name: 'Standard',
                  description: ''\
                  'Standardpaketet innehåller 30 dagars prenumeration på '\
-                 'lägenhetsutskick (300 SMS ingår om SMS-utskick önskas).',
-                 payson_description: 'Standardpaket: 30 dagar, sms: 300',
-                 unit_price_in_ore: 240*100,
+                 'lägenhetsutskick. Vi bjuder på 75 SMS som starbonus.',
+                 payson_description: 'Standardpaket: 30 dagar, 75 SMS',
+                 unit_price_in_ore: 223.20*100,
                  premium_days: 30,
-                 sms_account: 300,
+                 sms_account: 75,
                  active: true,
                  show_to_premium: false)
 
@@ -23,20 +23,37 @@ p << Package.new(sku: 'FORLANGNING',
                  name: 'Förlängning',
                  description: ''\
                  'Förlängningspaketet innehåller 30 dagars prenumeration på '\
-                 'lägenhetsutskick (300 SMS ingår om SMS-utskick önskas).',
-                 payson_description: 'Förlängningspaket: 30 dagar, sms: 300',
-                 unit_price_in_ore: 120*100,
+                 'lägenhetsutskick.',
+                 payson_description: 'Förlängningspaket: 30 dagar',
+                 unit_price_in_ore: 111.6*100,
                  premium_days: 30,
-                 sms_account: 300,
                  active: true,
+                 show_to_premium: true)
+
+p << Package.new(sku: 'SMS50',
+                 name: 'SMS50',
+                 description: ''\
+                 'SMS50-paketet innehåller 50 SMS.',
+                 payson_description: 'SMS50: 50 SMS',
+                 unit_price_in_ore: 24*100,
+                 sms_account: 50,
+                 show_to_premium: true)
+
+p << Package.new(sku: 'SMS150',
+                 name: 'SMS150',
+                 description: ''\
+                 'SMS150-paketet innehåller 150 SMS.',
+                 payson_description: 'SMS150: 150 SMS',
+                 unit_price_in_ore: 60*100,
+                 sms_account: 150,
                  show_to_premium: true)
 
 p << Package.new(sku: 'SMS300',
                  name: 'SMS300',
                  description: ''\
                  'SMS300-paketet innehåller 300 SMS.',
-                 payson_description: 'SMS300: sms: 300',
-                 unit_price_in_ore: 200*100,
+                 payson_description: 'SMS300: 300 SMS',
+                 unit_price_in_ore: 88*100,
                  sms_account: 300,
                  show_to_premium: true)
 
