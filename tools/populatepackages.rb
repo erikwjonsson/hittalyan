@@ -7,24 +7,24 @@ p = []
 # ==============================================
 # Production packages for production deployment
 # ==============================================
-p << Package.new(sku: 'STANDARD',
-                 name: 'Standard',
+p << Package.new(sku: 'START',
+                 name: 'Start',
                  description: ''\
-                 'Standardpaketet innehåller 30 dagars prenumeration på '\
+                 'Startpaketet innehåller 30 dagars prenumeration på '\
                  'lägenhetsutskick. Vi bjuder på 75 SMS som starbonus.',
-                 payson_description: 'Standardpaket: 30 dagar, 75 SMS',
+                 payson_description: 'Startpaket: 30 dagar, 75 SMS',
                  unit_price_in_ore: 223.20*100,
                  premium_days: 30,
                  sms_account: 75,
                  active: true,
                  show_to_premium: false)
 
-p << Package.new(sku: 'FORLANGNING',
-                 name: 'Förlängning',
+p << Package.new(sku: 'PREMIUM30',
+                 name: '30 dagar',
                  description: ''\
-                 'Förlängningspaketet innehåller 30 dagars prenumeration på '\
+                 '30-dagarspaketet innehåller 30 dagars prenumeration på '\
                  'lägenhetsutskick.',
-                 payson_description: 'Förlängningspaket: 30 dagar',
+                 payson_description: '30-dagarspaket: 30 dagar',
                  unit_price_in_ore: 111.6*100,
                  premium_days: 30,
                  active: true,
