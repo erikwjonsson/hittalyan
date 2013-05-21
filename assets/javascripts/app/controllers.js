@@ -430,6 +430,10 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
   };
 }
 
+function ShitController() {
+  
+}
+
 function TestController($scope) {
   deTokenify();
 }
