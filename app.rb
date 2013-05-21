@@ -305,6 +305,8 @@ Cuba.define do
                       "Lösenordsåterställning",
                       body,
                       'html')
+        else
+          puts "Password reset request for non-existent user #{email}."
         end
       end
 

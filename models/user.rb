@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 require 'digest'
 
 class User
@@ -31,6 +33,10 @@ class User
   field :premium_until, type: Time
   field :sms_account, type: Integer, default: 0
   field :unsubscribe_id, type: String
+
+  # Diagnostic fields
+  field :has_received_welcome_email, type: String, default: false
+
   has_one :session
   embeds_one :filter
   @@salt = 'aa2c2c739ba0c61dc84345b1c2dc222f'
@@ -119,7 +125,13 @@ class User
   def apply_package(package)
     add_premium_days(package.premium_days) if package.premium_days
     self.inc(:sms_account, package.sms_account) if package.sms_account
-    self.update_attribute(:active, package.active) if package.active 
+    self.update_attribute(:active, package.active) if package.active
+    begin
+      shoot_welcome_email if package.sku.include?('START')
+    rescue Exception => e
+      puts "Failed to send welcome email to #{self.email}."
+      log_exception(e)
+    end
   end
   
   class MalformedMobileNumber < StandardError
@@ -133,6 +145,13 @@ class User
   end
 
   private
+    def shoot_welcome_email
+      Mailer.shoot_email(self.email,
+                         'Välkommen - så här kommer du igång',
+                          render_mail("welcome_as_premium_member", binding),
+                         'html')
+      self.update_attribute(:has_received_welcome_email, true)
+    end
 
     def add_premium_days(days_to_add)
       time_from = if self.premium_until && self.premium_until > 1.day.from_now.midnight
