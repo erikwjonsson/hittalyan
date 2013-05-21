@@ -16,6 +16,7 @@ input "assets/javascripts" do
 
   match "vendor/**/*.js" do
     concat %w[
+      vendor/jquery-1.8.3.min.js
       vendor/angular.min.js
       vendor/angular-resource.min.js
       vendor/angular-sanitize.min.js
