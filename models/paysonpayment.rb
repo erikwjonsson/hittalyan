@@ -89,7 +89,7 @@ class PaysonPayment < Payment
 
   def amount
     @package ||= Packages::PACKAGE_BY_SKU[self.package_sku]
-    (@package.unit_price_in_ore/100)*(@package.tax_in_percentage_units/100.0 + 1)
+    (@package.unit_price_in_ore/100.0)*(@package.tax_in_percentage_units/100.0 + 1)
   end
 
   def generate_payment_uuid
