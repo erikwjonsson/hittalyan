@@ -17,6 +17,7 @@ require 'rack/post-body-to-params'
 require 'date'
 require 'rest-client'
 require 'payson_api'
+require 'erb'
 require_relative 'lib/getenvironment'
 require_relative 'lib/mailer'
 ENVIRONMENT = get_environment
