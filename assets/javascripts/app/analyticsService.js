@@ -14,7 +14,6 @@ angular.module('analytics', []).run(['$http', function($http) {
 .service('analytics', function($rootScope, $window, $location, $routeParams) {
   
   var convertPathToQueryString = function(path, $routeParams) {
-    alert("stringPathConverted")
     for (var key in $routeParams) {
       var queryParam = '/' + $routeParams[key];
       path = path.replace(queryParam, '');
@@ -30,8 +29,6 @@ angular.module('analytics', []).run(['$http', function($http) {
   var track = function() {
     var path = convertPathToQueryString($location.path(), $routeParams)
     $window._gaq.push(['_trackPageview', path]);
-    alert("This shit is getting tracked");
-    alert(JSON.stringify($window._gaq))
   };
   
   $rootScope.$on('$viewContentLoaded', track);
