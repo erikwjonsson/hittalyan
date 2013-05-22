@@ -171,7 +171,7 @@
           %input(type="submit"
                  class="btn"
                  name="save"
-                 value="Spara")
+                 value="Ändra lösenord")
           %span(ng-bind-html="passwordSettings.feedBackSymbol")
           %span {{passwordSettings.message}}
       
@@ -181,6 +181,14 @@
       %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
         %fieldset
           %legend Avsluta medlemskap
+          :markdown
+            Om du vill avsluta ditt medlemskap kan du göra det genom att fylla i ditt lösenord och trycka på knappen nedan.
+            Då tar vi bort ditt användarkonto och därmed all information om dig.
+            **Observera att detta innebär att eventuella prenumerationsdagar/SMS försvinner.**
+
+            Tänk på att prenumerationer avslutas automatiskt när de går ut.
+            Du behöver alltså aldrig säga upp din prenumeration självmant.
+            Möjligheten att asvluta ditt medlemskap finns för att du ska kunna ta bort ditt användarkonto om du önskar.
           %label(for="termination-password") Lösenord:
           %input(type="password"
                 name="termination-password"
