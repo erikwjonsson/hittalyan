@@ -132,7 +132,7 @@ Cuba.define do
           send_view "change_password"
         end
         
-        on "premiumtjanster" do
+        on "prenumeration" do
           on "slutford" do
             send_view "slutford"
           end
@@ -140,7 +140,7 @@ Cuba.define do
           on "avbruten" do
             send_view "avbruten"
           end
-          send_view "premiumtjanster"
+          send_view "prenumeration"
         end
         send_view "medlemssidor"
       end
