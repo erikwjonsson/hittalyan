@@ -2,16 +2,16 @@
 
 /* Controllers */
 
-function IndexController($rootScope, $scope, $http, $location) {
+function IndexController($rootScope, $scope, $http, $location, analytics) {
   defineViewHelperMethodsInRootScope($rootScope, $http, $location);
   getEnvironment($http, $rootScope);
 }
 
-function LandingController($scope) {
+function LandingController($scope, analytics) {
   $scope.message = "There is no spoon. Revenge!";
 }
 
-function AboutController($scope, $http) {
+function AboutController($scope, $http, analytics) {
   $scope.messageSent = false;
 
   $scope.submit = function() {
@@ -29,7 +29,7 @@ function AboutController($scope, $http) {
   };
 }
 
-function LoginController($scope, $http, $routeParams, $location) {
+function LoginController($scope, $http, $routeParams, $location, analytics) {
 
   $scope.submit = function() {
     if ( $scope.login.$valid == true ) {
@@ -55,10 +55,10 @@ function LoginController($scope, $http, $routeParams, $location) {
   };
 }
 
-function FAQController($scope, $routeParams) {
+function FAQController($scope, $routeParams, analytics) {
 }
 
-function SignupController($scope, $http, $location) {
+function SignupController($scope, $http, $location, analytics) {
   $scope.submit = function() {
     if ( $scope.signup.$valid == true) {
       $scope.data = {email: $scope.email,
@@ -91,10 +91,10 @@ function SignupController($scope, $http, $location) {
   };
 }
 
-function MembersController($scope) {
+function MembersController($scope, analytics) {
 }
 
-function SettingsController($scope, $http, $location) {
+function SettingsController($scope, $http, $location, analytics) {
   // Making room for namespaces
   $scope.passwordSettings = {};
   $scope.accountTermination = {};
@@ -317,7 +317,7 @@ function SettingsController($scope, $http, $location) {
   };
 }
 
-function ApartmentsController($scope, $http) {
+function ApartmentsController($scope, $http, analytics) {
   $http.get("medlemssidor/apartments_list").
     success(function(data, status) {
       $scope.apartments = data;
@@ -327,7 +327,7 @@ function ApartmentsController($scope, $http) {
     })
 }
 
-function PremiumServicesController($scope, $http) {
+function PremiumServicesController($scope, $http, analytics) {
   deTokenify();
   $scope.showForm = false;
 
@@ -388,7 +388,7 @@ function PremiumServicesController($scope, $http) {
   }
 }
 
-function PasswordResetController($scope, $http) {
+function PasswordResetController($scope, $http, analytics) {
   $scope.mailSent = false
   $scope.submit = function() {
     if ( $scope.passwordreset.$valid == true) {
@@ -405,7 +405,7 @@ function PasswordResetController($scope, $http) {
   };
 }
 
-function PasswordResetConfirmationController($scope, $http, $routeParams, $location) {
+function PasswordResetConfirmationController($scope, $http, $routeParams, $location, analytics) {
   // $scope.message = "Lösenordet återställs. Var god vänta...."
 
   $scope.submit = function() {
@@ -430,12 +430,12 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
   };
 }
 
-function ShitController() {
-  
+
+function ShitController(analytics) {
 }
 
-function TestController($scope) {
-  deTokenify();
+function TestController(analytics) {
+
 }
 
 // Extensions
