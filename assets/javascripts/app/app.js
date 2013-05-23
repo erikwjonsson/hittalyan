@@ -38,8 +38,7 @@ cubancabal.config(['$routeProvider', function($routeProvider) {
       when('/medlemssidor/installningar', {templateUrl: '/medlemssidor/installningar', controller: SettingsController}).
       when('/medlemssidor/lagenheter', {templateUrl: '/medlemssidor/lagenheter', controller: ApartmentsController}).
       when('/medlemssidor/premiumtjanster', {templateUrl: '/medlemssidor/premiumtjanster', controller: PremiumServicesController}).
-      when('/medlemssidor/premiumtjanster/slutford', {templateUrl: '/medlemssidor/premiumtjanster/slutford', controller: PremiumServicesController}).
-      when('/medlemssidor/premiumtjanster/avbruten', {templateUrl: '/medlemssidor/premiumtjanster/avbruten', controller: PremiumServicesController}).
+      when('/medlemssidor/premiumtjanster/betalningsbekraftning', {templateUrl: '/medlemssidor/premiumtjanster/betalningsbekraftning', controller: PaymentConfirmationController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
       when('/registrera', {templateUrl: 'registrera', controller: SignupController}).
       when('/om', {templateUrl: 'om',   controller: AboutController}).
@@ -59,9 +58,9 @@ cubancabal.run( function($rootScope, $location) {
         next.templateUrl = 'medlemssidor';
       }
     }
-    if ( next.templateUrl && next.templateUrl.indexOf("medlemssidor") != -1) {
+    if (next.templateUrl && next.templateUrl.indexOf("medlemssidor") != -1) {
       $rootScope.$broadcast('loginRequired');
-    }        
+    }
   });
   
   $rootScope.$on( "loginRequired", function() {
@@ -71,6 +70,8 @@ cubancabal.run( function($rootScope, $location) {
   });
   
   $rootScope.$on( "someSortOfError", function(event, next, current) {
-    $location.path('/shithappens');
+    if (next.templateUrl && next.templateUrl.indexOf("betalningsbekraftning") == -1) {
+      $location.path('/shithappens');
+    }
   });
 });

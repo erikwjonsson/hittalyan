@@ -133,12 +133,13 @@ Cuba.define do
         end
         
         on "premiumtjanster" do
-          on "slutford" do
-            send_view "slutford"
+          on "betalningsbekraftning" do
+            send_view "betalningsbekraftning"
           end
           
-          on "avbruten" do
-            send_view "avbruten"
+          on "paymentstatus" do
+            payment = Payment.where(user_email: user.email).asc(:time).last
+            send_json(payment.as_external_document)
           end
           send_view "premiumtjanster"
         end
