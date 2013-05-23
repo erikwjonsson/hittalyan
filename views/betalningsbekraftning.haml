@@ -1,0 +1,39 @@
+.row
+  .span12.box.opaque
+    .padhack
+      %h1 Medlemssidor
+.row.top-buffer
+  .span2.box.opaque
+    .padhack  
+      %ul.nav.nav-list.vertical-nav-box
+        %li
+          %a{href: "#!/medlemssidor"} Medlemssidor
+        %li
+          %a{href: "#!/medlemssidor/installningar"} Inställningar
+        %li
+          %a{href: "#!/medlemssidor/lagenheter"} Lägenheter
+        %li
+          %a{href: "#!/medlemssidor/premiumtjanster"} Premiumtjänster
+  .span10.box.opaque
+    .padhack
+      %table
+        %tr
+          %td
+            E-post:
+          %td
+            {{payment.user_email}}
+        %tr
+          %td
+            Paket:
+          %td
+            {{payment.package_sku}}
+        %tr
+          %td
+            Summa:
+          %td
+            {{payment.amount}}
+        %tr
+          %td
+            Status:
+          %td
+            {{payment.status}}
