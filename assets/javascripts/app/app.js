@@ -37,8 +37,8 @@ cubancabal.config(['$routeProvider', function($routeProvider) {
       when('/medlemssidor', {templateUrl: 'medlemssidor', controller: MembersController}).
       when('/medlemssidor/installningar', {templateUrl: '/medlemssidor/installningar', controller: SettingsController}).
       when('/medlemssidor/lagenheter', {templateUrl: '/medlemssidor/lagenheter', controller: ApartmentsController}).
-      when('/medlemssidor/premiumtjanster', {templateUrl: '/medlemssidor/premiumtjanster', controller: PremiumServicesController}).
-      when('/medlemssidor/premiumtjanster/betalningsbekraftning', {templateUrl: '/medlemssidor/premiumtjanster/betalningsbekraftning', controller: PaymentConfirmationController}).
+      when('/medlemssidor/prenumeration', {templateUrl: '/medlemssidor/prenumeration', controller: PremiumServicesController}).
+      when('/medlemssidor/prenumeration/betalningsbekraftning', {templateUrl: '/medlemssidor/prenumeration/betalningsbekraftning', controller: PaymentConfirmationController}).
       when('/login', {templateUrl: 'login', controller: LoginController}).
       when('/registrera', {templateUrl: 'registrera', controller: SignupController}).
       when('/om', {templateUrl: 'om',   controller: AboutController}).

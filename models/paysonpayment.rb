@@ -22,7 +22,7 @@ class PaysonPayment < Payment
                         :amount,
                         :status
   
-  RETURN_URL = WEBSITE_ADDRESS + '#!/medlemssidor/premiumtjanster/betalningsbekraftning'
+  RETURN_URL = WEBSITE_ADDRESS + '#!/medlemssidor/prenumeration/betalningsbekraftning'
   CANCEL_URL = RETURN_URL
   IPN_URL = WEBSITE_ADDRESS + 'ipn'
   MEMO = "Medlemspaket för #{BRAND_NAME}."
