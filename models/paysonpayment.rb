@@ -2,6 +2,7 @@
 
 class Payment
   include Mongoid::Document
+  include LingonberryMongoidImportExport
   class InitiationError < StandardError
     def initialize(response)
       @response = response
@@ -15,10 +16,14 @@ end
 
 class PaysonPayment < Payment
   attr_reader :forward_url
-  include Mongoid::Document
+
+  externally_readable   :user_email,
+                        :package_sku,
+                        :amount,
+                        :status
   
-  RETURN_URL = WEBSITE_ADDRESS + '#!/medlemssidor/premiumtjanster/slutford'
-  CANCEL_URL = WEBSITE_ADDRESS + '#!/medlemssidor/premiumtjanster/avbruten'
+  RETURN_URL = WEBSITE_ADDRESS + '#!/medlemssidor/premiumtjanster/betalningsbekraftning'
+  CANCEL_URL = RETURN_URL
   IPN_URL = WEBSITE_ADDRESS + 'ipn'
   MEMO = "Medlemspaket för #{BRAND_NAME}."
   
