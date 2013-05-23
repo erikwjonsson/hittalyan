@@ -388,7 +388,7 @@ function PremiumServicesController($scope, $http, analytics) {
 }
 
 function PaymentConfirmationController($scope, $http) {
-  $http.get("medlemssidor/premiumtjanster/paymentstatus").
+  $http.get("medlemssidor/prenumeration/paymentstatus").
     success(function(data, status) {
       console.log(data)
       $scope.payment = data;
