@@ -328,7 +328,6 @@ function ApartmentsController($scope, $http, analytics) {
 }
 
 function PremiumServicesController($scope, $http, analytics) {
-  deTokenify();
   $scope.showForm = false;
 
   $http.get("medlemssidor/user").
@@ -386,6 +385,17 @@ function PremiumServicesController($scope, $http, analytics) {
   $scope.imageURL = function(name) {
     return "images/package_" + name.toLowerCase() + ".png"
   }
+}
+
+function PaymentConfirmationController($scope, $http) {
+  $http.get("medlemssidor/premiumtjanster/paymentstatus").
+    success(function(data, status) {
+      console.log(data)
+      $scope.payment = data;
+    }).
+    error(function(data, status) {
+      $scope.payment = data;
+    });
 }
 
 function PasswordResetController($scope, $http, analytics) {
