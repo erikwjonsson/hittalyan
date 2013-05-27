@@ -17,8 +17,16 @@ angular.module('intercept', []).config(['$httpProvider', function ($httpProvider
       if (status == 401) {
         localStorage.loggedIn = "false";
         scope.$broadcast('loginRequired');
-      }else {
-        scope.$broadcast('someSortOfError');
+      }
+      else {
+        if (next != null) {
+          scope.$broadcast('someSortOfError');
+        }
+        else {
+          // Something we can't intercept. We'll just pass the status on...
+          return status;
+        }
+          
       }
     }
     return function (promise) {
