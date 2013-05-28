@@ -43,7 +43,6 @@ function LoginController($scope, $http, $routeParams, $location, analytics) {
     if ( $scope.login.$valid == true ) {
       $scope.data = {email: $scope.email,
                      password: $scope.password};
-      $scope.loworking
       $http.post("login", $scope.data).
         success(function(data, status) {
           if (status == 200) {
@@ -65,7 +64,10 @@ function LoginController($scope, $http, $routeParams, $location, analytics) {
 
 function NavbarLoginController($scope, $http, $routeParams, $location, analytics) {
   function loggedInSuccess() {
+    $scope.email = "";
+    $scope.password = "";
     $location.path('/medlemssidor');
+    loginFormSuccess($scope.data['email']);
   }
 
   function loggedInFail($scope) {
@@ -80,7 +82,6 @@ function NavbarLoginController($scope, $http, $routeParams, $location, analytics
     if ( $scope.login.$valid == true ) {
       $scope.data = {email: $scope.email,
                      password: $scope.password};
-      $scope.loworking
       $http.post("login", $scope.data).
         success(function(data, status) {
           if (status == 200) {
@@ -508,6 +509,11 @@ function PasswordResetController($scope, $http, analytics) {
 
 function PasswordResetConfirmationController($scope, $http, $routeParams, $location, analytics) {
   // $scope.message = "Lösenordet återställs. Var god vänta...."
+  function loggedInSuccess() {
+    $scope.new_password = "";
+    loginFormSuccess($scope.data.email);
+    $location.path('/medlemssidor');
+  }
 
   $scope.submit = function() {
     if ( $scope.new_password == $scope.repeat_password ) {
@@ -516,8 +522,20 @@ function PasswordResetConfirmationController($scope, $http, $routeParams, $locat
                        new_password: $scope.new_password};
         $http.post("passwordreset", $scope.data).
           success(function(data, status) {
-            //alert(data);
-            $location.path('/');
+            $scope.data = {email: data.email,
+                           password: $scope.new_password};
+            $http.post("login", $scope.data).
+              success(function(data, status) {
+                if (status == 200) {
+                  loggedInSuccess();
+                }
+                else {
+                  loginFormFail($scope);
+                }
+              }).
+              error(function(data, status) {
+                loginFormFail($scope);
+              });
           }).
           error(function(data, status) {
             $scope.message = data;

@@ -327,7 +327,7 @@ Cuba.define do
             user = User.find_by(email: reset.email)
             user.change_password!(new_pass)
             reset.delete # So the link cannot be used anymore
-            res.write "Lösen ändrat till #{new_pass}"
+            send_json(user.as_external_document)
           else
             res.status = 404 # For lack of a better status code
             res.write "Länk förlegad"
