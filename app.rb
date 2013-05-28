@@ -114,6 +114,15 @@ Cuba.define do
           send_json(external_packages)
         end
         
+        on "coupon/:code" do |code|
+          begin
+            coupon = Coupon.where(code: code).first.as_external_document
+          rescue StandardError => e
+            coupon = Coupon.where(code: "NONE").first.as_external_document
+          end
+          send_json(coupon)
+        end
+        
         on "installningar" do
           send_view "filtersettings"
         end
@@ -197,10 +206,11 @@ Cuba.define do
       
     end
 
-    on "payson_pay", param('sku') do |sku|
+    on "payson_pay", param('sku'), param('code') do |sku, code|
       user = current_user(req)
       payment = PaysonPayment.create!(user_email: user.email,
-                                      package_sku: sku)
+                                      package_sku: sku,
+                                      promotional_code: code)
       begin
         payment.initiate_payment
       rescue Payment::InitiationError => e
