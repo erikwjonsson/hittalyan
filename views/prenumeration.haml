@@ -21,13 +21,33 @@
       %h2 Paket som du kan köpa
       %p Betala direkt med Payson. Payson samarbetar med Visa/Mastercard och internetbankerna Swedbank, Handelsbanken, SEB och Nordea.
       %p Moms ingår i alla priser. Inga extra avgifter tillkommer.
+      %p(ng-hide="showCouponForm")
+        %button(type="button" class="btn" ng-click="toggleCouponForm()") Klicka här om du har en rabattkod
+      %form.form-horizontal(ng-show="showCouponForm" name="couponForm" ng-submit="submitCoupon()" novalidate)
+        %fieldset
+          %legend Rabattkod
+          %label(for="coupon-code")
+          %input(type="text"
+                 name="coupon-code"
+                 id="coupon-code"
+                 ng-model="couponCode"
+                 placeholder="Din rabattkod här")
+          %input(type="submit"
+                 class="btn"
+                 name="")
+      %p(ng-show="showCouponInfo")
+        Beskrivning: {{coupon.description}}
+        %br
+        Rabatt: {{coupon.discount_in_percentage_units}}%
+        %br
+        Giltig: {{coupon.valid}}
       %hr
       %table#packages.top-buffer
         %tr(ng-repeat="package in packages")
           %td
             %img.illustration(ng-src="{{imageURL(package.sku)}}")
           %td.description {{package.description}}
-          %td.price {{(package.unit_price_in_ore/100)*1.25}} kr
+          %td.price {{couponifyPrice(package, coupon)}} kr
           %td.buy
             %a(href="" rel="nofollow" ng-click="buyPackage(package.sku)")
               %img(src="images/payson_betala_btn.png")

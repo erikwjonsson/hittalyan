@@ -69,6 +69,20 @@ module Packages
   end
 end
 
+# =================
+# Fetches Coupons
+# =================
+
+module Coupons
+  COUPON_BY_CODE = {}
+  COUPONS = Coupon.all
+  COUPONS.all.each do |coupon|
+    # Make sure coupon codes don't start with a number and all letter are capital
+    self.const_set(coupon.code, coupon)
+    COUPON_BY_CODE[coupon.code] = coupon
+  end
+end
+
 # ================
 # Configures Cuba
 # ================
