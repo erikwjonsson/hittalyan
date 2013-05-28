@@ -20,7 +20,8 @@ class PaysonPayment < Payment
   externally_readable   :user_email,
                         :package_sku,
                         :amount,
-                        :status
+                        :status,
+                        :promotional_code
   
   RETURN_URL = WEBSITE_ADDRESS + '#!/medlemssidor/prenumeration/betalningsbekraftning'
   CANCEL_URL = RETURN_URL
@@ -30,12 +31,14 @@ class PaysonPayment < Payment
   field :payment_uuid, type: String # Set on create
   field :user_email, type: String
   field :package_sku, type: String
+  field :promotional_code, type: String
   field :time , type: Time # Set on create
   field :amount, type: Integer # Set on create
   field :status, type: String # Set on create
   
   validates :user_email, presence: true
   validates :package_sku, presence: true
+  validates :promotional_code, presence: true
   
   before_create do |document|
     document.payment_uuid = generate_payment_uuid
@@ -70,7 +73,7 @@ class PaysonPayment < Payment
       sender,
       [receiver],
       self.payment_uuid) # Comment
-    payment.order_items = [@package.as_order_item]
+    payment.order_items = [@package.as_order_item(Coupons::COUPON_BY_CODE[self.promotional_code])]
 
     response = PaysonAPI::Client.initiate_payment(payment) # Response
     raise Payment::InitiationError.new(response) unless response.success?
@@ -94,7 +97,11 @@ class PaysonPayment < Payment
 
   def amount
     @package ||= Packages::PACKAGE_BY_SKU[self.package_sku]
-    (@package.unit_price_in_ore/100.0)*(@package.tax_in_percentage_units/100.0 + 1)
+    @coupon ||= Coupons::COUPON_BY_CODE[self.promotional_code]
+    package_price = @package.unit_price_in_ore/100.0
+    tax = @package.tax_in_percentage_units/100.0 + 1
+    discount = @coupon.discount_in_percentage_units/100.0
+    (package_price*tax*(1-discount)).floor
   end
 
   def generate_payment_uuid

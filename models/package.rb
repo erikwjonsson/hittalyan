@@ -32,11 +32,21 @@ class Package
   validates :tax_in_percentage_units, numericality: {equal_to: 25}
   validates :sku, uniqueness: true, presence: true
 
-  def as_order_item
+  def as_order_item(coupon)
+    package_price = self.unit_price_in_ore/100.0
+    tax = self.tax_in_percentage_units/100.0 + 1
+    discount = coupon.discount_in_percentage_units/100.0
     PaysonAPI::OrderItem.new(self.payson_description,
-                             self.unit_price_in_ore/100.0,
+                             correct_for_flooring_and_tax(package_price, tax, discount),
                              self.quantity,
                              self.tax_in_percentage_units/100.0,
                              self.sku)
-    end
+  end
+  
+  private
+  
+  def correct_for_flooring_and_tax(package_price, tax, discount)
+    end_sum_we_want = (package_price*tax*(1-discount)).floor
+    new_package_price = end_sum_we_want/tax
+  end
 end
