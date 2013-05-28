@@ -120,7 +120,7 @@
           %input(type="text"
                 name="mobileNumber"
                 placeholder="Mobilnummer"
-                ng-required="smsNotification"
+                ng-required="userData.notify_by_sms"
                 id="mobileNumber"
                 ng-model="userData.mobile_number")
           %span(ng-show="allSettingsForm.mobileNumber.$error.required")
