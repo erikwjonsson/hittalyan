@@ -20,7 +20,7 @@ c = []
 c << Coupon.new(code: "NONE",
                 description: "Not a valid code/coupon",
                 discount_in_percentage_units: 0,
-                valid: false)
+                valid: true)
 
 # =========================================
 # Test coupons for development and testing
