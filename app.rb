@@ -271,7 +271,11 @@ Cuba.define do
         res.status = 401
       else
         on "user", param('data') do |client_user_model|
-          user.external_update!(client_user_model)
+          begin
+            user.external_update!(client_user_model)
+          rescue StandardError => e
+            res.status = 400
+          end
         end
         
         on "account_termination", param('password') do |password|

@@ -310,11 +310,13 @@ function SettingsController($scope, $http, $location, analytics) {
       feedBackSymbolWorking($scope.allSettings, "Sparar...");
       $http.post("medlemssidor/user", data).
         success(function(data, status) {
-          //alert(data);
-          feedBackSymbolOk($scope.allSettings, "Inställningar sparade");
+          if (status === 200) {
+            feedBackSymbolOk($scope.allSettings, "Inställningar sparade");
+          }else {
+            feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
+          }
         }).
         error(function(data, status) {
-          //alert(data);
           feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
         });
     }
