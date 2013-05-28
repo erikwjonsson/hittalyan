@@ -329,6 +329,11 @@ function ApartmentsController($scope, $http, analytics) {
 
 function PremiumServicesController($scope, $http, analytics) {
   $scope.showForm = false;
+  $scope.showCouponForm = false;
+  $scope.showCouponInfo = false;
+  $scope.coupon = {code: "NONE",
+                   discount_in_percentage_units: 0,
+                   valid: false}
 
   $http.get("medlemssidor/user").
     success(function(data, status) {
@@ -368,7 +373,8 @@ function PremiumServicesController($scope, $http, analytics) {
   $scope.buyPackage = function(sku) {
     $scope.sku = sku
     if ($scope.userData.first_name != "" && $scope.userData.last_name != "") {
-      data = {'sku': sku}
+      data = {'sku': sku,
+              'code': $scope.coupon.code}
       $http.post("payson_pay", data).
         success(function(data, status) {
           //alert(data);
@@ -382,8 +388,33 @@ function PremiumServicesController($scope, $http, analytics) {
     };
   };
   
+  $scope.submitCoupon = function() {
+    var getString = "medlemssidor/coupon" + "/" + $scope.couponCode
+    $http.get(getString).
+      success(function(data, status) {
+        $scope.coupon = data;
+        $scope.showCouponInfo = true;
+        console.log($scope.coupon);
+      }).
+      error(function(data, status) {
+        $scope.coupon = data;
+        $scope.showCouponInfo = true;
+      });
+  }
+  
+  $scope.toggleCouponForm = function() {
+    $scope.showCouponForm = !$scope.showCouponForm;
+  }
+  
   $scope.imageURL = function(name) {
     return "images/package_" + name.toLowerCase() + ".png"
+  }
+  
+  $scope.couponifyPrice = function(package, coupon) {
+    var package_price = (package.unit_price_in_ore/100)
+    var discount = (coupon.discount_in_percentage_units/100)
+
+    return Math.floor(package_price*(1-discount)*1.25)
   }
 }
 
