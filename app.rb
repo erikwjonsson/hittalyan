@@ -116,7 +116,7 @@ Cuba.define do
         
         on "coupon/:code" do |code|
           begin
-            coupon = Coupon.where(code: code).first.as_external_document
+            coupon = Coupon.where(code: code, valid: true).first.as_external_document
           rescue StandardError => e
             coupon = Coupon.where(code: "NONE").first.as_external_document
           end

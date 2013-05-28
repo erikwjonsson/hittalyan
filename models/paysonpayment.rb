@@ -39,12 +39,23 @@ class PaysonPayment < Payment
   validates :user_email, presence: true
   validates :package_sku, presence: true
   validates :promotional_code, presence: true
+  validate :validate_coupon
   
   before_create do |document|
     document.payment_uuid = generate_payment_uuid
     document.time = Time.now
     document.amount = amount
     document.status = "CREATED"
+  end
+  
+  def validate_coupon
+    raise InvalidCoupon unless Coupons::COUPON_BY_CODE[self.promotional_code].valid
+  end
+  
+  class InvalidCoupon < StandardError
+    def message
+      "This coupon is not valid"
+    end
   end
   
   def receiver
@@ -93,7 +104,6 @@ class PaysonPayment < Payment
   end
   
   private
-  
 
   def amount
     @package ||= Packages::PACKAGE_BY_SKU[self.package_sku]
