@@ -24,10 +24,15 @@ c << Coupon.new(code: "NONE",
 # Test coupons for development and testing
 # ==========================================
 unless production?
-  c << Coupon.new(code: "TEST1234",
-                  description: "This is a TESTcoupon for testing purposes",
+  c << Coupon.new(code: "VALID1234",
+                  description: "This is a TESTcoupon for testing purposes. VALID",
                   discount_in_percentage_units: 25,
                   valid: true)
+  
+  c << Coupon.new(code: "INVALID1234",
+                  description: "This is a TESTcoupon for testing purposes. INVALID",
+                  discount_in_percentage_units: 25,
+                  valid: false)
 end
 
 # Remove all old coupons
