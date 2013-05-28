@@ -422,7 +422,6 @@ function PaymentConfirmationController($scope, $http) {
   deTokenify();
   $http.get("medlemssidor/prenumeration/paymentstatus").
     success(function(data, status) {
-      console.log(data)
       $scope.payment = data;
     }).
     error(function(data, status) {
