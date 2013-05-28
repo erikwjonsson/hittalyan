@@ -242,7 +242,7 @@ Cuba.define do
         if user
           init_session(req, user)
         else
-          res.status = 401 # unauthorized
+          res.status = 400 # unauthorized
           res.write "Ogiltig e-postadress eller lösenord."
         end
       end

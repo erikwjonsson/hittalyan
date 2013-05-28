@@ -13,15 +13,19 @@ angular.module('intercept', []).config(['$httpProvider', function ($httpProvider
     }
     function error(response) {
       var status = response.status;
-
       if (status == 401) {
         localStorage.loggedIn = "false";
         scope.$broadcast('loginRequired');
-      }else {
+      }
+      else if (status == 400) {
+        return response;
+      }
+      else {
+        alert('other error!');
         scope.$broadcast('someSortOfError');
       }
     }
-    return function (promise) {
+    return function(promise) {
       return promise.then(success, error);
     }
   }];
@@ -70,7 +74,7 @@ cubancabal.run( function($rootScope, $location) {
   });
   
   $rootScope.$on( "someSortOfError", function(event, next, current) {
-    if (next.templateUrl && next.templateUrl.indexOf("betalningsbekraftning") == -1) {
+    if (next != undefined && next.templateUrl && next.templateUrl.indexOf("betalningsbekraftning") == -1) {
       $location.path('/shithappens');
     }
   });
