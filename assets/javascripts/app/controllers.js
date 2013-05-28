@@ -30,23 +30,31 @@ function AboutController($scope, $http, analytics) {
 }
 
 function LoginController($scope, $http, $routeParams, $location, analytics) {
+  function loggedInSuccess() {
+    feedBackSymbolOk($scope, "Loggar in...")
+    $scope.email = "";
+    $scope.password = "";
+    loginFormSuccess($scope.data['email']);
+    $location.path('/medlemssidor');
+  }
 
   $scope.submit = function() {
+    feedBackSymbolWorking($scope, "Loggar in...") 
     if ( $scope.login.$valid == true ) {
       $scope.data = {email: $scope.email,
                      password: $scope.password};
+      $scope.loworking
       $http.post("login", $scope.data).
         success(function(data, status) {
-          $scope.email = "";
-          $scope.password = "";
-          loginFormSuccess($scope.data['email']);
-          $location.path('/medlemssidor');
+          if (status == 200) {
+            loggedInSuccess();
+          }
+          else {
+            loginFormFail($scope);
+          }
         }).
         error(function(data, status) {
-          if ( status == "401") {
-            loginFormFail($scope);
-          };
-          $scope.message = data;
+          loginFormFail($scope);
         });
     }
     else {
@@ -55,10 +63,69 @@ function LoginController($scope, $http, $routeParams, $location, analytics) {
   };
 }
 
+function NavbarLoginController($scope, $http, $routeParams, $location, analytics) {
+  function loggedInSuccess() {
+    $location.path('/medlemssidor');
+  }
+
+  function loggedInFail($scope) {
+    $scope.password = "";
+    localStorage.loggedIn = "false";
+    localStorage.userName = "";
+    alert("Felaktigt användarnamn eller lösenord.");
+  }
+
+  $scope.submit = function() {
+    feedBackSymbolWorking($scope, "Loggar in...") 
+    if ( $scope.login.$valid == true ) {
+      $scope.data = {email: $scope.email,
+                     password: $scope.password};
+      $scope.loworking
+      $http.post("login", $scope.data).
+        success(function(data, status) {
+          if (status == 200) {
+            loggedInSuccess();
+          }
+          else {
+            loggedInFail($scope);
+          }
+        }).
+        error(function(data, status) {
+          loggedInFail($scope);
+        });
+    }
+    else {
+      loggedInFail($scope);
+    }
+  };
+}
+
 function FAQController($scope, $routeParams, analytics) {
 }
 
 function SignupController($scope, $http, $location, analytics) {
+  function loggedInSuccess() {
+    $scope.message = "Registrering lyckad. Loggar in..."
+    $http.post("login", $scope.data).
+    success(function(data, status) {
+      $scope.message = "Inloggad. Omdirigerar..."
+      loginFormSuccess($scope.data['email']);
+      $location.path('/medlemssidor');
+    }).
+    error(function(data, status) {
+      $scope.message = "Registrering lyckad men inloggning misslyckad"
+      $scope.working = false;
+      $scope.cross = true;
+      localStorage.loggedIn = "false";
+    });
+  }
+
+  function loggedInFail() {
+    $scope.message = "Registrering misslyckad"
+    $scope.working = false;
+    $scope.cross = true;
+  }
+
   $scope.submit = function() {
     if ( $scope.signup.$valid == true) {
       $scope.data = {email: $scope.email,
@@ -68,24 +135,17 @@ function SignupController($scope, $http, $location, analytics) {
       $scope.cross = false;
       $http.post("signup", $scope.data).
         success(function(data, status) {
-          $scope.message = "Registrering lyckad. Loggar in..."
-          $http.post("login", $scope.data).
-            success(function(data, status) {
-              $scope.message = "Inloggad. Omdirigerar..."
-              loginFormSuccess($scope.data['email']);
-              $location.path('/medlemssidor');
-            }).
-            error(function(data, status) {
-              $scope.message = "Registrering lyckad men inloggning misslyckad"
-              $scope.working = false;
-              $scope.cross = true;
-              localStorage.loggedIn = "false";
-            });
-        }).
+          // Hack because of some funky business happening...
+          if (status == 200) {
+            loggedInSuccess();
+          }
+          else {
+            loggedInFail();
+          }
+          
+      }).
         error(function(data, status) {
-          $scope.message = "Registrering misslyckad"
-          $scope.working = false;
-          $scope.cross = true;
+          loggedInFail();
         });
     }
   };
@@ -503,7 +563,7 @@ function loginFormFail($scope) {
   $scope.password = "";
   localStorage.loggedIn = "false";
   localStorage.userName = "";
-  alert("Felaktigt användarnamn eller lösenord.");
+  feedBackSymbolNotOk($scope, "Felaktigt användarnamn eller lösenord.");
 }
 
 function loginFormSuccess(email) {
