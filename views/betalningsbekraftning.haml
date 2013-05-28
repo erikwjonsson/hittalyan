@@ -16,24 +16,4 @@
           %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
   .span10.box.opaque
     .padhack
-      %table
-        %tr
-          %td
-            E-post:
-          %td
-            {{payment.user_email}}
-        %tr
-          %td
-            Paket:
-          %td
-            {{payment.package_sku}}
-        %tr
-          %td
-            Summa:
-          %td
-            {{payment.amount}}
-        %tr
-          %td
-            Status:
-          %td
-            {{payment.status}}
+      .alert.alert-info Ditt köp bearbetas. Var vänlig kontrollera din e-post.

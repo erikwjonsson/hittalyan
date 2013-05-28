@@ -145,11 +145,6 @@ Cuba.define do
           on "betalningsbekraftning" do
             send_view "betalningsbekraftning"
           end
-          
-          on "paymentstatus" do
-            payment = Payment.where(user_email: user.email).asc(:time).last
-            send_json(payment.as_external_document)
-          end
           send_view "prenumeration"
         end
         send_view "medlemssidor"

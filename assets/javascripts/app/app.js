@@ -21,7 +21,6 @@ angular.module('intercept', []).config(['$httpProvider', function ($httpProvider
         return response;
       }
       else {
-        alert('other error!');
         scope.$broadcast('someSortOfError');
       }
     }

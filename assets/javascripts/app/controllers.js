@@ -479,15 +479,7 @@ function PremiumServicesController($scope, $http, analytics) {
   }
 }
 
-function PaymentConfirmationController($scope, $http) {
-  deTokenify();
-  $http.get("medlemssidor/prenumeration/paymentstatus").
-    success(function(data, status) {
-      $scope.payment = data;
-    }).
-    error(function(data, status) {
-      $scope.payment = data;
-    });
+function PaymentConfirmationController() {
 }
 
 function PasswordResetController($scope, $http, analytics) {
@@ -643,6 +635,7 @@ function getEnvironment($http, $rootScope) {
     });
 };
 
+// I'm alone and useless now. please use me. Or abuse me. Anything!
 function deTokenify() {
   if (window.location.search != "") {
     var l = window.location;
