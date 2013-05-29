@@ -18,12 +18,14 @@ require 'date'
 require 'rest-client'
 require 'payson_api'
 require 'erb'
+
 require_relative 'lib/getenvironment'
 require_relative 'lib/mailer'
 ENVIRONMENT = get_environment
 require_relative 'helpers'
 WEBSITE_ADDRESS = website_address
 BRAND_NAME = "HittaLyan"
+require_from_directory 'middleware'
 require_from_directory 'extensions'
 require_from_directory 'models'
 require_from_directory 'models/packages'
@@ -95,6 +97,7 @@ Cuba.use Rack::Session::Cookie, :expire_after => 60*60*24*60, #sec*min*h*day two
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger
+Cuba.use DeathToMing
 Cuba.use Rack::Static, :urls => ['/images',
                                  '/fonts',
                                  application_css,
