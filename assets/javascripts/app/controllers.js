@@ -272,7 +272,7 @@ function SettingsController($scope, $http, $location, analytics) {
                           {name: "145", value: 145},
                           {name: "150+", value: 9999}];
 
-  $http.get("medlemssidor/user").
+  $http.get("medlemssidor/user" + mingDate()).
     success(function(data, status) {
       $scope.userData = data;
       $scope.roomsMin = $scope.roomValuesMin[data.filter.rooms.min - 1];
@@ -381,7 +381,7 @@ function SettingsController($scope, $http, $location, analytics) {
 }
 
 function ApartmentsController($scope, $http, analytics) {
-  $http.get("medlemssidor/apartments_list").
+  $http.get("medlemssidor/apartments_list" + mingDate()).
     success(function(data, status) {
       $scope.apartments = data;
     }).
@@ -398,7 +398,7 @@ function PremiumServicesController($scope, $http, analytics) {
                    discount_in_percentage_units: 0,
                    valid: false}
 
-  $http.get("medlemssidor/user").
+  $http.get("medlemssidor/user" + mingDate()).
     success(function(data, status) {
       $scope.userData = data;
       // alert(data);
@@ -407,7 +407,7 @@ function PremiumServicesController($scope, $http, analytics) {
       //alert(data);
     });
 
-  $http.get("medlemssidor/packages").
+  $http.get("medlemssidor/packages" + mingDate()).
     success(function(data, status) {
       $scope.packages = data;
       $scope.packages.sort(function(a, b) {
@@ -453,7 +453,7 @@ function PremiumServicesController($scope, $http, analytics) {
   
   $scope.submitCoupon = function() {
     var getString = "medlemssidor/coupon" + "/" + $scope.couponCode
-    $http.get(getString).
+    $http.get(getString + mingDate()).
       success(function(data, status) {
         $scope.coupon = data;
         $scope.showCouponInfo = true;
@@ -548,7 +548,6 @@ function ShitController(analytics) {
 }
 
 function TestController(analytics) {
-
 }
 
 // Extensions
@@ -628,7 +627,7 @@ function logout($http, $location) {
 };
 
 function getEnvironment($http, $rootScope) {
-  $http.get("environment").
+  $http.get("environment" + mingDate()).
     success(function(data, status) {
       environment = data;
     }).
@@ -643,6 +642,11 @@ function deTokenify() {
     var l = window.location;
     window.location = l.protocol + "//" + l.host + l.pathname + l.hash;
   };
+}
+
+function mingDate() {
+  var date = Date();
+  return "?ming=" + date + "mongo"
 }
 
 // Special function for defining view helper methods in $rootScope
