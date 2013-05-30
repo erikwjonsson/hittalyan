@@ -16,8 +16,8 @@
           %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
   .span10.box.opaque
     .padhack
+      %h2 Lägenheter
       %table(id="apartments-list")
-        %legend Lägenheter
         %tr(ng-repeat="apartment in apartments")
           %td
             %a(href="{{apartment.url}}")

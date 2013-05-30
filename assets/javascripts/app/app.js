@@ -13,11 +13,11 @@ angular.module('intercept', []).config(['$httpProvider', function ($httpProvider
     }
     function error(response) {
       var status = response.status;
-      if (status == 401) {
+      if (status === 401) {
         localStorage.loggedIn = "false";
         scope.$broadcast('loginRequired');
       }
-      else if (status == 400) {
+      else if (status === 400) {
         return response;
       }
       else {
@@ -26,13 +26,13 @@ angular.module('intercept', []).config(['$httpProvider', function ($httpProvider
     }
     return function(promise) {
       return promise.then(success, error);
-    }
+    };
   }];
   $httpProvider.responseInterceptors.push(interceptor);
 }]);
 
-var shitHappensHtml = "\x3Cdiv class=\"row\"\x3E\n  \x3Cdiv class=\"span12 box opaque\"\x3E\n    \x3Cdiv class=\"padhack\"\x3E\n      N\u00e5got verkar ha g\u00e5tt fel. Var god f\u00f6rs\u00f6k igen senare.\n    \x3C\x2Fdiv\x3E\n  \x3C\x2Fdiv\x3E\n\x3C\x2Fdiv\x3E"
-var cubancabal = angular.module('cubancabal', ['ngSanitize', 'HashBangURLs', 'intercept', 'analytics'])
+var shitHappensHtml = "\x3Cdiv class=\"row\"\x3E\n  \x3Cdiv class=\"span12 box opaque\"\x3E\n    \x3Cdiv class=\"padhack\"\x3E\n      N\u00e5got verkar ha g\u00e5tt fel. Var god f\u00f6rs\u00f6k igen senare.\n    \x3C\x2Fdiv\x3E\n  \x3C\x2Fdiv\x3E\n\x3C\x2Fdiv\x3E";
+var cubancabal = angular.module('cubancabal', ['ngSanitize', 'HashBangURLs', 'intercept', 'analytics']);
 
 cubancabal.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
@@ -55,25 +55,25 @@ cubancabal.config(['$routeProvider', function($routeProvider) {
 
 cubancabal.run( function($rootScope, $location) {
   $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-    if ( localStorage.loggedIn == "true" ) {
+    if ( localStorage.loggedIn === "true" ) {
       if ( next.templateUrl == "login" || next.templateUrl == "landing" ) {
         $location.path('/medlemssidor');
         next.templateUrl = 'medlemssidor';
       }
     }
-    if (next.templateUrl && next.templateUrl.indexOf("medlemssidor") != -1) {
+    if (next.templateUrl && next.templateUrl.indexOf("medlemssidor") !== -1) {
       $rootScope.$broadcast('loginRequired');
     }
   });
   
   $rootScope.$on( "loginRequired", function() {
-    if ( localStorage.loggedIn == "false" || localStorage.loggedIn == null) {
+    if ( localStorage.loggedIn === "false" || localStorage.loggedIn === null) {
       $location.path('/login');
     }
   });
   
   $rootScope.$on( "someSortOfError", function(event, next, current) {
-    if (next != undefined && next.templateUrl && next.templateUrl.indexOf("betalningsbekraftning") == -1) {
+    if (next !== undefined && next.templateUrl && next.templateUrl.indexOf("betalningsbekraftning") === -1) {
       $location.path('/shithappens');
     }
   });
