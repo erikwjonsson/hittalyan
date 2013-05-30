@@ -127,6 +127,10 @@
             %i(class='icon-remove checkmark wrongness icon-large')
             Mobilnummer måste anges om SMS-utskick önskas
           %br
+          %label.checkbox
+            %input(type="checkbox" ng-model="userData.permits_to_be_emailed")
+              Jag ger mitt medgivande till att ni kontaktar mig via e-post.
+          %br
           %input(type="submit"
                  class="btn"
                  name="save"

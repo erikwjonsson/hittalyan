@@ -147,7 +147,7 @@ class User
 
   private
     def shoot_welcome_email
-      Mailer.shoot_email(self.email,
+      Mailer.shoot_email(self,
                          'Välkommen - så här kommer du igång',
                           render_mail("welcome_as_premium_member", binding),
                          'html')
