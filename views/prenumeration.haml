@@ -25,7 +25,7 @@
       %table#packages.top-buffer
         %tr(ng-repeat="package in packages")
           %td
-            %img.illustration(ng-src="{{imageURL(package.sku)}}")
+            %img(ng-src="{{imageURL(package.sku)}}")
           %td.description {{package.description}}
           %td.price {{couponifyPrice(package, coupon)}} kr
           %td.buy
