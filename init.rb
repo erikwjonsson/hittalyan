@@ -106,6 +106,7 @@ Cuba.use Rack::Static, :urls => ['/images',
                                  '/google718389522c114c98.html'],
                         :root => PUBLIC_PATH
 Cuba.use Rack::PostBodyToParams
+Cuba.use Rack::CommonLogger
 
 # ================
 # Sets up logging
