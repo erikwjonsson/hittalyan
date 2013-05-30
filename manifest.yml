@@ -1,7 +1,7 @@
 --- 
 applications: 
   .: 
-    name: hittalyan
+    name: cubancabal
     framework: 
       name: rack
       info: 

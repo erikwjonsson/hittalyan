@@ -4,7 +4,8 @@
 
 function IndexController($rootScope, $scope, $http, $location, analytics) {
   defineViewHelperMethodsInRootScope($rootScope, $http, $location);
-  getEnvironment($http, $rootScope);
+  // Wedon't use this much anymore. Could maybe be removed.
+  // getEnvironment($http, $rootScope);
 }
 
 function LandingController($scope, analytics) {
@@ -381,13 +382,14 @@ function SettingsController($scope, $http, $location, analytics) {
 }
 
 function ApartmentsController($scope, $http, analytics) {
+  alert("ApartmentsController reporting, sir!");
   $http.get("medlemssidor/apartments_list" + mingDate()).
     success(function(data, status) {
       $scope.apartments = data;
     }).
     error(function(data, status) {
       $scope.apartments = [{address: "Något slags fel"}];
-    })
+    });
 }
 
 function PremiumServicesController($scope, $http, analytics) {
@@ -452,7 +454,7 @@ function PremiumServicesController($scope, $http, analytics) {
   };
   
   $scope.submitCoupon = function() {
-    var getString = "medlemssidor/coupon" + "/" + $scope.couponCode
+    var getString = "medlemssidor/coupon" + "/" + $scope.couponCode;
     $http.get(getString + mingDate()).
       success(function(data, status) {
         $scope.coupon = data;
@@ -470,14 +472,14 @@ function PremiumServicesController($scope, $http, analytics) {
   }
   
   $scope.imageURL = function(name) {
-    return "images/package_" + name.toLowerCase() + ".png"
+    return "images/package_" + name.toLowerCase() + ".png";
   }
   
   $scope.couponifyPrice = function(package, coupon) {
-    var package_price = (package.unit_price_in_ore/100)
-    var discount = (coupon.discount_in_percentage_units/100)
+    var package_price = (package.unit_price_in_ore/100);
+    var discount = (coupon.discount_in_percentage_units/100);
 
-    return Math.floor(package_price*(1-discount)*1.25)
+    return Math.floor(package_price*(1-discount)*1.25);
   }
 }
 
@@ -548,6 +550,7 @@ function ShitController(analytics) {
 }
 
 function TestController(analytics) {
+  alert("Här testas det");
 }
 
 // Extensions
