@@ -97,7 +97,7 @@ Cuba.use Rack::Rewrite do
   # Redirect non-www requests (e.g. hittalyan.se) to www (e.g. www.hittalyan.se),
   # but only in production.
   r301 /.*/,  Proc.new {|path, rack_env| "http://www.#{rack_env['SERVER_NAME']}#{path}" },
-    :if => Proc.new {|rack_env| production? && !(rack_env['SERVER_NAME'] =~ /www\./i)}
+    :if => Proc.new {|rack_env| production? && !(rack_env['SERVER_NAME'] =~ /www\./i) && !(rack_env['SERVER_NAME'].include?('aws.af.cm'))}
 end
 Cuba.use Rack::Session::Cookie, :expire_after => 60*60*24*60, #sec*min*h*day two months
                                 :secret => "Even a potato in a dark cellar has a certain low cunning about him."
