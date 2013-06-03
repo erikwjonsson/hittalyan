@@ -24,9 +24,9 @@
                 %li(ng-hide="isLoggedIn()")
                   %a(href="#!/registrera" ng-hide="isLoggedIn()") Bli medlem
                 %li(ng-show="isLoggedIn()")
-                  %a(href="#!/medlemssidor" ng-show="isLoggedIn()") Medlemssidor
+                  %a(href="#!/medlemssidor" rel="nofollow" ng-show="isLoggedIn()") Medlemssidor
                 %li(ng-hide="isLoggedIn()")
-                  %a(href="#!/losenordsaterstallning"
+                  %a(href="#!/losenordsaterstallning" rel="nofollow"
                      ng-hide="isLoggedIn()") Glömt Lösenord?
 
               %form#loginform.navbar-form.pull-right(name="login"
