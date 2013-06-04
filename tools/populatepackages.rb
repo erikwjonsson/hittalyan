@@ -11,7 +11,7 @@ p << Package.new(sku: 'START',
                  name: 'Start',
                  description: ''\
                  'Startpaketet innehåller 30 dagars prenumeration på '\
-                 'lägenhetstips. Vi bjuder på 75 SMS som starbonus.',
+                 'lägenhetstips. Vi bjuder på 75 SMS som startbonus.',
                  payson_description: 'Startpaket: 30 dagar, 75 SMS',
                  unit_price_in_ore: 223.20*100,
                  premium_days: 30,
