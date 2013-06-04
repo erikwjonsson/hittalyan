@@ -153,7 +153,7 @@ function SignupController($scope, $http, $location, analytics) {
   };
 }
 
-function MembersController($scope, analytics) {
+function MembersController($scope, $http, analytics) {
 }
 
 function SettingsController($scope, $http, $location, analytics) {
@@ -388,6 +388,13 @@ function ApartmentsController($scope, $http, analytics) {
     }).
     error(function(data, status) {
       $scope.apartments = [{address: "Något slags fel"}];
+  });
+
+  $http.get("medlemssidor/user" + mingDate()).
+    success(function(data, status) {
+      $scope.userData = data;
+    }).
+    error(function(data, status) {
     });
 }
 

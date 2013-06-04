@@ -16,6 +16,9 @@
           %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
   .span10.box.opaque
     .padhack
+      .alert(ng-hide="userData.active")
+        Obs! För att få lägenhetstips måste du aktivera en prenumeration.
+        %a(href="#!/medlemssidor/prenumeration") Gå till prenumerationer
       %h2 Lägenheter
       %table(id="apartments-list")
         %tr(ng-repeat="apartment in apartments")
