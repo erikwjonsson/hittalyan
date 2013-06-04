@@ -84,6 +84,7 @@ GEM
       activesupport (>= 2.3)
     rack-protection (1.2.0)
       rack
+    rack-rewrite (1.2.1)
     rake (0.9.6)
     rake-pipeline (0.7.0)
       json
@@ -130,6 +131,7 @@ DEPENDENCIES
   rack-livereload (= 0.3.12)
   rack-post-body-to-params (~> 0.1.5)
   rack-protection
+  rack-rewrite (~> 1.2.1)
   rake-pipeline (= 0.7.0)
   rake-pipeline-web-filters (= 0.7.0)
   rdiscount (= 1.6.8)

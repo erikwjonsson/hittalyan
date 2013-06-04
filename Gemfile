@@ -8,7 +8,7 @@ gem 'thin', '~>1.5.0'
 gem 'rest-client', '~>1.6.7'
 gem 'payson_api', '0.3.0'
 gem 'af'
-
+gem 'rack-rewrite', '~> 1.2.1'
 
 # Do not change the following comment. Rakefile uses it for deployment to AppFog.
 

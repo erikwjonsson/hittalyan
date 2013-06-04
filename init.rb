@@ -18,6 +18,7 @@ require 'date'
 require 'rest-client'
 require 'payson_api'
 require 'erb'
+require 'rack/rewrite'
 
 require_relative 'lib/getenvironment'
 require_relative 'lib/mailer'
@@ -92,6 +93,12 @@ end
 application_css = '/' + Dir["#{PUBLIC_PATH}/application-*.css"].first.split('/')[-1]
 application_js = '/' + Dir["#{PUBLIC_PATH}/application-*.js"].first.split('/')[-1]
 
+Cuba.use Rack::Rewrite do
+  # Redirect non-www requests (e.g. hittalyan.se) to www (e.g. www.hittalyan.se),
+  # but only in production.
+  r301 /.*/,  Proc.new {|path, rack_env| "http://www.#{rack_env['SERVER_NAME']}#{path}" },
+    :if => Proc.new {|rack_env| production? && !(rack_env['SERVER_NAME'] =~ /www\./i) && !(rack_env['SERVER_NAME'].include?('aws.af.cm'))}
+end
 Cuba.use Rack::Session::Cookie, :expire_after => 60*60*24*60, #sec*min*h*day two months
                                 :secret => "Even a potato in a dark cellar has a certain low cunning about him."
 Cuba.use Rack::Protection

@@ -16,6 +16,10 @@
           %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
   .span10.box.opaque
     .padhack
+      .alert(ng-hide="userData.active")
+        Obs! För att få lägenhetstips måste du aktivera en prenumeration.
+        %a(href="#!/medlemssidor/prenumeration") Gå till prenumerationer
+
       %form(name="allSettingsForm" ng-submit="submitAllSettings()" novalidate)
         %fieldset
           %legend Intressefilter
