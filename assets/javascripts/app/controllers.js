@@ -161,7 +161,9 @@ function SettingsController($scope, $http, $location, analytics) {
   $scope.passwordSettings = {};
   $scope.accountTermination = {};
   $scope.allSettings = {};
+  $scope.userData = {};
   
+  $scope.userData.active = true;
   $scope.cities = [{name: "Stockholm", value: 0},
                    {name: "Malmö", value: 1},
                    {name: "Gävle", value: 2},
@@ -390,6 +392,9 @@ function SettingsController($scope, $http, $location, analytics) {
 }
 
 function ApartmentsController($scope, $http, analytics) {
+  $scope.userData = {};
+  
+  $scope.userData.active = true;
   $http.get("medlemssidor/apartments_list" + mingDate()).
     success(function(data, status) {
       $scope.apartments = data;
