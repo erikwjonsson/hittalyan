@@ -7,10 +7,10 @@ c = []
 # =============================================
 # Production coupons for production deployment
 # =============================================
-# c << Coupon.new(code: "1234test",
-#                 description: 
-#                 discount_in_percentage_units: 25,
-#                 valid: true)
+c << Coupon.new(code: "SOMMAR13",
+                description: "Sommarerbjudande",
+                discount_in_percentage_units: 30,
+                valid: true)
 
 # ===========================================================
 # Coupon to use when there is no coupon.
@@ -18,7 +18,7 @@ c = []
 # DO NOT REMOVE OR MODIFY unless you know what you're doing.
 # ===========================================================
 c << Coupon.new(code: "NONE",
-                description: "Not a valid code/coupon",
+                description: "Ogiltig kupong/rabattkod",
                 discount_in_percentage_units: 0,
                 valid: true)
 

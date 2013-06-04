@@ -13,8 +13,10 @@
       %div.alert.alert-success(ng-show="messageSent")
         Ditt meddelande har skickats.
       %form#contact-form(name="contact" ng-submit="submit()")
+        %label(for="email") Din E-postadress
         %input(ng-model="email" name="email" type="text" placeholder="Din e-postadress" required)
         %br
+        %label(for="message") Din fråga/meddelande
         %textarea.large-textarea(ng-model="message" name="message "rows="10" placeholder="Skriv ditt meddelande här" required)
         %br
         %input(type="submit" class="btn" value="Skicka")

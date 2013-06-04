@@ -274,7 +274,7 @@ Cuba.define do
           begin
             user.external_update!(client_user_model)
           rescue StandardError => e
-            res.status = 400
+            res.status = 400 #Bad request
           end
         end
         
@@ -283,7 +283,7 @@ Cuba.define do
             user.session.delete
             user.delete
           else
-            res.status = 401 #Unathorized
+            res.status = 400 #Bad request
           end
         end
         
@@ -291,7 +291,7 @@ Cuba.define do
           begin
             user.change_password(new_password, old_password)
           rescue User::WrongPassword
-            res.status = 401
+            res.status = 400 #Bad request
             res.write ""
           end
         end

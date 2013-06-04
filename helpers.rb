@@ -60,7 +60,7 @@ def website_address
   elsif development?
     "http://localhost:4856/"
   elsif test?
-    "http://cubancabal.aws.af.cm/"
+    "http://cubancabal.eu01.aws.af.cm/"
   end
 end
 

@@ -343,7 +343,11 @@ function SettingsController($scope, $http, $location, analytics) {
         $http.post("medlemssidor/change_password", $scope.data).
           success(function(data, status) {
             //alert(data);
-            feedBackSymbolOk($scope.passwordSettings, "Inställningar sparade");
+            if (status === 400) {
+              feedBackSymbolNotOk($scope.passwordSettings, "Ditt gamla lösenord verkar inte stämma");
+            }else {
+              feedBackSymbolOk($scope.passwordSettings, "Lösenord ändrat");
+            }
           }).
           error(function(data, status) {
             //alert("Natural 1");
@@ -369,9 +373,13 @@ function SettingsController($scope, $http, $location, analytics) {
       feedBackSymbolWorking($scope.accountTermination, "Avslutar konto...");
       $http.post("medlemssidor/account_termination", $scope.data).
         success(function(data, status) {
-          alert("Ditt konto är avslutat.");
-          feedBackSymbolOk($scope.accountTermination, "Konto avslutat");
-          logout($http, $location);
+          if (status === 400) {
+            feedBackSymbolNotOk($scope.accountTermination, "Ditt konto kunde ej avslutas. Försök igen senare.");
+          } else{
+            alert("Ditt konto är avslutat.");
+            feedBackSymbolOk($scope.accountTermination, "Konto avslutat");
+            logout($http, $location);
+          };
         }).
         error(function(data, status) {
           // alert("Ditt konto kunde ej avslutas. Försök igen senare.");
