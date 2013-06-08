@@ -61,7 +61,7 @@ Cuba.define do
     on env['REQUEST_URI'].include?("_escaped_fragment_=") do
       fragment = env['REQUEST_URI']
       view_name = fragment.split('/').last
-      view_name = 'landing' if view_name = ''
+      view_name = 'landing' if view_name == ''
       send_serverside_rendered_view(view_name)
     end
 
