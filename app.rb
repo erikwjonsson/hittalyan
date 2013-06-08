@@ -70,7 +70,15 @@ Cuba.define do
     end
   
     on "" do
-      send_view "index"
+      user_agent = env['HTTP_USER_AGENT'].downcase
+      if ['google', 'msnbot', 'yahoo'].any? {|bot| user_agent.include?(bot)}
+        # To make sure AJAX parsing works on the root url.
+        LOG.info "Visit from search bot: #{user_agent}"
+        send_serverside_rendered_view('landing')
+      else
+        # The usual case, when real people visit.
+        send_view "index"
+      end
     end
     
     on "environment" do
