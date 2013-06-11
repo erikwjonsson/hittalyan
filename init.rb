@@ -19,6 +19,7 @@ require 'rest-client'
 require 'payson_api'
 require 'erb'
 require 'rack/rewrite'
+require 'rack/cors'
 
 require_relative 'lib/getenvironment'
 require_relative 'lib/mailer'
@@ -60,8 +61,6 @@ end
 # =================
 # Fetches Packages
 # =================
-# I really don't know why this line doesn't work
-# EXTERNAL_PACKAGES = Package.all.map! { |p| p.as_external_document }
 
 module Packages
   PACKAGE_BY_SKU = {}
@@ -101,6 +100,12 @@ Cuba.use Rack::Rewrite do
 end
 Cuba.use Rack::Session::Cookie, :expire_after => 60*60*24*60, #sec*min*h*day two months
                                 :secret => "Even a potato in a dark cellar has a certain low cunning about him."
+Cuba.use Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', :headers => :any, :methods => [:get, :post, :options]
+  end
+end
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger

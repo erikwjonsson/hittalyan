@@ -9,6 +9,7 @@ gem 'rest-client', '~>1.6.7'
 gem 'payson_api', '0.3.0'
 gem 'af'
 gem 'rack-rewrite', '~> 1.2.1'
+gem 'rack-cors'
 
 # Do not change the following comment. Rakefile uses it for deployment to AppFog.
 

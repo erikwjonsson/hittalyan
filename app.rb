@@ -53,7 +53,24 @@ def filtered_apartments_since(filter, days_ago)
 end
 
 Cuba.define do
-
+  # Mobile Specials
+  on "mobile" do
+    on get do
+      send_json User.all.map { |u| u.as_external_document}
+    end
+    
+    on post do
+      res.write "Made successful post"
+    end
+    
+    on put do
+      res.write "Made successful put"
+    end
+    
+    on delete do
+      res.write "Made successful delete"
+    end
+  end
   #GET-----------------------------------------
   on get do
     # Support for Google's AJAX crawling scheme.
@@ -340,7 +357,7 @@ Cuba.define do
 
     on "message", param('email'), param('message') do |email, message|
       Mailer.shoot_email(Mailer::OUR_STANDARD_EMAIL, "Meddelande via kontaktformulär", message, 'text', email)
-    end 
+    end
 
     on ":catchall" do
       LOG.info "Nu kom nån jävel allt fel post"
