@@ -78,6 +78,7 @@ Cuba.define do
     on env['REQUEST_URI'].include?("_escaped_fragment_=") do
       fragment = env['REQUEST_URI']
       view_name = fragment.split('/').last
+      view_name = 'landing' if view_name == ''
       send_serverside_rendered_view(view_name)
     end
 
@@ -86,7 +87,15 @@ Cuba.define do
     end
   
     on "" do
-      send_view "index"
+      user_agent = env['HTTP_USER_AGENT'].downcase
+      if ['google', 'msnbot', 'yahoo'].any? {|bot| user_agent.include?(bot)}
+        # To make sure AJAX parsing works on the root url.
+        LOG.info "Visit from search bot: #{user_agent}"
+        send_serverside_rendered_view('landing')
+      else
+        # The usual case, when real people visit.
+        send_view "index"
+      end
     end
     
     on "environment" do
