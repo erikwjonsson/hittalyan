@@ -11,6 +11,12 @@ def init_session(req, user)
   Session.create!(sid: sid, user: user)
 end
 
+def init_mobile_session(user)
+  sid = SecureRandom.uuid
+  Session.create!(sid: sid, user: user)
+  sid
+end
+
 def current_user(req)
   user = Session.authenticate(req.session[:sid])
   if user
@@ -55,20 +61,35 @@ end
 Cuba.define do
   # Mobile Specials
   on "mobile" do
-    on get do
-      send_json User.all.map { |u| u.as_external_document}
+    on "login", param('email'), param('password') do |email, password|
+      on post do
+        user = User.authenticate(email, password)
+        if user
+          sid = init_mobile_session(user)
+          send_json({sid: sid})
+        else
+          res.status = 401 # unauthorized
+          res.write "Ogiltig e-postadress eller lösenord."
+        end
+      end
     end
     
-    on post do
-      res.write "Made successful post"
-    end
-    
-    on put do
-      res.write "Made successful put"
-    end
-    
-    on delete do
-      res.write "Made successful delete"
+    on ":sid" do |sid|
+      on get do
+        send_json User.all.map { |u| u.as_external_document}
+      end
+      
+      on post do
+        res.write "Made successful post"
+      end
+      
+      on put do
+        res.write "Made successful put"
+      end
+      
+      on delete do
+        res.write "Made successful delete"
+      end
     end
   end
   #GET-----------------------------------------
