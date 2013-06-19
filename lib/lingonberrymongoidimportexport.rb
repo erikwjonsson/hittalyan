@@ -19,7 +19,7 @@
 module LingonberryMongoidImportExport
   
   def self.included(base)
-    base.const_set(:EXTERNALLY_READABLE_FIELDS, [])
+    base.const_set(:EXTERNALLY_READABLE_FIELDS, ['_id'])
     base.const_set(:EXTERNALLY_ACCESSIBLE_FIELDS, [])
 
     base.send(:include, InstanceMethods)
@@ -29,7 +29,13 @@ module LingonberryMongoidImportExport
   module InstanceMethods
     def as_external_document
      allowed_fields = (self.class.const_get(:EXTERNALLY_ACCESSIBLE_FIELDS) + self.class.const_get(:EXTERNALLY_READABLE_FIELDS)).map(&:to_s)
-     self.as_document.slice(*allowed_fields)
+     doc = self.as_document
+     doc.slice(*allowed_fields)
+
+     # note: id fix for client side libraries like Spine.js,
+     # who rely on an id attribute being present.
+     doc['id'] = doc['_id'].clone
+     doc
     end
 
     def external_update!(document_as_hash)
