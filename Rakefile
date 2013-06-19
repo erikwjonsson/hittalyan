@@ -82,6 +82,23 @@ task :bundle do
   system('bundle install --quiet')
 end
 
+task :mail do
+  require_relative 'init'
+  
+  subject = ENV['subject']
+  file = ENV['file']
+  puts "Subject: #{subject}"
+  puts "Source File: #{file}"
+  
+  User.all.each do |user|
+    puts "Shooting mail to: #{user.email}"
+    Mailer.shoot_email(user,
+                       subject,
+                       render_mail(file, binding),
+                       'html')
+end
+end
+
 namespace :assets do
   PUBLIC_PATH = File.expand_path(File.join(File.dirname(__FILE__), 'public/'))
 
