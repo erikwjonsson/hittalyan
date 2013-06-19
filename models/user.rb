@@ -14,7 +14,8 @@ class User
                         :notify_by_email,
                         :notify_by_sms,
                         :notify_by_push_note,
-                        :permits_to_be_emailed
+                        :permits_to_be_emailed,
+                        '_id'
 
   externally_readable   :active,
                         :sms_account,

@@ -154,6 +154,33 @@ function SignupController($scope, $http, $location, analytics) {
 }
 
 function MembersController($scope, $http, analytics) {
+  var userData = {};
+  $scope.showFirstDayMessage = false;
+  function firstDay() {
+    function mongoIdToDate(mongoId) {
+      timestamp = mongoId.toString().substring(0,8);
+      date = new Date(parseInt(timestamp, 16) * 1000);
+      return date;
+    }
+
+    membershipDate = mongoIdToDate(userData._id);
+    console.log("membership date: " + membershipDate);
+    date = new Date();
+    yesterday = new Date(date.setDate(date.getDate() - 1));
+    console.log("yesterday: " + yesterday);
+    if (membershipDate <= yesterday) {
+      return false;
+    }
+    return true;
+  };
+  $http.get("medlemssidor/user" + mingDate()).
+    success(function(data, status) {
+      userData = data;
+      $scope.showFirstDayMessage = firstDay();
+    }).
+    error(function(data, status) {
+    });
+
 }
 
 function SettingsController($scope, $http, $location, analytics) {
