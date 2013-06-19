@@ -25,7 +25,7 @@ class User
   field :last_name, type: String, default: ""
   field :mobile_number, type: String
   field :hashed_password, type: String
-  field :notify_by_email, type: Boolean, default: false
+  field :notify_by_email, type: Boolean, default: true
   field :notify_by_sms, type: Boolean, default: false
   field :notify_by_push_note, type: Boolean, default: false
   field :permits_to_be_emailed, type: Boolean, default: true
