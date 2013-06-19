@@ -57,6 +57,23 @@ p << Package.new(sku: 'SMS300',
                  sms_account: 300,
                  show_to_premium: true)
 
+# ==============================================================
+# Special packages for internal use. Never to be shown to users
+# ==============================================================
+
+# Package for giving new users a trial period
+p << Package.new(sku: 'TRIAL7',
+                 name: 'TRIAL7',
+                 description: ''\
+                 'Ger 7 dagar prenumeration och 50 sms',
+                 payson_description: 'TRIAL7: 7 dagar, 50 sms',
+                 unit_price_in_ore: 8888*100,
+                 premium_days: 7,
+                 sms_account: 50,
+                 active: true,
+                 show: false,
+                 show_to_premium: false)
+
 # ==========================================
 # Test packages for development and testing
 # ==========================================

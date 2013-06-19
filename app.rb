@@ -149,15 +149,21 @@ Cuba.define do
         end
 
         on "packages" do
-          external_packages = Packages::PACKAGES.each_with_object([]) do |(v), a|
-            a << v.as_external_document
+          external_packages = Packages::PACKAGES.select do |package|
+            # Unselect packages the user should never see. These are to be kept
+            # behind locked doors and closed windows at all times. Always.
+            criteria_a = package.show
+            
+            # Unselect packages that the user shouldn't be interested in seeing
+            criteria_b = package.show_to_premium == user.active
+            
+            criteria_a && criteria_b
           end
           
-          # Delete packages that the user shouldn't be interested in seeing
-          external_packages.delete_if { |x| x["show_to_premium"] != user.active }
+          external_packages.map! do |package|
+            package.as_external_document
+          end
           
-          p external_packages
-          p user.as_external_document
           send_json(external_packages)
         end
         
@@ -300,6 +306,11 @@ Cuba.define do
         user = User.create!(email: email,
                             hashed_password: password) # becomes hashed when created
         user.create_filter()
+        
+        # Giving the user her free trial period
+        package = Packages::PACKAGE_BY_SKU["TRIAL7"]
+        user.apply_package(package)
+        
         # test user for unit testing purposes
         if email == 'hank@rug.burn'
           user.delete
