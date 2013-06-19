@@ -85,13 +85,23 @@ end
 task :mail do
   require_relative 'init'
   
+  users = []
+  to = ENV['to'] || :everyone
   subject = ENV['subject']
   file = ENV['file']
-  puts "Subject: #{subject}"
-  puts "Source File: #{file}"
   
-  User.all.each do |user|
-    puts "Shooting mail to: #{user.email}"
+  LOG.info "To: #{to}"
+  LOG.info "Subject: #{subject}"
+  LOG.info "Source File: #{file}"
+  
+  if to == :everyone
+    users = User.all
+  else
+    users = [User.find_by(email: to)]
+  end
+  
+  users.each do |user|
+    LOG.info "Shooting mail to: #{user.email}"
     Mailer.shoot_email(user,
                        subject,
                        render_mail(file, binding),
