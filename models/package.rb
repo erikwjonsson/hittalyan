@@ -15,6 +15,8 @@ class Package
   field :priority, type: Integer
   field :show_to_premium, type: Boolean
   field :show, type: Boolean, default: true
+  field :trial, type: Boolean, default: false
+  field :show_to_trial, type: Boolean, default: false
 
   field :premium_days, type: Integer, default: 0
   field :sms_account, type: Integer, default: 0

@@ -34,6 +34,7 @@ class User
   field :sms_account, type: Integer, default: 0
   field :unsubscribe_id, type: String
   field :greeted_by_apartmentor, type: Boolean, default: false
+  field :trial, type: Boolean, default: false
 
   # Diagnostic fields
   field :has_received_welcome_email, type: String, default: false
@@ -127,6 +128,7 @@ class User
     add_premium_days(package.premium_days) if package.premium_days
     self.inc(:sms_account, package.sms_account) if package.sms_account
     self.update_attribute(:active, package.active) if package.active
+    self.update_attribute(:trial, package.trial)
     begin
       shoot_welcome_email if package.sku.include?('START')
     rescue Exception => e

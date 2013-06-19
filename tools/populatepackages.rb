@@ -17,7 +17,8 @@ p << Package.new(sku: 'START',
                  premium_days: 30,
                  sms_account: 75,
                  active: true,
-                 show_to_premium: false)
+                 show_to_premium: false,
+                 show_to_trial: true)
 
 p << Package.new(sku: 'PREMIUM30',
                  name: '30 dagar',
@@ -71,6 +72,7 @@ p << Package.new(sku: 'TRIAL7',
                  premium_days: 7,
                  sms_account: 50,
                  active: true,
+                 trial: true,
                  show: false,
                  show_to_premium: false)
 

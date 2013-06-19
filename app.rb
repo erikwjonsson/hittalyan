@@ -157,7 +157,15 @@ Cuba.define do
             # Unselect packages that the user shouldn't be interested in seeing
             criteria_b = package.show_to_premium == user.active
             
-            criteria_a && criteria_b
+            # Unselect if trial
+            criteria_c = package.show_to_trial == user.trial
+
+            # Fulhack to show startpackage to trial users
+            if package.show_to_trial && user.trial
+              true
+            else
+              criteria_a && criteria_b && criteria_c
+            end
           end
           
           external_packages.map! do |package|
