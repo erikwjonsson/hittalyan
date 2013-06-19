@@ -231,6 +231,10 @@ html, body {
   padding-bottom: 140px;
 }
 
+.trial-sticker {
+  float: right;
+}
+
 /*
 =====================
 Bootstrap extensions
