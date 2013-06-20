@@ -16,6 +16,9 @@
           %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
   .span10.box.opaque
     .padhack
+      .alert(ng-show="showFirstDayMessage")
+        Vi har skickat ett ett meddelande med instruktioner och tips för att du ska komma igång 
+        till din e-postadress.
       :markdown
         Välkommen till dina medlemssidor
         ---------------------------------
