@@ -2,5 +2,6 @@
 
 require_relative 'init'
 
-user = User.find_by(email: 'robin.edman@gmail.com')
-puts user._id.generation_time
+User.all.each do |u|
+  puts "#{u.trial}    #{u.email}: #{u._id}, #{u.premium_until}, #{u.first_name}"
+end
