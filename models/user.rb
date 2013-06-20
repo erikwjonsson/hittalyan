@@ -151,7 +151,7 @@ class User
   private
     def shoot_welcome_email
       Mailer.shoot_email(self,
-                         'Välkommen - så här kommer du igång',
+                         'Välkommen - startinstruktioner och tips',
                           render_mail("welcome_as_premium_member", binding),
                          'html')
       self.update_attribute(:has_received_welcome_email, true)
