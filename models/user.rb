@@ -132,6 +132,7 @@ class User
     self.update_attribute(:trial, package.trial)
     begin
       shoot_welcome_email if package.sku.include?('START')
+      shoot_welcome_email if package.sku.include?('TRIAL7')
     rescue Exception => e
       puts "Failed to send welcome email to #{self.email}."
       log_exception(e)
