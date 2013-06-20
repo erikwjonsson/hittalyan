@@ -259,7 +259,7 @@ Cuba.define do
         user.apply_package(package)
         LOG.info "Applied trial package to the user #{user.email}"
       end
-      res.write 'Din testperiod har aktiverats. <a href="/">Till HittaLyan</a>'
+      res.write 'Din testperiod har aktiverats. <a href="/#!/medlemssidor">Till HittaLyan</a>'
     end
 
     on ":catchall" do
