@@ -33,11 +33,11 @@ class User
   field :premium_until, type: Time
   field :sms_account, type: Integer, default: 0
   field :unsubscribe_id, type: String
-  field :greeted_by_apartmentor, type: Boolean, default: false
   field :trial, type: Boolean, default: false
 
   # Diagnostic fields
-  field :has_received_welcome_email, type: String, default: false
+  field :has_received_welcome_email, type: Boolean, default: false
+  field :greeted_by_apartmentor, type: Boolean, default: false
 
   has_one :session
   embeds_one :filter
