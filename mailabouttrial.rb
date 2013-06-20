@@ -2,8 +2,8 @@
 require_relative 'init'
   
 users = []
-#to = ENV['to'] || :everyone
-to = "robin.edman@gmail.com"
+to = :everyone
+#to = "robin.edman@gmail.com"
 subject = "Prova lägenhetstips från HittaLyan gratis i 7 dagar"
 file = "free_trial"
 
