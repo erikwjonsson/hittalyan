@@ -106,7 +106,7 @@ task :mail do
                        subject,
                        render_mail(file, binding),
                        'html')
-end
+  end
 end
 
 namespace :assets do

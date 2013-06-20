@@ -104,6 +104,7 @@ Cuba.define do
     end
 
     on "test" do
+      puts "Putsing: #{Time.now}"
       send_view "test"
     end
   
@@ -250,6 +251,17 @@ Cuba.define do
       end
     end
 
+    on ":user_id/aktivera_testperiod" do |user_id|
+      user = User.find(user_id)
+      unless user.trial
+        # Giving the user her free trial period
+        package = Packages::PACKAGE_BY_SKU["TRIAL7"]
+        user.apply_package(package)
+        LOG.info "Applied trial package to the user #{user.email}"
+      end
+      res.write 'Din tesperiod har aktiverats. <a href="/">Till HittaLyan</a>'
+    end
+
     on ":catchall" do
       LOG.info "Nu kom nån jävel allt fel get"
       res.status = 404 # not found
@@ -259,7 +271,6 @@ Cuba.define do
   #POST----------------------------------------
   on post do
     on "test" do
-      
     end
 
     on "payson_pay", param('sku'), param('code') do |sku, code|
