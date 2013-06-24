@@ -149,6 +149,21 @@ Cuba.define do
           send_json(user.as_external_document)
         end
 
+        on "apartments_estimate/:rooms_min/:rooms_max/:rent/:area_min/:area_max/:cities" do |rooms_min, rooms_max, rent, area_min, area_max, cities|
+          rooms = Range.new(rooms_min.to_i, rooms_max.to_i)
+          area = Range.new(area_min.to_i, area_max.to_i)
+          rent = rent.to_i
+          cities = ActiveSupport::JSON.decode(URI.unescape(cities))
+          apartments = Apartment.where(
+                         rooms: rooms, 
+                         area: area, 
+                         rent: 0..rent, 
+                         :city.in => cities,
+                         advertisement_found_at: 30.days.ago..Time.now)
+
+          send_json({count: apartments.count})
+        end
+
         on "packages" do
           external_packages = Packages::PACKAGES.select do |package|
             # Unselect packages the user should never see. These are to be kept

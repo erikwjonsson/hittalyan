@@ -189,6 +189,8 @@ function SettingsController($scope, $http, $location, analytics) {
   $scope.accountTermination = {};
   $scope.allSettings = {};
   $scope.userData = {};
+  $scope.apartmentsEstimate = null;
+  $scope.zeroApartmentsEstimate = false;
   
   $scope.userData.active = true;
   $scope.cities = [{name: "Stockholm", value: 0},
@@ -326,7 +328,7 @@ function SettingsController($scope, $http, $location, analytics) {
     error(function(data, status) {
       //alert(data)
     });
-  
+
   $scope.submitAllSettings = function() {
     if ( $scope.allSettingsForm.$valid === true) {
       var userData = $scope.userData;
@@ -357,10 +359,26 @@ function SettingsController($scope, $http, $location, analytics) {
   
   $scope.addCity = function() {
     $scope.userData.filter.cities.pushUnique($scope.city.name);
+    $scope.getApartmentsEstimate();
   };
   
   $scope.removeCity = function(city) {
     $scope.userData.filter.cities.remove(city);
+    $scope.getApartmentsEstimate();
+  };
+
+  $scope.getApartmentsEstimate = function() {
+    $http.get("medlemssidor/apartments_estimate/" + $scope.roomsMin.value + "/" + $scope.roomsMax.value + "/" + $scope.rent.value + "/" + $scope.areaMin.value + "/" + $scope.areaMax.value + "/" + JSON.stringify($scope.userData.filter.cities))
+      .success(function(data, status) {
+        console.log("Req sent. Got: " + data);
+        $scope.apartmentsEstimate = data.count;
+        if (data.count === 0 ) {
+          $scope.zeroApartmentsEstimate = true;
+        }
+        else {
+          $scope.zeroApartmentsEstimate = false;
+        };
+      });
   };
   
   $scope.submitPasswordSettings = function() {
