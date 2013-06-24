@@ -101,6 +101,7 @@ task :mail do
   end
   
   users.each do |user|
+    @user = user
     LOG.info "Shooting mail to: #{user.email}"
     Mailer.shoot_email(user,
                        subject,
