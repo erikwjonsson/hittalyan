@@ -159,7 +159,11 @@ Cuba.define do
             criteria_b = (package.show_to_premium == user.active)
             
             # Unselect if trial
-            criteria_c = (package.show_to_trial == user.trial)
+            criteria_c = if user.trial
+                           package.show_to_trial == user.trial
+                         else
+                           true
+                         end
 
             # Fulhack to show startpackage to trial users
             if package.show_to_trial && user.trial
