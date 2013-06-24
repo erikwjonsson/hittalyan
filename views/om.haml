@@ -3,9 +3,9 @@
     .padhack
       %h1 Om oss
       :markdown
-        HittaLyan är en tjänst för att hjälpa dig att hitta en bostad.
-        Det är gratis att bli medlem, 
-        men för att fullt ut kunna utnyttja tjänsten betalar du för en prenumeration på lägenhetstips.
+        HittaLyan är en tjänst som hjälper dig att hitta en hyreslägenhet i Stockholm.
+        Detta gör vi genom att hålla koll på när hyresvärdar lägger upp nya lägenheter 
+        och tipsa dig som är medlem. 
         Vi som står bakom tjänsten är ett företag som heter Lingonberry Productions.
       %h2 Kontakta oss
       :markdown
@@ -13,10 +13,12 @@
       %div.alert.alert-success(ng-show="messageSent")
         Ditt meddelande har skickats.
       %form#contact-form(name="contact" ng-submit="submit()")
-        %label(for="email") Din E-postadress
+        %label(for="email")
+          %strong Din E-postadress:
         %input(ng-model="email" name="email" type="text" placeholder="Din e-postadress" required)
         %br
-        %label(for="message") Din fråga/meddelande
+        %label(for="message")
+          %strong Fråga/meddelande:
         %textarea.large-textarea(ng-model="message" name="message "rows="10" placeholder="Skriv ditt meddelande här" required)
         %br
         %input(type="submit" class="btn" value="Skicka")
