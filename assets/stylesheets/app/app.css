@@ -262,4 +262,7 @@ Bootstrap extensions
           border-radius: 8px;
   }
 
+.hittalyan-nav-text {
+  color: rgb(153, 153, 153) !important;
+}
 

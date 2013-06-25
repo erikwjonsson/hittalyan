@@ -30,7 +30,11 @@ input "assets/stylesheets" do
   end
 
   match "vendor/**/*.css" do
-    concat
+    concat %w[
+      vendor/bootstrap.min.css
+      vendor/bootstrap-responsive.min.css
+      vendor/font-awesome.min.css
+    ], "application.css"
   end
 
   match "**/*.css" do
