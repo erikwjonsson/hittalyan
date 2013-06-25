@@ -164,6 +164,11 @@ body {
 
 .top-buffer { margin-top:30px; }
 
+.vertical-nav-box {
+  max-width: 140px;
+  padding: 8px 0;
+}
+
 /*Forcing vertical scrollbar to prevent jumping*/
 body {
   overflow-y: scroll; 
@@ -213,6 +218,7 @@ html, body {
 }
 
 #wrap {
+  padding: 0px;
   padding-top: 60px; /* Push us beneath the navbar */
   height: auto !important;
   min-height: 100%; /* For browser that don't support calc */
@@ -238,6 +244,11 @@ html, body {
 .trial-sticker {
   float: right;
   max-width: 50%;
+}
+
+#mainnav {
+  margin-left: 0px;
+  margin-right: 0px; 
 }
 
 /*
