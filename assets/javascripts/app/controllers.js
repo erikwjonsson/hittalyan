@@ -3,6 +3,7 @@
 /* Controllers */
 
 function IndexController($rootScope, $scope, $http, $location, analytics) {
+  $scope.navBarCollapsed = true;
   defineViewHelperMethodsInRootScope($rootScope, $http, $location);
   // Wedon't use this much anymore. Could maybe be removed.
   // getEnvironment($http, $rootScope);

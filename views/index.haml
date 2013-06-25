@@ -10,14 +10,16 @@
     #mainnav.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container
+          / %a.btn.btn-navbar(type="button"
+          /                   data-target=".nav-collapse"
+          /                   data-toggle="collapse")
           %a.btn.btn-navbar(type="button"
-                            data-target=".nav-collapse"
-                            data-toggle="collapse")
+                            ng-click="navBarCollapsed = !navBarCollapsed")
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
           %a.brand{:href => "#!/"} HittaLyan
-          .nav-collapse.collapse
+          .nav-collapse.collapse(collapse="navBarCollapsed")
             %ul.nav
               %li
                 %a(href="#!/vanliga-fragor") Vanliga frågor

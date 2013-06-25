@@ -20,6 +20,7 @@ input "assets/javascripts" do
       vendor/angular.min.js
       vendor/angular-resource.min.js
       vendor/angular-sanitize.min.js
+      vendor/ui-bootstrap-custom-tpls-0.4.0.js
     ], "application.js"
   end
 end
