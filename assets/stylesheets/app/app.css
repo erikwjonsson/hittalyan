@@ -266,3 +266,6 @@ Bootstrap extensions
   color: rgb(153, 153, 153) !important;
 }
 
+.hittalyan-limit-form-width {
+  max-width: 450px;
+}
