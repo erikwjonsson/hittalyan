@@ -33,64 +33,55 @@
             Med dessa filterinställningar hade du fått <strong>{{apartmentsEstimate}}</strong> lägenhetstips den senaste månaden.
           .alert.alert-error(ng-show="fewApartmentsEstimate")
             Med dessa filterinställningar hade du fått <strong>{{apartmentsEstimate}}</strong> lägenhetstips den senaste månaden.
-          %table(id="rooms" name="roomsTable")
-            %tr
-              %td
-                %label(for="roomsMin") Minimalt antal rum:
-              %td
-                %label(for="roomsMax") Maximalt antal rum:
-            %tr
-              %td
-                %select(ng-model="roomsMin"
-                        name="roomsMin"
-                        id="roomsMin"
-                        ng-options="r.name for r in roomValuesMin"
-                        ng-change="getApartmentsEstimate()")
-                  %option(value="" 
-                          disabled="disabled")Minimalt antal rum
-              %td
-                %select(ng-model="roomsMax"
-                        name="roomsMax"
-                        id="roomsMax"
-                        ng-options="r.name for r in roomValuesMax"
-                        ng-change="getApartmentsEstimate()")
-                  %option(value=""
-                          disabled="disabled")Maximalt antal rum
-            %tr
-              %td
-                %label(for="roomsMin") Minimal yta:
-              %td
-                %label(for="roomsMax") Maximal yta:
-            %tr
-              %td
-                %select(ng-model="areaMin"
-                        name="areaMin"
-                        id="areaMin"
-                        ng-options="a.name for a in areaValuesMin"
-                        ng-change="getApartmentsEstimate()")
-                  %option(value="" 
-                          disabled="disabled")Minimal yta
-              %td
-                %select(ng-model="areaMax"
-                        name="areaMax"
-                        id="areaMax"
-                        ng-options="a.name for a in areaValuesMax"
-                        ng-change="getApartmentsEstimate()")
-                  %option(value=""
-                          disabled="disabled")Maximal yta
-            %tr
-              %td
-                %label(for="rent") Maximal hyra:
-            %tr
-              %td
-                %select(ng-model="rent"
+          
+          .row-fluid.hittalyan-limit-form-width
+            .span6
+              %label(for="roomsMin") Minimalt antal rum:
+              %select(ng-model="roomsMin"
+                            name="roomsMin"
+                            id="roomsMin"
+                            ng-options="r.name for r in roomValuesMin"
+                            ng-change="getApartmentsEstimate()")
+                %option(value="" 
+                        disabled="disabled")Minimalt antal rum
+            .span6
+              %label(for="roomsMax") Maximalt antal rum:
+              %select(ng-model="roomsMax"
+                            name="roomsMax"
+                            id="roomsMax"
+                            ng-options="r.name for r in roomValuesMax"
+                            ng-change="getApartmentsEstimate()")
+                %option(value=""
+                        disabled="disabled")Maximalt antal rum
+          .row-fluid.hittalyan-limit-form-width
+            .span6
+              %label(for="roomsMin") Minimal yta:
+              %select(ng-model="areaMin"
+                            name="areaMin"
+                            id="areaMin"
+                            ng-options="a.name for a in areaValuesMin"
+                            ng-change="getApartmentsEstimate()")
+                %option(value="" 
+                        disabled="disabled")Minimal yta
+            .span6
+              %label(for="roomsMax") Maximal yta:
+              %select(ng-model="areaMax"
+                            name="areaMax"
+                            id="areaMax"
+                            ng-options="a.name for a in areaValuesMax"
+                            ng-change="getApartmentsEstimate()")
+                %option(value=""
+                        disabled="disabled")Maximal yta
+
+          %label(for="rent") Maximal hyra:
+          %select(ng-model="rent"
                         name="rent"
                         id="rent"
                         ng-options="r.name for r in rentValues"
                         ng-change="getApartmentsEstimate()")
-                  %option(value="" 
-                          disabled="disabled")Maximal Hyra
-
+            %option(value="" 
+                    disabled="disabled")Maximal Hyra
+                
           %label
             Städer:
             .form-horizontal.custom-input
