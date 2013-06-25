@@ -97,19 +97,19 @@ body {
 }
 
 /*Landing hero, duh.*/
-.hero-unit h1{
+/*.hero-unit h1{
   font-size: 55px;
-}
+}*/
 
 /*Should fit on one line, 
   have a bit of space separating it from the h1 above,
   and sit closer to the p text below.*/
-.hero-unit h2 {
+/*hero-unit h2 {
   font-size: 26px;
   margin-top: 35px;
   line-height: 24px;
 }
-
+*/
 .markety-box p {
   font-size: 18px;
   font-weight: 200;
@@ -237,6 +237,7 @@ html, body {
 
 .trial-sticker {
   float: right;
+  max-width: 50%;
 }
 
 /*
@@ -263,4 +264,59 @@ Bootstrap extensions
 
 .hittalyan-limit-form-width {
   max-width: 450px;
+}
+
+
+/*
+==============
+Media queries
+==============
+*/
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+  .hero-unit h1 {
+    font-size: 50px;
+  }
+
+  .hero-unit h2 {
+    font-size: 40px;
+  }
+
+  /*.hero-unit p {
+    font-size: 12px;
+  }*/
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  h1 {
+    font-size: 40px !important;
+  }
+
+  h2 {
+    font-size: 26px !important;
+    line-height: 32px !important;
+  }
+
+  .markety-box {
+    margin-top: 25px;
+  }
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px !important;
+  }
+
+  h2 {
+    font-size: 22px !important;
+    line-height: 22px !important;
+  }
 }
