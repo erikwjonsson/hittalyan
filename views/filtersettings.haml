@@ -29,9 +29,9 @@
               Du kan alltid begränsa filtret senare. 
               Vår rekommendation är att vänta ett par dagar innan du ändrar ditt filter så att du får se vilken typ 
               av lägenheter som hyresvärdarna lägger upp och till vilket pris.
-          .alert(ng-show="apartmentsEstimate")
+          .alert(ng-show="manyApartmentsEstimate")
             Med dessa filterinställningar hade du fått <strong>{{apartmentsEstimate}}</strong> lägenhetstips den senaste månaden.
-          .alert.alert-error(ng-show="zeroApartmentsEstimate")
+          .alert.alert-error(ng-show="fewApartmentsEstimate")
             Med dessa filterinställningar hade du fått <strong>{{apartmentsEstimate}}</strong> lägenhetstips den senaste månaden.
           %table(id="rooms" name="roomsTable")
             %tr
