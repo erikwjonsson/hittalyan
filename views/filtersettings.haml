@@ -23,7 +23,7 @@
       %form(name="allSettingsForm" ng-submit="submitAllSettings()" novalidate)
         %fieldset
           %legend Intressefilter
-          .alert.alert-info(ng-hide="userData.has_changed_filter_settings")
+          .alert.alert-info.alert-block(ng-hide="userData.has_changed_filter_settings")
             :markdown
               **Tips:** Ställ hellre in filtret på _vad du kan tänka dig_ än vad du helst vill ha.
               Du kan alltid begränsa filtret senare. 
