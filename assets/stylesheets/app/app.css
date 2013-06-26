@@ -212,8 +212,7 @@ Push content beneath navbar and put footer at the bottom.
 */
 
 html, body {
-  margin: 0;
-  padding: 0;
+  /*margin: 0;*/ /*Don't know what this is for. I want to remove it*/
   height: 100%;
 }
 
@@ -232,7 +231,8 @@ html, body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%; 
+  right: 0;
+  width: auto;
 }
 
 #content {
@@ -248,7 +248,10 @@ html, body {
 
 #mainnav {
   margin-left: 0px;
-  margin-right: 0px; 
+  margin-right: 0px;
+  left: 0;
+  right: 0;
+  width: auto;
 }
 
 /*
@@ -288,6 +291,15 @@ Media queries
 @media (min-width: 1200px) {
 
 }
+
+@media (max-width: 979px) {
+  /*When making navbar collapsible it's position is no longer absolute
+    and so we no longer need to push our wrapper beneath it. The navbar has
+    some margin-bottom instead.*/
+  #wrap {
+    padding-top: 0;
+  }
+}
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
@@ -317,6 +329,16 @@ Media queries
 
   .markety-box {
     margin-top: 25px;
+  }
+  
+  #mainnav {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
   }
 }
  
