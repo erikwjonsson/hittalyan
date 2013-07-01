@@ -10,9 +10,6 @@
     #mainnav.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container
-          / %a.btn.btn-navbar(type="button"
-          /                   data-target=".nav-collapse"
-          /                   data-toggle="collapse")
           %a.btn.btn-navbar(type="button"
                             ng-click="navBarCollapsed = !navBarCollapsed")
             %span.icon-bar
@@ -31,8 +28,7 @@
                 %a(href="#!/medlemssidor" rel="nofollow" ng-show="isLoggedIn()") Medlemssidor
               %li(ng-hide="isLoggedIn()")
                 %a(href="#!/losenordsaterstallning" rel="nofollow"
-                   ng-hide="isLoggedIn()") Glömt Lösenord?
-
+                   ng-hide="isLoggedIn()") Glömt lösenord?
             %form#loginform.navbar-form.pull-right(name="login"
                                                    ng-hide="isLoggedIn()"
                                                    ng-submit="submit()"
