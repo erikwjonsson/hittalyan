@@ -64,11 +64,12 @@
         %div{'ng-view' => true}
       #footer.top-buffer.dark-opaque
         .padhack
-          %span.footer-item
-            © Lingonberry Productions
-          %a.footer-item(href="https://www.payson.se" rel="nofollow" title="Payson internetbetalningar")
-            Kortbetalning på nätet
-            %img(src="images/payson150x55.png")
-          %a.footer-item(href="http://www.minacookies.se/" rel="nofollow" title="Vi använder cookies")
-            %img.opaque(src="images/vi_anvander_cookies_ikon_120x36.png")
-          
+          .row
+            .span7.footer-item
+              %a#credits(href="/#!/om") HittaLyan drivs av webbyrån Lingonberry&nbsp;Productions
+            .span2.footer-item.footer-item-vertical-center
+              %a(href="https://www.payson.se" rel="nofollow" title="Payson internetbetalningar")
+                %img(src="images/payson150x55.png")
+            .span2.footer-item.footer-item-vertical-center
+              %a.footer-item(href="http://www.minacookies.se/" rel="nofollow" title="Vi använder cookies")
+                %img.opaque(src="images/vi_anvander_cookies_ikon_120x36.png")

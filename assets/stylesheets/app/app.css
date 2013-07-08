@@ -155,7 +155,9 @@ hero-unit h2 {
 }
 
 .footer-item {
+  /*display: block;
   padding-right: 50px;
+  padding-bottom: 25px;*/
 }
 
 .payson-button {
@@ -278,6 +280,21 @@ Bootstrap extensions
 }
 
 
+/* Vertically position footer content in desktop/tablet view */
+.footer-item-vertical-center {
+  line-height: 60px;
+}
+
+#footer img {
+  vertical-align: bottom;
+}
+
+#credits {
+  display: block;
+  margin-top: 30px;
+  text-align: right;
+}
+
 /*
 ==============
 Media queries
@@ -286,11 +303,11 @@ Media queries
 
 /* Large desktop */
 @media (min-width: 1200px) {
-
 }
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
+  /* Hero unit */
   .hero-unit h1 {
     font-size: 50px;
   }
@@ -298,14 +315,14 @@ Media queries
   .hero-unit h2 {
     font-size: 40px;
   }
-
-  /*.hero-unit p {
-    font-size: 12px;
-  }*/
 }
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
+  #credits {
+    text-align: inherit;
+  }
+
   h1 {
     font-size: 40px !important;
   }
@@ -317,6 +334,20 @@ Media queries
 
   .markety-box {
     margin-top: 25px;
+  }
+
+  /* Adapt footer styles to vertical display */
+  #footer {
+    height: 300px;
+    text-align: center;
+  }
+
+  #content {
+   padding-bottom: 340px;
+  }
+
+  .footer-item {
+    margin-top: 15px;
   }
 }
  
