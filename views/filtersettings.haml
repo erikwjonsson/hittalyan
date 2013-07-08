@@ -1,20 +1,17 @@
 ﻿.row
-  .span12.box.opaque
-    .padhack
-      %h1 Medlemssidor
-.row.top-buffer
-  .span2.box.opaque
-    .padhack  
-      %ul.nav.nav-stacked.nav-pills
-        %li
-          %a{href: "#!/medlemssidor"} Medlemssidor
-        %li
-          %a{href: "#!/medlemssidor/installningar"} Inställningar
-        %li
-          %a{href: "#!/medlemssidor/lagenheter"} Lägenheter
-        %li
-          %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
-  .span10.box.opaque
+  .span3.bottom-buffer
+    #member-nav.box.opaque
+      .padhack  
+        %ul.nav.nav-stacked.nav-pills
+          %li
+            %a{href: "#!/medlemssidor"} Medlemssidor
+          %li
+            %a{href: "#!/medlemssidor/installningar"} Inställningar
+          %li
+            %a{href: "#!/medlemssidor/lagenheter"} Lägenheter
+          %li
+            %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
+  .span9.box.opaque
     .padhack
       .alert(ng-hide="userData.active")
         Obs! För att få lägenhetstips måste du aktivera en prenumeration.
