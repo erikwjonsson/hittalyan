@@ -359,9 +359,8 @@ Media queries
     border-radius: 0px;
   }
 
-  /* Extra padding to push us down beneath the navbar no longer necessary */
-  #wrap {
-    padding: 0px;
+  .hero-unit {
+    border-radius: 0px;
   }
 
   /* Adapt footer styles to vertical display */
