@@ -221,7 +221,8 @@ Push content beneath navbar and put footer at the bottom.
 */
 
 html, body {
-  /*margin: 0;*/ /*Don't know what this is for. I want to remove it*/
+  margin: 0;
+  padding: 0;
   height: 100%;
 }
 
@@ -236,13 +237,10 @@ html, body {
 }
 
 #footer {
-  min-height: 100px;
-  height: auto;
+  height: 100px;
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
-  width: auto;
+  width: 100%;
 }
 
 #content {
@@ -259,9 +257,7 @@ html, body {
 #mainnav {
   margin-left: 0px;
   margin-right: 0px;
-  left: 0;
-  right: 0;
-  width: auto;
+  width: 100%;
 }
 
 /*
@@ -336,10 +332,6 @@ Media queries
     font-size: 40px;
   }
 
-  /* Extra padding to push us down beneath the navbar no longer necessary. */
-  #wrap {
-    padding: 0px;
-  }
 }
  
 /* Landscape phone to portrait tablet */
@@ -360,7 +352,6 @@ Media queries
   .markety-box {
     margin-top: 25px;
   }
-<<<<<<< HEAD
 
   /* Curved borders don't look so good when the boxes cover the whole width of
      the screen. */
