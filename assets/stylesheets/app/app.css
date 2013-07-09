@@ -213,6 +213,14 @@ body {
   text-align: center
 }
 
+/* Makes the apartment image sit closer to the text. Small cosmetic change.
+   the more important one is in the media queries where we change this to
+   "float: left". The float prevents unnecessary stacking on smaller
+   screens. */
+.apartment-image {
+  float: right;
+}
+
 /*
 ======= 
 LAYOUT
@@ -331,7 +339,6 @@ Media queries
   .hero-unit h2 {
     font-size: 40px;
   }
-
 }
  
 /* Landscape phone to portrait tablet */
@@ -375,6 +382,12 @@ Media queries
 
   .footer-item {
     margin-top: 15px;
+  }
+
+  /* Makes the apartment image fit horizontally instead of stacking unnecessarily
+   on smaller screens. */
+  .apartment-image {
+    float: left;
   }
 }
  
