@@ -1,5 +1,5 @@
 module Mailer
-  OUR_STANDARD_EMAIL = "HittaLyan <lingonberryprod@gmail.com>"
+  OUR_STANDARD_EMAIL = "HittaLyan <info@hittalyan.se>"
   def self.shoot_email(recipient, subject, message, format='text', sender=OUR_STANDARD_EMAIL)
     if recipient.is_a?(User)
       unless recipient.permits_to_be_emailed
