@@ -32,27 +32,6 @@
   color: inherit;
 }
 
-#packages {
-  border-spacing: 2px;
-}
-
-#packages td {
-  padding: 2px;
-}
-
-#packages .description {
-  /*background-color: yellow;*/
-}
-
-#packages .price {
-  min-width: 60px;
-  /*background-color: lime;*/
-}
-
-#packages .buy {
-  min-width: 100px;
-  /*background-color: red;*/
-}
 
 /*Make bootstrap grok some Angular*/
 
@@ -221,6 +200,16 @@ body {
   float: right;
 }
 
+.package-image {
+  max-width: 100px;
+  float: right;
+}
+
+.package-row {
+  /* Limit the width a bit for nicer display on larger screens. */
+  max-width: 600px;
+}
+
 /*
 ======= 
 LAYOUT
@@ -387,6 +376,12 @@ Media queries
   /* Makes the apartment image fit horizontally instead of stacking unnecessarily
    on smaller screens. */
   .apartment-image {
+    float: left;
+  }
+
+  /* Similar to apartment-image. */
+  .package-image {
+    max-width: 100px;
     float: left;
   }
 }
