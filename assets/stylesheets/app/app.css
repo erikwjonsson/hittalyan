@@ -316,6 +316,10 @@ Media queries
   #wrap {
     padding-top: 0;
   }
+
+  body {
+    /*background-attachment: scroll; */
+  }
 }
  
 /* Portrait tablet to landscape and desktop */
