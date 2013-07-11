@@ -28,3 +28,33 @@
         prenumeration går du in på sidan [Prenumeration](/#!/medlemssidor/prenumeration). 
 
         Så, ta dig lite tid och kolla runt. Och invänta dina första lägenhetstips!
+.row
+  .span9.offset3.box.opaque.top-buffer
+    .padhack
+      %h3 Lägenheter
+      .row-fluid.bottom-buffer(ng-repeat="apartment in apartments")
+        .span3
+          %a(href="{{apartment.url}}")
+            %img.apartment-image(src="images/apartments.png"
+                 alt="Lägenhet")
+        .span9
+          %strong Ort: 
+          {{apartment.city}}
+          %br
+          %strong Adress: 
+          {{apartment.address}}
+          %br
+          %strong Rum: 
+          {{apartment.rooms}}
+          %br
+          %strong Yta: 
+          {{apartment.area}} kvm
+          %br
+          %strong Hyra: 
+          {{apartment.rent}} kr
+          %br
+          %em
+            Lägenheten publicerades 
+            {{apartment.advertisement_found_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+          %br
+          %a(href="{{apartment.url}}") Se lägenheten hos {{apartment.landlord}}

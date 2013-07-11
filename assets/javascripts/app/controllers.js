@@ -182,6 +182,14 @@ function MembersController($scope, $http, analytics) {
     error(function(data, status) {
     });
 
+  $scope.apartments = [];
+  $http.get("medlemssidor/apartments_list" + mingDate()).
+    success(function(data, status) {
+      $scope.apartments = data;
+    }).
+    error(function(data, status) {
+      $scope.apartments = [];
+  }); 
 }
 
 function SettingsController($scope, $http, $location, analytics) {
