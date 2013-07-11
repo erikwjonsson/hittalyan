@@ -75,18 +75,23 @@ body {
 	background-size: cover;
 }
 
+.markety-box h2 {
+  font-size: 23px;
+  text-align: center;
+}
+
 /*Landing hero, duh.*/
 .hero-unit h1{
-  font-size: 64px;
+  font-size: 48px;
 }
 
 /*Should fit on one line, 
   have a bit of space separating it from the h1 above,
   and sit closer to the p text below.*/
-hero-unit h2 {
-  font-size: 35px;
-  margin-top: 35px;
-  line-height: 26px;
+.hero-unit h2 {
+  font-size: 23px;
+  margin-top: 20px;
+  margin-bottom: 0px;
 }
 
 .markety-box p {
@@ -259,6 +264,7 @@ html, body {
 .trial-sticker {
   float: right;
   max-width: 50%;
+  margin-top: 10px;
 }
 
 #mainnav {
