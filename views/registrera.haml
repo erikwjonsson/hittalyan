@@ -1,18 +1,19 @@
 .row
   .span8.offset2.box.opaque
     .padhack
-      .alert.alert-info.text-center
-        Redan medlem? <a href="/#!/login">Logga in här</a>
-      %h2 Bli medlem
-      :markdown
-        Det är enkelt att börja använda HittaLyan.
-        Du behöver inte fylla i något annat än din e-postadress och det lösenord som du vill ha för att logga in 
-        på våra medlemssidor.
-
-        När du tryckt på knappen aktiverar vi en prenumeration som gäller i 7 dagar.
-        Du får tillgång till medlemssidorna där kan du ställa in vilka lägenheter du är intresserad av 
-        och hur vi ska meddela dig om nya lägenheter. 
       %form.form-horizontal(name="signup" ng-submit="submit()" novalidate)
+        %fieldset
+          %legend Bli medlem
+          .alert.alert-info.text-center
+            Redan medlem? <a href="/#!/login">Logga in här</a>
+          :markdown
+            Det är enkelt att börja använda HittaLyan.
+            Du behöver inte fylla i något annat än din e-postadress och det lösenord som du vill ha för att logga in 
+            på våra medlemssidor.
+
+            När du tryckt på knappen aktiverar vi en prenumeration som gäller i 7 dagar.
+            Du får tillgång till medlemssidorna där kan du ställa in vilka lägenheter du är intresserad av 
+            och hur vi ska meddela dig om nya lägenheter. 
         .control-group
           %label.control-label(for="email")
             %strong Din e-postadress:
