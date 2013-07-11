@@ -210,6 +210,16 @@ body {
   max-width: 600px;
 }
 
+
+.center {
+    text-align:center;
+}
+
+.center form {
+    display:inline-block;
+}
+
+
 /*
 ======= 
 LAYOUT
