@@ -68,7 +68,7 @@ input:focus.ng-valid {
 
 /*Background image for entire app*/
 body { 
-	background: url(/images/stockholmsvy.jpg) no-repeat center center fixed; 
+	background: url(/images/gamla_stan_cc_attribution.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -116,7 +116,7 @@ hero-unit h2 {
 /*Set element background to white and make that same BACKGROUND transparent*/
 .opaque {
   background: rgb(255, 255, 255) transparent; /* default fallback */
-  background: rgba(255, 255, 255, 0.8); /* nice browsers */
+  background: rgba(255, 255, 255, 0.9); /* nice browsers */
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
 }
@@ -293,7 +293,7 @@ Bootstrap extensions
   vertical-align: bottom;
 }
 
-#credits {
+.footer-text {
   display: block;
   margin-top: 30px;
   text-align: right;
@@ -336,8 +336,8 @@ Media queries
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-  #credits {
-    text-align: inherit;
+  .footer-text {
+    text-align: inherit !important;
   }
 
   h1 {

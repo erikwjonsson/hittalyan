@@ -1,16 +1,15 @@
 .row
   .span3.bottom-buffer
-    #member-nav.box.opaque
-      .padhack  
-        %ul.nav.nav-stacked.nav-pills
-          %li
-            %a{href: "#!/medlemssidor"} Medlemssidor
-          %li
-            %a{href: "#!/medlemssidor/installningar"} Inställningar
-          %li
-            %a{href: "#!/medlemssidor/lagenheter"} Lägenheter
-          %li
-            %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
+    #member-nav
+      %ul.nav.nav-stacked.nav-pills
+        %li.box.opaque
+          %a{href: "#!/medlemssidor"} Medlemssidor
+        %li.box.opaque
+          %a{href: "#!/medlemssidor/installningar"} Inställningar
+        %li.box.opaque
+          %a{href: "#!/medlemssidor/lagenheter"} Lägenheter
+        %li.box.opaque
+          %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
   .span9.box.opaque
     .padhack
       %div.alert.alert-info(ng-show="userData.premium_until")
