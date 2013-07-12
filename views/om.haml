@@ -7,18 +7,25 @@
         Detta gör vi genom att hålla koll på när hyresvärdar lägger upp nya lägenheter 
         och tipsa dig som är medlem. 
         Vi som står bakom tjänsten är ett företag som heter Lingonberry Productions.
-      %h2 Kontakta oss
-      :markdown
-        Du kan kontakta oss via det här formuläret.
-      %div.alert.alert-success(ng-show="messageSent")
-        Ditt meddelande har skickats.
-      %form#contact-form(name="contact" ng-submit="submit()")
-        %label(for="email")
-          %strong Din E-postadress:
-        %input(ng-model="email" name="email" type="text" placeholder="Din e-postadress" required)
-        %br
-        %label(for="message")
-          %strong Fråga/meddelande:
-        %textarea.large-textarea(ng-model="message" name="message "rows="10" placeholder="Skriv ditt meddelande här" required)
-        %br
-        %input(type="submit" class="btn" value="Skicka")
+      %form#contact-form.form-horizontal(name="contact" ng-submit="submit()")
+        %fieldset
+          %legend Kontakta oss
+          .alert.alert-success(ng-show="messageSent")
+            Ditt meddelande har skickats.
+          .control-group
+            %label.control-label(for="email")
+              %strong Din E-postadress:
+            .controls
+              %input(ng-model="email" id="email" type="text" placeholder="Din e-postadress" required)
+          .control-group
+            %label.control-label(for="message")
+              %strong Fråga/meddelande:
+            .controls
+              %textarea.large-textarea(ng-model="message" 
+                                       id="message" 
+                                       rows="10" 
+                                       placeholder="Skriv ditt meddelande här" 
+                                       required)
+          .control-group
+            .controls
+              %input(type="submit" class="btn" value="Skicka")
