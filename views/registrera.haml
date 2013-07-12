@@ -1,11 +1,11 @@
 .row
   .span8.offset2.box.opaque
     .padhack
+      .alert.alert-info.text-center
+        Redan medlem? <a href="/#!/login">Logga in här</a>
       %form.form-horizontal(name="signup" ng-submit="submit()" novalidate)
         %fieldset
           %legend Bli medlem
-          .alert.alert-info.text-center
-            Redan medlem? <a href="/#!/login">Logga in här</a>
           :markdown
             Det är enkelt att börja använda HittaLyan.
             Du behöver inte fylla i något annat än din e-postadress och det lösenord som du vill ha för att logga in 
