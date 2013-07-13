@@ -89,9 +89,8 @@ body {
   have a bit of space separating it from the h1 above,
   and sit closer to the p text below.*/
 .hero-unit h2 {
-  font-size: 23px;
-  margin-top: 20px;
-  margin-bottom: 0px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .markety-box p {
@@ -264,7 +263,6 @@ html, body {
 .trial-sticker {
   float: right;
   max-width: 50%;
-  margin-top: 10px;
 }
 
 #mainnav {
