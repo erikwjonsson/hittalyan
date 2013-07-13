@@ -313,6 +313,17 @@ Bootstrap extensions
   text-align: right;
 }
 
+#step1-image {
+  display: block;
+  float: right;
+  padding-right: 5px; /* To align approximately with step2-image */
+}
+
+#step2-image {
+  display: block;
+  float: right;
+}
+
 /*
 ==============
 Media queries
@@ -402,7 +413,18 @@ Media queries
     max-width: 100px;
     float: left;
   }
+
+  #step1-image {
+    float: left;
+    padding-right: 10px;
+  }
+
+  #step2-image {
+    float: left;
+    padding-right: 10px;
+  }
 }
+
  
 /* Landscape phones and down */
 @media (max-width: 480px) {

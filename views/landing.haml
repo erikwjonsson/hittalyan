@@ -9,12 +9,19 @@
   .span10.offset1.box.opaque.markety-box
     .padhack
       %h2.text-center Hur fungerar det?
-      :markdown
-          1. **En hyresvärd publicerar en lägenhet på sin hemsida.**
-             Lägenheten förmedlas inte genom en bostadskö. 
-             Istället väljer hyresvärden bland de som varit snabba att skicka in en intresseanmälan. 
-          2. **HittaLyan hittar lägenheten**. Direkt efter att lägenheten publicerats tipsar vi dig. 
-          3. **Du får tipset som ett SMS eller e-postmeddelande och kan anmäla ditt intresse.** 
+      .row-fluid
+        .span1.offset1
+          %i#step1-image.icon-building.icon-4x 
+        .span8
+          :markdown
+            En hyresvärd publicerar en lägenhet på sin hemsida. 
+            Hyreskontraktet erbjuds till någon av dem som varit snabba med att skicka in en intresseanmälan.
+      .row-fluid
+        .span1.offset1
+          %i#step2-image.icon-envelope.icon-4x.envelope-image
+        .span8
+          :markdown
+            HittaLyan hittar lägenheten och skickar ett mejl eller SMS till dig.
 .row.top-buffer
   #best-chance.span4.box.opaque.markety-box
     .padhack
