@@ -324,6 +324,11 @@ Bootstrap extensions
   float: right;
 }
 
+#step2-text {
+  display: block;
+  margin-top: 12px;
+}
+
 /*
 ==============
 Media queries
@@ -422,6 +427,10 @@ Media queries
   #step2-image {
     float: left;
     padding-right: 10px;
+  }
+
+  #step2-text {
+    margin-top: inherit;
   }
 }
 
