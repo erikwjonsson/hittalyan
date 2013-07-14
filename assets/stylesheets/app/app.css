@@ -371,11 +371,15 @@ Media queries
 @media (min-width: 768px) and (max-width: 979px) {
   /* Hero unit */
   .hero-unit h1 {
-    font-size: 50px;
+   font-size: 36px; 
   }
 
   .hero-unit h2 {
-    font-size: 40px;
+    line-height: 24px;
+  }
+
+  .markety-box h2 {
+    font-size: 20px;
   }
 
   .markety-equal-height {
@@ -389,13 +393,12 @@ Media queries
     text-align: inherit !important;
   }
 
-  h1 {
-    font-size: 40px !important;
+  .hero-unit h1 {
+    font-size: 36px;
   }
 
-  h2 {
-    font-size: 26px !important;
-    line-height: 32px !important;
+  .hero-unit h2 {
+    line-height: 24px;
   }
 
   .markety-box {
