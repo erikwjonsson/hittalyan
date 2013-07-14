@@ -329,6 +329,19 @@ Bootstrap extensions
   margin-top: 12px;
 }
 
+.markety-icon {
+  text-align: center;
+  font-size: 100px;
+  line-height: 100px;
+  height: 100px;
+}
+
+.icon-notanicon {
+  font-family: Arial, Helvetica, Geneva, SansSerif;
+  font-weight: bold;
+}
+
+
 /*
 ==============
 Media queries
@@ -337,6 +350,9 @@ Media queries
 
 /* Large desktop */
 @media (min-width: 1200px) {
+  .never-miss-length-compensation {
+    padding-bottom: 30px;
+  }
 }
 
 @media (max-width: 979px) {
@@ -347,8 +363,8 @@ Media queries
     padding-top: 0;
   }
 
-  body {
-    /*background-attachment: scroll; */
+  .never-miss-length-compensation {
+    padding-bottom: 30px;
   }
 }
  
