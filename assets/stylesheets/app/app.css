@@ -341,6 +341,9 @@ Bootstrap extensions
   font-weight: bold;
 }
 
+.markety-equal-height {
+  min-height: 380px;
+}
 
 /*
 ==============
@@ -350,8 +353,8 @@ Media queries
 
 /* Large desktop */
 @media (min-width: 1200px) {
-  .never-miss-length-compensation {
-    padding-bottom: 30px;
+  .markety-equal-height {
+    min-height: 350px;
   }
 }
 
@@ -361,10 +364,6 @@ Media queries
     some margin-bottom instead.*/
   #wrap {
     padding-top: 0;
-  }
-
-  .never-miss-length-compensation {
-    padding-bottom: 30px;
   }
 }
  
@@ -377,6 +376,10 @@ Media queries
 
   .hero-unit h2 {
     font-size: 40px;
+  }
+
+  .markety-equal-height {
+    min-height: 470px;
   }
 }
  
@@ -447,6 +450,10 @@ Media queries
 
   #step2-text {
     margin-top: inherit;
+  }
+
+  .markety-equal-height {
+    min-height: inherit;
   }
 }
 
