@@ -350,31 +350,19 @@ function SettingsController($scope, $http, $location, analytics) {
       var data = {data: userData};
       
       feedBackSymbolWorking($scope.allSettings, "Sparar...");
-      $http.post("medlemssidor/user", data).
-        success(function(data, status) {
-          if (status === 200) {
-            feedBackSymbolOk($scope.allSettings, "Inställningar sparade");
-          }else {
-            feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
-          }
-        }).
-        error(function(data, status) {
-          feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
-        });
+      $http.post("medlemssidor/user", data);
     }
-    else {
-      feedBackSymbolNotOk($scope.allSettings, "Inställningar INTE sparade");
-    }
+    console.log("submittedAllSettings");
   };
   
   $scope.addCity = function() {
     $scope.userData.filter.cities.pushUnique($scope.city.name);
-    $scope.getApartmentsEstimate();
+    $scope.changeHandler();
   };
   
   $scope.removeCity = function(city) {
     $scope.userData.filter.cities.remove(city);
-    $scope.getApartmentsEstimate();
+    $scope.changeHandler();
   };
 
   $scope.getApartmentsEstimate = function() {
@@ -390,6 +378,12 @@ function SettingsController($scope, $http, $location, analytics) {
           $scope.manyApartmentsEstimate = true;
         };
       });
+    console.log("gotApartmentEstimate");
+  };
+
+  $scope.changeHandler = function() {
+    $scope.getApartmentsEstimate();
+    $scope.submitAllSettings();
   };
   
   $scope.submitPasswordSettings = function() {
