@@ -34,7 +34,7 @@
       %h3 Lägenheter
       .row-fluid.bottom-buffer(ng-repeat="apartment in apartments")
         .span3
-          %a(href="{{apartment.url}}")
+          %a(href="{{apartment.url}}" target="_blank")
             %img.apartment-image(src="images/apartments.png"
                  alt="Lägenhet")
         .span9
@@ -57,4 +57,4 @@
             Lägenheten publicerades 
             {{apartment.advertisement_found_at | date: 'yyyy-MM-dd HH:mm:ss'}}
           %br
-          %a(href="{{apartment.url}}") Se lägenheten hos {{apartment.landlord}}
+          %a(href="{{apartment.url}}" target="_blank") Se lägenheten hos {{apartment.landlord}}
