@@ -107,10 +107,13 @@
                 ng-required="userData.notify_by_sms"
                 id="mobileNumber"
                 ng-model="userData.mobile_number"
-                ng-change="submitAllSettings()")
+                ng-change="mobileNumberChangeHandler()")
           %span(ng-show="allSettingsForm.mobileNumber.$error.required")
             %i(class='icon-remove checkmark wrongness icon-large')
             Mobilnummer måste anges om SMS-utskick önskas
+          %span(ng-show="! validMobileNumber")
+            %i(class='icon-remove checkmark wrongness icon-large')
+            Ogiltigt mobilnummer
           %br
           %label.checkbox
             %input(type="checkbox" ng-model="userData.permits_to_be_emailed" ng-click="submitAllSettings()")
