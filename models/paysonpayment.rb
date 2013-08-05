@@ -2,6 +2,7 @@
 
 class Payment
   include Mongoid::Document
+  include Mongoid::Timestamps
   include LingonberryMongoidImportExport
   class InitiationError < StandardError
     def initialize(response)

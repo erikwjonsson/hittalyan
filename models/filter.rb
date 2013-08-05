@@ -1,5 +1,6 @@
 class Filter
   include Mongoid::Document
+  include Mongoid::Timestamps
   embedded_in :user
   field :rooms, type: Range, default: (1..999)
   field :rent, type: Integer, default: 999999

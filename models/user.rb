@@ -4,6 +4,7 @@ require 'digest'
 
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
   include LingonberryMongoidImportExport
 
   externally_accessible :filter, # embedded document, all fields

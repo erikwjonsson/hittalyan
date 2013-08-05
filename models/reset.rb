@@ -4,6 +4,7 @@ require 'digest'
 
 class Reset
   include Mongoid::Document
+  include Mongoid::Timestamps
   field :email, type: String # User
   field :created_at, type: DateTime # So we can know age
   field :hashed_link, type: String # Unique, based on created_at and email
