@@ -17,6 +17,7 @@ input "assets/javascripts" do
   match "vendor/**/*.js" do
     concat %w[
       vendor/jquery-1.8.3.min.js
+      vendor/jquery.vegas.js
       vendor/angular.min.js
       vendor/angular-resource.min.js
       vendor/angular-sanitize.min.js
@@ -35,6 +36,7 @@ input "assets/stylesheets" do
       vendor/bootstrap.min.css
       vendor/bootstrap-responsive.min.css
       vendor/font-awesome.min.css
+      vendor/jquery.vegas.css
     ], "application.css"
   end
 
