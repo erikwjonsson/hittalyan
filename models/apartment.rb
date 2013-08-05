@@ -2,6 +2,7 @@
 
 class Apartment
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   ###
   # Descriptive fields

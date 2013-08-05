@@ -2,6 +2,7 @@
 
 class Coupon
   include Mongoid::Document
+  include Mongoid::Timestamps
   include LingonberryMongoidImportExport
 
   externally_readable   :code,
