@@ -192,6 +192,13 @@ body {
   padding: 4px 0px 4px 0px;
 }
 
+/* When you want to place spans beside/underneath the control,
+   like an error message. */
+.control-buffer {
+  margin-right: 4px !important;
+  margin-bottom: 4px !important;
+}
+
 .text-center {
   text-align: center
 }

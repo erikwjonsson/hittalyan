@@ -8,18 +8,18 @@
             %label.control-label(for="email") 
               %strong Din e-postadress:
             .controls
-              %input(type="email"
+              %input.control-buffer(type="email"
                      name="email"
                      placeholder="E-postadress"
                      id="email"
                      ng-model="email"
                      required)
-              %span(ng-show="login.email.$invalid && signup.email.$dirty") Ogiltig e-postadress.
+              %span(ng-show="login.email.$invalid && signup.email.$dirty") Ogiltig&nbsp;e-postadress.
           .control-group
             %label.control-label(for="password") 
               %strong Lösenord:
             .controls
-              %input(type="password"
+              %input.control-buffer(type="password"
                      name="password"
                      placeholder="Lösenord"
                      id="password"
@@ -27,8 +27,8 @@
                      required
                      ng-minlength="6"
                      ng-maxlength="36")
-              %span(ng-show="login.password.$error.minlength") Lösenordet är för kort.
-              %span(ng-show="login.password.$error.maxlength") Lösenordet är för långt.
+              %span(ng-show="login.password.$error.minlength") Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
+              %span(ng-show="login.password.$error.maxlength") Lösenordet&nbsp;är&nbsp;för&nbsp;långt.
           .control-group
             .controls
               %input.btn(type="submit"
