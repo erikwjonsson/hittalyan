@@ -19,9 +19,9 @@
           .nav-collapse.collapse(collapse="navBarCollapsed")
             %ul.nav
               %li
-                %a(href="#!/vanliga-fragor" ng-click="navBarCollapsed = !navBarCollapsed") Vanliga frågor
+                %a(href="#!/vanliga-fragor" ng-click="navBarCollapsed = !navBarCollapsed") Frågor & svar
               %li
-                %a(href="#!/om" ng-click="navBarCollapsed = !navBarCollapsed") Om
+                %a(href="#!/om" ng-click="navBarCollapsed = !navBarCollapsed") Om oss
               %li(ng-hide="isLoggedIn()")
                 %a(href="#!/registrera" ng-hide="isLoggedIn()" ng-click="navBarCollapsed = !navBarCollapsed") Kom igång
               %li(ng-show="isLoggedIn()" ng-click="navBarCollapsed = !navBarCollapsed")
