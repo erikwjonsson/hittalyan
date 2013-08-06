@@ -28,7 +28,7 @@
   .span9.offset3.box.opaque.top-buffer
     .padhack
       %h3 Lägenheter
-      .alert(ng-show="!apartments.length")
+      .alert(ng-show="showNoApartmentsMessage")
         Just nu finns det inga lägenheter som passar ditt intressefilter.
         <a href="#!/medlemssidor/installningar">Ändra ditt filter här</a>.
       .row-fluid.bottom-buffer(ng-repeat="apartment in apartments | orderBy:'advertisement_found_at':true")

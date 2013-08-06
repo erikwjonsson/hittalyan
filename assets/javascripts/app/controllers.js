@@ -157,6 +157,7 @@ function SignupController($scope, $http, $location, analytics) {
 function MembersController($scope, $http, analytics) {
   var userData = {};
   $scope.showFirstDayMessage = false;
+  $scope.showNoApartmentsMessage = false;
   function firstDay() {
     function mongoIdToDate(mongoId) {
       timestamp = mongoId.toString().substring(0,8);
@@ -189,6 +190,7 @@ function MembersController($scope, $http, analytics) {
     }).
     error(function(data, status) {
       $scope.apartments = [];
+      $scope.showNoApartmentsMessage = true;
   }); 
 }
 
