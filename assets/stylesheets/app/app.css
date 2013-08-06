@@ -488,4 +488,8 @@ Media queries
   .trial-sticker {
     max-width: 30%;
   }
+
+  .apartment-image {
+    max-width: 45%;
+  }
 }
