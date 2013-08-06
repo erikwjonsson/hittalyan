@@ -33,7 +33,7 @@
       .alert(ng-show="!apartments.length")
         Just nu finns det inga lägenheter som passar ditt intressefilter.
         <a href="#!/medlemssidor/installningar">Ändra ditt filter här</a>.
-      .row-fluid.bottom-buffer(ng-repeat="apartment in apartments")
+      .row-fluid.bottom-buffer(ng-repeat="apartment in apartments | orderBy:'advertisement_found_at':true")
         .span3
           %a(href="{{apartment.url}}" target="_blank")
             %img.apartment-image(src="images/apartments.png"
