@@ -230,6 +230,13 @@ body {
     display:inline-block;
 }
 
+.force-display {
+  display: visible !important;
+}
+
+.force-hide {
+  display: none !important;
+}
 
 /*
 ======= 
