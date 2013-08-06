@@ -28,7 +28,7 @@
                 %a(href="#!/medlemssidor" rel="nofollow" ng-show="isLoggedIn()") Medlemssidor
               %li(ng-hide="isLoggedIn()")
                 %a(href="#!/losenordsaterstallning" rel="nofollow" ng-click="navBarCollapsed = !navBarCollapsed"
-                   ng-hide="isLoggedIn()") Glömt lösenord?
+                   ng-hide="isLoggedIn()") Glömt lösenordet?
               %li.hidden-desktop(ng-class="{'force-hide': isLoggedIn() }")
                 %a(href="#!/login" ng-click="navBarCollapsed = !navBarCollapsed") Logga in
             %form#loginform.visible-desktop.navbar-form.pull-right(name="login"
