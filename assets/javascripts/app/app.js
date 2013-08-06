@@ -1,11 +1,5 @@
 ﻿'use strict';
 
-$(function() {
-  $.vegas({
-    src:'/images/gamla_stan_cc_attribution.jpg'
-  });
-});
-
 /* App Module */
 
 angular.module('HashBangURLs', []).config(['$locationProvider', function($location) {
