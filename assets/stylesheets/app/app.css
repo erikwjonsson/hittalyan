@@ -238,6 +238,13 @@ body {
   display: none !important;
 }
 
+/* FAQ styles */
+.faq h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
 /*
 ======= 
 LAYOUT
