@@ -155,7 +155,7 @@ function SignupController($scope, $http, $location, analytics) {
 }
 
 function MembersController($scope, $http, analytics) {
-  var userData = {};
+  $scope.userData = {};
   $scope.showFirstDayMessage = false;
   $scope.showNoApartmentsMessage = false;
   function firstDay() {
@@ -165,7 +165,7 @@ function MembersController($scope, $http, analytics) {
       return date;
     }
 
-    membershipDate = mongoIdToDate(userData._id);
+    membershipDate = mongoIdToDate($scope.userData._id);
     console.log("membership date: " + membershipDate);
     date = new Date();
     yesterday = new Date(date.setDate(date.getDate() - 1));
@@ -177,7 +177,7 @@ function MembersController($scope, $http, analytics) {
   };
   $http.get("medlemssidor/user" + mingDate()).
     success(function(data, status) {
-      userData = data;
+      $scope.userData = data;
       $scope.showFirstDayMessage = firstDay();
     }).
     error(function(data, status) {
