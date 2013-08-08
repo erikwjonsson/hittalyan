@@ -37,7 +37,10 @@ function LoginController($scope, $http, $routeParams, $location, analytics) {
     $scope.email = "";
     $scope.password = "";
     loginFormSuccess($scope.data.email);
-    $location.path('/medlemssidor');
+    $location.path(LOGIN_DESTINATION);
+
+    // Reset login destination
+    LOGIN_DESTINATION = '/medlemssidor';
   }
 
   $scope.submit = function() {
