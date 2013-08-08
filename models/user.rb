@@ -130,7 +130,10 @@ class User
   def apply_package(package)
     add_premium_days(package.premium_days) if package.premium_days
     self.inc(:sms_account, package.sms_account) if package.sms_account
-    self.update_attribute(:active, package.active) if package.active
+    if package.active
+      self.update_attribute(:active, package.active)
+      self.update_attribute(:has_been_reminded, false)
+    end
     self.update_attribute(:trial, package.trial)
     begin
       shoot_welcome_email if package.sku.include?('START')
