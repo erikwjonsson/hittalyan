@@ -71,7 +71,9 @@ cubancabal.run( function($rootScope, $location) {
   $rootScope.$on( "loginRequired", function() {
     if ( localStorage.loggedIn === "false" || localStorage.loggedIn === null) {
       var path = window.location.hash.replace('#!', '');
-      LOGIN_DESTINATION = path;
+      if (path != '/login') {
+        LOGIN_DESTINATION = path;
+      }
       $location.path('/login');
     }
   });
