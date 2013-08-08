@@ -21,22 +21,22 @@ p = []
 #                  show_to_trial: true)
 
 p << Package.new(sku: 'PREMIUM30',
-                 name: '30 dagar',
+                 name: 'HittaLyan 30 dagar',
                  description: ''\
-                 '30-dagarspaketet innehåller 30 dagars prenumeration på '\
-                 'lägenhetstips.',
-                 payson_description: '30-dagarspaket: 30 dagar',
+                 'HittaLyan 30 dagar. Innehåller 30 dagars prenumeration på '\
+                 'lägenhetstips via e-post.',
+                 payson_description: 'HittaLyan 30 dagar',
                  unit_price_in_ore: 11120,
                  premium_days: 30,
                  active: true,
                  show_to_premium: true)
 
 p << Package.new(sku: 'PREMIUM30SMS',
-                 name: '30 dagar, SMS',
+                 name: 'HittaLyan 30 dagar + SMS',
                  description: ''\
-                 '30-dagarspaketet innehåller 30 dagars prenumeration på '\
-                 'lägenhetstips. Inkluderar tips via SMS i 30 dagar.',
-                 payson_description: '30-dagarspaket: 30 dagar, sms',
+                 'HittaLyan 30 dagar + SMS. Innehåller 30 dagars prenumeration på '\
+                 'lägenhetstips via e-post och SMS.',
+                 payson_description: 'HittaLyan 30 dagar + SMS',
                  unit_price_in_ore: 14320,
                  premium_days: 30,
                  sms_days: 30,
