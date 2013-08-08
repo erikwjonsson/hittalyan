@@ -33,6 +33,7 @@ class User
   field :permits_to_be_emailed, type: Boolean, default: true
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
   field :premium_until, type: Time
+  field :sms_until, type: Time
   field :sms_account, type: Integer, default: 0
   field :unsubscribe_id, type: String
   field :trial, type: Boolean, default: false
@@ -128,7 +129,10 @@ class User
 
   def apply_package(package)
     add_premium_days(package.premium_days) if package.premium_days
-    self.inc(:sms_account, package.sms_account) if package.sms_account
+    # New model where each user has an infinite amount of sms to spend/use
+    add_sms_days(package.sms_days) if package.sms_days
+    # Old model where each user has a finite amount of sms to spend/use
+    # self.inc(:sms_account, package.sms_account) if package.sms_account
     self.update_attribute(:active, package.active) if package.active
     self.update_attribute(:trial, package.trial)
     begin
@@ -165,8 +169,17 @@ class User
                   else
                     1.day.from_now.midnight
                   end
-      puts "TIME FROM #{time_from}"
+      # LOG.debug "TIME FROM #{time_from}"
       self.update_attribute(:premium_until, (time_from + days_to_add.days))
+    end
+
+    def add_sms_days(days_to_add)
+      time_from = if self.sms_until && self.sms_until > 1.day.from_now.midnight
+                    self.sms_until
+                  else
+                    1.day.from_now.midnight
+                  end
+      self.update_attribute(:sms_until, (time_from + days_to_add.days))
     end
     
     def encrypt(s)

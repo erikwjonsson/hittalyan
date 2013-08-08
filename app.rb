@@ -171,20 +171,20 @@ Cuba.define do
             criteria_a = package.show
             
             # Unselect packages that the user shouldn't be interested in seeing
-            criteria_b = (package.show_to_premium == user.active)
+            # criteria_b = (package.show_to_premium == user.active)
             
             # Unselect if trial
-            criteria_c = if user.trial
-                           package.show_to_trial == user.trial
-                         else
-                           true
-                         end
+            # criteria_c = if user.trial
+            #                package.show_to_trial == user.trial
+            #              else
+            #                true
+            #              end
 
             # Fulhack to show startpackage to trial users
             if package.show_to_trial && user.trial
               true
             else
-              criteria_a && criteria_b && criteria_c
+              criteria_a # && criteria_b && criteria_c
             end
           end
           
