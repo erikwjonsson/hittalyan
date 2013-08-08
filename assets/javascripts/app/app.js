@@ -2,6 +2,8 @@
 
 /* App Module */
 
+LOGIN_DESTINATION = '/medlemssidor';
+
 angular.module('HashBangURLs', []).config(['$locationProvider', function($location) {
   $location.hashPrefix('!');
 }]);
@@ -68,6 +70,10 @@ cubancabal.run( function($rootScope, $location) {
   
   $rootScope.$on( "loginRequired", function() {
     if ( localStorage.loggedIn === "false" || localStorage.loggedIn === null) {
+      var path = window.location.hash.replace('#!', '');
+      if (path != '/login') {
+        LOGIN_DESTINATION = path;
+      }
       $location.path('/login');
     }
   });

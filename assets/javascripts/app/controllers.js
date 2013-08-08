@@ -10,10 +10,12 @@ function IndexController($rootScope, $scope, $http, $location, analytics) {
 }
 
 function LandingController($scope, analytics) {
+  LOGIN_DESTINATION = '/medlemssidor';
   $scope.message = "There is no spoon. Revenge!";
 }
 
 function AboutController($scope, $http, analytics) {
+  LOGIN_DESTINATION = '/medlemssidor';
   $scope.messageSent = false;
 
   $scope.submit = function() {
@@ -37,7 +39,10 @@ function LoginController($scope, $http, $routeParams, $location, analytics) {
     $scope.email = "";
     $scope.password = "";
     loginFormSuccess($scope.data.email);
-    $location.path('/medlemssidor');
+    $location.path(LOGIN_DESTINATION);
+
+    // Reset login destination
+    LOGIN_DESTINATION = '/medlemssidor';
   }
 
   $scope.submit = function() {
@@ -68,7 +73,11 @@ function NavbarLoginController($scope, $http, $routeParams, $location, analytics
   function loggedInSuccess() {
     $scope.email = "";
     $scope.password = "";
-    $location.path('/medlemssidor');
+    $location.path(LOGIN_DESTINATION);
+
+    // Reset login destination
+    LOGIN_DESTINATION = '/medlemssidor';
+    
     loginFormSuccess($scope.data.email);
   }
 
@@ -104,9 +113,11 @@ function NavbarLoginController($scope, $http, $routeParams, $location, analytics
 }
 
 function FAQController($scope, $routeParams, analytics) {
+  LOGIN_DESTINATION = '/medlemssidor';
 }
 
 function SignupController($scope, $http, $location, analytics) {
+  LOGIN_DESTINATION = '/medlemssidor';
   function loggedInSuccess() {
     $scope.message = "Registrering lyckad. Loggar in...";
     $http.post("login", $scope.data).
@@ -577,6 +588,8 @@ function PaymentConfirmationController() {
 }
 
 function PasswordResetController($scope, $http, analytics) {
+  LOGIN_DESTINATION = '/medlemssidor';
+
   $scope.mailSent = false;
   $scope.submit = function() {
     if ( $scope.passwordreset.$valid === true) {
