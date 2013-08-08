@@ -41,6 +41,7 @@ class User
   # Diagnostic fields
   field :has_received_welcome_email, type: Boolean, default: false
   field :greeted_by_apartmentor, type: Boolean, default: false
+  field :has_been_reminded, type: Boolean, default: false
 
   has_one :session
   embeds_one :filter
@@ -133,7 +134,10 @@ class User
     add_sms_days(package.sms_days) if package.sms_days
     # Old model where each user has a finite amount of sms to spend/use
     # self.inc(:sms_account, package.sms_account) if package.sms_account
-    self.update_attribute(:active, package.active) if package.active
+    if package.active
+      self.update_attribute(:active, package.active)
+      self.update_attribute(:has_been_reminded, false)
+    end
     self.update_attribute(:trial, package.trial)
     begin
       shoot_welcome_email if package.sku.include?('START')
@@ -153,6 +157,27 @@ class User
   def subtract_sms
     self.inc(:sms_account, -1) if self.sms_account > 0
   end
+  
+  # Shitty_code_begin >>>
+  def needs_reminding
+    trial_days = 2
+    active_days = 4
+    self.premium_until ||= Time.zone.now
+    
+    # For trial users
+    # If user is active and trial and hasn't been reminded and has less than #{trial_days} left
+    if self.active && self.trial && self.has_been_reminded != true && (self.premium_until - Time.zone.now) < trial_days*24*60*60
+      return true
+    end
+    
+    # For non-trial users
+    # If user is active and isn't trial and hasn't been reminded and has less than #{active_days} left
+    if self.active && self.trial != true && self.has_been_reminded != true && (self.premium_until - Time.zone.now) < active_days*24*60*60
+      return true
+    end
+    false
+  end
+  # <<< Shitty_code_end
 
   private
     def shoot_welcome_email
