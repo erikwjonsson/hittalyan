@@ -98,7 +98,7 @@ unless production?
                    payson_description: 'TESTpaket: 30 dagar, sms: 300',
                    unit_price_in_ore: 10*100,
                    premium_days: 30,
-                   sms_account: 300,
+                   sms_days: 30,
                    active: true,
                    show_to_premium: true)
 end
