@@ -157,6 +157,7 @@ function SignupController($scope, $http, $location, analytics) {
 function MembersController($scope, $http, analytics) {
   var userData = {};
   $scope.showFirstDayMessage = false;
+  $scope.showNoApartmentsMessage = false;
   function firstDay() {
     function mongoIdToDate(mongoId) {
       timestamp = mongoId.toString().substring(0,8);
@@ -189,6 +190,7 @@ function MembersController($scope, $http, analytics) {
     }).
     error(function(data, status) {
       $scope.apartments = [];
+      $scope.showNoApartmentsMessage = true;
   }); 
 }
 
@@ -201,6 +203,7 @@ function SettingsController($scope, $http, $location, analytics) {
   $scope.apartmentsEstimate = null;
   $scope.fewApartmentsEstimate = false;
   $scope.manyApartmentsEstimate = false;
+  $scope.validMobileNumber = true;
   
   $scope.userData.active = true;
   $scope.cities = [{name: "Stockholm", value: 0},
@@ -438,6 +441,24 @@ function SettingsController($scope, $http, $location, analytics) {
           feedBackSymbolNotOk($scope.accountTermination, "Ditt konto kunde ej avslutas. Försök igen senare.");
         });
     }
+  };
+
+  validateMobileNumber = function() {
+    var mobileNumber = $scope.userData.mobile_number;
+    if (!mobileNumber) {
+      $scope.validMobileNumber = true;
+    }
+    else if (mobileNumber[0] != "0" && mobileNumber[0] != "+") {
+      $scope.validMobileNumber = false;
+    }
+    else {
+      $scope.validMobileNumber = true;
+    }
+  };
+
+  $scope.mobileNumberChangeHandler = function() {
+    validateMobileNumber();
+    $scope.submitAllSettings();
   };
 }
 

@@ -15,24 +15,26 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href => "#!/"} HittaLyan
+          %a.brand(href="#!/" ng-click="navBarCollapsed = true") HittaLyan
           .nav-collapse.collapse(collapse="navBarCollapsed")
             %ul.nav
               %li
-                %a(href="#!/vanliga-fragor") Vanliga frågor
+                %a(href="#!/vanliga-fragor" ng-click="navBarCollapsed = !navBarCollapsed") Frågor & svar
               %li
-                %a(href="#!/om") Om
+                %a(href="#!/om" ng-click="navBarCollapsed = !navBarCollapsed") Om oss
               %li(ng-hide="isLoggedIn()")
-                %a(href="#!/registrera" ng-hide="isLoggedIn()") Kom igång
-              %li(ng-show="isLoggedIn()")
+                %a(href="#!/registrera" ng-hide="isLoggedIn()" ng-click="navBarCollapsed = !navBarCollapsed") Kom igång
+              %li(ng-show="isLoggedIn()" ng-click="navBarCollapsed = !navBarCollapsed")
                 %a(href="#!/medlemssidor" rel="nofollow" ng-show="isLoggedIn()") Medlemssidor
               %li(ng-hide="isLoggedIn()")
-                %a(href="#!/losenordsaterstallning" rel="nofollow"
-                   ng-hide="isLoggedIn()") Glömt lösenord?
-            %form#loginform.navbar-form.pull-right(name="login"
-                                                   ng-hide="isLoggedIn()"
-                                                   ng-submit="submit()"
+                %a(href="#!/losenordsaterstallning" rel="nofollow" ng-click="navBarCollapsed = !navBarCollapsed"
+                   ng-hide="isLoggedIn()") Glömt lösenordet?
+              %li.hidden-desktop(ng-class="{'force-hide': isLoggedIn() }")
+                %a(href="#!/login" ng-click="navBarCollapsed = !navBarCollapsed") Logga in
+            %form#loginform.visible-desktop.navbar-form.pull-right(name="login"
+                                                   ng-class="{'force-hide': isLoggedIn()}"
                                                    novalidate
+                                                   ng-submit="submit()"
                                                    ng-controller="NavbarLoginController")
               %input.span2(type="email"
                            ng-model="email"
@@ -44,16 +46,15 @@
                            required
                            ng-minlength="6"
                            ng-maxlength="36")
-              %input(type="submit"
-                     class="btn"
-                     name="login"
-                     value="Logga in")
+              %input.btn(type="submit"
+                         value="Logga in"
+                         name="login")
             %ul.nav.pull-right(ng-show="isLoggedIn()")
               %li
                 %span.hittalyan-nav-text {{userName()}}
               %li
                 %a(href=""
-                   ng-click="logout()"
+                   ng-click="logout(); navBarCollapsed = !navBarCollapsed"
                    ng-show="isLoggedIn()") Logga ut
     #wrap
       #content.container
@@ -75,4 +76,6 @@
               %span.footer-text(href="/#!/copyrights" style="text-align: left")
                 Fotot är taget av 
                 %a(href="http://www.flickr.com/photos/venteco/2918805203/" target="_blank") Olof&nbsp;S
+    %script
+      $.backstretch("images/gamla_stan_cc_attribution.jpg");
 

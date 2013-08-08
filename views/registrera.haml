@@ -12,26 +12,26 @@
             på våra medlemssidor.
 
             När du tryckt på knappen aktiverar vi en prenumeration som gäller i 7 dagar.
-            Du får tillgång till medlemssidorna där kan du ställa in vilka lägenheter du är intresserad av 
+            Du får tillgång till medlemssidorna där du kan ställa in vilka lägenheter du är intresserad av 
             och hur vi ska meddela dig om nya lägenheter. 
           .control-group
             %label.control-label(for="email")
               %strong Din e-postadress:
             .controls
-              %input(type="email"
+              %input.control-buffer(type="email"
                      name="email"
                      placeholder="E-postadress"
                      id="email"
                      ng-model="email"
                      required)
-              %span(ng-show="signup.email.$invalid && signup.email.$dirty") Ogiltig&nbsp;e-postadress.
+              %span(ng-show="signup.email.$error.email") Ogiltig&nbsp;e-postadress.
               %span(ng-show="signup.email.$valid") 
                 %i.icon-ok.checkmark.okness.icon-large
           .control-group
             %label.control-label(for="password")
               %strong Önskat lösenord:
             .controls
-              %input(type="password"
+              %input.control-buffer(type="password"
                      name="password"
                      placeholder="Lösenord"
                      id="password"
