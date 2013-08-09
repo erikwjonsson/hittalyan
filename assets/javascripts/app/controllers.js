@@ -592,7 +592,7 @@ function PremiumServicesController($scope, $http, analytics) {
   };
 }
 
-function PaymentConfirmationController() {
+function PaymentConfirmationController($scope) {
   $scope.smsActiveState = true;
 
   $http.get("medlemssidor/user" + mingDate()).
@@ -709,11 +709,10 @@ Array.prototype.remove = function() {
 
 // General Controller helper functions
 function setSmsActiveState(sms_until) {
-  var d_until = Date(sms_until);
-  if (d_until > new Date()) {
-    true;
+  if (new Date(sms_until) > new Date()) {
+    return true;
   } else{
-    false;
+    return false;
   }
 };
 
