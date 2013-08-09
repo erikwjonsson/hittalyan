@@ -12,7 +12,7 @@
       .box.opaque
         %div.alert.alert-info(ng-show="userData.premium_until")
           Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
-          %div(ng-show="userData.sms_until")
+          %div(ng-show="userData.sms_until && smsActiveState")
             SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
   .span9.box.opaque
     .padhack
@@ -85,6 +85,8 @@
           %legend Meddelandesätt
           %label.checkbox
             %input(type="checkbox" ng-model="userData.notify_by_sms" ng-click="submitAllSettings()") SMS
+            .alert.alert-error(ng-show="userData.notify_by_sms && ! smsActiveState")
+              Detta är en varningstext
           %label.checkbox
             %input(type="checkbox" ng-model="userData.notify_by_email" ng-click="submitAllSettings()") E-post
           / %label.checkbox
