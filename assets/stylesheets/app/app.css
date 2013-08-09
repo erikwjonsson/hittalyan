@@ -238,6 +238,20 @@ body {
   display: none !important;
 }
 
+/* The point of this instead of "display: none" or ng-show/ng-hide is that it
+  still takes  up space. */
+.visibility-hidden {
+  visibility: hidden !important; 
+}
+
+.display-visible {
+  display: visible;
+}
+
+.control-group-compact {
+  margin: 2px !important;
+}
+
 /* FAQ styles */
 .faq h2 {
   font-size: 16px;
@@ -507,5 +521,9 @@ Media queries
 
   .apartment-image {
     max-width: 45%;
+  }
+
+  .mobile-block {
+    display: block;
   }
 }
