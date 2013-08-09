@@ -169,6 +169,8 @@ function MembersController($scope, $http, analytics) {
   $scope.userData = {};
   $scope.showFirstDayMessage = false;
   $scope.showNoApartmentsMessage = false;
+  $scope.smsActiveState = true;
+
   function firstDay() {
     function mongoIdToDate(mongoId) {
       timestamp = mongoId.toString().substring(0,8);
@@ -190,6 +192,7 @@ function MembersController($scope, $http, analytics) {
     success(function(data, status) {
       $scope.userData = data;
       $scope.showFirstDayMessage = firstDay();
+      $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
     }).
     error(function(data, status) {
     });
@@ -215,6 +218,7 @@ function SettingsController($scope, $http, $location, analytics) {
   $scope.fewApartmentsEstimate = false;
   $scope.manyApartmentsEstimate = false;
   $scope.validMobileNumber = true;
+  $scope.smsActiveState = true;
   
   $scope.userData.active = true;
   $scope.cities = [{name: "Stockholm", value: 0},
@@ -348,6 +352,7 @@ function SettingsController($scope, $http, $location, analytics) {
       } else{
         $scope.areaMax = $scope.areaValuesMax[data.filter.area.max/5 -2];
       }
+      $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
     }).
     error(function(data, status) {
       //alert(data)
@@ -497,6 +502,8 @@ function PremiumServicesController($scope, $http, analytics) {
   $scope.showForm = false;
   $scope.showCouponForm = false;
   $scope.showCouponInfo = false;
+  $scope.smsActiveState = true;
+
   $scope.coupon = {code: "NONE",
                    discount_in_percentage_units: 0,
                    valid: false};
@@ -504,6 +511,7 @@ function PremiumServicesController($scope, $http, analytics) {
   $http.get("medlemssidor/user" + mingDate()).
     success(function(data, status) {
       $scope.userData = data;
+      $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
       // alert(data);
     }).
     error(function(data, status) {
@@ -584,7 +592,18 @@ function PremiumServicesController($scope, $http, analytics) {
   };
 }
 
-function PaymentConfirmationController() {
+function PaymentConfirmationController($scope) {
+  $scope.smsActiveState = true;
+
+  $http.get("medlemssidor/user" + mingDate()).
+    success(function(data, status) {
+      $scope.userData = data;
+      $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
+      // alert(data);
+    }).
+    error(function(data, status) {
+      //alert(data);
+    });
 }
 
 function PasswordResetController($scope, $http, analytics) {
@@ -689,6 +708,13 @@ Array.prototype.remove = function() {
 };
 
 // General Controller helper functions
+function setSmsActiveState(sms_until) {
+  if (new Date(sms_until) > new Date()) {
+    return true;
+  } else{
+    return false;
+  }
+};
 
 function feedBackSymbolOk(scope, message) {
   scope.feedBackSymbol = "<i class='icon-ok checkmark okness icon-large'></i>";

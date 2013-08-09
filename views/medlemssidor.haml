@@ -12,7 +12,7 @@
       .box.opaque
         %div.alert.alert-info(ng-show="userData.premium_until")
           Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
-          %div(ng-show="userData.sms_until")
+          %div(ng-show="userData.sms_until && smsActiveState")
             SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
   .span9.box.opaque
     .padhack
