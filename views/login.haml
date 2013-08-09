@@ -16,7 +16,8 @@
                      required)
               %span(ng-show="login.email.$valid") 
                 %i.icon-ok.checkmark.okness.icon-large
-              %span(ng-class="{'visibility-hidden': !(login.email.$error.email)}") Ogiltig&nbsp;e-postadress.
+              %span.mobile-block(ng-class="{'visibility-hidden': !(login.email.$error.email)}")
+                Ogiltig&nbsp;e-postadress.
           .control-group.control-group-compact
             %label.control-label(for="password") 
               %strong Lösenord:
@@ -31,7 +32,7 @@
                      ng-maxlength="36")
               %span(ng-show="login.password.$valid") 
                 %i.icon-ok.checkmark.okness.icon-large
-              %span(ng-class="{'visibility-hidden': !(login.password.$error.minlength)}")
+              %span.mobile-block(ng-class="{'visibility-hidden': !(login.password.$error.minlength)}")
                 Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
           .control-group.control-group-compact
             .controls

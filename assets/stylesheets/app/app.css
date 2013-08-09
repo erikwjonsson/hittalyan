@@ -522,4 +522,8 @@ Media queries
   .apartment-image {
     max-width: 45%;
   }
+
+  .mobile-block {
+    display: block;
+  }
 }
