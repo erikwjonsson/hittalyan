@@ -758,6 +758,12 @@ function mingDate() {
 // Special function for defining view helper methods in $rootScope
 // Use sparingly. Subject to re-evaluation.
 function defineViewHelperMethodsInRootScope($rootScope, $http, $location) {
+  $rootScope.oneDayBefore = function(date) {
+    var d = new Date(date);
+    d.setDate(d.getDate() - 1);
+    return d;
+  }
+
   $rootScope.userName = function() {
     return localStorage.userName;
   };

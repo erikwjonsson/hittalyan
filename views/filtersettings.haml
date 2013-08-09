@@ -11,9 +11,9 @@
     #member-info-box
       .box.opaque
         %div.alert.alert-info(ng-show="userData.premium_until")
-          Din prenumeration gäller fram till {{userData.premium_until | date: 'yyyy-MM-dd'}}.
+          Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
           %div(ng-show="userData.sms_until")
-            SMS är aktiverat fram till {{userData.sms_until | date: 'yyyy-MM-dd'}}.
+            SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
   .span9.box.opaque
     .padhack
       .alert(ng-hide="userData.active")
