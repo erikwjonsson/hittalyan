@@ -119,7 +119,11 @@ class User
   def change_password!(new_password)
     # We really want to validate the new_passord before it gets hashed.
     # We jut don't know how. Crap.
-    self.update_attribute(:hashed_password, encrypt(new_password))
+    if new_password.length >= 6 && new_password.length <= 64 
+      self.update_attribute(:hashed_password, encrypt(new_password))
+    else
+      raise NewPasswordFailedValidation
+    end
   end
   
   class WrongPassword < StandardError
@@ -145,6 +149,12 @@ class User
     rescue Exception => e
       puts "Failed to send welcome email to #{self.email}."
       log_exception(e)
+    end
+  end
+
+  class NewPasswordFailedValidation < StandardError
+    def message
+      "New password failed validation."
     end
   end
   
