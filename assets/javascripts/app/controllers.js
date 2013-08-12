@@ -172,6 +172,10 @@ function MembersController($scope, $http, analytics) {
   $scope.smsActiveState = true;
   $scope.showUserInactiveMessage = false;
 
+  // Sorting of apartments
+  $scope.sortingOrderedBy = 'rent';
+  $scope.sortingReversed = 'true';
+
   function firstDay() {
     function mongoIdToDate(mongoId) {
       timestamp = mongoId.toString().substring(0,8);
