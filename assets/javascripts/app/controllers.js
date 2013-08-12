@@ -170,6 +170,7 @@ function MembersController($scope, $http, analytics) {
   $scope.showFirstDayMessage = false;
   $scope.showNoApartmentsMessage = false;
   $scope.smsActiveState = true;
+  $scope.showUserInactiveMessage = false;
 
   function firstDay() {
     function mongoIdToDate(mongoId) {
@@ -188,24 +189,27 @@ function MembersController($scope, $http, analytics) {
     }
     return true;
   };
+
   $http.get("medlemssidor/user" + mingDate()).
     success(function(data, status) {
       $scope.userData = data;
       $scope.showFirstDayMessage = firstDay();
       $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
+      $scope.showUserInactiveMessage = !$scope.userData.active;
+      if ($scope.userData.active === true) {
+        $scope.apartments = [];
+        $http.get("medlemssidor/apartments_list" + mingDate()).
+          success(function(data, status) {
+            $scope.apartments = data;
+          }).
+          error(function(data, status) {
+            $scope.apartments = [];
+            $scope.showNoApartmentsMessage = true;
+        });
+      };
     }).
     error(function(data, status) {
     });
-
-  $scope.apartments = [];
-  $http.get("medlemssidor/apartments_list" + mingDate()).
-    success(function(data, status) {
-      $scope.apartments = data;
-    }).
-    error(function(data, status) {
-      $scope.apartments = [];
-      $scope.showNoApartmentsMessage = true;
-  }); 
 }
 
 function SettingsController($scope, $http, $location, analytics) {

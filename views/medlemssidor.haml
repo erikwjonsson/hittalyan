@@ -1,5 +1,5 @@
 ﻿.row
-  .span3.bottom-buffer
+  .span3
     #member-nav
       %ul.nav.nav-stacked.nav-pills
         %li.box.opaque
@@ -14,52 +14,54 @@
           Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
           %div(ng-show="userData.sms_until && smsActiveState")
             SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
-  .span9.box.opaque
-    .padhack
-      .alert(ng-show="showFirstDayMessage")
-        Vi har skickat ett ett meddelande med instruktioner och tips för att du ska komma igång 
-        till din e-postadress.
-      :markdown
-        Dina medlemssidor
-        ---------------------------------
+  .span9
+    .box.opaque.bottom-buffer
+      .padhack
+        .alert(ng-show="showFirstDayMessage")
+          Vi har skickat ett ett meddelande med instruktioner och tips för att du ska komma igång 
+          till din e-postadress.
+        :markdown
+          Dina medlemssidor
+          ---------------------------------
 
-        Använd menyn för att navigera. 
-        På sidan [Inställningar](/#!/medlemssidor/installningar) kan du ställa in vilka lägenheter du är intresserad av och 
-        hur du vill bli meddelad om nya lägenheter. 
-        Här nedanför ser du de senaste lägenheterna som hittats och matchar ditt intressefilter. 
+          Använd menyn för att navigera. 
+          På sidan [Inställningar](/#!/medlemssidor/installningar) kan du ställa in vilka lägenheter du är intresserad av och 
+          hur du vill bli meddelad om nya lägenheter. 
+          Här nedanför ser du de senaste lägenheterna som hittats och matchar ditt intressefilter. 
 
-        För att förlänga din prenumeration på lägenhetstips eller se hur mycket som återstår av din nuvarande 
-        prenumeration går du in på sidan [Prenumeration](/#!/medlemssidor/prenumeration). 
-.row
-  .span9.offset3.box.opaque
-    .padhack
-      %h3 Lägenheter
-      .alert(ng-show="showNoApartmentsMessage")
-        Just nu finns det inga lägenheter som passar ditt intressefilter.
-        <a href="#!/medlemssidor/installningar">Ändra ditt filter här</a>.
-      .row-fluid.bottom-buffer(ng-repeat="apartment in apartments | orderBy:'advertisement_found_at':true")
-        .span3
-          %a(href="{{apartment.url}}" target="_blank")
-            %img.apartment-image(src="images/apartments.png"
-                 alt="Lägenhet")
-        .span9
-          %strong Ort: 
-          {{apartment.city}}
-          %br
-          %strong Adress: 
-          {{apartment.address}}
-          %br
-          %strong Rum: 
-          {{apartment.rooms}}
-          %br
-          %strong Yta: 
-          {{apartment.area}} kvm
-          %br
-          %strong Hyra: 
-          {{apartment.rent}} kr
-          %br
-          %em
-            Lägenheten publicerades 
-            {{apartment.advertisement_found_at | date: 'yyyy-MM-dd HH:mm:ss'}}
-          %br
-          %a(href="{{apartment.url}}" target="_blank") Se lägenheten hos {{apartment.landlord}}
+          För att förlänga din prenumeration på lägenhetstips eller se hur mycket som återstår av din nuvarande 
+          prenumeration går du in på sidan [Prenumeration](/#!/medlemssidor/prenumeration). 
+    .box.opaque
+      .padhack
+        %h3 Lägenheter
+        .alert(ng-show="showUserInactiveMessage")
+          Din prenumeration har gått ut. Köp en prenumeration för att fortsätta få lägenhetstips.
+        .alert(ng-show="showNoApartmentsMessage")
+          Just nu finns det inga lägenheter som passar ditt intressefilter.
+          <a href="#!/medlemssidor/installningar">Ändra ditt filter här</a>.
+        .row-fluid.bottom-buffer(ng-repeat="apartment in apartments | orderBy:'advertisement_found_at':true")
+          .span3
+            %a(href="{{apartment.url}}" target="_blank")
+              %img.apartment-image(src="images/apartments.png"
+                   alt="Lägenhet")
+          .span9
+            %strong Ort: 
+            {{apartment.city}}
+            %br
+            %strong Adress: 
+            {{apartment.address}}
+            %br
+            %strong Rum: 
+            {{apartment.rooms}}
+            %br
+            %strong Yta: 
+            {{apartment.area}} kvm
+            %br
+            %strong Hyra: 
+            {{apartment.rent}} kr
+            %br
+            %em
+              Lägenheten publicerades 
+              {{apartment.advertisement_found_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+            %br
+            %a(href="{{apartment.url}}" target="_blank") Se lägenheten hos {{apartment.landlord}}
