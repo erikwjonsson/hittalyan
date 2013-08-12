@@ -34,7 +34,7 @@ angular.module('intercept', []).config(['$httpProvider', function ($httpProvider
 }]);
 
 var shitHappensHtml = "\x3Cdiv class=\"row\"\x3E\n  \x3Cdiv class=\"span12 box opaque\"\x3E\n    \x3Cdiv class=\"padhack\"\x3E\n      N\u00e5got verkar ha g\u00e5tt fel. Var god f\u00f6rs\u00f6k igen senare.\n    \x3C\x2Fdiv\x3E\n  \x3C\x2Fdiv\x3E\n\x3C\x2Fdiv\x3E";
-var cubancabal = angular.module('cubancabal', ['ngSanitize', 'HashBangURLs', 'intercept', 'analytics', 'ui.bootstrap']);
+var cubancabal = angular.module('cubancabal', ['ngSanitize', 'HashBangURLs', 'intercept', 'analytics']);
 
 cubancabal.config(['$routeProvider', function($routeProvider) {
   $routeProvider.

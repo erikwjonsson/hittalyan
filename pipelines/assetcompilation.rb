@@ -18,10 +18,10 @@ input "assets/javascripts" do
     concat %w[
       vendor/jquery-1.8.3.min.js
       vendor/jquery.backstretch.js
+      vendor/bootstrap.min.js
       vendor/angular.min.js
       vendor/angular-resource.min.js
       vendor/angular-sanitize.min.js
-      vendor/ui-bootstrap-custom-tpls-0.4.0.js
     ], "application.js"
   end
 end

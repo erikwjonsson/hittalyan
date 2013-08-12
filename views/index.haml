@@ -10,27 +10,26 @@
     #mainnav.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container
-          %a.btn.btn-navbar(type="button"
-                            ng-click="navBarCollapsed = !navBarCollapsed")
+          %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#!/" ng-click="navBarCollapsed = true") HittaLyan
+          %a.brand(href="#!/" data-toggle="collapse" data-target=".nav-collapse.in") HittaLyan
           .nav-collapse.collapse(collapse="navBarCollapsed")
             %ul.nav
               %li
-                %a(href="#!/vanliga-fragor" ng-click="navBarCollapsed = !navBarCollapsed") Frågor & svar
+                %a(href="#!/vanliga-fragor" data-toggle="collapse" data-target=".nav-collapse.in") Frågor & svar
               %li
-                %a(href="#!/om" ng-click="navBarCollapsed = !navBarCollapsed") Om oss
+                %a(href="#!/om" data-toggle="collapse" data-target=".nav-collapse.in") Om oss
               %li(ng-hide="isLoggedIn()")
-                %a(href="#!/registrera" ng-hide="isLoggedIn()" ng-click="navBarCollapsed = !navBarCollapsed") Kom igång
-              %li(ng-show="isLoggedIn()" ng-click="navBarCollapsed = !navBarCollapsed")
-                %a(href="#!/medlemssidor" rel="nofollow" ng-show="isLoggedIn()") Medlemssidor
+                %a(href="#!/registrera" ng-hide="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Kom igång
+              %li(ng-show="isLoggedIn()")
+                %a(href="#!/medlemssidor" rel="nofollow" ng-show="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Medlemssidor
               %li(ng-hide="isLoggedIn()")
-                %a(href="#!/losenordsaterstallning" rel="nofollow" ng-click="navBarCollapsed = !navBarCollapsed"
+                %a(href="#!/losenordsaterstallning" rel="nofollow" data-toggle="collapse" data-target=".nav-collapse.in"
                    ng-hide="isLoggedIn()") Glömt lösenordet?
               %li.hidden-desktop(ng-class="{'force-hide': isLoggedIn() }")
-                %a(href="#!/login" ng-click="navBarCollapsed = !navBarCollapsed") Logga in
+                %a(href="#!/login" data-toggle="collapse" data-target=".nav-collapse.in") Logga in
             %form#loginform.visible-desktop.navbar-form.pull-right(name="login"
                                                    ng-class="{'force-hide': isLoggedIn()}"
                                                    novalidate
@@ -54,7 +53,8 @@
                 %span.hittalyan-nav-text {{userName()}}
               %li
                 %a(href=""
-                   ng-click="logout(); navBarCollapsed = !navBarCollapsed"
+                   data-toggle="collapse" data-target=".nav-collapse.in"
+                   ng-click="logout()"
                    ng-show="isLoggedIn()") Logga ut
     #wrap
       #content.container
