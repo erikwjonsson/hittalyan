@@ -39,10 +39,10 @@
         .alert(ng-show="showNoApartmentsMessage")
           Just nu finns det inga lägenheter som passar ditt intressefilter.
           <a href="#!/medlemssidor/installningar">Ändra ditt filter här</a>.
-        %a.label(href="" ng-click="sortingOrderedBy = 'advertisement_found_at'; sortingReversed=true") Sortera efter datum
-        %a.label(href="" ng-click="sortingOrderedBy = 'landlord'; sortingReversed=false") Sortera efter hyresvärd
-        %a.label(href="" ng-click="sortingOrderedBy = 'rent'; sortingReversed=false") Sortera efter hyra
-
+        %a.label(href="" ng-click="sortingOrderedBy = 'advertisement_found_at'; sortingReversed=true" ng-class="{'label-inverse': isOrderedBy('advertisement_found_at')}") Sortera efter datum
+        %a.label(href="" ng-click="sortingOrderedBy = 'landlord'; sortingReversed=false" ng-class="{'label-inverse': isOrderedBy('landlord')}") Sortera efter hyresvärd
+        %a.label(href="" ng-click="sortingOrderedBy = 'rent'; sortingReversed=false" ng-class="{'label-inverse': isOrderedBy('rent')}") Sortera efter hyra
+        %hr
         .row-fluid.bottom-buffer(ng-repeat="apartment in apartments | orderBy:sortingOrderedBy:sortingReversed")
           .span3
             %a(href="{{apartment.url}}" target="_blank")
