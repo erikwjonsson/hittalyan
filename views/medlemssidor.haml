@@ -25,8 +25,7 @@
           Vi har skickat ett ett meddelande med instruktioner och tips för att du ska komma igång 
           till din e-postadress.
         :markdown
-          Dina medlemssidor
-          ---------------------------------
+          ## Medlemssidor
 
           Använd menyn för att navigera. 
           På sidan [Inställningar](/#!/medlemssidor/installningar) kan du ställa in vilka lägenheter du är intresserad av och 
@@ -43,7 +42,12 @@
         .alert(ng-show="showNoApartmentsMessage")
           Just nu finns det inga lägenheter som passar ditt intressefilter.
           <a href="#!/medlemssidor/installningar">Ändra ditt filter här</a>.
-        .row-fluid.bottom-buffer(ng-repeat="apartment in apartments | orderBy:'advertisement_found_at':true")
+        %span.mobile-block Sortera efter: 
+        %a.label(href="" ng-click="sortingOrderedBy = 'advertisement_found_at'; sortingReversed=true" ng-class="{'label-inverse': isOrderedBy('advertisement_found_at')}") Datum
+        %a.label(href="" ng-click="sortingOrderedBy = 'rent'; sortingReversed=false" ng-class="{'label-inverse': isOrderedBy('rent')}") Hyra
+        %a.label(href="" ng-click="sortingOrderedBy = 'landlord'; sortingReversed=false" ng-class="{'label-inverse': isOrderedBy('landlord')}") Hyresvärd
+        
+        .row-fluid.top-buffer.bottom-buffer(ng-repeat="apartment in apartments | orderBy:sortingOrderedBy:sortingReversed")
           .span3
             %a(href="{{apartment.url}}" target="_blank")
               %img.apartment-image(src="images/apartments.png"

@@ -172,6 +172,17 @@ function MembersController($scope, $http, analytics) {
   $scope.smsActiveState = true;
   $scope.showUserInactiveMessage = false;
 
+  // Sorting of apartments
+  $scope.sortingOrderedBy = 'advertisement_found_at';
+  $scope.sortingReversed = 'true';
+
+  $scope.isOrderedBy = function(predicate) {
+    if (predicate === $scope.sortingOrderedBy) {
+      return true;
+    }
+    return false;
+  };
+
   function firstDay() {
     function mongoIdToDate(mongoId) {
       timestamp = mongoId.toString().substring(0,8);
