@@ -214,10 +214,10 @@ function MembersController($scope, $http, analytics) {
 
 function SettingsController($scope, $http, $location, analytics) {
   // Making room for namespaces
+  $scope.userData = {};
   $scope.passwordSettings = {};
   $scope.accountTermination = {};
   $scope.allSettings = {};
-  $scope.userData = {};
   $scope.apartmentsEstimate = null;
   $scope.fewApartmentsEstimate = false;
   $scope.manyApartmentsEstimate = false;

@@ -10,7 +10,7 @@
           %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
     #member-info-box
       .box.opaque
-        .alert.alert-info(ng-show="showUserInactiveMessage")
+        .alert(ng-show="showUserInactiveMessage")
           Du har ingen aktiv prenumeration. Skaffa en här.
         .alert.alert-info(ng-show="userData.active")
           Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
@@ -18,11 +18,7 @@
             SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
   .span9.box.opaque
     .padhack
-      %div.alert.alert-info(ng-show="userData.premium_until")
-        Din prenumeration gäller fram till och med {{userData.premium_until | date: 'yyyy-MM-dd'}}.
-        %div(ng-show="userData.sms_until && smsActiveState")
-          SMS är aktiverat fram till och med {{userData.sms_until | date: 'yyyy-MM-dd'}}.
-      %h2 Paket som du kan köpa
+      %h2 Prenumerationer
       %p Betala direkt med Payson. Payson samarbetar med Visa/Mastercard och internetbankerna Swedbank, Handelsbanken, SEB och Nordea.
       %p Moms ingår i alla priser. Inga extra avgifter tillkommer.
       %hr
