@@ -223,6 +223,7 @@ function SettingsController($scope, $http, $location, analytics) {
   $scope.manyApartmentsEstimate = false;
   $scope.validMobileNumber = true;
   $scope.smsActiveState = true;
+  $scope.showUserInactiveMessage = false;
   
   $scope.userData.active = true;
   $scope.cities = [{name: "Stockholm", value: 0},
@@ -339,6 +340,7 @@ function SettingsController($scope, $http, $location, analytics) {
   $http.get("medlemssidor/user" + mingDate()).
     success(function(data, status) {
       $scope.userData = data;
+      $scope.showUserInactiveMessage = !$scope.userData.active;
       $scope.roomsMin = $scope.roomValuesMin[data.filter.rooms.min - 1];
       if (data.filter.rooms.max === 999) {
         $scope.roomsMax = $scope.roomValuesMax[$scope.roomValuesMax.length - 1];
@@ -507,6 +509,7 @@ function PremiumServicesController($scope, $http, analytics) {
   $scope.showCouponForm = false;
   $scope.showCouponInfo = false;
   $scope.smsActiveState = true;
+  $scope.showUserInactiveMessage = false;
 
   $scope.coupon = {code: "NONE",
                    discount_in_percentage_units: 0,
@@ -515,6 +518,7 @@ function PremiumServicesController($scope, $http, analytics) {
   $http.get("medlemssidor/user" + mingDate()).
     success(function(data, status) {
       $scope.userData = data;
+      $scope.showUserInactiveMessage = !$scope.userData.active;
       $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
       // alert(data);
     }).
