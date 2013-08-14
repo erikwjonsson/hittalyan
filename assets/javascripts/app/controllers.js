@@ -236,7 +236,6 @@ function SettingsController($scope, $http, $location, analytics) {
   $scope.smsActiveState = true;
   $scope.showUserInactiveMessage = false;
   
-  $scope.userData.active = true;
   $scope.cities = [{name: "Stockholm", value: 0},
                    {name: "Malmö", value: 1},
                    {name: "Gävle", value: 2},

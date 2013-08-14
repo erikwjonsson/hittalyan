@@ -20,7 +20,7 @@
             SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
   .span9.box.opaque
     .padhack
-      .alert(ng-hide="userData.active")
+      .alert(ng-show="showUserInactiveMessage")
         Obs! För att få lägenhetstips måste du aktivera en prenumeration.
         %a(href="#!/medlemssidor/prenumeration") Gå till prenumerationer
 
