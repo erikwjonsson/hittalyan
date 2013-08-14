@@ -109,5 +109,5 @@ Package.destroy_all
 # Save them all to database
 p.each_with_index do |o, i|
   o.priority = i
-  o.save
+  o.save!
 end
