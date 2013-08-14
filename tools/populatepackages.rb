@@ -43,6 +43,16 @@ p << Package.new(sku: 'PREMIUM30SMS',
                  active: true,
                  show_to_premium: true)
 
+p << Package.new(sku: 'SMS',
+                 name: 'Tillägg SMS',
+                 description: ''\
+                 'Tillägg för utskick av SMS. Behöver bara köpas om du redan har '\
+                 'prenumeration utan SMS.',
+                 payson_description: 'HittaLyan SMS',
+                 unit_price_in_ore: 3200,
+                 sms_days: 30,
+                 show_to_premium: true)
+
 # p << Package.new(sku: 'SMS50',
 #                  name: 'SMS50',
 #                  description: ''\
