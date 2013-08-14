@@ -90,7 +90,9 @@
           %label.checkbox
             %input(type="checkbox" ng-model="userData.notify_by_sms" ng-click="submitAllSettings()") SMS
             .alert.alert-error(ng-show="userData.notify_by_sms && ! smsActiveState")
-              Detta är en varningstext
+              Din prenumeration saknar SMS. Skaffa SMS
+              %a(href="#!/medlemssidor/prenumeration") här
+              \.
           %label.checkbox
             %input(type="checkbox" ng-model="userData.notify_by_email" ng-click="submitAllSettings()") E-post
           / %label.checkbox

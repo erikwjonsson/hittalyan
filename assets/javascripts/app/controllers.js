@@ -611,7 +611,7 @@ function PremiumServicesController($scope, $http, analytics) {
   };
 }
 
-function PaymentConfirmationController($scope) {
+function PaymentConfirmationController($scope, $http) {
   $scope.smsActiveState = true;
 
   $http.get("medlemssidor/user" + mingDate()).
