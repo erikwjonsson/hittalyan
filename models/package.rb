@@ -20,7 +20,7 @@ class Package
   field :show_to_trial, type: Boolean, default: false
 
   field :premium_days, type: Integer, default: 0
-  field :sms_account, type: Integer, default: 0
+  field :sms_days, type: Integer, default: 0
   field :active, type: Boolean, default: false
   
   field :tax_in_percentage_units, type: Integer, default: 25
