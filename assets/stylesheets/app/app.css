@@ -533,4 +533,9 @@ Media queries
   .mobile-block {
     display: block;
   }
+
+  .btn-buy {
+    /* To align all buttons the same way. */
+    margin-right: 100%;
+  }
 }
