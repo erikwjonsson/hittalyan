@@ -261,6 +261,13 @@ body {
   line-height: 20px;
 }
 
+/* Would be a bit too small if we'd just write Köp and be done with it,
+   so some extra horizontal padding is really what we need. */
+.btn-buy {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 /*
 ======= 
 LAYOUT
@@ -525,5 +532,10 @@ Media queries
 
   .mobile-block {
     display: block;
+  }
+
+  .btn-buy {
+    /* To align all buttons the same way. */
+    margin-right: 100%;
   }
 }
