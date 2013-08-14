@@ -20,9 +20,11 @@
     .padhack
       %h2 Prenumerationer
       %p Betala direkt med Payson. Payson samarbetar med Visa/Mastercard och internetbankerna Swedbank, Handelsbanken, SEB och Nordea.
-      %p Moms ingår i alla priser. Inga extra avgifter tillkommer.
+      :markdown
+        Moms ingår i alla priser. 
+        Inga extra avgifter tillkommer. 
+        Vi har ingen uppsägningstid, utan alla prenumerationer avslutas automatiskt när prenumerationstiden är över.
       %hr
-
       .row-fluid.package-row.bottom-buffer(ng-repeat="package in packages")
         .span3
           %img.package-image(ng-src="{{imageURL(package.sku)}}")
