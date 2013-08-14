@@ -33,8 +33,7 @@
         .span2
           %strong {{couponifyPrice(package, coupon)}} kr
         .span3
-          %a(href="" rel="nofollow" ng-click="buyPackage(package.sku)")
-            %img(src="images/payson_betala_btn.png")
+          %button.btn.btn-buy(ng-click="buyPackage(package.sku)") Köp
 
       %form(name="nameForm" ng-submit="submitNameInfo()" ng-show="showForm" novalidate)
         %fieldset
