@@ -133,7 +133,7 @@ class User
   end
 
   def apply_package(package)
-    add_premium_days(package.premium_days) if package.premium_days
+    add_premium_days(package.premium_days) if package.premium_days && package.premium_days > 0
     # New model where each user has an infinite amount of sms to spend/use
     add_sms_days(package.sms_days) if package.sms_days
     # Old model where each user has a finite amount of sms to spend/use
