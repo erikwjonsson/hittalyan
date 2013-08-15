@@ -102,7 +102,6 @@ Cuba.define do
       view_name = 'landing' if view_name == ''
       send_serverside_rendered_view(view_name)
     end
-
     on "test" do
       puts "Putsing: #{Time.now}"
       send_view "test"
@@ -118,6 +117,13 @@ Cuba.define do
         # The usual case, when real people visit.
         send_view "index"
       end
+    end
+
+    # Because Outlook (webmail) gets #! wrong we use this to work around that.
+    # Only use this in emails.
+    on "hashbang" do
+      fragment = env['PATH_INFO']
+      res.redirect("/#!#{fragment}", 301)
     end
     
     on "environment" do
