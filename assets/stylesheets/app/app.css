@@ -386,7 +386,9 @@ Bootstrap extensions
 }
 
 .markety-equal-height {
-  min-height: 380px;
+  /* Set to take into account that Helvetica will be used for some users
+     instead of Helvetica Neue. */
+  min-height: 410px; 
 }
 
 /*
@@ -398,7 +400,7 @@ Media queries
 /* Large desktop */
 @media (min-width: 1200px) {
   .markety-equal-height {
-    min-height: 350px;
+    min-height: 380px;
   }
 }
 
