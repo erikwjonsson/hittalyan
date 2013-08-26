@@ -16,7 +16,7 @@
                      required)
               %span(ng-show="login.email.$valid") 
                 %i.icon-ok.checkmark.okness.icon-large
-              %span.mobile-block(ng-class="{'visibility-hidden': !(login.email.$error.email)}")
+              %span.tablet-block(ng-class="{'visibility-hidden': !(login.email.$error.email)}")
                 Ogiltig&nbsp;e-postadress.
           .control-group.control-group-compact
             %label.control-label(for="password") 
@@ -32,13 +32,16 @@
                      ng-maxlength="36")
               %span(ng-show="login.password.$valid") 
                 %i.icon-ok.checkmark.okness.icon-large
-              %span.mobile-block(ng-class="{'visibility-hidden': !(login.password.$error.minlength)}")
+              %span.tablet-block(ng-class="{'visibility-hidden': !(login.password.$error.minlength)}")
                 Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
           .control-group.control-group-compact
             .controls
-              %input.btn(type="submit"
+              %input.btn.control-buffer(type="submit"
                          name="login"
                          value="Logga in")
-              %span(ng-show="working")
-              %span(ng-bind-html="feedBackSymbol")
-              %span {{message}}
+              %span.tablet-block
+                %span(ng-show="working")
+                %span(ng-bind-html="feedBackSymbol")
+                %span {{message}}
+                %a(href="#!/losenordsaterstallning" rel="nofollow") Glömt lösenordet?
+

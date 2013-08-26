@@ -431,6 +431,10 @@ Media queries
   .markety-equal-height {
     min-height: 470px;
   }
+
+  .tablet-block {
+    display: block;
+  }
 }
  
 /* Landscape phone to portrait tablet */
@@ -504,6 +508,11 @@ Media queries
   .markety-equal-height {
     min-height: inherit;
   }
+
+  .tablet-block {
+    display: block;
+  }
+
 }
 
  
@@ -539,5 +548,9 @@ Media queries
   .btn-buy {
     /* To align all buttons the same way. */
     margin-right: 100%;
+  }
+
+  .tablet-block {
+    display: block;
   }
 }
