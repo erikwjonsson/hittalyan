@@ -20,7 +20,7 @@
               %li
                 %a(href="#!/vanliga-fragor" data-toggle="collapse" data-target=".nav-collapse.in") Frågor & svar
               %li
-                %a(href="#!/om" data-toggle="collapse" data-target=".nav-collapse.in") Om oss
+                %a(href="#!/om" data-toggle="collapse" data-target=".nav-collapse.in") Om
               %li(ng-hide="isLoggedIn()")
                 %a(href="#!/registrera" ng-hide="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Kom igång
               %li(ng-show="isLoggedIn()")
@@ -29,7 +29,7 @@
                 %a(href="http://blogg.hittalyan.se" target="_blank") Blogg
               %li(ng-hide="isLoggedIn()")
                 %a(href="#!/losenordsaterstallning" rel="nofollow" data-toggle="collapse" data-target=".nav-collapse.in"
-                   ng-hide="isLoggedIn()") Glömt lösenordet?
+                   ng-hide="isLoggedIn()") Glömt lösenord
               %li.hidden-desktop(ng-class="{'force-hide': isLoggedIn() }")
                 %a(href="#!/login" data-toggle="collapse" data-target=".nav-collapse.in") Logga in
             %form#loginform.visible-desktop.navbar-form.pull-right(name="login"
