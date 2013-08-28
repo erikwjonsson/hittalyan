@@ -96,13 +96,8 @@ class PaysonPayment < Payment
   
   def validate(ipn_response, ipn_request)
     validation = PaysonAPI::Client.validate_ipn(ipn_request)
-    if validation.verified? && ipn_response.status == "COMPLETED"
-      self.update_attribute(:status, "COMPLETED")
-      return true
-    else
-      self.update_attribute(:status, "FAIL")
-      return false
-    end
+    self.update_attribute(:status, ipn_response.status)
+    validation.verified? && ipn_response.status == "COMPLETED"
   end
   
   private
