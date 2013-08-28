@@ -86,7 +86,7 @@ task :mail do
   require_relative 'init'
   
   users = []
-  to = ENV['to'] || :everyone
+  to = ENV['to'] #|| :everyone
   subject = ENV['subject']
   file = ENV['file']
   
