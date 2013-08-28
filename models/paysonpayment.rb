@@ -85,6 +85,7 @@ class PaysonPayment < Payment
       sender,
       [receiver],
       self.payment_uuid) # Comment
+    payment.guarantee_offered = 'NO'
     payment.order_items = [@package.as_order_item(Coupons::COUPON_BY_CODE[self.promotional_code])]
 
     response = PaysonAPI::Client.initiate_payment(payment) # Response
