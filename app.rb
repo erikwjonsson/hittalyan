@@ -323,7 +323,6 @@ Cuba.define do
         package = Packages::PACKAGE_BY_SKU[payment.package_sku]
         user.apply_package(package)
       when false
-        puts "Something went wrong."
         res.status = 400
       end
     end
