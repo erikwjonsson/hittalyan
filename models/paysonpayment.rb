@@ -36,6 +36,7 @@ class PaysonPayment < Payment
   field :time , type: Time # Set on create
   field :amount, type: Integer # Set on create
   field :status, type: String # Set on create
+  field :token, type: String
   
   validates :user_email, presence: true
   validates :package_sku, presence: true
@@ -95,6 +96,7 @@ class PaysonPayment < Payment
   end
   
   def validate(ipn_response, ipn_request)
+    self.update_attribute(:token, ipn_response.token)
     validation = PaysonAPI::Client.validate_ipn(ipn_request)
     self.update_attribute(:status, ipn_response.status)
     validation.verified? && ipn_response.status == "COMPLETED"
