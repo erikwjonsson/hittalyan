@@ -42,6 +42,8 @@ class User
   field :has_received_welcome_email, type: Boolean, default: false
   field :greeted_by_apartmentor, type: Boolean, default: false
   field :has_been_reminded, type: Boolean, default: false
+  # To prevent SubscriptionEnd emails if user has never had an active subscription
+  field :has_been_notified_that_subscription_has_expired, type: Boolean, default: true
 
   has_one :session
   embeds_one :filter
@@ -141,6 +143,7 @@ class User
     if package.active
       self.update_attribute(:active, package.active)
       self.update_attribute(:has_been_reminded, false)
+      self.update_attribute(:has_been_notified_that_subscription_has_expired, false)
     end
     self.update_attribute(:trial, package.trial)
     begin
