@@ -30,9 +30,9 @@
               %li(ng-hide="isLoggedIn()")
                 %a(href="#!/losenordsaterstallning" rel="nofollow" data-toggle="collapse" data-target=".nav-collapse.in"
                    ng-hide="isLoggedIn()") Glömt lösenord
-              %li.hidden-desktop(ng-class="{'force-hide': isLoggedIn() }")
+              %li.hidden-large-desktop(ng-class="{'force-hide': isLoggedIn() }")
                 %a(href="#!/login" data-toggle="collapse" data-target=".nav-collapse.in") Logga in
-            %form#loginform.visible-desktop.navbar-form.pull-right(name="login"
+            %form#loginform.visible-large-desktop.navbar-form.pull-right(name="login"
                                                    ng-class="{'force-hide': isLoggedIn()}"
                                                    novalidate
                                                    ng-submit="submit()"

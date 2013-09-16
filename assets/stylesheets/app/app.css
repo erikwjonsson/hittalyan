@@ -402,6 +402,21 @@ Media queries
   .markety-equal-height {
     min-height: 380px;
   }
+
+  .visible-large-desktop {
+    display: visible;
+  }
+
+  .hidden-large-desktop {
+   display: none; 
+  }
+}
+
+/* Small desktop and down */
+@media (max-width: 1200px) {
+  .visible-large-desktop {
+    display: none; 
+  }
 }
 
 @media (max-width: 979px) {
@@ -415,6 +430,7 @@ Media queries
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
+
   /* Hero unit */
   .hero-unit h1 {
    font-size: 36px; 
