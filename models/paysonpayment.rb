@@ -92,11 +92,11 @@ class PaysonPayment < Payment
     response = PaysonAPI::Client.initiate_payment(payment) # Response
     raise Payment::InitiationError.new(response) unless response.success?
     self.update_attribute(:status, "CREATED")
+    self.update_attribute(:token, response.token)
     @forward_url = response.forward_url
   end
   
   def validate(ipn_response, ipn_request)
-    self.update_attribute(:token, ipn_response.token)
     validation = PaysonAPI::Client.validate_ipn(ipn_request)
     self.update_attribute(:status, ipn_response.status)
     validation.verified? && ipn_response.status == "COMPLETED"
