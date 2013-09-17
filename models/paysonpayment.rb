@@ -91,7 +91,7 @@ class PaysonPayment < Payment
 
     response = PaysonAPI::Client.initiate_payment(payment) # Response
     raise Payment::InitiationError.new(response) unless response.success?
-    self.update_attribute(:status, "INITIALIZED")
+    self.update_attribute(:status, "CREATED")
     @forward_url = response.forward_url
   end
   
