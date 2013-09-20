@@ -202,7 +202,7 @@ class User
     end
 
     def add_premium_days(days_to_add)
-      time_from = if self.premium_until && self.premium_until > 1.day.from_now.midnight
+      time_from = if self.active && self.premium_until > 1.day.from_now.midnight
                     self.premium_until
                   else
                     1.day.from_now.midnight
