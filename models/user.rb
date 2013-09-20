@@ -145,6 +145,7 @@ class User
     if package.active
       self.update_attribute(:active, package.active)
       self.update_attribute(:has_been_reminded, false)
+      self.update_attribute(:has_been_reminded_again, false)
       self.update_attribute(:has_been_notified_that_subscription_has_expired, false)
     end
     self.update_attribute(:trial, package.trial)
