@@ -42,8 +42,10 @@ class User
   field :has_received_welcome_email, type: Boolean, default: false
   field :greeted_by_apartmentor, type: Boolean, default: false
   field :has_been_reminded, type: Boolean, default: false
+  field :has_been_reminded_again, type: Boolean, default: false
   # To prevent SubscriptionEnd emails if user has never had an active subscription
   field :has_been_notified_that_subscription_has_expired, type: Boolean, default: true
+  field :has_been_enquired_about_gotten_startedness, type: Boolean, default: false
 
   has_one :session
   embeds_one :filter
