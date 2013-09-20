@@ -42,8 +42,10 @@ class User
   field :has_received_welcome_email, type: Boolean, default: false
   field :greeted_by_apartmentor, type: Boolean, default: false
   field :has_been_reminded, type: Boolean, default: false
+  field :has_been_reminded_again, type: Boolean, default: false
   # To prevent SubscriptionEnd emails if user has never had an active subscription
   field :has_been_notified_that_subscription_has_expired, type: Boolean, default: true
+  field :has_been_enquired_about_gotten_startedness, type: Boolean, default: false
 
   has_one :session
   embeds_one :filter
@@ -143,6 +145,7 @@ class User
     if package.active
       self.update_attribute(:active, package.active)
       self.update_attribute(:has_been_reminded, false)
+      self.update_attribute(:has_been_reminded_again, false)
       self.update_attribute(:has_been_notified_that_subscription_has_expired, false)
     end
     self.update_attribute(:trial, package.trial)
@@ -202,7 +205,7 @@ class User
     end
 
     def add_premium_days(days_to_add)
-      time_from = if self.premium_until && self.premium_until > 1.day.from_now.midnight
+      time_from = if self.active && self.premium_until > 1.day.from_now.midnight
                     self.premium_until
                   else
                     1.day.from_now.midnight
