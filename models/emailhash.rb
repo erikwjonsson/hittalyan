@@ -1,7 +1,5 @@
 #encoding: UTF-8
 
-require 'digest'
-
 class EmailHash
   include Mongoid::Document
   include Mongoid::Timestamps
