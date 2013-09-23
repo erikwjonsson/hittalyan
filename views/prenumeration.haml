@@ -25,16 +25,6 @@
         Inga extra avgifter tillkommer. 
         Vi har ingen uppsägningstid, utan alla prenumerationer avslutas automatiskt när prenumerationstiden är över.
       %hr
-      .row-fluid.package-row.bottom-buffer(ng-repeat="package in packages")
-        .span3
-          %img.package-image(ng-src="{{imageURL(package.sku)}}")
-        .span4
-          %em {{package.description}}
-        .span2
-          %strong {{couponifyPrice(package, coupon)}} kr
-        .span3
-          %button.btn.btn-buy(ng-click="buyPackage(package.sku)") Köp
-
       %form(name="nameForm" ng-submit="submitNameInfo()" ng-show="showForm" novalidate)
         %fieldset
           %span Betalningstjänsten kräver ditt för- och efternamn.
@@ -57,6 +47,15 @@
                  class="btn"
                  name="save"
                  value="Gå vidare")
+      .row-fluid.package-row.bottom-buffer(ng-repeat="package in packages")
+        .span3
+          %img.package-image(ng-src="{{imageURL(package.sku)}}")
+        .span4
+          %em {{package.description}}
+        .span2
+          %strong {{couponifyPrice(package, coupon)}} kr
+        .span3
+          %button.btn.btn-buy(ng-click="buyPackage(package.sku)") Köp
       %p(ng-hide="showCouponForm")
         %button(type="button" class="btn" ng-click="toggleCouponForm()") Klicka här om du har en rabattkod
       %form.form-horizontal(ng-show="showCouponForm" name="couponForm" ng-submit="submitCoupon()" novalidate)
