@@ -182,3 +182,37 @@ namespace :assets do
   task :rebuild => [:clean, :precompile] do
   end
 end
+
+namespace :db do
+  desc 'Create database indexes.'
+  task :create_indexes do
+    require_relative 'init'
+    mongoid_models = [Apartment, Filter, User, EmailHash]
+    mongoid_models.each do |m|
+      puts "Will create indexes specified in #{m.to_s.downcase}.rb."
+      m.create_indexes
+    end
+    puts "Indexes created"
+  end
+
+  desc 'Backup all collections for database.'
+  task :backup, [:db_env] do |t, args|
+    collections = ['apartments', 'coupons', 'packages', 'payments', 'resets',
+                   'sessions', 'users', 'emailhashes']
+    databases = {test: {host: 'ds037647.mongolab.com:37647',
+                        name: 'hittalyan-test'},
+                 production: {host: 'ds047217.mongolab.com:47217',
+                              name: 'hittalyan-production'}}
+    database = databases[args.db_env.to_sym]
+    time = Time.now.strftime("%Y%m%d%H%M")
+    puts "Backing up \"#{database[:name]}\""
+    collections.each do |collection|
+      print "#{collection.capitalize}   \t"
+      `mongoexport -h #{database[:host]} -d #{database[:name]} -c #{collection} -u af_cubancabal-lingonberryprod -p dpoqovae4grh52dr22fulu0569 -o backups/#{args.db_env}/#{time}/#{args.db_env}-#{time}-#{collection}.json`
+    end
+    puts ''
+    puts 'Created these backups:'
+    query = "backups/#{args.db_env}/#{time}/#{args.db_env}-#{time}-*.json"
+    system("ls -1 #{query}")
+  end
+end
