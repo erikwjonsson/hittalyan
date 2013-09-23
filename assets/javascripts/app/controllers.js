@@ -611,12 +611,20 @@ function PremiumServicesController($scope, $http, analytics) {
 }
 
 function PaymentConfirmationController($scope, $http) {
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   $scope.smsActiveState = true;
+  $scope.emailProvider = {}
 
   $http.get("medlemssidor/user" + mingDate()).
     success(function(data, status) {
       $scope.userData = data;
       $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
+
+      $scope.emailProvider.displayName = capitalizeFirstLetter($scope.userData.email.split('@')[1]);
+      $scope.emailProvider.url = "http://www." + $scope.emailProvider.displayName.toLowerCase();
       // alert(data);
     }).
     error(function(data, status) {
@@ -690,7 +698,6 @@ function ShitController(analytics) {
 }
 
 function TestController(analytics) {
-  alert("Här testas det");
 }
 
 // Extensions
