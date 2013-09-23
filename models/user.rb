@@ -137,6 +137,13 @@ class User
   end
 
   def apply_package(package)
+    if package.sku.include?('TRIAL7') && EmailHash.find_by(hashed_email: encrypt(self.email))
+      LOG.info "Old deleted user re-registered. User will not get TRIAL7 package."
+      shoot_welcome_email
+      return
+    else
+      EmailHash.create(hashed_email: encrypt(self.email))
+    end
     add_premium_days(package.premium_days) if package.premium_days && package.premium_days > 0
     # New model where each user has an infinite amount of sms to spend/use
     add_sms_days(package.sms_days) if package.sms_days
