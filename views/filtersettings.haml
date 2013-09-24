@@ -107,6 +107,8 @@
                           ng-change="submitAllSettings()")
               %option(value="2300" 
                       disabled="disabled") Sluta skicka lägenhetstips
+              %option(value=""
+                      disabled="disabled") Sluta skicka lägenhetstips
 
             %label(for="roomsMin") Börja skicka lägenhetstips:
             %select(ng-model="startSend"
@@ -115,6 +117,8 @@
                           ng-options="start.name for start in startSendValues"
                           ng-change="submitAllSettings()")
               %option(value="0700" 
+                      disabled="disabled") Börja skicka lägenhetstips
+              %option(value=""
                       disabled="disabled") Börja skicka lägenhetstips
         %fieldset
           %legend Personlig information
