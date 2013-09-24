@@ -385,9 +385,9 @@ function SettingsController($scope, $http, $location, analytics) {
         $scope.areaMax = $scope.areaValuesMax[data.filter.area.max/5 -2];
       }
       $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
-      $scope.stopSend.value = userData.stop_sending_notifications_at;
+      $scope.stopSend.value = data.stop_sending_notifications_at;
       $scope.stopSend.name = $scope.stopSend.value[0] + ':' + $scope.stopSend.value[0];
-      $scope.startSend.value = userData.start_sending_notifications_at;
+      $scope.startSend.value = data.start_sending_notifications_at;
       $scope.startSend.name = $scope.startSend.value[0] + ':' + $scope.startSend.value[0];
     }).
     error(function(data, status) {
