@@ -86,16 +86,36 @@
         
         %fieldset
           %legend Meddelandesätt
+          .bottom-buffer
+            %label.checkbox
+              %input(type="checkbox" ng-model="userData.notify_by_sms" ng-click="submitAllSettings()") SMS
+              .alert.alert-error(ng-show="userData.notify_by_sms && ! smsActiveState")
+                Din prenumeration inkluderar inte SMS. 
+                %a(href="#!/medlemssidor/prenumeration") Lägg till SMS
+            %label.checkbox
+              %input(type="checkbox" ng-model="userData.notify_by_email" ng-click="submitAllSettings()") E-post
+            / %label.checkbox
+            /   %input(type="checkbox" ng-model="userData.notify_by_push_note") Pushmeddelande
           %label.checkbox
-            %input(type="checkbox" ng-model="userData.notify_by_sms" ng-click="submitAllSettings()") SMS
-            .alert.alert-error(ng-show="userData.notify_by_sms && ! smsActiveState")
-              Din prenumeration inkluderar inte SMS. 
-              %a(href="#!/medlemssidor/prenumeration") Lägg till SMS
-          %label.checkbox
-            %input(type="checkbox" ng-model="userData.notify_by_email" ng-click="submitAllSettings()") E-post
-          / %label.checkbox
-          /   %input(type="checkbox" ng-model="userData.notify_by_push_note") Pushmeddelande
-        
+            %input(type="checkbox" ng-model="userData.notification_times" ng-click="submitAllSettings()") Jag vill inte få lägenhetstips nattetid
+          %div(ng-show="userData.notification_times")
+            %label(for="roomsMin") Sluta skicka lägenhetstips:
+            %select(ng-model="stopSend"
+                          name="stopSend"
+                          id="stopSend"
+                          ng-options="stop.name for stop in stopSendValues"
+                          ng-change="submitAllSettings()")
+              %option(value="2300" 
+                      disabled="disabled") Sluta skicka lägenhetstips
+
+            %label(for="roomsMin") Börja skicka lägenhetstips:
+            %select(ng-model="startSend"
+                          name="startSend"
+                          id="startSend"
+                          ng-options="start.name for start in startSendValues"
+                          ng-change="submitAllSettings()")
+              %option(value="0700" 
+                      disabled="disabled") Börja skicka lägenhetstips
         %fieldset
           %legend Personlig information
           %label(for="first-name") Förnamn:
