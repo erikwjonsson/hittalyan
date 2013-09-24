@@ -34,8 +34,8 @@ class User
   field :notify_by_sms, type: Boolean, default: false
   field :notify_by_push_note, type: Boolean, default: false
   field :notification_times, type: Boolean, default: false
-  field :stop_sending_notifications_at, type: Time, default: [23, 01] # inactive when notification_times is false
-  field :start_sending_notifications_at, type: Time, default: [07, 00] # inactive when notification_times is false
+  field :stop_sending_notifications_at, type: Array, default: [23, 01] # inactive when notification_times is false
+  field :start_sending_notifications_at, type: Array, default: [07, 00] # inactive when notification_times is false
   field :permits_to_be_emailed, type: Boolean, default: true
   field :active, type: Boolean, default: false # normally equivalent to "has paid"
   field :premium_until, type: Time
