@@ -47,7 +47,7 @@
                  class="btn"
                  name="save"
                  value="Gå vidare")
-      .row-fluid.package-row.bottom-buffer(ng-repeat="package in packages")
+      .row-fluid.package-row.bottom-buffer(ng-repeat="package in packages" ng-hide="showForm")
         .span3
           %img.package-image(ng-src="{{imageURL(package.sku)}}")
         .span4
