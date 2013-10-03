@@ -1,5 +1,6 @@
 *~
 .DS_Store
+backups/
 public/
 tmp/
 public
