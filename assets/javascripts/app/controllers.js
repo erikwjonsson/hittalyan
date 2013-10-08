@@ -346,6 +346,65 @@ function SettingsController($scope, $http, $location, analytics) {
                           {name: "140", value: 140},
                           {name: "145", value: 145},
                           {name: "150+", value: 9999}];
+  $scope.stopSendValues = [{name: "21:00", value: 2100},
+                           {name: "21:30", value: 2130},
+                           {name: "22:00", value: 2200},
+                           {name: "22:30", value: 2230},
+                           {name: "23:00", value: 2300},
+                           {name: "23:30", value: 2330},
+                           {name: "00:00", value: 2359}];
+  $scope.startSendValues = [{name: "05:00", value: 500},
+                            {name: "05:30", value: 530},
+                            {name: "06:00", value: 600},
+                            {name: "06:30", value: 630},
+                            {name: "07:00", value: 700},
+                            {name: "07:30", value: 730},
+                            {name: "08:00", value: 800}];
+  
+  function findTime(timeDigits, arr) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].value == timeDigits) {
+        return arr[i];
+      }
+    }
+    return undefined;
+  }
+
+  function notificationTimesOn() {
+    if ($scope.startSend.value === 0 || $scope.stopSend.value === 2359) {
+      // Set default values
+      $scope.stopSend = $scope.stopSendValues[0];
+      $scope.startSend = $scope.startSendValues[0];
+      $scope.submitAllSettings();
+    }
+    else {
+      // Display the values from the db
+      $scope.stopSend = findTime($scope.userData.stop_sending_notifications_at, $scope.stopSendValues);
+      $scope.startSend = findTime($scope.userData.start_sending_notifications_at, $scope.startSendValues);
+    }
+    $scope.notificationTimes = true;
+  }
+
+  function notificationTimesOff() {
+    $scope.startSend.value = 0;
+    $scope.stopSend.value = 2359;
+    $scope.notificationTimes = false;
+    $scope.submitAllSettings();
+  }
+
+  $scope.triggerNotificationTimes = function() {
+    if ($scope.notificationTimes === true) {
+      // becomes checked
+      notificationTimesOn();
+    }
+    else {
+      // becomes unchecked
+      notificationTimesOff();
+    }
+  };
+  $scope.stopSend = {};
+  $scope.startSend = {};
+  $scope.notificationTimes = false;
 
   $http.get("medlemssidor/user" + mingDate()).
     success(function(data, status) {
@@ -369,6 +428,13 @@ function SettingsController($scope, $http, $location, analytics) {
         $scope.areaMax = $scope.areaValuesMax[data.filter.area.max/5 -2];
       }
       $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
+      $scope.stopSend.value = $scope.userData.stop_sending_notifications_at;
+      $scope.startSend.value = $scope.userData.start_sending_notifications_at;
+
+      if ($scope.startSend.value !== 0 || $scope.stopSend.value !== 2359) {
+        notificationTimesOn();
+      }
+
     }).
     error(function(data, status) {
       //alert(data)
@@ -382,6 +448,8 @@ function SettingsController($scope, $http, $location, analytics) {
       userData.filter.rent = $scope.rent.value;
       userData.filter.area.min = $scope.areaMin.value;
       userData.filter.area.max = $scope.areaMax.value;
+      userData.stop_sending_notifications_at = $scope.stopSend.value;
+      userData.start_sending_notifications_at = $scope.startSend.value;
       var data = {data: userData};
       
       feedBackSymbolWorking($scope.allSettings, "Sparar...");
