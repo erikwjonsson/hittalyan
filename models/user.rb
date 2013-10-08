@@ -73,7 +73,8 @@ class User
 
   def validate_and_coerce_mobile_number_format
     return unless self.mobile_number
-    self.mobile_number = self.mobile_number.gsub(/\s+/, "")
+    # Removes whitespace and dashes
+    self.mobile_number = self.mobile_number.gsub(/\s+|\-+/, "")
 
     if self.mobile_number == ""
     elsif self.mobile_number[0..1] == '00'
@@ -86,7 +87,7 @@ class User
       # Comment for humans: If we got this far the number didn't start with a
       # single or double 0 and... it didn't even start with a plus.
       # Gasp! It must be from outer space, yao.
-      raise MalformedMobileNumber 
+      raise MalformedMobileNumber
     end
   end
 

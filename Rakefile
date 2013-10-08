@@ -198,7 +198,7 @@ namespace :db do
   desc 'Backup all collections for database.'
   task :backup, [:db_env] do |t, args|
     collections = ['apartments', 'coupons', 'packages', 'payments', 'resets',
-                   'sessions', 'users', 'emailhashes']
+                   'sessions', 'users', 'email_hashes']
     databases = {test: {host: 'ds037647.mongolab.com:37647',
                         name: 'hittalyan-test'},
                  production: {host: 'ds047217.mongolab.com:47217',
