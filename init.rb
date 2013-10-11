@@ -20,6 +20,7 @@ require 'payson_api'
 require 'erb'
 require 'rack/rewrite'
 require 'rack/cors'
+require 'airbrake'
 
 require_relative 'lib/getenvironment'
 require_relative 'lib/mailer'
@@ -106,6 +107,7 @@ Cuba.use Rack::Cors do
     resource '*', :headers => :any, :methods => [:get, :post, :options]
   end
 end
+Cuba.use Airbrake::Rack
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger
@@ -135,6 +137,40 @@ def change_log_level(level)
   LOG.level = Kernel.qualified_const_get("Logger::#{level.upcase}")
   puts "Log level set to #{level.upcase}."
 end
+
+# ===============================
+# Airbrake/Errbit config
+# ===============================
+
+class TestErrbitException < StandardError
+  def message
+    "Test error that can be used to verify that errors are sent to Errbit."
+  end
+end
+
+def test_errbit_config
+  begin
+    raise TestErrbitException.new
+  rescue TestErrbitException => e
+    Airbrake.notify_or_ignore(e, cgi_data: ENV.to_hash)
+  end
+end
+
+Airbrake.configure do |config|
+  if production?
+    config.api_key = '050527ff27bff94b751788a766171275'
+    config.host    = 'errbiter.eu01.aws.af.cm'
+    config.port    = 80
+    config.secure  = config.port == 443
+  elsif test? || development?
+    config.api_key = 'f587fba316d7b059f68f5c52f1ee956f'
+    config.host    = 'errbiter-test.eu01.aws.af.cm'
+    config.port    = 80
+    config.secure  = config.port == 443
+  end
+end
+
+test_errbit_config
 
 # ==============
 # Time and date

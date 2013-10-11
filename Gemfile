@@ -10,6 +10,7 @@ gem 'payson_api', '0.3.0'
 gem 'af'
 gem 'rack-rewrite', '~> 1.2.1'
 gem 'rack-cors'
+gem 'airbrake'
 
 # Do not change the following comment. Rakefile uses it for deployment to AppFog.
 

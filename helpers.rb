@@ -18,9 +18,11 @@ def log
 end
 
 def log_exception(e)
-  LOG.error e
-  LOG.error e.message
+  LOG.error "Exception: #{e}"
+  LOG.error "Message: #{e.message}"
   LOG.error e.backtrace.join("\n")
+
+  Airbrake.notify_or_ignore(e, cgi_data: ENV.to_hash)
 end
 
 # emailer
