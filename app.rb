@@ -103,6 +103,7 @@ Cuba.define do
       send_serverside_rendered_view(view_name)
     end
     on "test" do
+      raise StandardError
       puts "Putsing: #{Time.now}"
       send_view "test"
     end
