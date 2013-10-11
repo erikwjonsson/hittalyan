@@ -1,10 +1,48 @@
 require 'rake-pipeline-web-filters'
 
+class AGsubFilter < Filter
+  def initialize(*args, &block)
+    @args, @block = args, block
+    super() { |input| input }
+  end
+
+  def generate_output(inputs, output)
+    inputs.each do |input|
+      if @block
+        content = input.read.gsub(*@args) do |match|
+          @block.call match, *$~.captures
+        end
+        output.write content
+      else
+        output.write input.read.gsub(*@args)
+      end
+    end
+  end
+end
+
+
 output "public"
 
 class Rake::Pipeline::DSL::PipelineDSL
   def production?
     ENV['RAKEP_MODE'] == 'production'
+  end
+
+  def airbrake_api_key
+    api_key = if ENV['RACK_ENV'] == 'production'
+                '065fc39876e58a98d0059e488341161e'
+              else
+                'e1c9156a53c7a026a6875d8321c4d367'
+              end
+    "var AIRBRAKE_API_KEY = '#{api_key}';"
+  end
+
+  def airbrake_url
+    if ENV['RACK_ENV'] == 'production'
+      'http://errbiter.eu01.aws.af.cm'
+    else
+       'http://errbiter-test.eu01.aws.af.cm'
+    end
   end
 end
 
@@ -15,7 +53,18 @@ input "assets/javascripts" do
   end
 
   match "vendor/**/*.js" do
+    filter(AGsubFilter, 
+           'airbrake_api_key_to_be_replaced_by_rake_pipeline',
+           airbrake_api_key)
+    filter(AGsubFilter, 
+           'airbrake_url_to_be_replaced_by_rake_pipeline',
+           airbrake_url)
+    filter(AGsubFilter, 
+           'environment_to_be_replaced_by_rake_pipeline',
+           ENV['RACK_ENV'])
+
     concat %w[
+      vendor/airbrake.notifier.min.js
       vendor/jquery-1.8.3.min.js
       vendor/jquery.backstretch.js
       vendor/bootstrap.min.js
