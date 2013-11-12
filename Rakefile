@@ -1,3 +1,4 @@
+require 'rake/testtask'
 require 'fileutils'
 require 'securerandom'
 
@@ -55,6 +56,10 @@ def appfog_app_name
   else
     "cubancabal"
   end
+end
+
+Rake::TestTask.new do |t|
+  t.pattern = "tests/*_test.rb"
 end
 
 desc "Clean the pipe, pour in those assets, then rack it up!"

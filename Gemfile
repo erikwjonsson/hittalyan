@@ -29,4 +29,6 @@ if ENV['RACK_ENV'] == 'development'
   gem 'tilt', '1.3.3'
   gem 'haml', '3.1.7'
   gem 'rdiscount', '1.6.8'
+
+  gem "minitest", "~> 4.2"
 end
