@@ -409,7 +409,7 @@ Cuba.define do
             reset = Reset.create!(email: email)
           end
           body = ["<p>Hej!</p>",
-                  %[<p>Klicka <a href="#{WEBSITE_ADDRESS}/hashbang/losenordsaterstallning/#{reset.hashed_link}">här</a> för att sätta ett nytt lösenord.</p>],
+                  %[<p>Klicka <a href="#{WEBSITE_ADDRESS}hashbang/losenordsaterstallning/#{reset.hashed_link}">här</a> för att sätta ett nytt lösenord.</p>],
                   "<p>Observera att länken endast är giltig i 12 timmar och att du måste klicka på länken i det senaste e-postmeddelandet om du tryckt flera gånger på att återställa ditt lösenord.</p>",
                   "<p>Med vänlig hälsning,<br/>",
                   "HittaLyan</p>"].join("\n")
