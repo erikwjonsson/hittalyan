@@ -5,7 +5,19 @@ require_relative '../init'
 class UserTest < Minitest::Test
   UNIT_TEST_USER_EMAIL = "unittesting@example.com"
   UNIT_TEST_USER_PASSWORD = "averysecurepassword"
+
+  RETURNING_UNIT_TEST_USER_EMAIL = "returning_" + UNIT_TEST_USER_EMAIL
+
+  def tabula_rasa
+    EmailHash.destroy_all(hashed_email: Encryption.encrypt(User::SALT, UNIT_TEST_USER_EMAIL))
+    EmailHash.destroy_all(hashed_email: Encryption.encrypt(User::SALT, RETURNING_UNIT_TEST_USER_EMAIL))
+    User.destroy_all(email: UNIT_TEST_USER_EMAIL)
+    User.destroy_all(email: RETURNING_UNIT_TEST_USER_EMAIL)
+  end
+
   def setup
+    tabula_rasa
+
     @user = User.create!(email: UNIT_TEST_USER_EMAIL,
                          hashed_password: UNIT_TEST_USER_PASSWORD)
   end
@@ -83,7 +95,38 @@ class UserTest < Minitest::Test
     refute(@user.has_password?("thewrongpassword"))
   end
 
+
+
+
+  def test_apply_package_trial_sets_active
+    @user.apply_package(Packages::PACKAGE_BY_SKU["TRIAL7"])
+
+    assert(@user.active)
+  end
+
+  def test_apply_package_trial_sets_trial
+    @user.apply_package(Packages::PACKAGE_BY_SKU["TRIAL7"])
+
+    assert(@user.trial)
+  end
+
+  def test_reregistering_will_not_reactivate_trial
+    def create_returning_user
+      puts "Creating the returning user"
+      returning_user = User.create!(email: RETURNING_UNIT_TEST_USER_EMAIL,
+                                    hashed_password: UNIT_TEST_USER_PASSWORD)
+      returning_user.apply_package(Packages::PACKAGE_BY_SKU["TRIAL7"])
+      returning_user
+    end
+    
+    returning_user = create_returning_user
+    returning_user.destroy
+    returning_user = create_returning_user
+  
+    refute(returning_user.active)
+  end
+
   def teardown
-    @user.destroy
+    tabula_rasa
   end
 end
