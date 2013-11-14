@@ -96,8 +96,6 @@ class UserTest < Minitest::Test
   end
 
 
-
-
   def test_apply_package_trial_sets_active
     @user.apply_package(Packages::PACKAGE_BY_SKU["TRIAL7"])
 
@@ -124,6 +122,21 @@ class UserTest < Minitest::Test
     returning_user = create_returning_user
   
     refute(returning_user.active)
+  end
+
+  def test_apply_package_premium30_on_inactive_user_adds_30_days
+    refute(@user.active)
+    @user.apply_package(Packages::PACKAGE_BY_SKU["PREMIUM30"])
+    
+    assert_equal(1.day.from_now.midnight + 30.days, @user.premium_until)
+  end
+
+  def test_apply_package_premium30_on_active_user_adds_30_days_from_premium_until
+    @user.apply_package(Packages::PACKAGE_BY_SKU["TRIAL7"])
+    original_premium_until = @user.premium_until.dup
+    @user.apply_package(Packages::PACKAGE_BY_SKU["PREMIUM30"])
+
+    assert_equal(original_premium_until + 30.days, @user.premium_until)
   end
 
   def teardown
