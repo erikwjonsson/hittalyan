@@ -119,6 +119,7 @@ function FAQController($scope, $routeParams, analytics) {
 function SignupController($scope, $http, $location, analytics) {
   LOGIN_DESTINATION = '/medlemssidor';
   function loggedInSuccess() {
+    trackConversion();
     $scope.message = "Registrering lyckad. Loggar in...";
     $http.post("login", $scope.data).
     success(function(data, status) {
@@ -872,6 +873,15 @@ function deTokenify() {
 function mingDate() {
   var date = Date();
   return "?ming=" + date + "mongo";
+}
+
+function trackConversion() {
+  google_conversion_id = 984866425;
+  google_conversion_label = "l9YnCLfbyggQ-bzP1QM";
+  var image = new Image(1,1);
+  image.src = 'http://www.googleadservices.com/pagead/conversion/' +
+    google_conversion_id + '/?label=' + google_conversion_label +
+    '&value=1&guid=ON&script=0';
 }
 
 // Special function for defining view helper methods in $rootScope
