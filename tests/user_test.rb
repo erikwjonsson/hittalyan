@@ -75,6 +75,14 @@ class UserTest < Minitest::Test
     end
   end
 
+  def test_has_password_with_correct_password
+    assert(@user.has_password?(UNIT_TEST_USER_PASSWORD))
+  end
+
+  def test_has_password_with_incorrect_password
+    refute(@user.has_password?("thewrongpassword"))
+  end
+
   def teardown
     @user.destroy
   end
