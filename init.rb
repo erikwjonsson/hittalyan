@@ -23,6 +23,7 @@ require 'rack/cors'
 require 'airbrake'
 
 require_relative 'lib/getenvironment'
+require_relative 'lib/encryption'
 require_relative 'lib/mailer'
 ENVIRONMENT = get_environment
 require_relative 'helpers'

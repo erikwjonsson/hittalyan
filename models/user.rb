@@ -54,8 +54,8 @@ class User
 
   has_one :session
   embeds_one :filter
-  @@salt = 'aa2c2c739ba0c61dc84345b1c2dc222f'
-  @@unsubscribe_salt = 'lu5rnzg9wgly9a2l1ftbdij7edb6e6'
+  SALT = 'aa2c2c739ba0c61dc84345b1c2dc222f'
+  UNSUBSCRIBE_SALT = 'lu5rnzg9wgly9a2l1ftbdij7edb6e6'
   
   validates :email, presence: true, uniqueness: true, length: { maximum: 64 }
   # Note that hashed_password isn't hashed at the point of validation
@@ -72,7 +72,7 @@ class User
 
   # This is where hashed_password becomes true to it's name
   before_create do |document|
-    document.hashed_password = encrypt(document.hashed_password)
+    document.hashed_password = Encryption.encrypt(SALT, document.hashed_password)
     generate_unsubscribe_id
   end
 
@@ -109,7 +109,7 @@ class User
   end
   
   def has_password?(submitted_password)
-    self.hashed_password == encrypt(submitted_password)
+    self.hashed_password == Encryption.encrypt(SALT, submitted_password)
   end
 
   def self.authenticate(email, submitted_password)
@@ -130,7 +130,7 @@ class User
     # We really want to validate the new_passord before it gets hashed.
     # We jut don't know how. Crap.
     if new_password.length >= 6 && new_password.length <= 64 
-      self.update_attribute(:hashed_password, encrypt(new_password))
+      self.update_attribute(:hashed_password, Encryption.encrypt(SALT, new_password))
     else
       raise NewPasswordFailedValidation
     end
@@ -143,12 +143,12 @@ class User
   end
 
   def apply_package(package)
-    if package.sku.include?('TRIAL7') && EmailHash.find_by(hashed_email: encrypt(self.email))
+    if package.sku.include?('TRIAL7') && EmailHash.find_by(hashed_email: Encryption.encrypt(SALT, self.email))
       LOG.info "Old deleted user re-registered. User will not get TRIAL7 package."
       shoot_welcome_email
       return
     else
-      EmailHash.create(hashed_email: encrypt(self.email))
+      EmailHash.create(hashed_email: Encryption.encrypt(SALT, self.email))
     end
     add_premium_days(package.premium_days) if package.premium_days && package.premium_days > 0
     # New model where each user has an infinite amount of sms to spend/use
@@ -235,17 +235,9 @@ class User
                   end
       self.update_attribute(:sms_until, (time_from + days_to_add.days))
     end
-    
-    def encrypt(s)
-      hash_string(@@salt + s)
-    end
-    
-    def hash_string(s)
-      Digest::SHA2.hexdigest(s)
-    end
 
     def generate_unsubscribe_id
-      self.unsubscribe_id = encrypt(email + Time.now.to_s + @@unsubscribe_salt)
+      self.unsubscribe_id = Encryption.encrypt(SALT, (email + Time.now.to_s + UNSUBSCRIBE_SALT))
     end
 
     # from_what - all/notifications/
