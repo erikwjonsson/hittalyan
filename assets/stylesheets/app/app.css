@@ -149,6 +149,7 @@ body {
 
 .top-buffer {
   margin-top: 30px;
+  /*Makes the distance to the object above 30px*/
 }
 
 .bottom-buffer {
@@ -219,11 +220,6 @@ body {
 .package-row {
   /* Limit the width a bit for nicer display on larger screens. */
   max-width: 600px;
-}
-
-
-.center {
-    text-align:center;
 }
 
 .center form {
@@ -540,7 +536,7 @@ Media queries
 @media (max-width: 480px) {
   .hero-unit {
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 20px
   }
 
   .hero-unit h1 {
@@ -574,3 +570,33 @@ Media queries
     display: block;
   }
 }
+
+
+/* Makes navbar fatter */
+.navbarfat {
+  height: 70px;  
+}
+
+
+.content {
+  width: 100%;
+}
+
+.top-buffer {
+  margin-top: 75px;
+}
+
+.center { 
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+li {
+  display: inline;
+}
+
+.text-left {
+  text-align: left;
+}
+

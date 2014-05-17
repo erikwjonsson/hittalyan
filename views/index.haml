@@ -8,7 +8,7 @@
     %script{src: "#{Dir['public/application-*.js'].first.split('/')[1]}"}
   %body{'ng-controller' => "IndexController"}
     #mainnav.navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
+      .navbar-inner.navbarfat
         .container
           %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
             %span.icon-bar
@@ -59,7 +59,7 @@
                    ng-click="logout()"
                    ng-show="isLoggedIn()") Logga ut
     #wrap
-      #content.container
+      #content.container.content
         %div{'ng-view' => true}
       #footer.top-buffer.dark-opaque
         .padhack
