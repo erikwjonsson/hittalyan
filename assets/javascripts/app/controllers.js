@@ -144,7 +144,9 @@ function SignupController($scope, $http, $location, analytics) {
   $scope.submit = function() {
     if ( $scope.signup.$valid === true) {
       $scope.data = {email: $scope.email,
-                     password: $scope.password};
+                     password: $scope.password,
+                     first_name: $scope.first_name,
+                     last_name: $scope.last_name};
       $scope.message = "Registrerar...";
       $scope.working = true;
       $scope.cross = false;
