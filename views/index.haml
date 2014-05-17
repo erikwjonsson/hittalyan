@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 %html{lang: "se", 'ng-app' => "cubancabal"}
   %head
     %meta{charset: "utf-8"}
@@ -9,7 +9,7 @@
   %body{'ng-controller' => "IndexController"}
     #mainnav.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner.navbarfat
-        .container
+        .container.navbar-vertical-center
           %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
             %span.icon-bar
             %span.icon-bar
@@ -78,6 +78,6 @@
               %span.footer-text(href="/#!/copyrights" style="text-align: left")
                 Fotot är taget av 
                 %a(href="http://www.flickr.com/photos/venteco/2918805203/" target="_blank") Olof&nbsp;S
-    %script
-      $.backstretch("images/gamla_stan_cc_attribution.jpg");
+    /* %script */
+    /*  $.backstretch("images/gamla_stan_cc_attribution.jpg"); */
 
