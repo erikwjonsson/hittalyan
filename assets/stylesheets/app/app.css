@@ -611,3 +611,15 @@ li {
   width: 100%;
   height: 500px;
 }
+
+.margin-left {
+margin-left: 350px;
+}
+
+
+@media (min-width: 1200px) {
+  .offset-faq {
+    margin-left: 390px;
+  }
+}
+
