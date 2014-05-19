@@ -703,6 +703,10 @@ function PaymentConfirmationController($scope, $http) {
     });
 }
 
+function CampaignController($scope, $http, analytics) {
+  
+}
+
 function PasswordResetController($scope, $http, analytics) {
   LOGIN_DESTINATION = '/medlemssidor';
 

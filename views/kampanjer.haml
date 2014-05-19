@@ -1,0 +1,24 @@
+.row
+  .span3
+    #member-nav
+      %ul.nav.nav-stacked.nav-pills
+        %li.box.opaque
+          %a{href: "#!/medlemssidor"} Medlemssidor
+        %li.box.opaque
+          %a{href: "#!/medlemssidor/installningar"} Inställningar
+        %li.box.opaque
+          %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
+        %li.box.opaque
+          %a{href: "#!/medlemssidor/kampanjer"} Kampanjer
+    #member-info-box
+      .box.opaque
+        .alert(ng-show="showUserInactiveMessage")
+          Du har ingen aktiv prenumeration.
+          %a(href="#!/medlemssidor/prenumeration") Förläng din prenumeration
+        .alert.alert-info(ng-show="userData.active")
+          Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
+          %div(ng-show="userData.sms_until && smsActiveState")
+            SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
+  .span9
+    .box.opaque.bottom-buffer
+      .padhack

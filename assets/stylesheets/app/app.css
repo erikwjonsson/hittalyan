@@ -279,10 +279,10 @@ html, body {
 
 #wrap {
   padding: 0px;
-  padding-top: 60px; /* Push us beneath the navbar */
+  padding-top: 100px; /* Push us beneath the navbar */
   /*height: auto !important;*/
   min-height: 100%; /* For browser that don't support calc */
-  min-height: calc(100% - 60px); /* Compensate for navbar */
+  min-height: calc(100% - 100px); /* Compensate for navbar */
   /*height: 100%;*/
   position: relative; /* To be able to position #footer with absolute */
 }
@@ -424,7 +424,7 @@ Media queries
     and so we no longer need to push our wrapper beneath it. The navbar has
     some margin-bottom instead.*/
   #wrap {
-    padding-top: 0;
+    padding-top: 25px;
   }
   .navbar-fixed-top {
     margin-bottom: 0px;

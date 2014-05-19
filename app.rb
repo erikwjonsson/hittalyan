@@ -235,6 +235,10 @@ Cuba.define do
           end
           send_view "prenumeration"
         end
+
+        on "kampanjer" do
+          send_view "kampanjer"
+        end
         send_view "medlemssidor"
       end
     end
