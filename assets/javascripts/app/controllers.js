@@ -118,14 +118,18 @@ function FAQController($scope, $routeParams, analytics) {
 
 function SignupController($scope, $http, $location, analytics) {
   LOGIN_DESTINATION = '/medlemssidor';
+
   function loggedInSuccess() {
     trackConversion();
     $scope.message = "Registrering lyckad. Loggar in...";
     $http.post("login", $scope.data).
     success(function(data, status) {
       $scope.message = "Inloggad. Omdirigerar...";
+      console.log($scope.data.email);
       loginFormSuccess($scope.data.email);
-      $location.path('/medlemssidor');
+      console.log("Attempting to run buyPackage()")
+      $scope.buyPackage();
+      // $location.path('/medlemssidor');
     }).
     error(function(data, status) {
       $scope.message = "Registrering lyckad men inloggning misslyckad";
@@ -140,6 +144,20 @@ function SignupController($scope, $http, $location, analytics) {
     $scope.working = false;
     $scope.cross = true;
   }
+
+  $scope.buyPackage = function() {
+    console.log("Buying package...");
+    data = {'sku': "PREMIUM30SMS",
+            'code': "NONE"};
+    $http.post("payson_pay", data).
+      success(function(data, status) {
+        //alert(data);
+        window.location = data;
+      }).
+      error(function(data, status) {
+        //alert(data);
+      });
+  };
 
   $scope.submit = function() {
     if ( $scope.signup.$valid === true) {
