@@ -531,7 +531,7 @@ Media queries
 @media (max-width: 480px) {
   .hero-unit {
     padding-left: 20px;
-    padding-right: 20px
+    padding-right: 20px;
   }
 
   .hero-unit h1 {
