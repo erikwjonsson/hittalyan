@@ -283,7 +283,7 @@ html, body {
 }
 
 #footer {
-  height: 100px;
+  height: 300px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -291,8 +291,8 @@ html, body {
 
 #content {
   /* This should match the height of the footer + desired padding.
-     Here: 100px for the footer and 40px padding */
-  padding-bottom: 140px;
+     Here: 300px for the footer and 0px padding */
+  padding-bottom: 300px;
 }
 
 .trial-sticker {
@@ -627,3 +627,7 @@ margin-left: 350px;
 margin-top: -30px;
 }
 
+/*Make the distance between hero-unit and footer 0*/
+.hero-unit {
+  margin-bottom: 0px;
+}
