@@ -421,10 +421,6 @@ Media queries
   #wrap {
     padding-top: 25px;
   }
-  .navbar-fixed-top {
-    margin-bottom: 0px;
-  }
-
 }
  
 /* Portrait tablet to landscape and desktop */
