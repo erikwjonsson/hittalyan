@@ -568,7 +568,7 @@ Media queries
 
 
 /* Makes navbar fatter */
-.navbarfat {
+.navbar--fat {
   min-height: 70px;  
 }
 
