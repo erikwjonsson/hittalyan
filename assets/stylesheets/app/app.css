@@ -147,11 +147,6 @@ body {
   background-image: url(/images/payson_betala_btn.png); /* 16px x 16px */
 }
 
-.top-buffer {
-  margin-top: 30px;
-  /*Makes the distance to the object above 30px*/
-}
-
 .bottom-buffer {
   margin-bottom: 30px;
 }
@@ -590,11 +585,16 @@ Media queries
 }
 
 .top-buffer {
+
   margin-top: 75px;
 }
 
 .top-buffer-text {
   margin-top: 45px;
+}
+
+.top-buffer-herounit {
+  margin-top: 10px;
 }
 
 .center { 
