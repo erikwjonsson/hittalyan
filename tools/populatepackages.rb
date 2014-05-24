@@ -18,18 +18,7 @@ p = []
 #                  sms_account: 75,
 #                  active: true,
 #                  show_to_premium: false,
-#                  show_to_trial: true)
-
-p << Package.new(sku: 'PREMIUM30',
-                 name: 'HittaLyan 30 dagar',
-                 description: ''\
-                 'HittaLyan 30 dagar. Innehåller 30 dagars prenumeration på '\
-                 'lägenhetstips via e-post.',
-                 payson_description: 'HittaLyan 30 dagar',
-                 unit_price_in_ore: 11120,
-                 premium_days: 30,
-                 active: true,
-                 show_to_premium: true)
+                 # show_to_trial: true)
 
 p << Package.new(sku: 'PREMIUM30SMS',
                  name: 'HittaLyan 30 dagar + SMS',
@@ -37,21 +26,32 @@ p << Package.new(sku: 'PREMIUM30SMS',
                  'HittaLyan 30 dagar + SMS. Innehåller 30 dagars prenumeration på '\
                  'lägenhetstips via e-post och SMS.',
                  payson_description: 'HittaLyan 30 dagar + SMS',
-                 unit_price_in_ore: 14320,
+                 unit_price_in_ore: 23840,
                  premium_days: 30,
                  sms_days: 30,
                  active: true,
                  show_to_premium: true)
 
-p << Package.new(sku: 'SMS',
-                 name: 'Tillägg SMS',
-                 description: ''\
-                 'Tillägg för utskick av SMS. Behöver bara köpas om du redan har '\
-                 'prenumeration utan SMS.',
-                 payson_description: 'HittaLyan SMS',
-                 unit_price_in_ore: 3200,
-                 sms_days: 30,
-                 show_to_premium: true)
+# p << Package.new(sku: 'PREMIUM30',
+#                  name: 'HittaLyan 30 dagar',
+#                  description: ''\
+#                  'HittaLyan 30 dagar. Innehåller 30 dagars prenumeration på '\
+#                  'lägenhetstips via e-post.',
+#                  payson_description: 'HittaLyan 30 dagar',
+#                  unit_price_in_ore: 11120,
+#                  premium_days: 30,
+#                  active: true,
+#                  show_to_premium: true)
+
+# p << Package.new(sku: 'SMS',
+#                  name: 'Tillägg SMS',
+#                  description: ''\
+#                  'Tillägg för utskick av SMS. Behöver bara köpas om du redan har '\
+#                  'prenumeration utan SMS.',
+#                  payson_description: 'HittaLyan SMS',
+#                  unit_price_in_ore: 3200,
+#                  sms_days: 30,
+#                  show_to_premium: true)
 
 # p << Package.new(sku: 'SMS50',
 #                  name: 'SMS50',
