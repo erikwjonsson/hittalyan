@@ -19,7 +19,7 @@
           Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
           %div(ng-show="userData.sms_until && smsActiveState")
             SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
-  .span8
+  .span6
     .box.opaque.bottom-buffer
       .padhack
         :markdown
@@ -29,9 +29,10 @@
       .box.opaque
         .padhack
           %h3.top-buffer-text Tipsa en kompis!
-          %h4.top-buffer-text Ange e-postadress till vänner och tipsa dem om HittaLyan och få gratisdagar
+          %h4.top-buffer-text Tipsa kompis om HittaLyan och få gratisdagar
           :markdown 
-            Känner du någon som du tror skulle ha behov av HittaLyan tjänst. Skriv in dina kompisars e-post nedanför och få din prenumeration förlängd med 10 gratisdagar. Observera att du måste ha köpt en prenumeration av HittaLyan för att du ska kunna få gratisdagar.
+            Känner du någon som du tror skulle ha behov av HittaLyan tjänst. Om dina kompisar börjar använda HittaLyans tjänst så de kan välja Tips från kompis som alternativ och sedan ange din e-postadress så får du automatisk 10 gratisdagar.
+            Observera att du måste ha köpt en prenumeration av HittaLyan för att du ska kunna få gratisdagar.
 
           %h4.top-buffer-text Skapa rabattkod och skicka till dina vänner och bekanta
           :markdown
