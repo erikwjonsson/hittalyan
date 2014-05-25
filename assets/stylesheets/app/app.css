@@ -631,3 +631,8 @@ margin-top: -30px;
 .hero-unit {
   margin-bottom: 0px;
 }
+
+/*Set element background to black and make that same BACKGROUND transparent*/
+.dark-opaque {
+  color: black; /* approximately the regular opaque color when on our background */
+}
