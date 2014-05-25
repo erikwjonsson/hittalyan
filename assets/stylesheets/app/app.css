@@ -630,6 +630,7 @@ margin-top: -30px;
 /*Make the distance between hero-unit and footer 0*/
 .hero-unit {
   margin-bottom: 0px;
+  background-color: white;
 }
 
 /*Set element background to black and make that same BACKGROUND transparent*/
