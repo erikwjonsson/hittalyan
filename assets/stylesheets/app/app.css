@@ -599,9 +599,7 @@ Media queries
   margin-right: auto;
 }
 
-li {
-  display: inline;
-}
+
 
 .text-left {
   text-align: left;
