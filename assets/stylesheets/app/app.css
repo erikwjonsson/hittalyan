@@ -603,7 +603,7 @@ Media queries
   text-align: left;
 }
 
-.landingpage-image {
+.landingpage__image {
   width: 100%;
   height: 500px;
 }
