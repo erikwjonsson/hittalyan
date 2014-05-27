@@ -1,6 +1,6 @@
 ﻿.row
   .span3
-    #member-nav
+    #member-nav(ng-show="isLoggedIn()") 
       %ul.nav.nav-stacked.nav-pills
         %li.box.opaque
           %a{href: "#!/medlemssidor"} Medlemssidor
