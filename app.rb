@@ -354,10 +354,6 @@ Cuba.define do
                             last_name: last_name)
         user.create_filter()
         
-        # Giving the user her free trial period
-        package = Packages::PACKAGE_BY_SKU["TRIAL7"]
-        user.apply_package(package)
-        
         # test user for unit testing purposes
         if email == 'hank@rug.burn'
           user.delete
