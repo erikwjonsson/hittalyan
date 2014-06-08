@@ -125,11 +125,8 @@ function SignupController($scope, $http, $location, analytics) {
     $http.post("login", $scope.data).
     success(function(data, status) {
       $scope.message = "Inloggad. Omdirigerar...";
-      console.log($scope.data.email);
       loginFormSuccess($scope.data.email);
-      console.log("Attempting to run buyPackage()")
-      $scope.buyPackage();
-      // $location.path('/medlemssidor');
+      buyPackage("PREMIUM30SMS");
     }).
     error(function(data, status) {
       $scope.message = "Registrering lyckad men inloggning misslyckad";
@@ -145,17 +142,14 @@ function SignupController($scope, $http, $location, analytics) {
     $scope.cross = true;
   }
 
-  $scope.buyPackage = function() {
-    console.log("Buying package...");
-    data = {'sku': "PREMIUM30SMS",
+  buyPackage = function(sku) {
+    data = {'sku': sku,
             'code': "NONE"};
     $http.post("payson_pay", data).
       success(function(data, status) {
-        //alert(data);
         window.location = data;
       }).
       error(function(data, status) {
-        //alert(data);
       });
   };
 
