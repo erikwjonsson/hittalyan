@@ -345,7 +345,8 @@ Cuba.define do
       user.session.delete if user
     end
     
-    on "signup", param('email'), param('password'), param('first_name'), param('last_name') do |email, password, first_name, last_name|
+    on "signup", param('email'), param('password'), param('first_name'), param('last_name')\
+    do |email, password, first_name, last_name|
       begin
         user = User.create!(email: email,
                             hashed_password: password, # becomes hashed when created
