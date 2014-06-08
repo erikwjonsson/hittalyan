@@ -151,6 +151,10 @@ body {
   margin-bottom: 30px;
 }
 
+.bottom-buffer2 {
+  margin-bottom: 75px;
+}
+
 .vertical-nav-box {
   max-width: 140px;
   padding: 8px 0;
@@ -532,6 +536,7 @@ Media queries
   .hero-unit {
     padding-left: 20px;
     padding-right: 20px;
+    margin-top: 30px;
   }
 
   .hero-unit h1 {
@@ -599,6 +604,18 @@ Media queries
   margin-right: auto;
 }
 
+
+@media (min-width: 0px) {
+.hero-unit__center {
+  float: none;
+  margin-top: 70px;
+  margin-bottom: auto;
+  padding: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+}
+
 .text-left {
   text-align: left;
 }
@@ -608,8 +625,17 @@ Media queries
   height: 500px;
 }
 
+/*Makes the distance not exist between background image and the navbar*/
+@media (min-width: 877px) {
 .background-image-top-margin {
 margin-top: -30px;
+}
+}
+
+@media (min-width: 0px) {
+.background-image-top-margin {
+margin-top: -45px;
+}
 }
 
 /*Make the distance between hero-unit and footer 0*/
