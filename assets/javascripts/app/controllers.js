@@ -180,6 +180,10 @@ function SignupController($scope, $http, $location, analytics) {
   };
 }
 
+function MemberSidebarController($scope) {
+  $scope.memberSidebarUrl = "membersidebar"
+}
+
 function MembersController($scope, $http, analytics) {
   $scope.userData = {};
   $scope.showFirstDayMessage = false;

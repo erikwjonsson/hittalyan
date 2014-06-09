@@ -1,21 +1,5 @@
 .row
-  .span3.bottom-buffer
-    #member-nav
-      %ul.nav.nav-stacked.nav-pills
-        %li.box.opaque
-          %a{href: "#!/medlemssidor"} Medlemssidor
-        %li.box.opaque
-          %a{href: "#!/medlemssidor/installningar"} Inställningar
-        %li.box.opaque
-          %a{href: "#!/medlemssidor/lagenheter"} Lägenheter
-        %li.box.opaque
-          %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
-    #member-info-box
-      .box.opaque
-        %div.alert.alert-info(ng-show="userData.active")
-          Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
-          %div(ng-show="userData.sms_until")
-            SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
+  .span3.bottom-buffer(ng-controller="MemberSidebarController" ng-include="memberSidebarUrl")
   .span9.box.opaque
     .padhack
       .alert(ng-hide="userData.active")

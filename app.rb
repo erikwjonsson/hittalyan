@@ -146,6 +146,10 @@ Cuba.define do
     on "om" do
       send_view "om"
     end
+
+    on "membersidebar" do
+      send_view "membersidebar"
+    end
     
     on "medlemssidor" do
       user = current_user(req)
