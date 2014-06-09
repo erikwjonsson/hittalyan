@@ -17,12 +17,12 @@
           %a.brand(href="#!/" data-toggle="collapse" data-target=".nav-collapse.in") HittaLyan
           .nav-collapse.collapse(collapse="navBarCollapsed")
             %ul.nav
+              %li(ng-hide="isLoggedIn()")
+                %a(href="#!/registrera" ng-hide="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Sök lägenhet
               %li
                 %a(href="#!/vanliga-fragor" data-toggle="collapse" data-target=".nav-collapse.in") Frågor & svar
               %li
                 %a(href="#!/om" data-toggle="collapse" data-target=".nav-collapse.in") Om
-              %li(ng-hide="isLoggedIn()")
-                %a(href="#!/registrera" ng-hide="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Kom igång
               %li(ng-show="isLoggedIn()")
                 %a(href="#!/medlemssidor" rel="nofollow" ng-show="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Medlemssidor
               %li

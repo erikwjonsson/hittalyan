@@ -13,7 +13,27 @@
 
             När du tryckt på knappen aktiverar vi en prenumeration som gäller i 7 dagar.
             Du får tillgång till medlemssidorna där du kan ställa in vilka lägenheter du är intresserad av 
-            och hur vi ska meddela dig om nya lägenheter. 
+            och hur vi ska meddela dig om nya lägenheter.
+          .control-group.control-group-compact
+            %label.control-label(for="first-name")
+              %strong Förnamn:
+            .controls
+              %input.control-buffer(type="text"
+                    name="first-name"
+                    placeholder="Förnamn"
+                    id="first-name"
+                    ng-model="first_name"
+                    required)
+          .control-group.control-group-compact
+            %label.control-label(for="last-name")
+              %strong Efternamn:
+            .controls
+              %input.control-buffer(type="text"
+                    name="last-name"
+                    placeholder="Efternamn"
+                    id="last-name"
+                    ng-model="last_name"
+                    required)
           .control-group.control-group-compact
             %label.control-label(for="email")
               %strong Din e-postadress:
@@ -49,7 +69,7 @@
               %input(type="submit"
                      class="btn"
                      name="signup"i
-                     value="Bli medlem")
+                     value="Fortsätt till nästa steg")
               %span(ng-show="working")
                 %i.icon-spinner.checkmark.icon-spin.icon-large
                 {{message}}

@@ -118,6 +118,7 @@ function FAQController($scope, $routeParams, analytics) {
 
 function SignupController($scope, $http, $location, analytics) {
   LOGIN_DESTINATION = '/medlemssidor';
+
   function loggedInSuccess() {
     trackConversion();
     $scope.message = "Registrering lyckad. Loggar in...";
@@ -125,7 +126,7 @@ function SignupController($scope, $http, $location, analytics) {
     success(function(data, status) {
       $scope.message = "Inloggad. Omdirigerar...";
       loginFormSuccess($scope.data.email);
-      $location.path('/medlemssidor');
+      buyPackage("PREMIUM30SMS");
     }).
     error(function(data, status) {
       $scope.message = "Registrering lyckad men inloggning misslyckad";
@@ -141,10 +142,23 @@ function SignupController($scope, $http, $location, analytics) {
     $scope.cross = true;
   }
 
+  buyPackage = function(sku) {
+    data = {'sku': sku,
+            'code': "NONE"};
+    $http.post("payson_pay", data).
+      success(function(data, status) {
+        window.location = data;
+      }).
+      error(function(data, status) {
+      });
+  };
+
   $scope.submit = function() {
     if ( $scope.signup.$valid === true) {
       $scope.data = {email: $scope.email,
-                     password: $scope.password};
+                     password: $scope.password,
+                     first_name: $scope.first_name,
+                     last_name: $scope.last_name};
       $scope.message = "Registrerar...";
       $scope.working = true;
       $scope.cross = false;
