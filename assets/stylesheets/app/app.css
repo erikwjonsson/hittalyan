@@ -120,7 +120,7 @@ body {
 /*Set element background to white and make that same BACKGROUND transparent*/
 .opaque {
   background: rgb(255, 255, 255) transparent; /* default fallback */
-  background: rgba(255, 255, 255, 0.9); /* nice browsers */
+  background: rgba(255, 255, 255, 0); /* nice browsers */
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
 }
@@ -278,7 +278,7 @@ html, body {
 
 #wrap {
   padding: 0px;
-  padding-top: 100px; /* Push us beneath the navbar */
+  padding-top: 72px; /* Push us beneath the navbar */
   /*height: auto !important;*/
   min-height: 100%; /* For browser that don't support calc */
   min-height: calc(100% - 100px); /* Compensate for navbar */
@@ -648,4 +648,35 @@ margin-top: -45px;
 /*Set element background to black and make that same BACKGROUND transparent*/
 .dark-opaque {
   color: black; /* approximately the regular opaque color when on our background */
+}
+
+
+@media (min-width: 0px) {
+.span-sidenav {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 0px;
+}
+}
+
+@media (min-width: 778px) {
+.span-sidenav {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 1000px;
+}
+}
+
+@media (min-width: 980px) {
+.span-sidenav {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: 0px;
+padding-bottom: 1000px;
+}
 }
