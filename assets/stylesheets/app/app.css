@@ -287,7 +287,7 @@ html, body {
 }
 
 #footer {
-  height: 400px;
+  height: 300px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -483,7 +483,7 @@ Media queries
 
   /* Adapt footer styles to vertical display */
   #footer {
-    height: 400px;
+    height: 300px;
     text-align: center;
   }
 
@@ -678,5 +678,65 @@ background-color: #F5F5F8;
 height: 100%;
 margin-top: 0px;
 padding-bottom: 1000px;
+}
+}
+
+@media (min-width: 0px) {
+.span-sidenav-faq {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 0px;
+}
+}
+
+@media (min-width: 768px) {
+.span-sidenav-faq {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 3200px;
+}
+}
+
+@media (min-width: 980px) {
+.span-sidenav-faq {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: 0px;
+padding-bottom: 2500px;
+}
+}
+
+@media (min-width: 0px) {
+.span-sidenav-filtersettings {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 0px;
+}
+}
+
+@media (min-width: 778px) {
+.span-sidenav-filtersettings {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 1800px;
+}
+}
+
+@media (min-width: 980px) {
+.span-sidenav-filtersettings {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: 0px;
+padding-bottom: 1800px;
 }
 }

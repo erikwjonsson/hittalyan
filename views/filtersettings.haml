@@ -1,5 +1,5 @@
 ﻿.row
-  .span3.bottom-buffer
+  .span-sidenav-filtersettings
     #member-nav
       %ul.nav.nav-stacked.nav-pills
         %li.box.opaque
@@ -152,75 +152,71 @@
           %label.checkbox
             %input(type="checkbox" ng-model="userData.permits_to_be_emailed" ng-click="submitAllSettings()")
               Jag ger mitt medgivande till att ni kontaktar mig via e-post.
+    .box.opaque
+      .padhack
+        %form(name="passwordChange" ng-submit="submitPasswordSettings()" novalidate)
+          %fieldset
+            %legend Ändra Lösenord
+            %label(for="new_password") Nytt lösenord:
+            %input(type="password"
+                   name="new_password"
+                   id="new_password"
+                   ng-model="new_password"
+                   required
+                   ng-minlength="6"
+                   ng-maxlength="36"
+                   placeholder="Nytt lösenord")
+            %label(for="repeat_password") Upprepa lösenord:
+            %input(type="password"
+                   name="repeat_password"
+                   id="repeat_password"
+                   ng-model="repeat_password"
+                   required
+                   ng-minlength="6"
+                   ng-maxlength="36"
+                   placeholder="Upprepa lösenord")
+            %label(for="area") Ditt gamla lösenord:
+            %input(type="password"
+                   name="old_password"
+                   id="old_password"
+                   ng-model="old_password"
+                   required
+                   ng-minlength="6"
+                   ng-maxlength="36"
+                   placeholder="Ditt gamla lösenord")
+            %br
+            %input(type="submit"
+                   class="btn"
+                   name="save"
+                   value="Ändra lösenord")
+            %span(ng-bind-html="passwordSettings.feedBackSymbol")
+            %span {{passwordSettings.message}}
+      .box.opaque
+        .padhack        
+          %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
+            %fieldset
+              %legend Avsluta medlemskap
+              :markdown
+                Om du vill avsluta ditt medlemskap kan du göra det genom att fylla i ditt lösenord och trycka på knappen nedan.
+                Då tar vi bort ditt användarkonto och därmed all information om dig.
+                **Observera att detta innebär att eventuella prenumerationsdagar/SMS försvinner.**
 
-.row.top-buffer
-  .span9.offset3.box.opaque
-    .padhack
-      %form(name="passwordChange" ng-submit="submitPasswordSettings()" novalidate)
-        %fieldset
-          %legend Ändra Lösenord
-          %label(for="new_password") Nytt lösenord:
-          %input(type="password"
-                 name="new_password"
-                 id="new_password"
-                 ng-model="new_password"
-                 required
-                 ng-minlength="6"
-                 ng-maxlength="36"
-                 placeholder="Nytt lösenord")
-          %label(for="repeat_password") Upprepa lösenord:
-          %input(type="password"
-                 name="repeat_password"
-                 id="repeat_password"
-                 ng-model="repeat_password"
-                 required
-                 ng-minlength="6"
-                 ng-maxlength="36"
-                 placeholder="Upprepa lösenord")
-          %label(for="area") Ditt gamla lösenord:
-          %input(type="password"
-                 name="old_password"
-                 id="old_password"
-                 ng-model="old_password"
-                 required
-                 ng-minlength="6"
-                 ng-maxlength="36"
-                 placeholder="Ditt gamla lösenord")
-          %br
-          %input(type="submit"
-                 class="btn"
-                 name="save"
-                 value="Ändra lösenord")
-          %span(ng-bind-html="passwordSettings.feedBackSymbol")
-          %span {{passwordSettings.message}}
-      
-.row.top-buffer
-  .span9.offset3.box.opaque
-    .padhack
-      %form(name="accountTermination" ng-submit="terminateAccount()" novalidate)
-        %fieldset
-          %legend Avsluta medlemskap
-          :markdown
-            Om du vill avsluta ditt medlemskap kan du göra det genom att fylla i ditt lösenord och trycka på knappen nedan.
-            Då tar vi bort ditt användarkonto och därmed all information om dig.
-            **Observera att detta innebär att eventuella prenumerationsdagar/SMS försvinner.**
-
-            Tänk på att prenumerationer avslutas automatiskt när de går ut.
-            Du behöver alltså aldrig säga upp din prenumeration självmant.
-            Möjligheten att avsluta ditt medlemskap finns för att du ska kunna ta bort ditt användarkonto om du önskar.
-          %label(for="termination-password") Lösenord:
-          %input(type="password"
-                name="termination-password"
-                id="termination-password"
-                ng-model="terminationPassword"
-                required
-                ng-minlength="6"
-                ng-maxlength="36"
-                placeholder="Lösenord")
-          %br
-          %input(type="submit"
-                 class="btn"
-                 name="terminate-account"
-                 value="Avsluta medlemskap")
-          %span(ng-bind-html="accountTermination.feedBackSymbol")
-          %span {{accountTermination.message}}
+                Tänk på att prenumerationer avslutas automatiskt när de går ut.
+                Du behöver alltså aldrig säga upp din prenumeration självmant.
+                Möjligheten att avsluta ditt medlemskap finns för att du ska kunna ta bort ditt användarkonto om du önskar.
+              %label(for="termination-password") Lösenord:
+              %input(type="password"
+                    name="termination-password"
+                    id="termination-password"
+                    ng-model="terminationPassword"
+                    required
+                    ng-minlength="6"
+                    ng-maxlength="36"
+                    placeholder="Lösenord")
+              %br
+              %input(type="submit"
+                     class="btn"
+                     name="terminate-account"
+                     value="Avsluta medlemskap")
+              %span(ng-bind-html="accountTermination.feedBackSymbol")
+              %span {{accountTermination.message}}
