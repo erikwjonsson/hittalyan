@@ -651,6 +651,7 @@ margin-top: -45px;
 }
 
 
+
 @media (min-width: 0px) {
 .span-sidenav {
 width: 220px;
@@ -661,13 +662,13 @@ padding-bottom: 0px;
 }
 }
 
-@media (min-width: 778px) {
+@media (min-width: 768px) {
 .span-sidenav {
 width: 220px;
 background-color: #F5F5F8;
 height: 100%;
 margin-top: -45px;
-padding-bottom: 2500px;
+padding-bottom: 3200px;
 }
 }
 
@@ -677,9 +678,18 @@ width: 220px;
 background-color: #F5F5F8;
 height: 100%;
 margin-top: 0px;
-padding-bottom: 2000px;
+padding-bottom: 1500px;
 }
 }
+
+
+
+
+
+
+
+
+
 
 @media (min-width: 0px) {
 .span-sidenav-faq {
@@ -739,4 +749,15 @@ height: 100%;
 margin-top: 0px;
 padding-bottom: 1800px;
 }
+}
+
+
+.blue-box {
+  background-color: blue;
+  border: 2px solid;
+  border-color: red
+}
+
+.menu-button-margin {
+  margin-left: 30px;
 }
