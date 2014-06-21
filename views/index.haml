@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 %html{lang: "se", 'ng-app' => "cubancabal"}
   %head
     %meta{charset: "utf-8"}
@@ -8,8 +8,8 @@
     %script{src: "#{Dir['public/application-*.js'].first.split('/')[1]}"}
   %body{'ng-controller' => "IndexController"}
     #mainnav.navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
-        .container
+      .navbar-inner.navbar--fat
+        .container.navbar-vertical-center
           %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
             %span.icon-bar
             %span.icon-bar
@@ -18,15 +18,15 @@
           .nav-collapse.collapse(collapse="navBarCollapsed")
             %ul.nav
               %li(ng-hide="isLoggedIn()")
-                %a(href="#!/registrera" ng-hide="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Sök lägenhet
+                %a(href="#!/registrera" ng-hide="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Hitta lediga lägenheter
+              %li(ng-show="isLoggedIn()")
+                %a(href="#!/medlemssidor" rel="nofollow" ng-show="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Hitta lediga lägenheter
               %li
                 %a(href="#!/vanliga-fragor" data-toggle="collapse" data-target=".nav-collapse.in") Frågor & svar
               %li
                 %a(href="#!/om" data-toggle="collapse" data-target=".nav-collapse.in") Om
-              %li(ng-show="isLoggedIn()")
-                %a(href="#!/medlemssidor" rel="nofollow" ng-show="isLoggedIn()" data-toggle="collapse" data-target=".nav-collapse.in") Medlemssidor
-              %li
-                %a(href="http://blogg.hittalyan.se" target="_blank") Blogg
+              / %li
+              /   %a(href="http://blogg.hittalyan.se" target="_blank") Blogg
               %li(ng-hide="isLoggedIn()")
                 %a(href="#!/losenordsaterstallning" rel="nofollow" data-toggle="collapse" data-target=".nav-collapse.in"
                    ng-hide="isLoggedIn()") Glömt lösenord
@@ -59,25 +59,34 @@
                    ng-click="logout()"
                    ng-show="isLoggedIn()") Logga ut
     #wrap
-      #content.container
+      #content.container.content
         %div{'ng-view' => true}
-      #footer.top-buffer.dark-opaque
+      #footer.top-buffer.white-opaque
         .padhack
-          .row
-            .span5.footer-item
-              %span.footer-text
-                HittaLyan drivs av webbyrån 
-                %a(href="/#!/om") Lingonberry&nbsp;Productions
-            .span3.footer-item.footer-item-vertical-center
-              %a(href="https://www.payson.se" rel="nofollow" title="Payson internetbetalningar" target="_blank")
-                %img(src="images/payson150x55.png")
-            .span2.footer-item.footer-item-vertical-center
-              %a.footer-item(href="http://www.minacookies.se/" rel="nofollow" title="Vi använder cookies" target="_blank")
-                %img.opaque(src="images/vi_anvander_cookies_ikon_120x36.png")
-            .span2.footer-item
-              %span.footer-text(href="/#!/copyrights" style="text-align: left")
-                Fotot är taget av 
-                %a(href="http://www.flickr.com/photos/venteco/2918805203/" target="_blank") Olof&nbsp;S
-    %script
-      $.backstretch("images/gamla_stan_cc_attribution.jpg");
+          .row.center
+            .span12.center
+              .span4.footer-item
+                %span.footer-text
+                  HittaLyan drivs av 
+                  %a(href="/#!/om") Lingonberry&nbsp;Productions
+                  %p Hittalyan.se © 2012-2014
+              .span2.footer-item.footer-item-vertical-center
+                %a(href="https://www.payson.se" rel="nofollow" title="Payson internetbetalningar" target="_blank")
+                  %img(src="images/payson150x55.png")
+              .span2.footer-item.footer-item-vertical-center
+                %a.footer-item(href="http://www.minacookies.se/" rel="nofollow" title="Vi använder cookies" target="_blank")
+                  %img.opaque(src="images/vi_anvander_cookies_ikon_120x36.png")
+              .span2.footer-item
+                %span.footer-text(href="/#!/copyrights" style="text-align: left")
+                  Fotot är taget av 
+                  %a(href="http://www.flickr.com/photos/venteco/2918805203/" target="_blank") Olof&nbsp;S
+              .span1.footer-item
+                %span.footer-text
+                  %a(href="/#!/om") Personuppgiftslagen
+                  %a(href="/#!/om") Användarvillkor
 
+
+
+
+    /* %script */
+    /*  $.backstretch("images/gamla_stan_cc_attribution.jpg"); */

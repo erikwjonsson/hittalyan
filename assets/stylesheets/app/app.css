@@ -120,7 +120,7 @@ body {
 /*Set element background to white and make that same BACKGROUND transparent*/
 .opaque {
   background: rgb(255, 255, 255) transparent; /* default fallback */
-  background: rgba(255, 255, 255, 0.9); /* nice browsers */
+  background: rgba(255, 255, 255, 0); /* nice browsers */
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
 }
@@ -147,12 +147,12 @@ body {
   background-image: url(/images/payson_betala_btn.png); /* 16px x 16px */
 }
 
-.top-buffer {
-  margin-top: 30px;
-}
-
 .bottom-buffer {
   margin-bottom: 30px;
+}
+
+.bottom-buffer2 {
+  margin-bottom: 75px;
 }
 
 .vertical-nav-box {
@@ -221,11 +221,6 @@ body {
   max-width: 600px;
 }
 
-
-.center {
-    text-align:center;
-}
-
 .center form {
     display:inline-block;
 }
@@ -283,25 +278,26 @@ html, body {
 
 #wrap {
   padding: 0px;
-  padding-top: 60px; /* Push us beneath the navbar */
+  padding-top: 72px; /* Push us beneath the navbar */
   /*height: auto !important;*/
   min-height: 100%; /* For browser that don't support calc */
-  min-height: calc(100% - 60px); /* Compensate for navbar */
+  min-height: calc(100% - 100px); /* Compensate for navbar */
   /*height: 100%;*/
   position: relative; /* To be able to position #footer with absolute */
 }
 
 #footer {
-  height: 100px;
+  height: 300px;
   position: absolute;
   bottom: 0;
   width: 100%;
+  background-color: #F93
 }
 
 #content {
   /* This should match the height of the footer + desired padding.
-     Here: 100px for the footer and 40px padding */
-  padding-bottom: 140px;
+     Here: 300px for the footer and 0px padding */
+  padding-bottom: 300px;
 }
 
 .trial-sticker {
@@ -428,7 +424,7 @@ Media queries
     and so we no longer need to push our wrapper beneath it. The navbar has
     some margin-bottom instead.*/
   #wrap {
-    padding-top: 0;
+    padding-top: 25px;
   }
 }
  
@@ -541,6 +537,7 @@ Media queries
   .hero-unit {
     padding-left: 20px;
     padding-right: 20px;
+    margin-top: 30px;
   }
 
   .hero-unit h1 {
@@ -573,4 +570,194 @@ Media queries
   .tablet-block {
     display: block;
   }
+}
+
+
+/* Makes navbar fatter */
+.navbar--fat {
+  min-height: 70px;  
+}
+
+.navbar-vertical-center {
+  margin-top: 15px;
+}
+
+.content {
+  width: 100%;
+}
+
+.top-buffer {
+
+  margin-top: 75px;
+}
+
+.top-buffer-text {
+  margin-top: 45px;
+}
+
+.top-buffer-herounit {
+  margin-top: 10px;
+}
+
+.center { 
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+@media (min-width: 0px) {
+.hero-unit__center {
+  float: none;
+  margin-top: 70px;
+  margin-bottom: auto;
+  padding: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+}
+
+.text-left {
+  text-align: left;
+}
+
+.landingpage__image {
+  width: 100%;
+  height: 500px;
+}
+
+/*Makes the distance not exist between background image and the navbar*/
+@media (min-width: 877px) {
+.background-image-top-margin {
+margin-top: -30px;
+}
+}
+
+@media (min-width: 0px) {
+.background-image-top-margin {
+margin-top: -45px;
+}
+}
+
+/*Make the distance between hero-unit and footer 0*/
+.hero-unit {
+  margin-bottom: 0px;
+  background-color: white;
+}
+
+/*Set element background to black and make that same BACKGROUND transparent*/
+.dark-opaque {
+  color: black; /* approximately the regular opaque color when on our background */
+}
+
+
+
+@media (min-width: 0px) {
+.span-sidenav {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 0px;
+}
+}
+
+@media (min-width: 768px) {
+.span-sidenav {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 3200px;
+}
+}
+
+@media (min-width: 980px) {
+.span-sidenav {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: 0px;
+padding-bottom: 1500px;
+}
+}
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 0px) {
+.span-sidenav-faq {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 0px;
+}
+}
+
+@media (min-width: 768px) {
+.span-sidenav-faq {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 3200px;
+}
+}
+
+@media (min-width: 980px) {
+.span-sidenav-faq {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: 0px;
+padding-bottom: 1500px;
+}
+}
+
+@media (min-width: 0px) {
+.span-sidenav-filtersettings {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 0px;
+}
+}
+
+@media (min-width: 778px) {
+.span-sidenav-filtersettings {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: -45px;
+padding-bottom: 1800px;
+}
+}
+
+@media (min-width: 980px) {
+.span-sidenav-filtersettings {
+width: 220px;
+background-color: #F5F5F8;
+height: 100%;
+margin-top: 0px;
+padding-bottom: 1800px;
+}
+}
+
+
+.blue-box {
+  background-color: blue;
+  border: 2px solid;
+  border-color: red
+}
+
+.menu-button-margin {
+  margin-left: 30px;
 }

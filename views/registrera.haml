@@ -1,78 +1,84 @@
 .row
-  .span8.offset2.box.opaque
+  .span6.offset2.box.opaque
     .padhack
       .alert.alert-info.text-center
         Redan medlem? <a href="/#!/login">Logga in här</a>
       %form.form-horizontal(name="signup" ng-submit="submit()" novalidate)
         %fieldset
-          %legend Bli medlem
-          :markdown
-            Det är enkelt att börja använda HittaLyan.
-            Du behöver inte fylla i något annat än din e-postadress och det lösenord som du vill ha för att logga in 
-            på våra medlemssidor.
+          %h2 Bli medlem
+          %div.top-buffer-text
+            :markdown
+              #### För 298 kr får du tips via e-post och SMS så fort nya lägenheter dyker upp i 30 dagar.
 
-            När du tryckt på knappen aktiverar vi en prenumeration som gäller i 7 dagar.
-            Du får tillgång till medlemssidorna där du kan ställa in vilka lägenheter du är intresserad av 
-            och hur vi ska meddela dig om nya lägenheter.
-          .control-group.control-group-compact
-            %label.control-label(for="first-name")
-              %strong Förnamn:
-            .controls
-              %input.control-buffer(type="text"
-                    name="first-name"
-                    placeholder="Förnamn"
-                    id="first-name"
-                    ng-model="first_name"
-                    required)
-          .control-group.control-group-compact
-            %label.control-label(for="last-name")
-              %strong Efternamn:
-            .controls
-              %input.control-buffer(type="text"
-                    name="last-name"
-                    placeholder="Efternamn"
-                    id="last-name"
-                    ng-model="last_name"
-                    required)
-          .control-group.control-group-compact
-            %label.control-label(for="email")
-              %strong Din e-postadress:
-            .controls
-              %input.control-buffer(type="email"
-                     name="email"
-                     placeholder="E-postadress"
-                     id="email"
-                     ng-model="email"
-                     required)
-              %span(ng-show="signup.email.$valid")
-                %i.icon-ok.checkmark.okness.icon-large
-              %span.mobile-block(ng-class="{'visibility-hidden': !(signup.email.$error.email)}")
-                Ogiltig&nbsp;e-postadress.
-          .control-group.control-group-compact
-            %label.control-label(for="password")
-              %strong Önskat lösenord:
-            .controls
-              %input.control-buffer(type="password"
-                     name="password"
-                     placeholder="Lösenord"
-                     id="password"
-                     ng-model="password"
-                     required
-                     ng-minlength="6"
-                     ng-maxlength="36")
-              %span(ng-show="signup.password.$valid") 
-                %i.icon-ok.checkmark.okness.icon-large
-              %span.mobile-block(ng-class="{'visibility-hidden': !(signup.password.$error.minlength)}") 
-                Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
-          .control-group.control-group-compact
-            .controls
-              %input(type="submit"
-                     class="btn"
-                     name="signup"i
-                     value="Fortsätt till nästa steg")
-              %span(ng-show="working")
-                %i.icon-spinner.checkmark.icon-spin.icon-large
-                {{message}}
-              %span(ng-show="cross")
-                %i.icon-remove.checkmark.wrongness.icon-large
-                {{message}}
+              ##### Vill du fortsätta leta lägenheter efter 30 dagar kan du förnya medlemskapet för halva priset 149 kr. 
+
+              ###### *Efter att du köpt tjänsten kan du ange telefonnummer som SMS ska skickas till.*
+          .span6.box.bluebox
+            :markdown
+              #### För 298 kr får du tips via e-post och SMS så fort nya lägenheter dyker upp i 30 dagar.
+
+          %div.top-buffer
+            .control-group.control-group-compact
+              %label.control-label(for="first-name")
+                %strong Förnamn:
+              .controls
+                %input.control-buffer(type="text"
+                      name="first-name"
+                      placeholder="Förnamn"
+                      id="first-name"
+                      ng-model="first_name"
+                      required)
+            .control-group.control-group-compact
+              %label.control-label(for="last-name")
+                %strong Efternamn:
+              .controls
+                %input.control-buffer(type="text"
+                      name="last-name"
+                      placeholder="Efternamn"
+                      id="last-name"
+                      ng-model="last_name"
+                      required)
+            .control-group.control-group-compact
+              %label.control-label(for="email")
+                %strong Din e-postadress:
+              .controls
+                %input.control-buffer(type="email"
+                       name="email"
+                       placeholder="E-postadress"
+                       id="email"
+                       ng-model="email"
+                       required)
+                %span(ng-show="signup.email.$valid")
+                  %i.icon-ok.checkmark.okness.icon-large
+                %span.mobile-block(ng-class="{'visibility-hidden': !(signup.email.$error.email)}")
+                  Ogiltig&nbsp;e-postadress.
+            .control-group.control-group-compact
+              %label.control-label(for="password")
+                %strong Önskat lösenord:
+              .controls
+                %input.control-buffer(type="password"
+                       name="password"
+                       placeholder="Lösenord"
+                       id="password"
+                       ng-model="password"
+                       required
+                       ng-minlength="6"
+                       ng-maxlength="36")
+                %span(ng-show="signup.password.$valid") 
+                  %i.icon-ok.checkmark.okness.icon-large
+                %span.mobile-block(ng-class="{'visibility-hidden': !(signup.password.$error.minlength)}") 
+                  Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
+            .control-group.control-group-compact
+              .controls
+                %input(type="submit"
+                       class="btn"
+                       name="signup"i
+                       value="Fortsätt till nästa steg")
+                %span(ng-show="working")
+                  %i.icon-spinner.checkmark.icon-spin.icon-large
+                  {{message}}
+                %span(ng-show="cross")
+                  %i.icon-remove.checkmark.wrongness.icon-large
+                  {{message}}
+  .span6
+    %img(src="/images/Stockholm magnifying glass.jpg")
