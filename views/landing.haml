@@ -9,24 +9,31 @@
     $(".landingpage__image").backstretch("images/gamla_stan_cc_attribution_cropped.jpg");
 
 .hero-unit
-
   %div.row
-    %div.span6.top-buffer.center
+
+    .span6.top-buffer.center
       %h3 Hur fungerar det?
       %p Flertalet hyresvärdar erbjuder förstahandskontrakt i Stockholm genom att lägga upp bostäder på sina hemsidor där den som är först till kvarn att anmäla sig till dessa bostäder har störst chans att få kontrakt.
       %p Problemet är att du inte har tid att bevaka hyresvärdarnas hemsidor efter nya lägenheter hela tiden för att kunna vara bland de första som anmäler sig.
       %p Hittalyan hjälper dig att hålla koll på när nya bostäder läggs upp av dessa hyresvärdar så att du ökar din chans att få ett förstahandskontrakt. Genom att använda vår tjänst får du sms och mejl så fort en först-till-kvarn lägenhet annonseras.
-  %div.span6.top-buffer.center
-    %img(src="/images/drawing2.svg")
+      
+    .span3.top-buffer.twitterfeed 
+      %a.twitter-timeline{"data-widget-id" => "480331648555159552", href: "https://twitter.com/ME22ej"} Tweets by @ME22ej
+      :javascript
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-  %div.row
-    %div.span6.top-buffer.center
+    .span6.top-buffer.center
+      %img(src="/images/drawing2.svg")
+
+
+
+
+    .span6.top-buffer.center
       %h3 Fördelarna med att använda HittaLyan?
       %p Samma minut som en lägenhet annonseras ut skickar vi ett e-postmeddelande eller SMS till dig. Försprånget du får gör att du alltid kan vara en av de första som skickar in en intresseanmälan.
       %p Vi letar efter lägenheter på hyresvärdarnas hemsidor varje minut, dygnet runt, så att du slipper. Att leta lägenhet ska inte behöva vara en heltidssyssla.
-  %div.span6.top-buffer.center
-    %img(src="/images/drawing.svg")
-
+    .offset6.top-buffer
+      %img(src="/images/drawing.svg")
 
   %div.row
     %div.span6.top-buffer.center
@@ -35,6 +42,6 @@
     %div.span6.top-buffer.center.text-center
       %a.btn.btn-warning.btn-xlarge.text-center(href="#!/registrera") Kom igång direkt »
 
-
   %div.span6.top-buffer.center
     %img(src="/images/drawing3.svg")
+

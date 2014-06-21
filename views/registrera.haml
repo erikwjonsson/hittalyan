@@ -6,18 +6,25 @@
       %form.form-horizontal(name="signup" ng-submit="submit()" novalidate)
         %fieldset
           %h2 Bli medlem
-          %div.top-buffer-text
-            :markdown
-              #### För 298 kr får du tips via e-post och SMS så fort nya lägenheter dyker upp i 30 dagar.
+          .span9
+            .span3.sell-pic 
+              %img(src="/images/Stockholm magnifying glass.jpg")
 
-              ##### Vill du fortsätta leta lägenheter efter 30 dagar kan du förnya medlemskapet för halva priset 149 kr. 
+            .span4
+              %h4 För 298 kr skickar vi mejl och SMS till dig så fort en först-till-kvarnen lägenhet dyker upp hos någon av de hyresvärdar vi bevakar. Vill du fortsätta leta lägenheter efter 30 dagar kan du förnya medlemskapet för halva priset 149 kr.
 
-              ###### *Efter att du köpt tjänsten kan du ange telefonnummer som SMS ska skickas till.*
-          .span6.box.bluebox
-            :markdown
-              #### För 298 kr får du tips via e-post och SMS så fort nya lägenheter dyker upp i 30 dagar.
 
-          %div.top-buffer
+          .span6.box.blue-box.top-buffer-text
+            .span1.sellbox-left
+              <input type="checkbox" name="my-checkbox" checked>
+            .span5.sellbox-center
+              :markdown
+                #### Få e-post och SMS så fort nya först-till-kvarnen lägenheter dyker upp hos hyresvärdarna vi bevakar i 30 dagar.
+            .span1.sellbox-right
+              :markdown
+                #### 298 kr
+
+          .span6.blue-box.top-buffer-text
             .control-group.control-group-compact
               %label.control-label(for="first-name")
                 %strong Förnamn:
@@ -80,5 +87,4 @@
                 %span(ng-show="cross")
                   %i.icon-remove.checkmark.wrongness.icon-large
                   {{message}}
-  .span6
-    %img(src="/images/Stockholm magnifying glass.jpg")
+
