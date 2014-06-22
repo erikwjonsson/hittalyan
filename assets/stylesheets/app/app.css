@@ -800,13 +800,13 @@ margin-left: -30px;
 
 
 
-@media (max-width: 480px) {
+@media (min-width: 100px) {
 .twitterfeed { 
 padding-right: 30px;
 }
 }
 
-@media (max-width: 2000px) {
+@media (min-width: 481px) {
 .twitterfeed {
 margin-left: -30px;
 padding-right: 30px;
