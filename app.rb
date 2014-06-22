@@ -146,6 +146,10 @@ Cuba.define do
     on "om" do
       send_view "om"
     end
+
+    on "membersidebar" do
+      send_view "membersidebar"
+    end
     
     on "medlemssidor" do
       user = current_user(req)
@@ -349,17 +353,14 @@ Cuba.define do
       user.session.delete if user
     end
     
-    on "signup", param('email'), param('password'), param('first_name'), param('last_name') do |email, password, first_name, last_name|
+    on "signup", param('email'), param('password'), param('first_name'), param('last_name')\
+    do |email, password, first_name, last_name|
       begin
         user = User.create!(email: email,
                             hashed_password: password, # becomes hashed when created
                             first_name: first_name,
                             last_name: last_name)
         user.create_filter()
-        
-        # Giving the user her free trial period
-        package = Packages::PACKAGE_BY_SKU["TRIAL7"]
-        user.apply_package(package)
         
         # test user for unit testing purposes
         if email == 'hank@rug.burn'
