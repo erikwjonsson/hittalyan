@@ -1,5 +1,5 @@
 .row
-  .span-sidenav
+  .span3
     #member-nav
       %ul.nav.nav-stacked.nav-pills
         %li.box.opaque
@@ -19,12 +19,14 @@
           Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
           %div(ng-show="userData.sms_until && smsActiveState")
             SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
-  %div
-    .span9
+
+  .span9
+    .row
       .span6
         :markdown
           ## Kampanjer
           Känner du andra som du tror skulle kunna ha behöva en tjänst som HittaLyan. Här nedan hittar du flera alternativ för att sprida ordet om HittaLyan till vänner och bekanta.
+    .row
       .span4
         .box.opaque
           .padhack
