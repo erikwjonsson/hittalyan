@@ -755,10 +755,6 @@ padding-bottom: 1800px;
   margin-left: 30px;
 }
 
-.sell-pic { 
-margin-left: -30px;
-}
-
 @media (min-width: 100px) {
 .twitterfeed { 
 padding-right: 30px;
@@ -773,11 +769,11 @@ padding-right: 30px;
 }
 
 .sales-box {
-  color: black;
   background-color: #FFDAB6;
   padding-bottom: 40px;
   padding-top: 40px;
   border: 1px solid #FFB56C;
+  margin-top: 45px;
 }
 
 .salestext-red {
