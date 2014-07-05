@@ -761,3 +761,14 @@ padding-bottom: 1800px;
 .menu-button-margin {
   margin-left: 30px;
 }
+
+.blurred-apartment {
+  position: relative;
+}
+
+.blurred-apartment-btn {
+  position: absolute;
+  top: 52px;
+  left: 139px;
+  z-index: 10;
+}

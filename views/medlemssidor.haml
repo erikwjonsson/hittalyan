@@ -26,7 +26,9 @@
       %a.label(href="" ng-click="sortingOrderedBy = 'landlord'; sortingReversed=false" ng-class="{'label-inverse': isOrderedBy('landlord')}") Hyresvärd
       
       .row-fluid.top-buffer.bottom-buffer(ng-show="showBlurredApartments" ng-repeat="i in range(5)")
-        %img(src="images/apartments_blurred.png")
+        .blurred-apartment
+          %img(src="images/apartments_blurred.png")
+          %a.btn.btn-warning.btn-xlarge.blurred-apartment-btn(href="#!/medlemssidor/prenumeration") Kom igång direkt »
 
       .row-fluid.top-buffer.bottom-buffer(ng-repeat="apartment in apartments | orderBy:sortingOrderedBy:sortingReversed")
         .span3
