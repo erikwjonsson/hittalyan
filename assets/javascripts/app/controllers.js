@@ -190,10 +190,15 @@ function MembersController($scope, $http, analytics) {
   $scope.showNoApartmentsMessage = false;
   $scope.smsActiveState = true;
   $scope.showUserInactiveMessage = false;
+  $scope.showBlurredApartments = false;
 
   // Sorting of apartments
   $scope.sortingOrderedBy = 'advertisement_found_at';
   $scope.sortingReversed = 'true';
+
+  $scope.range = function(n) {
+    return new Array(n);
+  };
 
   $scope.isOrderedBy = function(predicate) {
     if (predicate === $scope.sortingOrderedBy) {
@@ -226,6 +231,7 @@ function MembersController($scope, $http, analytics) {
       $scope.showFirstDayMessage = firstDay();
       $scope.smsActiveState = setSmsActiveState($scope.userData.sms_until);
       $scope.showUserInactiveMessage = !$scope.userData.active;
+      $scope.showBlurredApartments = !$scope.userData.active;
       if ($scope.userData.active === true) {
         $scope.apartments = [];
         $http.get("medlemssidor/apartments_list" + mingDate()).
