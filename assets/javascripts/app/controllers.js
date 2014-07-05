@@ -232,9 +232,8 @@ function MembersController($scope, $http, analytics) {
           success(function(data, status) {
             $scope.apartments = data;
           }).
-          error(function(data, status) {
-            $scope.apartments = [];
-            $scope.showNoApartmentsMessage = true;
+          then(function() {
+            $scope.showNoApartmentsMessage = ($scope.apartments.length === 0)
         });
       };
     }).
