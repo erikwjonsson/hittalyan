@@ -11,7 +11,7 @@
         %li.box.opaque
           %a{href: "#!/medlemssidor/kampanjer"} Kampanjer
     #member-info-box
-      .box.opaque
+      .box
         .alert(ng-show="showUserInactiveMessage")
           Du har ingen aktiv prenumeration.
           %a(href="#!/medlemssidor/prenumeration") Förläng din prenumeration
@@ -23,40 +23,39 @@
   .span9
     .row
       .span6
-        :markdown
-          ## Kampanjer
-          Känner du andra som du tror skulle kunna ha behöva en tjänst som HittaLyan. Här nedan hittar du flera alternativ för att sprida ordet om HittaLyan till vänner och bekanta.
+        .padhack
+          :markdown
+            ## Kampanjer
+            Känner du andra som du tror skulle kunna ha behöva en tjänst som HittaLyan. Här nedan hittar du flera alternativ för att sprida ordet om HittaLyan till vänner och bekanta.
     .row
       .span4
-        .box.opaque
-          .padhack
-            %h3.top-buffer-text Tipsa en kompis!
-            %img(src="/images/Spread the word.jpg")
-            %h4.top-buffer-text Tipsa kompis om HittaLyan och få gratisdagar
-            :markdown 
-              Känner du någon som du tror skulle ha behov av HittaLyan tjänst. Om dina kompisar börjar använda HittaLyans tjänst så de kan välja Tips från kompis som alternativ och sedan ange din e-postadress så får du automatisk 10 gratisdagar.
-              Observera att du måste ha köpt en prenumeration av HittaLyan för att du ska kunna få gratisdagar.
+        .padhack
+          %h3.top-buffer-text Tipsa en kompis!
+          %img(src="/images/Spread the word.jpg")
+          %h4.top-buffer-text Tipsa kompis om HittaLyan och få gratisdagar
+          :markdown 
+            Känner du någon som du tror skulle ha behov av HittaLyan tjänst. Om dina kompisar börjar använda HittaLyans tjänst så de kan välja Tips från kompis som alternativ och sedan ange din e-postadress så får du automatisk 10 gratisdagar.
+            Observera att du måste ha köpt en prenumeration av HittaLyan för att du ska kunna få gratisdagar.
 
-            %h4.top-buffer-text Skapa rabattkod och skicka till dina vänner och bekanta
-            :markdown
-              Skapa en rabattkod som kan du skicka till dina vänner och bekanta. Rabattkoden ger dem 25% procent rabatt när de börjar använda HittaLyan. Det är bara för dem att ange koden när de fyller i sina kontaktuppgifter innan betalsteget.
-            %h4.top-buffer-text Skicka rabattkod via Facebook
-            :markdown   
-              Du kan även välja att skapa en rabattkod genom HittaLyans facebook app. Använd vår facebook app för att skapa rabattkoden och skicka till dina facebook vänner. Rabattkoden ger dem 25% procent i rabatt när de börjar använda HittaLyan. Det är bara för dem att ange koden när de fyller i sina kontaktuppgifter innan betalsteget.
-            %img(src="/images/facebook logo.png")
+          %h4.top-buffer-text Skapa rabattkod och skicka till dina vänner och bekanta
+          :markdown
+            Skapa en rabattkod som kan du skicka till dina vänner och bekanta. Rabattkoden ger dem 25% procent rabatt när de börjar använda HittaLyan. Det är bara för dem att ange koden när de fyller i sina kontaktuppgifter innan betalsteget.
+          %h4.top-buffer-text Skicka rabattkod via Facebook
+          :markdown   
+            Du kan även välja att skapa en rabattkod genom HittaLyans facebook app. Använd vår facebook app för att skapa rabattkoden och skicka till dina facebook vänner. Rabattkoden ger dem 25% procent i rabatt när de börjar använda HittaLyan. Det är bara för dem att ange koden när de fyller i sina kontaktuppgifter innan betalsteget.
+          %img(src="/images/facebook logo.png")
       .span4
-        .box.opaque
-          .padhack
-            %h3.top-buffer Rekommendera HittaLyan och tjäna pengar!  
-            :markdown   
-              Hjälp oss visa för omvärlden värdet av HittaLyans tjänst genom skriva en kortfattad rekommendation av vår tjänst och få betalt.
-            :markdown
-              Vi erbjuder 200 kr om du som mejlar oss en kort text där du skrivit en rekommendation samt ger oss tillåtelse att använda ditt efternamn samt första initial i ditt förnamn i vår marknadföring.
-            :markdown
-              Vi erbjuder även 1000 kr för ett fåtal personer som är intresserade av att medverka på bild och samt bidrar med ett kortfattat citat där ni rekommenderar HittaLyan.
-              Om du skulle vara intresserad av detta mejla in ditt intresse till HittaLyan.se idag genom vårt kontaktformulär som du hitta här!
-            :markdown 
-              Klicka här för att komma till kontaktformuläret.
-            %h3.top-buffer Ge oss feedback!
-            :markdown
-              Fyll i vår undersökningsblankett eller ge oss övrig feedback!
+        .padhack
+          %h3.top-buffer Rekommendera HittaLyan och tjäna pengar!  
+          :markdown   
+            Hjälp oss visa för omvärlden värdet av HittaLyans tjänst genom skriva en kortfattad rekommendation av vår tjänst och få betalt.
+          :markdown
+            Vi erbjuder 200 kr om du som mejlar oss en kort text där du skrivit en rekommendation samt ger oss tillåtelse att använda ditt efternamn samt första initial i ditt förnamn i vår marknadföring.
+          :markdown
+            Vi erbjuder även 1000 kr för ett fåtal personer som är intresserade av att medverka på bild och samt bidrar med ett kortfattat citat där ni rekommenderar HittaLyan.
+            Om du skulle vara intresserad av detta mejla in ditt intresse till HittaLyan.se idag genom vårt kontaktformulär som du hitta här!
+          :markdown 
+            Klicka här för att komma till kontaktformuläret.
+          %h3.top-buffer Ge oss feedback!
+          :markdown
+            Fyll i vår undersökningsblankett eller ge oss övrig feedback!
