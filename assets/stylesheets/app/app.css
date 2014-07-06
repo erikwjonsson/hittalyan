@@ -636,3 +636,14 @@ Media queries
 color: red;
 font-weight: bold;
 }
+
+.blurred-apartment {
+  position: relative;
+}
+
+.blurred-apartment-btn {
+  position: absolute;
+  top: 52px;
+  left: 139px;
+  z-index: 10;
+}

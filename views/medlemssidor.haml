@@ -1,5 +1,5 @@
-﻿.row
-  .span3.bottom-buffer(ng-controller="MemberSidebarController" ng-include="memberSidebarUrl")
+.row
+  .span3.bottom-buffer(ng-controller="MemberSidebarController" ng-include="memberSidebarUrl")y
   .span9.bottom-buffer2
     .padhack
       .alert(ng-show="showFirstDayMessage")
@@ -7,7 +7,6 @@
         till din e-postadress.
       :markdown
         ## Medlemssidor
-
         Använd menyn för att navigera.
         På sidan [Inställningar](/#!/medlemssidor/installningar) kan du ställa in vilka lägenheter du är intresserad av och 
         hur du vill bli meddelad om nya lägenheter. 
@@ -26,7 +25,9 @@
       %a.label(href="" ng-click="sortingOrderedBy = 'landlord'; sortingReversed=false" ng-class="{'label-inverse': isOrderedBy('landlord')}") Hyresvärd
       
       .row-fluid.top-buffer.bottom-buffer(ng-show="showBlurredApartments" ng-repeat="i in range(5)")
-        %img(src="images/apartments_blurred.png")
+        .blurred-apartment
+          %img(src="images/apartments_blurred.png")
+          %a.btn.btn-warning.btn-xlarge.blurred-apartment-btn(href="#!/medlemssidor/prenumeration") Kom igång direkt »
 
       .row-fluid.top-buffer.bottom-buffer(ng-repeat="apartment in apartments | orderBy:sortingOrderedBy:sortingReversed")
         .span3
