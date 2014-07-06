@@ -108,14 +108,6 @@ input:focus.ng-valid {
   padding: 15px;
 }
 
-/*Set element background to white and make that same BACKGROUND transparent*/
-.opaque {
-  background: rgb(255, 255, 255) transparent; /* default fallback */
-  background: rgba(255, 255, 255, 0); /* nice browsers */
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
-}
-
 #links {
   padding-left: 40%;
   /*padding-right: 35%;*/
@@ -161,12 +153,6 @@ body {
   max-width: 500px;
 }
 
-/*Set element background to black and make that same BACKGROUND transparent*/
-.dark-opaque {
-  color: #e7eef0; /* approximately the regular opaque color when on our background */
-  background: rgb(0, 0, 0) transparent; /* default fallback */
-  background: rgba(0, 0, 0, 0.8); /* nice browsers */
-}
 
 /* Align text in nav bar the same as links */
 .navbar .nav > li > span {
@@ -627,7 +613,7 @@ Media queries
 }
 
 .cover-image--signup {
-  background-image: url(images/stockholm_bird_view.jpg);
+  background-image: url(images/stockholmsvy.jpg);
 }
 
 /* Overrides for the default Bootstrap styling */
@@ -635,128 +621,8 @@ Media queries
   background-color: white;
 }
 
-/*Set element background to black and make that same BACKGROUND transparent*/
-.dark-opaque {
-  color: black; /* approximately the regular opaque color when on our background */
-}
-
-
-.side-nav
-
-@media (min-width: 0px) {
-.span-sidenav {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 0px;
-}
-}
-
-@media (min-width: 768px) {
-.span-sidenav {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 3200px;
-}
-}
-
-@media (min-width: 980px) {
-.span-sidenav {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: 0px;
-padding-bottom: 1500px;
-}
-}
-
-
-
-
-
-
-
-
-
-
-@media (min-width: 0px) {
-.span-sidenav-faq {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 0px;
-}
-}
-
-@media (min-width: 768px) {
-.span-sidenav-faq {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 3200px;
-}
-}
-
-@media (min-width: 980px) {
-.span-sidenav-faq {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: 0px;
-padding-bottom: 1500px;
-}
-}
-
-@media (min-width: 0px) {
-.span-sidenav-filtersettings {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 0px;
-}
-}
-
-@media (min-width: 778px) {
-.span-sidenav-filtersettings {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 1800px;
-}
-}
-
-@media (min-width: 980px) {
-.span-sidenav-filtersettings {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: 0px;
-padding-bottom: 1800px;
-}
-}
-
 .menu-button-margin {
   margin-left: 30px;
-}
-
-@media (min-width: 100px) {
-.twitterfeed { 
-padding-right: 30px;
-}
-}
-
-@media (min-width: 481px) {
-.twitterfeed {
-margin-left: -30px;
-padding-right: 30px;
-}
 }
 
 .sales-box {
@@ -764,23 +630,6 @@ padding-right: 30px;
   padding-bottom: 40px;
   padding-top: 40px;
   margin-top: 45px;
-}
-
-.salestext-red {
-  color: red;
-}
-
-.sales-box-center {
-    float:none;
-    display:inline-block;
-    vertical-align:middle;
-    margin-right:-4px;
-}
-
-.side-nav {
-background-color: #F5F5F8;
-height: 100%;
-padding-bottom: 70%;
 }
 
 .markety-important {
