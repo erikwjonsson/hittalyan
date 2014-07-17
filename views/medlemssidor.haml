@@ -27,7 +27,7 @@
       .row-fluid.top-buffer.bottom-buffer(ng-show="showBlurredApartments" ng-repeat="i in range(5)")
         .blurred-apartment
           %img(src="images/apartments_blurred.png")
-          %a.btn.btn-warning.btn-large.blurred-apartment-btn(href="#!/medlemssidor/prenumeration") Kom igång direkt »
+          %a.btn.btn-warning.btn-large.blurred-apartment__btn(href="#!/medlemssidor/prenumeration") Kom igång direkt »
 
       .row-fluid.top-buffer.bottom-buffer(ng-repeat="apartment in apartments | orderBy:sortingOrderedBy:sortingReversed")
         .span3

@@ -621,10 +621,6 @@ Media queries
   background-color: white;
 }
 
-.menu-button-margin {
-  margin-left: 30px;
-}
-
 .sales-box {
   background-color: #FFA347;
   padding-bottom: 40px;
@@ -633,17 +629,16 @@ Media queries
 }
 
 .markety-important {
-color: red;
-font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 .blurred-apartment {
   position: relative;
 }
 
-.blurred-apartment-btn {
+.blurred-apartment__btn {
   position: absolute;
   top: 52px;
   left: 139px;
-  z-index: 10;
 }
