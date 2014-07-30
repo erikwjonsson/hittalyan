@@ -1,5 +1,5 @@
 .row
-  .span-sidenav
+  .span3
     #member-nav(ng-show="isLoggedIn()") 
       %ul.nav.nav-stacked.nav-pills
         %li.box.opaque
@@ -19,34 +19,33 @@
           Din prenumeration gäller fram till och med {{oneDayBefore(userData.premium_until) | date: 'yyyy-MM-dd'}}.
           %div(ng-show="userData.sms_until && smsActiveState")
             SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
-  .span9
-    .box.opaque.bottom-buffer
-      .padhack
-        %h1 Om oss
-        :markdown
-          HittaLyan är en tjänst som hjälper dig att hitta en hyreslägenhet i Stockholm.
-          Detta gör vi genom att hålla koll på när hyresvärdar lägger upp nya lägenheter 
-          och tipsa dig som är medlem. 
-          Vi som står bakom tjänsten är ett företag som heter Lingonberry Productions.
-        %form#contact-form.form-horizontal(name="contact" ng-submit="submit()")
-          %fieldset
-            %legend Kontakta oss
-            .alert.alert-success(ng-show="messageSent")
-              Ditt meddelande har skickats.
-            .control-group
-              %label.control-label(for="email")
-                %strong Din e-postadress:
-              .controls
-                %input(ng-model="email" id="email" type="text" placeholder="Din e-postadress" required)
-            .control-group
-              %label.control-label(for="message")
-                %strong Fråga/meddelande:
-              .controls
-                %textarea.large-textarea(ng-model="message" 
-                                         id="message" 
-                                         rows="10" 
-                                         placeholder="Skriv ditt meddelande här" 
-                                         required)
-            .control-group
-              .controls
-                %input(type="submit" class="btn" value="Skicka")
+  .span9.bottom-buffer
+    .padhack
+      %h2 Om oss
+      :markdown
+        HittaLyan är en tjänst som hjälper dig att hitta en hyreslägenhet i Stockholm.
+        Detta gör vi genom att hålla koll på när hyresvärdar lägger upp nya lägenheter 
+        och tipsa dig som är medlem. 
+        Vi som står bakom tjänsten är ett företag som heter Lingonberry Productions.
+      %form#contact-form.form-horizontal(name="contact" ng-submit="submit()")
+        %fieldset
+          %legend Kontakta oss
+          .alert.alert-success(ng-show="messageSent")
+            Ditt meddelande har skickats.
+          .control-group
+            %label.control-label(for="email")
+              %strong Din e-postadress:
+            .controls
+              %input(ng-model="email" id="email" type="text" placeholder="Din e-postadress" required)
+          .control-group
+            %label.control-label(for="message")
+              %strong Fråga/meddelande:
+            .controls
+              %textarea.large-textarea(ng-model="message" 
+                                       id="message" 
+                                       rows="10" 
+                                       placeholder="Skriv ditt meddelande här" 
+                                       required)
+          .control-group
+            .controls
+              %input(type="submit" class="btn" value="Skicka")

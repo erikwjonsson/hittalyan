@@ -66,15 +66,6 @@ input:focus.ng-valid {
   border-color: #00a8ed;
 }
 
-/*Background image for entire app*/
-body { 
-	/*background: url(/images/gamla_stan_cc_attribution.jpg) no-repeat center center fixed; */
-	/*-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;*/
-}
-
 .markety-box h2 {
   font-size: 23px;
   text-align: center;
@@ -117,14 +108,6 @@ body {
   padding: 15px;
 }
 
-/*Set element background to white and make that same BACKGROUND transparent*/
-.opaque {
-  background: rgb(255, 255, 255) transparent; /* default fallback */
-  background: rgba(255, 255, 255, 0); /* nice browsers */
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF); /* IE 6/7 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF)"; /* IE8 */
-}
-
 #links {
   padding-left: 40%;
   /*padding-right: 35%;*/
@@ -144,7 +127,7 @@ body {
 }
 
 .payson-button {
-  background-image: url(/images/payson_betala_btn.png); /* 16px x 16px */
+  background: url(/images/payson_betala_btn.png) no-repeat center center fixed; /* 16px x 16px */
 }
 
 .bottom-buffer {
@@ -170,12 +153,6 @@ body {
   max-width: 500px;
 }
 
-/*Set element background to black and make that same BACKGROUND transparent*/
-.dark-opaque {
-  color: #e7eef0; /* approximately the regular opaque color when on our background */
-  background: rgb(0, 0, 0) transparent; /* default fallback */
-  background: rgba(0, 0, 0, 0.8); /* nice browsers */
-}
 
 /* Align text in nav bar the same as links */
 .navbar .nav > li > span {
@@ -278,7 +255,7 @@ html, body {
 
 #wrap {
   padding: 0px;
-  padding-top: 72px; /* Push us beneath the navbar */
+  padding-top: 71px; /* Push us beneath the navbar */
   /*height: auto !important;*/
   min-height: 100%; /* For browser that don't support calc */
   min-height: calc(100% - 100px); /* Compensate for navbar */
@@ -287,7 +264,7 @@ html, body {
 }
 
 #footer {
-  height: 300px;
+  height: 320px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -371,9 +348,9 @@ Bootstrap extensions
 
 .markety-icon {
   text-align: center;
-  font-size: 100px;
-  line-height: 100px;
-  height: 100px;
+  font-size: 50px;
+  line-height: 50px;
+  height: 50px;
 }
 
 .icon-notanicon {
@@ -421,10 +398,13 @@ Media queries
 
 @media (max-width: 979px) {
   /*When making navbar collapsible it's position is no longer absolute
-    and so we no longer need to push our wrapper beneath it. The navbar has
-    some margin-bottom instead.*/
+    and so we no longer need to push our wrapper beneath it, ... */
   #wrap {
-    padding-top: 25px;
+    padding-top: 0px;
+
+    /* ... however we need to counteract a Bootstrap margin-bottom on the navbar.
+    Would be nicer to unset that style, but specificity makes that messy. */
+    margin-top: -20px;
   }
 }
  
@@ -606,158 +586,59 @@ Media queries
 }
 
 
-@media (min-width: 0px) {
-.hero-unit__center {
+.hero-unit--center {
   float: none;
-  margin-top: 70px;
-  margin-bottom: auto;
-  padding: 40px;
   margin-left: auto;
   margin-right: auto;
-}
+ 
+  margin-top: 70px;
+  margin-bottom: 70px;
 }
 
 .text-left {
   text-align: left;
 }
 
-.landingpage__image {
-  width: 100%;
-  height: 500px;
+.cover-image {
+  background-repeat: no-repeat;
+  background-position: center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-/*Makes the distance not exist between background image and the navbar*/
-@media (min-width: 877px) {
-.background-image-top-margin {
-margin-top: -30px;
-}
+.cover-image--landing {
+  background-image: url(images/gamla_stan_cc_attribution_cropped.jpg);
 }
 
-@media (min-width: 0px) {
-.background-image-top-margin {
-margin-top: -45px;
-}
+.cover-image--signup {
+  background-image: url(images/stockholmsvy.jpg);
 }
 
-/*Make the distance between hero-unit and footer 0*/
+/* Overrides for the default Bootstrap styling */
 .hero-unit {
-  margin-bottom: 0px;
   background-color: white;
 }
 
-/*Set element background to black and make that same BACKGROUND transparent*/
-.dark-opaque {
-  color: black; /* approximately the regular opaque color when on our background */
+.sales-box {
+  background-color: #FFA347;
+  padding-bottom: 40px;
+  padding-top: 40px;
+  margin-top: 45px;
 }
 
-
-
-@media (min-width: 0px) {
-.span-sidenav {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 0px;
-}
+.markety-important {
+  color: red;
+  font-weight: bold;
 }
 
-@media (min-width: 768px) {
-.span-sidenav {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 3200px;
-}
+.blurred-apartment {
+  position: relative;
 }
 
-@media (min-width: 980px) {
-.span-sidenav {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: 0px;
-padding-bottom: 1500px;
-}
-}
-
-
-
-
-
-
-
-
-
-
-@media (min-width: 0px) {
-.span-sidenav-faq {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 0px;
-}
-}
-
-@media (min-width: 768px) {
-.span-sidenav-faq {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 3200px;
-}
-}
-
-@media (min-width: 980px) {
-.span-sidenav-faq {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: 0px;
-padding-bottom: 1500px;
-}
-}
-
-@media (min-width: 0px) {
-.span-sidenav-filtersettings {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 0px;
-}
-}
-
-@media (min-width: 778px) {
-.span-sidenav-filtersettings {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: -45px;
-padding-bottom: 1800px;
-}
-}
-
-@media (min-width: 980px) {
-.span-sidenav-filtersettings {
-width: 220px;
-background-color: #F5F5F8;
-height: 100%;
-margin-top: 0px;
-padding-bottom: 1800px;
-}
-}
-
-
-.blue-box {
-  background-color: blue;
-  border: 2px solid;
-  border-color: red
-}
-
-.menu-button-margin {
-  margin-left: 30px;
+.blurred-apartment__btn {
+  position: absolute;
+  top: 52px;
+  left: 139px;
 }
