@@ -2,9 +2,13 @@
   .span3.bottom-buffer(ng-controller="MemberSidebarController" ng-include="memberSidebarUrl")
   .span9
     .padhack
+      .alert-error(ng-show="showUserInactiveMessage")
+        Tipsa dina vänner om HittaLyan och få gratis extradagar. 
+        %a(href="#!/medlemssidor/kampanjer") Se kampanjer!
       .alert(ng-show="showUserInactiveMessage")
         Obs! För att få lägenhetstips måste du aktivera en prenumeration.
         %a(href="#!/medlemssidor/prenumeration") Gå till prenumerationer
+
 
       %form(name="allSettingsForm" ng-submit="submitAllSettings()" novalidate)
         %fieldset
