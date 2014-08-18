@@ -329,8 +329,10 @@ Cuba.define do
       case payment.validate(ipn_response, ipn_request)
       when true
         user = User.find_by(email: payment.user_email)
-        package = Packages::PACKAGE_BY_SKU[payment.package_sku]
-        user.apply_package(package)
+        user.apply_package(Packages::PACKAGE_BY_SKU[payment.package_sku])
+        if referee_user = User.find_by(email: user.referee)
+          referee_user.apply_package(Packages::PACKAGE_BY_SKU["REFERRAL"])
+        end
       when false
         res.status = 400
       end

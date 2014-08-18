@@ -98,6 +98,19 @@ p << Package.new(sku: 'TRIAL7',
                  show: false,
                  show_to_premium: false)
 
+# Package for giving referrals free days
+p << Package.new(sku: 'REFERRAL',
+                 name: 'REFERRAL',
+                 description: ''\
+                 'Ger 10 dagar prenumeration med sms',
+                 payson_description: 'REFERRAL: 10 dagar, sms',
+                 unit_price_in_ore: 8888*100,
+                 premium_days: 10,
+                 sms_days: 10,
+                 active: true,
+                 show: false,
+                 show_to_premium: false)
+
 # ==========================================
 # Test packages for development and testing
 # ==========================================
