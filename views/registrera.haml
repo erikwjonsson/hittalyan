@@ -25,6 +25,8 @@
                   id="first-name"
                   ng-model="first_name"
                   required)
+            %span(ng-show="signup['first-name'].$valid")
+              %i.icon-ok.checkmark.okness.icon-large
         .control-group.control-group-compact
           %label.control-label(for="last-name")
             %strong Efternamn:
@@ -35,6 +37,8 @@
                   id="last-name"
                   ng-model="last_name"
                   required)
+            %span(ng-show="signup['last-name'].$valid")
+              %i.icon-ok.checkmark.okness.icon-large
         .control-group.control-group-compact
           %label.control-label(for="email")
             %strong Din e-postadress:
@@ -61,10 +65,23 @@
                    required
                    ng-minlength="6"
                    ng-maxlength="36")
-            %span(ng-show="signup.password.$valid") 
+            %span(ng-show="signup.password.$valid")
               %i.icon-ok.checkmark.okness.icon-large
             %span.mobile-block(ng-class="{'visibility-hidden': !(signup.password.$error.minlength)}") 
               Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
+        .control-group.control-group-compact
+          %label.control-label(for="referee")
+            %strong Referent:
+          .controls
+            %input.control-buffer(type="email"
+                   name="referee"
+                   placeholder="Referent"
+                   id="referee"
+                   ng-model="referee")
+            %span(ng-show="signup.referee.$valid && referee")
+              %i.icon-ok.checkmark.okness.icon-large
+            %span.mobile-block(ng-class="{'visibility-hidden': !(signup.referee.$error.email)}")
+              Ogiltig&nbsp;e-postadress.
         .control-group.control-group-compact
           .controls
             %input(type="submit"
