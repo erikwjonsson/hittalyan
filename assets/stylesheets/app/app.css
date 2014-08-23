@@ -608,12 +608,13 @@ Media queries
   background-size: cover;
 }
 
+/* https://www.flickr.com/photos/anymotion/3659158957 */
 .cover-image--landing {
   background-image: url(images/gamla_stan_cc_attribution_cropped.jpg);
 }
 
 .cover-image--signup {
-  background-image: url(images/stockholmsvy.jpg);
+  background-image: url(images/Stockholm_registrera_2.jpg);
 }
 
 /* Overrides for the default Bootstrap styling */
@@ -625,7 +626,7 @@ Media queries
   background-color: #FFA347;
   padding-bottom: 40px;
   padding-top: 40px;
-  margin-top: 45px;
+  margin-top: 10px;
 }
 
 .markety-important {
