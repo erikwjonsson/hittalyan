@@ -10,11 +10,16 @@
     #mainnav.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner.navbar--fat
         .container.navbar-vertical-center
+          .span1
+            %img(src="/images/Hittalyan_ikon2.svg")
           %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
+
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
+
           %a.brand(href="#!/" data-toggle="collapse" data-target=".nav-collapse.in") HittaLyan
+
           .nav-collapse.collapse(collapse="navBarCollapsed")
             %ul.nav
               %li(ng-hide="isLoggedIn()")

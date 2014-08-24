@@ -306,6 +306,16 @@ Bootstrap extensions
           border-radius: 8px;
   }
 
+.btn-medium {
+  padding: 6px 30px;
+  font-size: 14px;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  }
+
+
 .hittalyan-nav-text {
   color: rgb(153, 153, 153) !important;
 }
