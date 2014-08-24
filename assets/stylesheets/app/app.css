@@ -76,6 +76,10 @@ input:focus.ng-valid {
   font-size: 48px;
 }
 
+.hero-unit a {
+  font-weight: 300;
+}
+
 /*Should fit on one line, 
   have a bit of space separating it from the h1 above,
   and sit closer to the p text below.*/
@@ -84,15 +88,19 @@ input:focus.ng-valid {
   font-weight: 500;
 }
 
+.hero-unit p {
+  font-weight: 300;
+}
+
 .markety-box p {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 30px;
 }
 
 .markety-box li {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 30px;
 }
 
@@ -597,7 +605,6 @@ Media queries
 }
 
 .top-buffer {
-
   margin-top: 75px;
 }
 
@@ -605,7 +612,7 @@ Media queries
   margin-top: 45px;
 }
 
-.top-buffer-herounit {
+.top-buffer-small {
   margin-top: 10px;
 }
 
