@@ -1,78 +1,83 @@
 .row.cover-image.cover-image--signup
   .span9.hero-unit.hero-unit--center.text-center
     %h1 Bli medlem
-    %p För <span class=markety-important>298 kr</span> får du mejl och SMS så fort en först till kvarn-lägenhet dyker upp hos någon av hyresvärdarna vi bevakar. Om du inte hittat en lägenhet efter 30 dagar kan du förnya medlemskapet för <span class=markety-important>halva priset (149 kr)</span>.
-    %p Det är enkelt att komma igång. Fyll bara i formuläret nedan och betala säkert med Payson. (Om du vill ha SMS fyller du enkelt i ditt mobilnummer när du blivit medlem.)
-    .markety-icon
-      %i.icon-chevron-down
+    .top-buffer-small
+      :markdown
+        För **298 kr** får du mejl och SMS så fort en först till kvarn-lägenhet dyker upp hos någon av hyresvärdarna vi bevakar.
+        Prenumerationen avslutas automatiskt efter 30 dagar. 
+        Om du inte hittat en lägenhet efter denna tid erbjuder vi dig att **förnya medlemskapet för rabbaterat pris,
+        endast 149 kr**.
+        
+        Det är enkelt att komma igång. Fyll bara i formuläret nedan och betala säkert med Payson. 
+        Om du vill ha SMS fyller du enkelt i ditt mobilnummer när du blivit medlem.
+      .markety-icon
+        %i.icon-chevron-down
 .row
-  .span7.center.top-buffer-text
-    .padhack
-      .alert.alert-info.text-center
-        Redan medlem? <a href="/#!/login">Logga in här</a>
-.row
-  .span7.bottom-buffer2.sales-box.box.center
-    %form.form-horizontal(name="signup" ng-submit="submit()" novalidate)
-      %fieldset
-        .control-group.control-group-compact
-          %label.control-label(for="first-name")
-            %strong Förnamn:
-          .controls
-            %input.control-buffer(type="text"
-                  name="first-name"
-                  placeholder="Förnamn"
-                  id="first-name"
-                  ng-model="first_name"
-                  required)
-        .control-group.control-group-compact
-          %label.control-label(for="last-name")
-            %strong Efternamn:
-          .controls
-            %input.control-buffer(type="text"
-                  name="last-name"
-                  placeholder="Efternamn"
-                  id="last-name"
-                  ng-model="last_name"
-                  required)
-        .control-group.control-group-compact
-          %label.control-label(for="email")
-            %strong Din e-postadress:
-          .controls
-            %input.control-buffer(type="email"
-                   name="email"
-                   placeholder="E-postadress"
-                   id="email"
-                   ng-model="email"
-                   required)
-            %span(ng-show="signup.email.$valid")
-              %i.icon-ok.checkmark.okness.icon-large
-            %span.mobile-block(ng-class="{'visibility-hidden': !(signup.email.$error.email)}")
-              Ogiltig&nbsp;e-postadress.
-        .control-group.control-group-compact
-          %label.control-label(for="password")
-            %strong Önskat lösenord:
-          .controls
-            %input.control-buffer(type="password"
-                   name="password"
-                   placeholder="Lösenord"
-                   id="password"
-                   ng-model="password"
-                   required
-                   ng-minlength="6"
-                   ng-maxlength="36")
-            %span(ng-show="signup.password.$valid") 
-              %i.icon-ok.checkmark.okness.icon-large
-            %span.mobile-block(ng-class="{'visibility-hidden': !(signup.password.$error.minlength)}") 
-              Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
-        .control-group.control-group-compact
-          .controls
-            %input(type="submit"
-                   class="btn"
-                   name="signup"i
-                   value="Fortsätt till betalning")
-            %span(ng-show="working")
-              %i.icon-spinner.checkmark.icon-spin.icon-large
-              {{message}}
-            %span(ng-show="cross")
-              %i.icon-remove.checkmark.wrongness.icon-large
-              {{message}}
+  .span7.bottom-buffer-large.center
+    .alert.alert-info.text-center.top-buffer
+      Redan medlem? <a href="/#!/login">Logga in här</a>
+    .sales-box.box
+      %form.form-horizontal(name="signup" ng-submit="submit()" novalidate)
+        %fieldset
+          .control-group.control-group-compact
+            %label.control-label(for="first-name")
+              %strong Förnamn:
+            .controls
+              %input.control-buffer(type="text"
+                    name="first-name"
+                    placeholder="Förnamn"
+                    id="first-name"
+                    ng-model="first_name"
+                    required)
+          .control-group.control-group-compact
+            %label.control-label(for="last-name")
+              %strong Efternamn:
+            .controls
+              %input.control-buffer(type="text"
+                    name="last-name"
+                    placeholder="Efternamn"
+                    id="last-name"
+                    ng-model="last_name"
+                    required)
+          .control-group.control-group-compact
+            %label.control-label(for="email")
+              %strong Din e-postadress:
+            .controls
+              %input.control-buffer(type="email"
+                     name="email"
+                     placeholder="E-postadress"
+                     id="email"
+                     ng-model="email"
+                     required)
+              %span(ng-show="signup.email.$valid")
+                %i.icon-ok.checkmark.okness.icon-large
+              %span.mobile-block(ng-class="{'visibility-hidden': !(signup.email.$error.email)}")
+                Ogiltig&nbsp;e-postadress.
+          .control-group.control-group-compact
+            %label.control-label(for="password")
+              %strong Önskat lösenord:
+            .controls
+              %input.control-buffer(type="password"
+                     name="password"
+                     placeholder="Lösenord"
+                     id="password"
+                     ng-model="password"
+                     required
+                     ng-minlength="6"
+                     ng-maxlength="36")
+              %span(ng-show="signup.password.$valid") 
+                %i.icon-ok.checkmark.okness.icon-large
+              %span.mobile-block(ng-class="{'visibility-hidden': !(signup.password.$error.minlength)}") 
+                Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
+          .control-group.control-group-compact
+            .controls
+              %input(type="submit"
+                     class="btn"
+                     name="signup"i
+                     value="Fortsätt till betalning")
+              %span(ng-show="working")
+                %i.icon-spinner.checkmark.icon-spin.icon-large
+                {{message}}
+              %span(ng-show="cross")
+                %i.icon-remove.checkmark.wrongness.icon-large
+                {{message}}

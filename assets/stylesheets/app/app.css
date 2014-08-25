@@ -32,7 +32,12 @@
   color: inherit;
 }
 
+.navbar .brand {
+  /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
+     makes font look too thin in FF */
+  font-weight: 300; 
 
+}
 /*Make bootstrap grok some Angular*/
 
 /*Ng says invalid for whatever reason. Red*/
@@ -142,7 +147,7 @@ input:focus.ng-valid {
   margin-bottom: 30px;
 }
 
-.bottom-buffer2 {
+.bottom-buffer-large {
   margin-bottom: 75px;
 }
 
