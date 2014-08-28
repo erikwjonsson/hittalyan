@@ -1,26 +1,60 @@
 .row.cover-image.cover-image--landing
   .span9.hero-unit.hero-unit--center.text-center
     %h1 Du saknar år i bostadskön och vill ha ett förstahandskontrakt i Stockholm.
-    %p.top-buffer-herounit.bottom-buffer Många lägenheter förmedlas utanför bostadskön. Så fort en lägenhet blir ledig skickar vi e-post eller SMS till dig. Endast 298 kr för 30 dagar.
-    %a.btn.btn-warning.btn-xlarge.text-center(href="#!/registrera") Kom igång direkt »
+    .top-buffer-small
+      :markdown
+        Många lägenheter förmedlas utanför bostadskön.
+        HittaLyan bevakar utbudet av först till kvarn-lägenheter i Stockholm. Så fort en lägenhet blir ledig skickar vi ett mejl eller SMS till dig. **Endast 298 kr för 30 dagar**.
+      %a.btn.btn-warning.btn-xlarge.text-center(href="#!/registrera") Kom igång direkt »
 .row
   .span6.top-buffer.center
     .padhack
       %div.markety-box
-        %h3 Hur fungerar det?
-        %p Flertalet hyresvärdar erbjuder förstahandskontrakt i Stockholm genom att lägga upp bostäder på sina hemsidor där den som är först till kvarn att anmäla sig till dessa bostäder har störst chans att få kontrakt.
-        %p Problemet är att du inte har tid att bevaka hyresvärdarnas hemsidor efter nya lägenheter hela tiden för att kunna vara bland de första som anmäler sig.
-        %p Hittalyan hjälper dig att hålla koll på när nya bostäder läggs upp av dessa hyresvärdar så att du ökar din chans att få ett förstahandskontrakt. Genom att använda vår tjänst får du sms och mejl så fort en först-till-kvarn lägenhet annonseras.
-    
+        %h3 Vad gör HittaLyan?
+        :markdown
+          HittaLyan hjälper dig att hitta förstahandskontrakt på hyreslägenheter i eller i närheten av Stockholm. Många hyresvärdar annonserar ut så kallade **först till kvarn/bostad direkt-lägenheter** på sina hemsidor. Är du bland de första som anmäler intresse för en sådan lägenhet kan du få skriva kontrakt på den, oavsett hur många dagar du har i bostadskön. Problemet är såklart att du har annat att göra än att surfa på hyresvärdarnas hemsidor hela dagarna.
+          
+          HittaLyan **bevakar hyresvärdarnas hemsidor åt dig**. Så fort en lägenhet blir tillgänglig får du SMS och mejl med all information du behöver för att skicka in en intresseanmälan.
+  .span6.top-buffer.center
+    .padhack
+      %div.markety-box
+        %h3 Hur det fungerar – steg för steg
+        .row-fluid
+          .span1.offset1
+            %i.step1-image.icon-building.icon-4x 
+          .span8
+            %p.step1-text
+              En hyresvärd annonserar ut en lägenhet på sin hemsida. 
+              Hyreskontraktet erbjuds till någon av de första som skickar in en intresseanmälan.
+        .row-fluid
+          .span1.offset1
+            %i.step2-image.icon-envelope.icon-4x
+          .span8
+            %p.step2-text
+              HittaLyan hittar lägenheten och skickar ett mejl eller SMS till dig.
+        .row-fluid
+          .span1.offset1
+            %i.step3-image.icon-user.icon-4x 
+          .span8
+            %p.step3-text
+              Nu är det upp till dig att skicka in en intresseanmälan till hyresvärden.
+              Oftast gäller det att vara snabb så det är tur att HittaLyan ger dig ett försprång.
+        .row-fluid
+          .span1.offset1
+            %i.step4-image.icon-edit.icon-4x 
+          .span8
+            %p.step4-text
+              Om allt går väl leder din intresseanmälan till att du får skriva kontrakt på lägenheten!
+            :markdown
+              [Mer information och svar på vanliga frågor](/#!/vanliga-fragor)
   .span6.top-buffer.center
     .padhack
       %img(src="/images/drawing2.svg")
-
   .span6.top-buffer.center
     %div.markety-box
       .padhack
-        %h3 Fördelarna med att använda HittaLyan?
-        %p Samma minut som en lägenhet annonseras ut skickar vi ett e-postmeddelande eller SMS till dig. Försprånget du får gör att du alltid kan vara en av de första som skickar in en intresseanmälan.
+        %h3 Fördelarna med att använda HittaLyan
+        %p Du kan vara en av de första att anmäla intresse på varje först till kvarn-lägenhet i Stockholm.
         %p Vi letar efter lägenheter på hyresvärdarnas hemsidor varje minut, dygnet runt, så att du slipper. Att leta lägenhet ska inte behöva vara en heltidssyssla.
   
   .span6.top-buffer.center
@@ -30,13 +64,12 @@
   .span6.top-buffer.center
     %div.markety-box
       .padhack
-        %h3 Hur kan jag börja använda HittaLyan?
-        %p Tryck på Kom igång direkt och fyll i uppgifterna. Tjänsten kostar 298 kr första månaden och endast 149 kr för varje nästföljande månad. Vi har ingen uppsägningstid utan tjänsten avslutas när du väljer att avsluta den. Givetvis har du kvar resterande dagar av prenumeration som du redan betalat för. (kommentar: vi kanske skriver EFTER de köpt tjänsten att de manuellt måste gå in på sidan för att avsluta prenumerationen annars fortlöper den automatisk.)
-
+        %h3 Hur kommer jag igång?
+        :markdown
+          Tryck på [Kom igång direkt](/#!/registrera). 30 dagars prenumeration kostar **endast 298 kr**. Vi har ingen uppsägningstid utan prenumerationen avslutas när dina 30 dagar är slut. Om du inte hittat en lägenhet efter denna tid kan du köpa 30 dagar till för **halva priset (149 kr)**. 
   .span6.top-buffer.center.text-center
     .padhack
       %a.btn.btn-warning.btn-xlarge.text-center(href="#!/registrera") Kom igång direkt »
-
   .span6.top-buffer.center
     .padhack
       %img(src="/images/drawing3.svg")

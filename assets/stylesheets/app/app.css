@@ -32,7 +32,12 @@
   color: inherit;
 }
 
+.navbar .brand {
+  /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
+     makes font look too thin in FF */
+  font-weight: 300; 
 
+}
 /*Make bootstrap grok some Angular*/
 
 /*Ng says invalid for whatever reason. Red*/
@@ -76,6 +81,10 @@ input:focus.ng-valid {
   font-size: 48px;
 }
 
+.hero-unit a {
+  font-weight: 300;
+}
+
 /*Should fit on one line, 
   have a bit of space separating it from the h1 above,
   and sit closer to the p text below.*/
@@ -84,15 +93,19 @@ input:focus.ng-valid {
   font-weight: 500;
 }
 
+.hero-unit p {
+  font-weight: 300;
+}
+
 .markety-box p {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 30px;
 }
 
 .markety-box li {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 30px;
 }
 
@@ -134,7 +147,7 @@ input:focus.ng-valid {
   margin-bottom: 30px;
 }
 
-.bottom-buffer2 {
+.bottom-buffer-large {
   margin-bottom: 75px;
 }
 
@@ -330,18 +343,34 @@ Bootstrap extensions
   text-align: right;
 }
 
-#step1-image {
+.step1-image {
   display: block;
   float: right;
   padding-right: 5px; /* To align approximately with step2-image */
 }
 
-#step2-image {
+.step2-image {
   display: block;
   float: right;
 }
 
-#step2-text {
+.step2-text {
+  display: block;
+  margin-top: 12px;
+}
+
+.step3-image {
+  display: block;
+  float: right;
+  padding-right: 6px; /* To align approximately with step2-image */
+}
+
+.step4-image {
+  display: block;
+  float: right;
+}
+
+.step4-text {
   display: block;
   margin-top: 12px;
 }
@@ -487,17 +516,31 @@ Media queries
     float: left;
   }
 
-  #step1-image {
+  .step1-image {
     float: left;
     padding-right: 10px;
   }
 
-  #step2-image {
+  .step3-image {
     float: left;
     padding-right: 10px;
   }
 
-  #step2-text {
+  .step4-image {
+    float: left;
+    padding-right: 10px;
+  }
+
+  .step4-text {
+    margin-top: inherit;
+  }
+
+  .step2-image {
+    float: left;
+    padding-right: 10px;
+  }
+
+  .step2-text {
     margin-top: inherit;
   }
 
@@ -567,7 +610,6 @@ Media queries
 }
 
 .top-buffer {
-
   margin-top: 75px;
 }
 
@@ -575,7 +617,7 @@ Media queries
   margin-top: 45px;
 }
 
-.top-buffer-herounit {
+.top-buffer-small {
   margin-top: 10px;
 }
 
