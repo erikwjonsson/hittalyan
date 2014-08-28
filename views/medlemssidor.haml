@@ -4,6 +4,10 @@
     .padhack
       .alert(ng-show="showFirstDayMessage")
         Vi har skickat ett ett mejl till dig med instruktioner och tips för att du ska komma igång.
+        till din e-postadress.
+      .alert(ng-show="showUserInactiveMessage")
+        Tipsa dina vänner om HittaLyan och få gratis extradagar. 
+        %a(href="#!/medlemssidor/kampanjer") Se kampanjer!
       :markdown
         ## Medlemssidor
         Använd menyn för att navigera.
@@ -13,9 +17,12 @@
 
         För att förlänga din prenumeration på lägenhetstips går du in på sidan [Prenumeration](/#!/medlemssidor/prenumeration).
 
+
       %h3 Lägenheter
       .alert(ng-show="showUserInactiveMessage")
         Din prenumeration har gått ut. Köp en prenumeration för att fortsätta få lägenhetstips.
+
+
       .alert(ng-show="showNoApartmentsMessage")
         Just nu finns det inga lägenheter.
       %span.mobile-block Sortera efter: 

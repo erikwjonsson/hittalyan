@@ -2,6 +2,10 @@
   .span3.bottom-buffer(ng-controller="MemberSidebarController" ng-include="memberSidebarUrl")
   .span9
     .padhack
+      .alert(ng-show="showUserInactiveMessage")
+        Tipsa dina vänner om HittaLyan och få gratis extradagar. 
+        %a(href="#!/medlemssidor/kampanjer") Se kampanjer!
+      
       %h2 Prenumerationer
       %p Betala direkt med Payson. Payson samarbetar med Visa/Mastercard och internetbankerna Swedbank, Handelsbanken, SEB och Nordea.
       :markdown
