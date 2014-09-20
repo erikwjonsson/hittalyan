@@ -2,6 +2,10 @@
   .span3.bottom-buffer(ng-controller="MemberSidebarController" ng-include="memberSidebarUrl")
   .span9
     .padhack
+      .alert(ng-show="showUserInactiveMessage")
+        Tipsa dina vänner om HittaLyan och få gratis extradagar. 
+        %a(href="#!/medlemssidor/kampanjer") Se kampanjer!
+      
       %h2 Prenumerationer
       %p Betala direkt med Payson. Payson samarbetar med Visa/Mastercard och internetbankerna Swedbank, Handelsbanken, SEB och Nordea.
       :markdown
@@ -11,7 +15,7 @@
       %hr
       %form(name="nameForm" ng-submit="submitNameInfo()" ng-show="showForm" novalidate)
         %fieldset
-          %span Betalningstjänsten kräver ditt för- och efternamn.
+          %span Vad heter du? (Payson behöver informationen för att kunna genomföra betalningen).
           %label(for="first-name") Förnamn:
           %input(type="text"
                 name="first-name"
