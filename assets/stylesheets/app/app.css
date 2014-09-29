@@ -356,12 +356,13 @@ Bootstrap extensions
 .step1-image {
   display: block;
   float: right;
-  padding-right: 5px; /* To align approximately with step2-image */
+  padding-right: 15px; /* To align approximately with step2-image */
 }
 
 .step2-image {
   display: block;
   float: right;
+  padding-right: 10px;
 }
 
 .step2-text {
@@ -372,12 +373,13 @@ Bootstrap extensions
 .step3-image {
   display: block;
   float: right;
-  padding-right: 6px; /* To align approximately with step2-image */
+  padding-right: 16px; /* To align approximately with step2-image */
 }
 
 .step4-image {
   display: block;
   float: right;
+  padding-right: 3px; /* To align approximately with step2-image */
 }
 
 .step4-text {
@@ -682,7 +684,7 @@ Media queries
 }
 
 .markety-important {
-  color: red;
+  color: rgba(237, 0, 0, 1);
   font-weight: bold;
 }
 
