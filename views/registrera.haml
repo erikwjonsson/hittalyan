@@ -1,5 +1,5 @@
-.row.cover-image.cover-image--signup
-  .span6.hero-unit-registrera.hero-unit--center.text-center
+.row.cover-image.cover-image--signup.inner-shadow
+  .span7.hero-unit-registrera.hero-unit--center.text-center.shadow
     %h1 Bli medlem
     .top-buffer-small
       :markdown
@@ -15,7 +15,7 @@
   .span7.bottom-buffer-large.center
     .alert.alert-info.text-center.top-buffer
       Redan medlem? <a href="/#!/login">Logga in här</a>
-    .sales-box.box
+    .sales-box.box.shadow2
       %form.form-horizontal(name="signup" ng-submit="submit()" novalidate)
         %fieldset
           .control-group.control-group-compact
