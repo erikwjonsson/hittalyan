@@ -740,6 +740,11 @@ Media queries
   margin-top: 30px;
 }
 
-.faq-title{
+.faq-title {
   line-height: 32px
+}
+
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  position: absolute;
 }
