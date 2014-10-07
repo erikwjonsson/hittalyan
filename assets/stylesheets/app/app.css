@@ -739,3 +739,7 @@ Media queries
 .member-nav-top {
   margin-top: 30px;
 }
+
+.faq-title{
+  line-height: 32px
+}
