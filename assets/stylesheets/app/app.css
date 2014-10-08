@@ -93,16 +93,6 @@ input:focus.ng-valid {
   font-weight: 500;
 }
 
-.hero-unit p {
-  font-weight: 300;
-}
-
-.markety-box p {
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 28px;
-}
-
 .markety-box li {
   font-size: 18px;
   font-weight: 300;
@@ -435,6 +425,15 @@ Media queries
   .visible-large-desktop {
     display: none; 
   }
+  /* Erik */
+  .faq-title {
+    line-height: 32px
+  }
+
+  .top-buffer {
+    margin-top: 75px;
+  }
+
 }
 
 @media (max-width: 979px) {
@@ -451,6 +450,16 @@ Media queries
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
+
+  /* Erik */
+  .faq-title {
+    line-height: 32px
+  }
+
+  /* Erik */
+  .top-buffer {
+    margin-top: 75px;
+  }  
 
   /* Hero unit */
   .hero-unit h1 {
@@ -479,6 +488,16 @@ Media queries
   .footer-text {
     text-align: inherit !important;
   }
+
+  /* Erik */
+  .faq-title {
+    line-height: 32px
+  }
+
+  /* Erik */
+  .top-buffer {
+    margin-top: 75px;
+  }  
 
   .hero-unit h1 {
     font-size: 36px;
@@ -585,6 +604,62 @@ Media queries
     font-weight: 400;
   }
 
+  /* Erik */
+  .hero-unit p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+  }
+
+  /* Erik */
+  .hero-unit-registrera p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+  }
+
+  /* Erik */
+  .hero-unit-registrera h1 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  /* Erik */
+  .markety-box p {
+    font-size: 13px;
+    font-weight: 300px;
+    line-height: 19px;
+  }
+
+  /* Erik */
+  .markety-box h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  /* Erik */
+  .registrera-page-objects {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  /* Erik */
+  .box {
+    border-radius: 10px;
+    padding-left: 15px;
+  }
+
+  /* Erik */
+  .faq-title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  /* Erik */
+  .top-buffer {
+    margin-top: 0px;
+  }
+
   .trial-sticker {
     max-width: 30%;
   }
@@ -621,16 +696,17 @@ Media queries
   width: 100%;
 }
 
-.top-buffer {
-  margin-top: 75px;
-}
-
 .top-buffer-text {
   margin-top: 45px;
 }
 
 .top-buffer-small {
   margin-top: 10px;
+}
+
+
+.top-buffer2 {
+  margin-top: 75px;
 }
 
 .center { 
@@ -738,10 +814,6 @@ Media queries
 
 .member-nav-top {
   margin-top: 30px;
-}
-
-.faq-title {
-  line-height: 32px
 }
 
 .navbar-fixed-top,
