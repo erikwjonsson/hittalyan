@@ -418,7 +418,7 @@ Media queries
    display: none; 
   }
 
- /* Erik */
+  /* Erik */
   .faq-title {
     line-height: 32px
   }
@@ -443,6 +443,16 @@ Media queries
   /* Erik */
   .step-text {
     margin-top: inherit;
+  }
+
+  /* Erik */
+  .button-size {
+  font-size: 17.5px;
+  }
+
+  /* Erik */
+  .logo-size {
+    max-width: 0px;
   }
 
   .top-buffer {
@@ -481,6 +491,16 @@ Media queries
   /* Erik */
   .step-text {
     margin-top: inherit;
+  }
+
+  /* Erik */
+  .button-size {
+  font-size: 17.5px;
+  }
+
+  /* Erik */
+  .logo-size {
+    max-width: 0px;
   }
 
   .top-buffer {
@@ -536,6 +556,16 @@ Media queries
     margin-top: inherit;
   }
 
+  /* Erik */
+  .button-size {
+  font-size: 17.5px;
+  }
+
+  /* Erik */
+  .logo-size {
+    max-width: 0px;
+  }
+
   /* Hero unit */
   .hero-unit h1 {
    font-size: 36px; 
@@ -589,6 +619,16 @@ Media queries
   /* Erik */
   .mobile-titles h3{
     font-size: 24.5px;
+  }
+
+  /* Erik */
+  .button-size {
+  font-size: 17.5px;
+  }
+
+  /* Erik */
+  .logo-size {
+    max-width: 0px;
   }
 
   .hero-unit h1 {
@@ -764,6 +804,16 @@ Media queries
     text-align: center;
   }
 
+  /* Erik */
+  .button-size {
+    font-size: 12px;
+  }
+
+  /* Erik */
+  .logo-size {
+    max-width: 80px;
+  }
+
   .trial-sticker {
     max-width: 30%;
   }
@@ -924,35 +974,7 @@ Media queries
 .navbar-fixed-bottom {
 }
 
-
-@media (min-width: 481px) {
-.button-size {
-  font-size: 17.5px;
-}
-}
-
-@media (max-width: 480px) {
-.button-size {
-  font-size: 12px;
-}
-}
-
-@media (max-width: 767px) {
-.logo-size {
-  max-width: 0px;
-}
-}
-
-@media (min-width: 480px) {
-.logo-size {
-  max-width: 80px;
-}
-}
-
 /* Makes the alert more centered in mobile version, has almost no effect in desktop version */
 .loggedin-alerts{
   margin-right: 15px;
-  }
-
-
-  text-align: center; /* Makes text centered in mobile format */
+}
