@@ -1,6 +1,6 @@
 .row
   .span3.bottom-buffer(ng-controller="MemberSidebarController" ng-include="memberSidebarUrl")y
-  .span9.bottom-buffer-large
+  .span9.bottom-buffer-large.mobile-titles
     .padhack
       .alert(ng-show="showFirstDayMessage")
         Vi har skickat ett ett mejl till dig med instruktioner och tips för att du ska komma igång.
@@ -26,7 +26,7 @@
       .row-fluid.top-buffer.bottom-buffer(ng-show="showBlurredApartments" ng-repeat="i in range(5)")
         .blurred-apartment
           %img(src="images/apartments_blurred.png")
-          %a.btn.btn-warning.btn-large.blurred-apartment__btn(href="#!/medlemssidor/prenumeration") Kom igång direkt »
+          %a.btn.btn-warning.btn-large.blurred-apartment__btn.button-size(href="#!/medlemssidor/prenumeration") Kom igång direkt »
 
       .row-fluid.top-buffer.bottom-buffer(ng-repeat="apartment in apartments | orderBy:sortingOrderedBy:sortingReversed")
         .span3

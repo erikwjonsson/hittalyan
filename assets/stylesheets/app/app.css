@@ -347,32 +347,31 @@ Bootstrap extensions
   display: block;
   float: right;
   padding-right: 15px; /* To align approximately with step2-image */
+  margin-left: 42.5%; /* Makes icon centered in mobile format */
 }
 
 .step2-image {
   display: block;
   float: right;
   padding-right: 10px;
-}
-
-.step2-text {
-  display: block;
-  margin-top: 12px;
+  margin-left: 42.5%; /* Makes icon centered in mobile format */
 }
 
 .step3-image {
   display: block;
   float: right;
   padding-right: 16px; /* To align approximately with step2-image */
+  margin-left: 42.5%; /* Makes icon centered in mobile format */
 }
 
 .step4-image {
   display: block;
   float: right;
   padding-right: 3px; /* To align approximately with step2-image */
+  margin-left: 42.5%; /* Makes icon centered in mobile format */
 }
 
-.step4-text {
+.step-text {
   display: block;
   margin-top: 12px;
 }
@@ -418,6 +417,38 @@ Media queries
   .hidden-large-desktop {
    display: none; 
   }
+
+ /* Erik */
+  .faq-title {
+    line-height: 32px
+  }
+
+  /* Erik */
+  .markety-box p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  /* Erik */
+  .mobile-titles h2{
+    font-size: 31.5px;
+  }
+
+  /* Erik */
+  .mobile-titles h3{
+    font-size: 24.5px;
+  }
+
+  /* Erik */
+  .step-text {
+    margin-top: inherit;
+  }
+
+  .top-buffer {
+    margin-top: 75px;
+  }
+
 }
 
 /* Small desktop and down */
@@ -428,6 +459,28 @@ Media queries
   /* Erik */
   .faq-title {
     line-height: 32px
+  }
+
+  /* Erik */
+  .markety-box p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  /* Erik */
+  .mobile-titles h2{
+    font-size: 31.5px;
+  }
+
+  /* Erik */
+  .mobile-titles h3{
+    font-size: 24.5px;
+  }
+
+  /* Erik */
+  .step-text {
+    margin-top: inherit;
   }
 
   .top-buffer {
@@ -459,7 +512,29 @@ Media queries
   /* Erik */
   .top-buffer {
     margin-top: 75px;
-  }  
+  }
+    
+  /* Erik */
+  .markety-box p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  /* Erik */
+  .mobile-titles h2{
+    font-size: 31.5px;
+  }
+
+  /* Erik */
+  .mobile-titles h3{
+    font-size: 24.5px;
+  }
+
+  /* Erik */
+  .step-text {
+    margin-top: inherit;
+  }
 
   /* Hero unit */
   .hero-unit h1 {
@@ -498,6 +573,23 @@ Media queries
   .top-buffer {
     margin-top: 75px;
   }  
+
+  /* Erik */
+  .markety-box p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  /* Erik */
+  .mobile-titles h2{
+    font-size: 31.5px;
+  }
+
+  /* Erik */
+  .mobile-titles h3{
+    font-size: 24.5px;
+  }
 
   .hero-unit h1 {
     font-size: 36px;
@@ -562,16 +654,12 @@ Media queries
     padding-right: 10px;
   }
 
-  .step4-text {
-    margin-top: inherit;
-  }
-
   .step2-image {
     float: left;
     padding-right: 10px;
   }
 
-  .step2-text {
+  .step-text {
     margin-top: inherit;
   }
 
@@ -658,6 +746,22 @@ Media queries
   /* Erik */
   .top-buffer {
     margin-top: 0px;
+  }
+
+  /* Erik */
+  .mobile-titles h2{
+    font-size: 22.5px;
+  }
+
+  /* Erik */
+  .mobile-titles h3{
+    font-size: 20.5px;
+  }
+
+  /* Erik */
+  .step-text {
+    margin-top: inherit;
+    text-align: center;
   }
 
   .trial-sticker {
@@ -818,5 +922,37 @@ Media queries
 
 .navbar-fixed-top,
 .navbar-fixed-bottom {
-  position: absolute;
 }
+
+
+@media (min-width: 481px) {
+.button-size {
+  font-size: 17.5px;
+}
+}
+
+@media (max-width: 480px) {
+.button-size {
+  font-size: 12px;
+}
+}
+
+@media (max-width: 767px) {
+.logo-size {
+  max-width: 0px;
+}
+}
+
+@media (min-width: 480px) {
+.logo-size {
+  max-width: 80px;
+}
+}
+
+/* Makes the alert more centered in mobile version, has almost no effect in desktop version */
+.loggedin-alerts{
+  margin-right: 15px;
+  }
+
+
+  text-align: center; /* Makes text centered in mobile format */
