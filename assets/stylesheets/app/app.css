@@ -455,6 +455,11 @@ Media queries
     max-width: 0px;
   }
 
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: absolute
+  }
+
   .top-buffer {
     margin-top: 75px;
   }
@@ -501,6 +506,11 @@ Media queries
   /* Erik */
   .logo-size {
     max-width: 0px;
+  }
+
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: absolute
   }
 
   .top-buffer {
@@ -571,6 +581,11 @@ Media queries
    font-size: 36px; 
   }
 
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: relative;
+  }
+
   .hero-unit h2 {
     line-height: 24px;
   }
@@ -629,6 +644,11 @@ Media queries
   /* Erik */
   .logo-size {
     max-width: 0px;
+  }
+
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: relative;
   }
 
   .hero-unit h1 {
@@ -814,6 +834,11 @@ Media queries
     max-width: 80px;
   }
 
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: relative;
+  }
+
   .trial-sticker {
     max-width: 30%;
   }
@@ -968,10 +993,6 @@ Media queries
 
 .member-nav-top {
   margin-top: 30px;
-}
-
-.navbar-fixed-top,
-.navbar-fixed-bottom {
 }
 
 /* Makes the alert more centered in mobile version, has almost no effect in desktop version */
