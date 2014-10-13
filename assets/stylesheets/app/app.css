@@ -418,39 +418,32 @@ Media queries
    display: none; 
   }
 
-  /* Erik */
   .faq-title {
     line-height: 32px
   }
 
-  /* Erik */
   .markety-box p {
     font-size: 18px;
     font-weight: 300;
     line-height: 28px;
   }
 
-  /* Erik */
   .mobile-titles h2{
     font-size: 31.5px;
   }
 
-  /* Erik */
   .mobile-titles h3{
     font-size: 24.5px;
   }
 
-  /* Erik */
   .step-text {
     margin-top: inherit;
   }
 
-  /* Erik */
   .button-size {
   font-size: 17.5px;
   }
 
-  /* Erik */
   .logo-size {
     max-width: 0px;
   }
@@ -471,39 +464,33 @@ Media queries
   .visible-large-desktop {
     display: none; 
   }
-  /* Erik */
+
   .faq-title {
     line-height: 32px
   }
 
-  /* Erik */
   .markety-box p {
     font-size: 18px;
     font-weight: 300;
     line-height: 28px;
   }
 
-  /* Erik */
   .mobile-titles h2{
     font-size: 31.5px;
   }
 
-  /* Erik */
   .mobile-titles h3{
     font-size: 24.5px;
   }
 
-  /* Erik */
   .step-text {
     margin-top: inherit;
   }
 
-  /* Erik */
   .button-size {
   font-size: 17.5px;
   }
 
-  /* Erik */
   .logo-size {
     max-width: 0px;
   }
@@ -534,44 +521,36 @@ Media queries
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
 
-  /* Erik */
   .faq-title {
     line-height: 32px
   }
 
-  /* Erik */
   .top-buffer {
     margin-top: 75px;
   }
-    
-  /* Erik */
+
   .markety-box p {
     font-size: 18px;
     font-weight: 300;
     line-height: 28px;
   }
 
-  /* Erik */
   .mobile-titles h2{
     font-size: 31.5px;
   }
 
-  /* Erik */
   .mobile-titles h3{
     font-size: 24.5px;
   }
 
-  /* Erik */
   .step-text {
     margin-top: inherit;
   }
 
-  /* Erik */
   .button-size {
   font-size: 17.5px;
   }
 
-  /* Erik */
   .logo-size {
     max-width: 0px;
   }
@@ -609,39 +588,32 @@ Media queries
     text-align: inherit !important;
   }
 
-  /* Erik */
   .faq-title {
     line-height: 32px
   }
 
-  /* Erik */
   .top-buffer {
     margin-top: 75px;
   }  
 
-  /* Erik */
   .markety-box p {
     font-size: 18px;
     font-weight: 300;
     line-height: 28px;
   }
 
-  /* Erik */
   .mobile-titles h2{
     font-size: 31.5px;
   }
 
-  /* Erik */
   .mobile-titles h3{
     font-size: 24.5px;
   }
 
-  /* Erik */
   .button-size {
   font-size: 17.5px;
   }
 
-  /* Erik */
   .logo-size {
     max-width: 0px;
   }
@@ -752,84 +724,70 @@ Media queries
     font-weight: 400;
   }
 
-  /* Erik */
   .hero-unit p {
     font-size: 14px;
     font-weight: 300;
     line-height: 19px;
   }
 
-  /* Erik */
   .hero-unit-registrera p {
     font-size: 14px;
     font-weight: 300;
     line-height: 19px;
   }
 
-  /* Erik */
   .hero-unit-registrera h1 {
     font-size: 20px;
     line-height: 24px;
   }
 
-  /* Erik */
   .markety-box p {
     font-size: 13px;
     font-weight: 300px;
     line-height: 19px;
   }
 
-  /* Erik */
   .markety-box h3 {
     font-size: 20px;
     line-height: 24px;
   }
 
-  /* Erik */
   .registrera-page-objects {
     margin-left: 6px;
     margin-right: 6px;
   }
 
-  /* Erik */
   .box {
     border-radius: 10px;
     padding-left: 15px;
   }
 
-  /* Erik */
   .faq-title {
     font-size: 20px;
     line-height: 24px;
   }
 
-  /* Erik */
   .top-buffer {
     margin-top: 0px;
   }
 
-  /* Erik */
   .mobile-titles h2{
     font-size: 22.5px;
   }
 
-  /* Erik */
   .mobile-titles h3{
     font-size: 20.5px;
   }
 
-  /* Erik */
   .step-text {
     margin-top: inherit;
     text-align: center;
   }
 
-  /* Erik */
   .button-size {
     font-size: 12px;
   }
 
-  /* Erik */
   .logo-size {
     max-width: 80px;
   }
@@ -986,6 +944,7 @@ Media queries
   -moz-box-shadow: 0px -2px 5px 0px rgba(50, 50, 50, 0.75);
   box-shadow: 1px 1px 4px 1px rgba(50, 50, 50, 0.75);
 }
+/* See explanation to webkit and moz at this link: http://www.cssmatic.com/box-shadow */
 
 .member-nav-side {
   margin-left: 20px;
