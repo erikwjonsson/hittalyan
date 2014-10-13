@@ -141,6 +141,10 @@ input:focus.ng-valid {
   margin-bottom: 75px;
 }
 
+.bottom-buffer-kampanjer {
+  margin-bottom: 250px;
+}
+
 .vertical-nav-box {
   max-width: 140px;
   padding: 8px 0;
