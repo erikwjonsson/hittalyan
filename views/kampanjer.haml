@@ -2,13 +2,13 @@
   .span3
     #member-nav
       %ul.nav.nav-stacked.nav-pills
-        %li.box.opaque
+        %li.box.opaque.member-nav-side.member-nav-top
           %a{href: "#!/medlemssidor"} Medlemssidor
-        %li.box.opaque
+        %li.box.opaque.member-nav-side
           %a{href: "#!/medlemssidor/installningar"} Inställningar
-        %li.box.opaque
+        %li.box.opaque.member-nav-side
           %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
-        %li.box.opaque
+        %li.box.opaque.member-nav-side
           %a{href: "#!/medlemssidor/kampanjer"} Kampanjer
     #member-info-box
       .box
@@ -20,7 +20,7 @@
           %div(ng-show="userData.sms_until && smsActiveState")
             SMS är aktiverat fram till och med {{oneDayBefore(userData.sms_until) | date: 'yyyy-MM-dd'}}.
 
-  .span9
+  .span9.mobile-titles
     .row
       .span6
         .padhack

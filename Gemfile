@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+ruby "1.9.3"
 gem 'rack-protection'
 gem 'mongoid', '~>3.0.0'
 gem 'bson_ext', '~>1.6.4'
