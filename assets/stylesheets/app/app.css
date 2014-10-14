@@ -449,7 +449,8 @@ Media queries
   }
 
   .logo-size {
-    max-width: 0px;
+    max-width: 80px;
+    margin-top: -10px;
   }
 
   .navbar-fixed-top,
@@ -509,7 +510,8 @@ Media queries
   }
 
   .logo-size {
-    max-width: 0px;
+    max-width: 80px;
+    margin-top: -7px;
   }
 
   .navbar-fixed-top,
@@ -583,7 +585,8 @@ Media queries
   }
 
   .logo-size {
-    max-width: 0px;
+    max-width: 80px;
+    margin-top: 0px
   }
 
   /* Hero unit */
@@ -660,7 +663,8 @@ Media queries
   }
 
   .logo-size {
-    max-width: 0px;
+    max-width: 80px;
+    margin-top: 0px
   }
 
   .navbar-fixed-top,
@@ -850,6 +854,7 @@ Media queries
 
   .logo-size {
     max-width: 80px;
+    margin-top: 0px
   }
 
   .navbar-fixed-top,
@@ -987,7 +992,6 @@ Media queries
 
 .hero-unit-registrera {
   padding: 30px;
-  margin-bottom: 30px;
   font-size: 18px;
   font-weight: 200;
   line-height: 30px;
