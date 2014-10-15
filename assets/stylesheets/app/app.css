@@ -458,6 +458,10 @@ Media queries
     position: absolute
   }
 
+  .password-button {
+    margin-top: 0px;
+  }
+
   .kampanj-alert-mobile {
     margin-top: 0px;
   }
@@ -519,6 +523,9 @@ Media queries
     position: absolute
   }
 
+  .password-button {
+    margin-top: 0px;
+  }
 
   .kampanj-alert-mobile {
     margin-top: 0px;
@@ -599,6 +606,10 @@ Media queries
     position: relative;
   }
 
+  .password-button {
+    margin-top: 0px;
+  }
+
   .kampanj-alert-mobile {
     margin-top: 0px;
   }
@@ -670,6 +681,10 @@ Media queries
   .navbar-fixed-top,
   .navbar-fixed-bottom {
     position: relative;
+  }
+
+  .password-button {
+    margin-top: 0px;
   }
 
   .kampanj-alert-mobile {
@@ -862,6 +877,10 @@ Media queries
     position: relative;
   }
 
+  .password-button {
+    margin-top: 5px;
+  }
+
   .kampanj-alert-mobile {
     margin-top: -30px;
   }
@@ -1041,4 +1060,6 @@ Media queries
 /* .faq-secondcolumn- Made the two columns when made into one, not have a separation  */
 /* .loggedin-alerts- was not working in format 480px-767px so I changed it  */
 /* .kampanj-alert-mobile- makes the kampanj-alert be closer to the other alert about subscription time, so there isn't a big gap  */
+
+
 
