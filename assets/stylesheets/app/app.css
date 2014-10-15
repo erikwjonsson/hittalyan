@@ -449,7 +449,8 @@ Media queries
   }
 
   .logo-size {
-    max-width: 0px;
+    max-width: 80px;
+    margin-top: -10px;
   }
 
   .navbar-fixed-top,
@@ -457,8 +458,25 @@ Media queries
     position: absolute
   }
 
+  .password-button {
+    margin-top: 0px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: 0px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 0px;
+  }
+
   .top-buffer {
     margin-top: 75px;
+  }
+
+  .faq-secondcolumn{
+    margin-top: 0px;
   }
 
 }
@@ -496,7 +514,8 @@ Media queries
   }
 
   .logo-size {
-    max-width: 0px;
+    max-width: 80px;
+    margin-top: -7px;
   }
 
   .navbar-fixed-top,
@@ -504,8 +523,25 @@ Media queries
     position: absolute
   }
 
+  .password-button {
+    margin-top: 0px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: 0px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 0px;
+  }
+
   .top-buffer {
     margin-top: 75px;
+  }
+
+  .faq-secondcolumn{
+    margin-top: 0px;
   }
 
 }
@@ -556,7 +592,8 @@ Media queries
   }
 
   .logo-size {
-    max-width: 0px;
+    max-width: 80px;
+    margin-top: 0px
   }
 
   /* Hero unit */
@@ -567,6 +604,24 @@ Media queries
   .navbar-fixed-top,
   .navbar-fixed-bottom {
     position: relative;
+  }
+
+  .password-button {
+    margin-top: 0px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: 0px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 0px;
+  }
+
+
+  .faq-secondcolumn{
+    margin-top: 0px;
   }
 
   .hero-unit h2 {
@@ -619,12 +674,32 @@ Media queries
   }
 
   .logo-size {
-    max-width: 0px;
+    max-width: 80px;
+    margin-top: 0px
   }
 
   .navbar-fixed-top,
   .navbar-fixed-bottom {
     position: relative;
+  }
+
+  .password-button {
+    margin-top: 0px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: -30px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+
+
+  .faq-secondcolumn{
+    margin-top: -75px;
   }
 
   .hero-unit h1 {
@@ -794,11 +869,30 @@ Media queries
 
   .logo-size {
     max-width: 80px;
+    margin-top: 0px
   }
 
   .navbar-fixed-top,
   .navbar-fixed-bottom {
     position: relative;
+  }
+
+  .password-button {
+    margin-top: 5px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: -30px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 15px;
+    margin-left: 0px;
+  }
+
+  .faq-secondcolumn{
+    margin-top: -75px;
   }
 
   .trial-sticker {
@@ -917,7 +1011,6 @@ Media queries
 
 .hero-unit-registrera {
   padding: 30px;
-  margin-bottom: 30px;
   font-size: 18px;
   font-weight: 200;
   line-height: 30px;
@@ -932,16 +1025,6 @@ Media queries
   box-shadow: 0px 10px 5px -2px rgba(0, 0, 0, 0.25);
 }
 /* Use this link to configure box-shadows. http://www.cssmatic.com/box-shadow */
-
-.shadow2 {
-  box-shadow: 0px 9px 9px -5px rgba(0, 0, 0, 0.25)
-}
-
-.inner-shadow {
-  -webkit-box-shadow: inset 0px 2px 21px 4px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 0px 2px 21px 4px rgba(0,0,0,0.75);
-  box-shadow: inset 0px 2px 15px 4px rgba(0,0,0,0.75);
-}
 
 .footer-shadow {
   -webkit-box-shadow: 0px -2px 5px 0px rgba(50, 50, 50, 0.75);
@@ -958,11 +1041,6 @@ Media queries
   margin-top: 30px;
 }
 
-/* Makes the alert more centered in mobile version, has almost no effect in desktop version */
-.loggedin-alerts{
-  margin-right: 15px;
-}
-
 .kampanj-alert {
   padding: 8px 35px 8px 14px;
   margin-bottom: 20px;
@@ -975,3 +1053,4 @@ Media queries
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
+}
