@@ -93,16 +93,6 @@ input:focus.ng-valid {
   font-weight: 500;
 }
 
-.hero-unit p {
-  font-weight: 300;
-}
-
-.markety-box p {
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 30px;
-}
-
 .markety-box li {
   font-size: 18px;
   font-weight: 300;
@@ -149,6 +139,10 @@ input:focus.ng-valid {
 
 .bottom-buffer-large {
   margin-bottom: 75px;
+}
+
+.bottom-buffer-kampanjer {
+  margin-bottom: 250px;
 }
 
 .vertical-nav-box {
@@ -319,6 +313,16 @@ Bootstrap extensions
           border-radius: 8px;
   }
 
+.btn-medium {
+  padding: 6px 30px;
+  font-size: 14px;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  }
+
+
 .hittalyan-nav-text {
   color: rgb(153, 153, 153) !important;
 }
@@ -346,31 +350,32 @@ Bootstrap extensions
 .step1-image {
   display: block;
   float: right;
-  padding-right: 5px; /* To align approximately with step2-image */
+  padding-right: 15px; /* To align approximately with step2-image */
+  margin-left: 42.5%; /* Makes icon centered in mobile format */
 }
 
 .step2-image {
   display: block;
   float: right;
-}
-
-.step2-text {
-  display: block;
-  margin-top: 12px;
+  padding-right: 10px;
+  margin-left: 42.5%; /* Makes icon centered in mobile format */
 }
 
 .step3-image {
   display: block;
   float: right;
-  padding-right: 6px; /* To align approximately with step2-image */
+  padding-right: 16px; /* To align approximately with step2-image */
+  margin-left: 42.5%; /* Makes icon centered in mobile format */
 }
 
 .step4-image {
   display: block;
   float: right;
+  padding-right: 3px; /* To align approximately with step2-image */
+  margin-left: 42.5%; /* Makes icon centered in mobile format */
 }
 
-.step4-text {
+.step-text {
   display: block;
   margin-top: 12px;
 }
@@ -416,6 +421,64 @@ Media queries
   .hidden-large-desktop {
    display: none; 
   }
+
+  .faq-title {
+    line-height: 32px
+  }
+
+  .markety-box p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  .mobile-titles h2{
+    font-size: 31.5px;
+  }
+
+  .mobile-titles h3{
+    font-size: 24.5px;
+  }
+
+  .step-text {
+    margin-top: inherit;
+  }
+
+  .button-size {
+  font-size: 17.5px;
+  }
+
+  .logo-size {
+    max-width: 80px;
+    margin-top: -10px;
+  }
+
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: absolute
+  }
+
+  .password-button {
+    margin-top: 0px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: 0px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 0px;
+  }
+
+  .top-buffer {
+    margin-top: 75px;
+  }
+
+  .faq-secondcolumn{
+    margin-top: 0px;
+  }
+
 }
 
 /* Small desktop and down */
@@ -423,6 +486,64 @@ Media queries
   .visible-large-desktop {
     display: none; 
   }
+
+  .faq-title {
+    line-height: 32px
+  }
+
+  .markety-box p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  .mobile-titles h2{
+    font-size: 31.5px;
+  }
+
+  .mobile-titles h3{
+    font-size: 24.5px;
+  }
+
+  .step-text {
+    margin-top: inherit;
+  }
+
+  .button-size {
+  font-size: 17.5px;
+  }
+
+  .logo-size {
+    max-width: 80px;
+    margin-top: -7px;
+  }
+
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: absolute
+  }
+
+  .password-button {
+    margin-top: 0px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: 0px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 0px;
+  }
+
+  .top-buffer {
+    margin-top: 75px;
+  }
+
+  .faq-secondcolumn{
+    margin-top: 0px;
+  }
+
 }
 
 @media (max-width: 979px) {
@@ -440,9 +561,67 @@ Media queries
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
 
+  .faq-title {
+    line-height: 32px
+  }
+
+  .top-buffer {
+    margin-top: 75px;
+  }
+
+  .markety-box p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  .mobile-titles h2{
+    font-size: 31.5px;
+  }
+
+  .mobile-titles h3{
+    font-size: 24.5px;
+  }
+
+  .step-text {
+    margin-top: inherit;
+  }
+
+  .button-size {
+  font-size: 17.5px;
+  }
+
+  .logo-size {
+    max-width: 80px;
+    margin-top: 0px
+  }
+
   /* Hero unit */
   .hero-unit h1 {
    font-size: 36px; 
+  }
+
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: relative;
+  }
+
+  .password-button {
+    margin-top: 0px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: 0px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 0px;
+  }
+
+
+  .faq-secondcolumn{
+    margin-top: 0px;
   }
 
   .hero-unit h2 {
@@ -466,6 +645,61 @@ Media queries
 @media (max-width: 767px) {
   .footer-text {
     text-align: inherit !important;
+  }
+
+  .faq-title {
+    line-height: 32px
+  }
+
+  .top-buffer {
+    margin-top: 75px;
+  }  
+
+  .markety-box p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  .mobile-titles h2{
+    font-size: 31.5px;
+  }
+
+  .mobile-titles h3{
+    font-size: 24.5px;
+  }
+
+  .button-size {
+  font-size: 17.5px;
+  }
+
+  .logo-size {
+    max-width: 80px;
+    margin-top: 0px
+  }
+
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: relative;
+  }
+
+  .password-button {
+    margin-top: 0px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: -30px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+
+
+  .faq-secondcolumn{
+    margin-top: -75px;
   }
 
   .hero-unit h1 {
@@ -531,16 +765,12 @@ Media queries
     padding-right: 10px;
   }
 
-  .step4-text {
-    margin-top: inherit;
-  }
-
   .step2-image {
     float: left;
     padding-right: 10px;
   }
 
-  .step2-text {
+  .step-text {
     margin-top: inherit;
   }
 
@@ -571,6 +801,98 @@ Media queries
   .hero-unit h2 {
     font-size: 18px;
     font-weight: 400;
+  }
+
+  .hero-unit p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+  }
+
+  .hero-unit-registrera p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+  }
+
+  .hero-unit-registrera h1 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .markety-box p {
+    font-size: 13px;
+    font-weight: 300px;
+    line-height: 19px;
+  }
+
+  .markety-box h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .registrera-page-objects {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  .box {
+    border-radius: 10px;
+    padding-left: 15px;
+  }
+
+  .faq-title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .top-buffer {
+    margin-top: 0px;
+  }
+
+  .mobile-titles h2{
+    font-size: 22.5px;
+  }
+
+  .mobile-titles h3{
+    font-size: 20.5px;
+  }
+
+  .step-text {
+    margin-top: inherit;
+    text-align: center;
+  }
+
+  .button-size {
+    font-size: 12px;
+  }
+
+  .logo-size {
+    max-width: 80px;
+    margin-top: 0px
+  }
+
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    position: relative;
+  }
+
+  .password-button {
+    margin-top: 5px;
+  }
+
+  .kampanj-alert-mobile {
+    margin-top: -30px;
+  }
+
+  /* Makes the alert more centered */
+  .loggedin-alerts{
+    margin-right: 15px;
+    margin-left: 0px;
+  }
+
+  .faq-secondcolumn{
+    margin-top: -75px;
   }
 
   .trial-sticker {
@@ -609,16 +931,17 @@ Media queries
   width: 100%;
 }
 
-.top-buffer {
-  margin-top: 75px;
-}
-
 .top-buffer-text {
   margin-top: 45px;
 }
 
 .top-buffer-small {
   margin-top: 10px;
+}
+
+
+.top-buffer2 {
+  margin-top: 75px;
 }
 
 .center { 
@@ -650,12 +973,13 @@ Media queries
   background-size: cover;
 }
 
+/* https://www.flickr.com/photos/anymotion/3659158957 */
 .cover-image--landing {
   background-image: url(images/gamla_stan_cc_attribution_cropped.jpg);
 }
 
 .cover-image--signup {
-  background-image: url(images/stockholmsvy.jpg);
+  background-image: url(images/Stockholm_registrera_2.jpg);
 }
 
 /* Overrides for the default Bootstrap styling */
@@ -667,11 +991,11 @@ Media queries
   background-color: #FFA347;
   padding-bottom: 40px;
   padding-top: 40px;
-  margin-top: 45px;
+  margin-top: 10px;
 }
 
 .markety-important {
-  color: red;
+  color: rgba(237, 0, 0, 1);
   font-weight: bold;
 }
 
@@ -683,4 +1007,50 @@ Media queries
   position: absolute;
   top: 52px;
   left: 139px;
+}
+
+.hero-unit-registrera {
+  padding: 30px;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+  color: inherit;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.shadow {
+  box-shadow: 0px 10px 5px -2px rgba(0, 0, 0, 0.25);
+}
+/* Use this link to configure box-shadows. http://www.cssmatic.com/box-shadow */
+
+.footer-shadow {
+  -webkit-box-shadow: 0px -2px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 0px -2px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 1px 1px 4px 1px rgba(50, 50, 50, 0.75);
+}
+/* See explanation to webkit and moz at this link: http://www.cssmatic.com/box-shadow */
+
+.member-nav-side {
+  margin-left: 20px;
+}
+
+.member-nav-top {
+  margin-top: 30px;
+}
+
+.kampanj-alert {
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 215, 145, 0.7);
+  border: 1px solid rgba(255, 164, 5, 0.06);
+  color: #FF7E00;
+  text-align: center;
+  font-weight: bold;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
 }

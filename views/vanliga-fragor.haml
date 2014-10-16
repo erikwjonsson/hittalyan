@@ -2,13 +2,13 @@
   .span3
     #member-nav(ng-show="isLoggedIn()")
       %ul.nav.nav-stacked.nav-pills
-        %li.box.opaque
+        %li.box.opaque.member-nav-side.member-nav-top
           %a{href: "#!/medlemssidor"} Medlemssidor
-        %li.box.opaque
+        %li.box.opaque.member-nav-side
           %a{href: "#!/medlemssidor/installningar"} Inställningar
-        %li.box.opaque
+        %li.box.opaque.member-nav-side
           %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
-        %li.box.opaque
+        %li.box.opaque.member-nav-side
           %a{href: "#!/medlemssidor/kampanjer"} Kampanjer
     #member-info-box
       .box.opaque
@@ -28,24 +28,24 @@
     .row
       .span4.bottom-buffer
         .padhack
-          %h3.top-buffer-text Hur får jag tillgång till HittaLyan?
+          %h3.top-buffer-text.faq-title Hur får jag tillgång till HittaLyan?
           :markdown
             Tryck på någon av _Kom igång direkt_-knapparna eller [klicka här](/#!/registrera).
             Betalning sker enkelt och säkert med Payson. Du kan börja använda dig av tjänsten omedelbart.
-          %h3.top-buffer-text Har ni någon uppsägningstid?
+          %h3.top-buffer-text.faq-title Har ni någon uppsägningstid?
           :markdown
             Vi har ingen uppsägningstid. 
             Din prenumerationen avslutas automatiskt efter den tid du betalat för har passerat. 
             Har du t.ex. betalat för 30 dagar avslutas din prenumeration efter det. 
             Om du vill fortsätta att använda dig av HittaLyan loggar du in på dina medlemssidor 
             och förnyar din prenumeration.
-          %h3.top-buffer-text Kommer jag att hitta en lägenhet om jag använder HittaLyan?
+          %h3.top-buffer-text.faq-title Kommer jag att hitta en lägenhet om jag använder HittaLyan?
           :markdown
             Vi kan inte garantera att du du hittar en lägenhet,
             men vi kan ge dig så bra chanser som möjligt.
             Vi håller koll på lägenhetsmarknaden varje minut, 24 timmar om dygnet.
             Som prenumerant har därför även du alltid koll och kan agera direkt när en lägenhet utannonseras.
-          %h3.top-buffer-text Hur många lägenheter har ni?
+          %h3.top-buffer-text.faq-title Hur många lägenheter har ni?
           :markdown
             Vi har inga egna lägenheter.
             Istället informerar vi om de lägenheter som hyresvärdar lägger ut på sina egna hemsidor. 
@@ -55,7 +55,7 @@
             Det antal lägenheter vi tipsar om varierar beroende på hur många lägenheter hyresvärdarna 
             lägger ut. I snitt tipsar vi dock om mellan 100 och 150 lägenheter i Stockholmsområdet per månad.
           %img(src="/images/Stockholm_bird_view.jpg")
-          %h3.top-buffer-text Måste jag ställa mig i någon bostadskö?
+          %h3.top-buffer-text.faq-title Måste jag ställa mig i någon bostadskö?
           :markdown
             Samtliga lägenheter vi informerar om i dagsläget är lägenheter som förmedlas på andra sätt än genom en bostadskö.
             I praktiken betyder detta oftast att uthyrningsprincipen är _först till kvarn_.
@@ -67,15 +67,23 @@
             Med undantag från Stockholms Stads Bostadsförmedling är det gratis.
             Vi ger information till dig som prenumerant om vilka hyresvärdar du bör registrera dig hos, 
             så att du är förberedd när du får utskick om lägenheter där.
-      .span4.bottom-buffer
+      .span4.bottom-buffer.faq-secondcolumn
         .padhack
-          %h3.top-buffer-text Varför ska jag välja er istället för en av era konkurrenter?
+          %h3.top-buffer-text.faq-title Varför ska jag välja er istället för en av era konkurrenter?
           :markdown
             HittaLyan skapades som svar på liknande tjänster efter att vi provat dem och tyckt att idén bakom var god, men att utförandet kunde varit bättre. De fungerade inte som utlovat utan krånglade ofta. Ofta missade de lägenheter eller angav felaktiga uppgifter om lägenheterna. Ibland var de inte snabba nog. Snabbhet var just det vi trodde att vi betalade för. Vi ville få tipsen som SMS, men den möjligheten begränsades på olika sätt. Antingen gick det inte att få SMS om alla lägenheter, eller så kostade varje SMS.
 
             Så vad vi skapade var en tjänst som vi själv ville använda. Vi är precis så snabba som vi säger att vi är och vår tjänst underhålls aktivt. Vill du ha SMS så ingår det i priset, utan begränsningar.
+
+          // http://www.istockphoto.com/photo/stockholm-embankment-with-boats-6396489?st=74e2129
           %img(src="/images/Stockholm_docks.jpg")
-          %h3.top-buffer-text Hur betalar jag?
+          %h3.top-buffer-text.faq-title Varför får jag inte några mejl från HittaLyan?
+          :markdown
+            När du registrerade dig hos HittaLyan skickades ett välkomstbrev till den e-postadress du angav. Om du inte fått detta mejl pröva att titta bland din skräppost. Om du hittar mejlet där måste du markera att det faktiskt inte är skräppost så borde du i fortsättningen få mejl från oss.
+            
+            Hur du gör detta skiljer sig åt beroende på vilken e-postklient du använder (Hotmail, GMail, Outlook etc.),
+            men det brukar vara enkelt att hitta
+          %h3.top-buffer-text.faq-title Hur betalar jag?
           :markdown
             Betalning sker enkelt och säkert med Payson. 
             Även om du inte har ett Paysonkonto sedan tidigare kan du snabbt göra transaktionen via Payson. 
@@ -88,7 +96,9 @@
             Payson startade 2004 i Sverige och över en miljon personer har använt Payson som är en välkänd betallösning på internet.
 
             Läs mer om Payson här: [www.payson.se](http://www.payson.se/)
+
+          // http://www.istockphoto.com/photo/central-stockholm-8111198?st=50963f3
           %img(src="images/payson.png")
-          %h3.top-buffer-text Jag har en annan fråga. Hur kontaktar jag er?
+          %h3.top-buffer-text.faq-title Jag har en annan fråga. Hur kontaktar jag er?
           :markdown
             Hör gärna av dig. Det kan du göra via [vårt kontaktformulär](/#!/om), eller via e-post till <mailto:info@hittalyan.se>.

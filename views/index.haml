@@ -7,14 +7,19 @@
     %link{href: "#{Dir['public/application-*.css'].first.split('/')[1]}", rel: "stylesheet"}
     %script{src: "#{Dir['public/application-*.js'].first.split('/')[1]}"}
   %body{'ng-controller' => "IndexController"}
-    #mainnav.navbar.navbar-inverse.navbar-fixed-top
+    #mainnav.navbar.navbar-inverse.navbar-fixed-top.shadow
       .navbar-inner.navbar--fat
         .container.navbar-vertical-center
+
           %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
+
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
+          .span1.logo-size
+            %img(src="/images/Hittalyan_ikon5.svg")
           %a.brand(href="#!/" data-toggle="collapse" data-target=".nav-collapse.in") HittaLyan
+
           .nav-collapse.collapse(collapse="navBarCollapsed")
             %ul.nav
               %li(ng-hide="isLoggedIn()")
@@ -61,7 +66,7 @@
     #wrap
       #content.container.content
         %div{'ng-view' => true}
-      #footer.top-buffer
+      #footer.top-buffer.footer-shadow
         .padhack
           .row.center
             .span12.center
@@ -80,7 +85,3 @@
                 %span.footer-text(href="/#!/copyrights" style="text-align: left")
                   Fotot är taget av 
                   %a(href="http://www.flickr.com/photos/venteco/2918805203/" target="_blank") Olof&nbsp;S
-              .span1.footer-item
-                %span.footer-text
-                  %a(href="/#!/om") Personuppgiftslagen
-                  %a(href="/#!/om") Användarvillkor
