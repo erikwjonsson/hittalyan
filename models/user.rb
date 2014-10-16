@@ -11,7 +11,7 @@ class User
                         :email, 
                         :first_name,
                         :last_name,
-                        :referee,
+                        :referred_by,
                         :mobile_number,
                         :notify_by_email,
                         :notify_by_sms,
@@ -29,7 +29,7 @@ class User
   field :email, type: String
   field :first_name, type: String, default: ""
   field :last_name, type: String, default: ""
-  field :referee, type: String, default: ""
+  field :referred_by, type: String, default: ""
   field :mobile_number, type: String
   field :hashed_password, type: String
   field :notify_by_email, type: Boolean, default: true

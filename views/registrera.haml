@@ -77,17 +77,17 @@
             %span.mobile-block(ng-class="{'visibility-hidden': !(signup.password.$error.minlength)}") 
               Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
         .control-group.control-group-compact
-          %label.control-label(for="referee")
+          %label.control-label(for="referred_by")
             %strong Referent:
           .controls
             %input.control-buffer(type="email"
-                   name="referee"
+                   name="referred_by"
                    placeholder="Referent"
-                   id="referee"
-                   ng-model="referee")
-            %span(ng-show="signup.referee.$valid && referee")
+                   id="referred_by"
+                   ng-model="referred_by")
+            %span(ng-show="signup.referred_by.$valid && referred_by")
               %i.icon-ok.checkmark.okness.icon-large
-            %span.mobile-block(ng-class="{'visibility-hidden': !(signup.referee.$error.email)}")
+            %span.mobile-block(ng-class="{'visibility-hidden': !(signup.referred_by.$error.email)}")
               Ogiltig&nbsp;e-postadress.
         .control-group.control-group-compact
           .controls

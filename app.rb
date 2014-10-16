@@ -330,8 +330,8 @@ Cuba.define do
       when true
         user = User.find_by(email: payment.user_email)
         user.apply_package(Packages::PACKAGE_BY_SKU[payment.package_sku])
-        if referee_user = User.find_by(email: user.referee)
-          referee_user.apply_package(Packages::PACKAGE_BY_SKU["REFERRAL"])
+        if referred_by_user = User.find_by(email: user.referred_by)
+          referred_by_user.apply_package(Packages::PACKAGE_BY_SKU["REFERRAL"])
         end
       when false
         res.status = 400
@@ -356,14 +356,14 @@ Cuba.define do
     end
     
     on "signup", param('email'), param('password'), param('first_name'),
-    param('last_name'), param('referee')\
-    do |email, password, first_name, last_name, referee|
+    param('last_name'), param('referred_by')\
+    do |email, password, first_name, last_name, referred_by|
       begin
         user = User.create!(email: email,
                             hashed_password: password, # becomes hashed when created
                             first_name: first_name,
                             last_name: last_name,
-                            referee: referee)
+                            referred_by: referred_by)
         user.create_filter()
         
         # test user for unit testing purposes
