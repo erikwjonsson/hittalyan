@@ -32,12 +32,6 @@
   color: inherit;
 }
 
-.navbar .brand {
-  /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
-     makes font look too thin in FF */
-  font-weight: 300; 
-
-}
 /*Make bootstrap grok some Angular*/
 
 /*Ng says invalid for whatever reason. Red*/
@@ -410,6 +404,12 @@ Media queries
 
 /* Large desktop */
 @media (min-width: 1200px) {
+  .navbar .brand {
+    /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
+       makes font look too thin in FF */
+    font-weight: 300;
+  }
+
   .markety-equal-height {
     min-height: 380px;
   }
@@ -450,8 +450,11 @@ Media queries
 
   .logo-size {
     max-width: 80px;
-    margin-top: -10px;
+    margin-top: -13px;
   }
+
+  .hittalyan-title {
+    }
 
   .navbar-fixed-top,
   .navbar-fixed-bottom {
@@ -483,6 +486,12 @@ Media queries
 
 /* Small desktop and down */
 @media (max-width: 1200px) {
+  .navbar .brand {
+    /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
+       makes font look too thin in FF */
+    font-weight: 300;
+  }
+
   .visible-large-desktop {
     display: none; 
   }
@@ -517,6 +526,9 @@ Media queries
     max-width: 80px;
     margin-top: -7px;
   }
+
+  .hittalyan-title {
+    }
 
   .navbar-fixed-top,
   .navbar-fixed-bottom {
@@ -561,6 +573,12 @@ Media queries
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
 
+  .navbar .brand {
+    /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
+       makes font look too thin in FF */
+    font-weight: 300;
+  }
+
   .faq-title {
     line-height: 32px
   }
@@ -593,8 +611,11 @@ Media queries
 
   .logo-size {
     max-width: 80px;
-    margin-top: 0px
+    margin-top: 0px;
   }
+
+  .hittalyan-title {
+    }
 
   /* Hero unit */
   .hero-unit h1 {
@@ -643,6 +664,14 @@ Media queries
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
+  .navbar .brand {
+    /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
+       makes font look too thin in FF */
+    font-weight: 300;
+    margin-top: -53px;
+    margin-left: 52px;
+  }
+
   .footer-text {
     text-align: inherit !important;
   }
@@ -674,9 +703,12 @@ Media queries
   }
 
   .logo-size {
-    max-width: 80px;
-    margin-top: 0px
+    max-width: 65px;
+    margin-top: -15px;
   }
+
+  .hittalyan-title {
+    }
 
   .navbar-fixed-top,
   .navbar-fixed-bottom {
@@ -787,6 +819,14 @@ Media queries
  
 /* Landscape phones and down */
 @media (max-width: 480px) {
+  .navbar .brand {
+    /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
+       makes font look too thin in FF */
+    font-weight: 300;
+    margin-top: -53px;
+    margin-left: 52px;
+  }
+
   .hero-unit {
     padding-left: 20px;
     padding-right: 20px;
@@ -868,8 +908,13 @@ Media queries
   }
 
   .logo-size {
-    max-width: 80px;
-    margin-top: 0px
+    max-width: 65px;
+    margin-top: -15px;
+  }
+
+.hittalyan-title {
+  margin-top: -60px;
+  margin-left: 65px
   }
 
   .navbar-fixed-top,
@@ -1054,3 +1099,5 @@ Media queries
      -moz-border-radius: 4px;
           border-radius: 4px;
 }
+
+
