@@ -672,6 +672,18 @@ Media queries
     margin-left: 52px;
   }
 
+  .img-polaroid {
+  padding: 0px;
+  background-color: #fff;
+  border: 0px solid #ccc;
+  border: 0px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+     -moz-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+  }
+    /* This class overwrites the polaroid frame in bootstrap to go away in smaller tablet format */
+
+
   .footer-text {
     text-align: inherit !important;
   }
@@ -826,6 +838,17 @@ Media queries
     margin-top: -53px;
     margin-left: 52px;
   }
+
+  .img-polaroid {
+  padding: 0px;
+  background-color: #fff;
+  border: 0px solid #ccc;
+  border: 0px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+     -moz-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+  }
+    /* This class overwrites the polaroid frame in bootstrap to go away in mobile format */
 
   .hero-unit {
     padding-left: 20px;
