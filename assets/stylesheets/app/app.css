@@ -410,9 +410,13 @@ Media queries
     font-weight: 300;
   }
 
-  /* https://www.flickr.com/photos/anymotion/3659158957 */
   .cover-image--landing {
     background-image: url(images/gamla_stan_cc_attribution_cropped.jpg);
+  }
+
+  /* https://www.flickr.com/photos/anymotion/3659158957 */
+  .cover-image--signup {
+    background-image: url(images/Stockholm_registrera_2.jpg);
   }
 
   .markety-equal-height {
@@ -497,9 +501,13 @@ Media queries
     font-weight: 300;
   }
 
-  /* https://www.flickr.com/photos/anymotion/3659158957 */
   .cover-image--landing {
     background-image: url(images/gamla_stan_cc_attribution_cropped.jpg);
+  }
+
+  /* https://www.flickr.com/photos/anymotion/3659158957 */
+  .cover-image--signup {
+    background-image: url(images/Stockholm_registrera_2.jpg);
   }
 
   .visible-large-desktop {
@@ -589,9 +597,13 @@ Media queries
     font-weight: 300;
   }
 
-  /* https://www.flickr.com/photos/anymotion/3659158957 */
   .cover-image--landing {
     background-image: url(images/gamla_stan_cc_attribution_cropped.jpg);
+  }
+
+  /* https://www.flickr.com/photos/anymotion/3659158957 */
+  .cover-image--signup {
+    background-image: url(images/Stockholm_registrera_2.jpg);
   }
 
   .faq-title {
@@ -698,9 +710,13 @@ Media queries
   }
     /* This class overwrites the polaroid frame in bootstrap to go away in smaller tablet format */
 
-  /* https://www.flickr.com/photos/anymotion/3659158957 */
   .cover-image--landing {
     background-image: url(images/gamla_stan_cc_attribution_cropped.jpg);
+  }
+
+  /* https://www.flickr.com/photos/anymotion/3659158957 */
+  .cover-image--signup {
+    background-image: url(images/Stockholm_registrera_2.jpg);
   }
 
   .footer-text {
@@ -869,9 +885,13 @@ Media queries
           box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
   }
     
-  /* https://www.flickr.com/photos/anymotion/3659158957 */
   .cover-image--landing {
     background-image: url(images/gamla_stan_cc_attribution_cropped_mobile2.jpg);
+  }
+
+  /* https://www.flickr.com/photos/anymotion/3659158957 */
+  .cover-image--signup {
+    background-image: url(images/Stockholm_registrera_mobile.jpg);
   }
 
   .hero-unit {
@@ -1063,10 +1083,6 @@ Media queries
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-
-.cover-image--signup {
-  background-image: url(images/Stockholm_registrera_2.jpg);
 }
 
 /* Overrides for the default Bootstrap styling */
