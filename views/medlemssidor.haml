@@ -1,9 +1,13 @@
 .row
   .span3.bottom-buffer(ng-controller="MemberSidebarController" ng-include="memberSidebarUrl")y
-  .span9.bottom-buffer-large
+  .span9.bottom-buffer-large.mobile-titles
     .padhack
       .alert(ng-show="showFirstDayMessage")
         Vi har skickat ett ett mejl till dig med instruktioner och tips för att du ska komma igång.
+        till din e-postadress.
+      .kampanj-alert.kampanj-alert-mobile
+        Tipsa dina vänner om HittaLyan och få gratis extradagar. 
+        %a(href="#!/medlemssidor/kampanjer") Se kampanjer!
       :markdown
         ## Medlemssidor
         Använd menyn för att navigera.
@@ -13,9 +17,12 @@
 
         För att förlänga din prenumeration på lägenhetstips går du in på sidan [Prenumeration](/#!/medlemssidor/prenumeration).
 
+
       %h3 Lägenheter
       .alert(ng-show="showUserInactiveMessage")
         Din prenumeration har gått ut. Köp en prenumeration för att fortsätta få lägenhetstips.
+
+
       .alert(ng-show="showNoApartmentsMessage")
         Just nu finns det inga lägenheter.
       %span.mobile-block Sortera efter: 
@@ -26,7 +33,7 @@
       .row-fluid.top-buffer.bottom-buffer(ng-show="showBlurredApartments" ng-repeat="i in range(5)")
         .blurred-apartment
           %img(src="images/apartments_blurred.png")
-          %a.btn.btn-warning.btn-large.blurred-apartment__btn(href="#!/medlemssidor/prenumeration") Kom igång direkt »
+          %a.btn.btn-warning.btn-large.blurred-apartment__btn.button-size(href="#!/medlemssidor/prenumeration") Kom igång direkt »
 
       .row-fluid.top-buffer.bottom-buffer(ng-repeat="apartment in apartments | orderBy:sortingOrderedBy:sortingReversed")
         .span3

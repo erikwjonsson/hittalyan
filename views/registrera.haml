@@ -1,22 +1,21 @@
 .row.cover-image.cover-image--signup
-  .span9.hero-unit.hero-unit--center.text-center
+  .span7.hero-unit-registrera.hero-unit--center.text-center.shadow
     %h1 Bli medlem
     .top-buffer-small
       :markdown
         För **298 kr** får du mejl och SMS så fort en först till kvarn-lägenhet dyker upp hos någon av hyresvärdarna vi bevakar.
         Prenumerationen avslutas automatiskt efter 30 dagar. 
-        Om du inte hittat en lägenhet efter denna tid erbjuder vi dig att **förnya medlemskapet för rabbaterat pris,
-        endast 149 kr**.
-        
+        Om du inte hittat en lägenhet efter denna tid erbjuder vi dig att **förnya medlemskapet till halva priset 149 kr**.
+
         Det är enkelt att komma igång. Fyll bara i formuläret nedan och betala säkert med Payson. 
         Om du vill ha SMS fyller du enkelt i ditt mobilnummer när du blivit medlem.
       .markety-icon
         %i.icon-chevron-down
 .row
   .span7.bottom-buffer-large.center
-    .alert.alert-info.text-center.top-buffer
+    .alert.alert-info.text-center.top-buffer2.registrera-page-objects
       Redan medlem? <a href="/#!/login">Logga in här</a>
-    .sales-box.box
+    .sales-box.box.registrera-page-objects
       %form.form-horizontal(name="signup" ng-submit="submit()" novalidate)
         %fieldset
           .control-group.control-group-compact
@@ -29,6 +28,8 @@
                     id="first-name"
                     ng-model="first_name"
                     required)
+              %span(ng-show="signup['first-name'].$valid")
+                %i.icon-ok.checkmark.okness.icon-large
           .control-group.control-group-compact
             %label.control-label(for="last-name")
               %strong Efternamn:
@@ -39,6 +40,8 @@
                     id="last-name"
                     ng-model="last_name"
                     required)
+              %span(ng-show="signup['last-name'].$valid")
+                %i.icon-ok.checkmark.okness.icon-large
           .control-group.control-group-compact
             %label.control-label(for="email")
               %strong Din e-postadress:
@@ -65,10 +68,23 @@
                      required
                      ng-minlength="6"
                      ng-maxlength="36")
-              %span(ng-show="signup.password.$valid") 
+              %span(ng-show="signup.password.$valid")
                 %i.icon-ok.checkmark.okness.icon-large
               %span.mobile-block(ng-class="{'visibility-hidden': !(signup.password.$error.minlength)}") 
                 Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
+          .control-group.control-group-compact
+            %label.control-label(for="referred_by")
+              %strong Referent:
+            .controls
+              %input.control-buffer(type="email"
+                     name="referred_by"
+                     placeholder="Referent"
+                     id="referred_by"
+                     ng-model="referred_by")
+              %span(ng-show="signup.referred_by.$valid && referred_by")
+                %i.icon-ok.checkmark.okness.icon-large
+              %span.mobile-block(ng-class="{'visibility-hidden': !(signup.referred_by.$error.email)}")
+                Ogiltig&nbsp;e-postadress.
           .control-group.control-group-compact
             .controls
               %input(type="submit"

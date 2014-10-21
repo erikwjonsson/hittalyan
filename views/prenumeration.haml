@@ -1,7 +1,10 @@
 .row
   .span3.bottom-buffer(ng-controller="MemberSidebarController" ng-include="memberSidebarUrl")
   .span9
-    .padhack
+    .padhack.mobile-titles
+      .kampanj-alert.kampanj-alert-mobile
+        Tipsa dina vänner om HittaLyan och få gratis extradagar. 
+        %a(href="#!/medlemssidor/kampanjer") Se kampanjer!
       %h2 Prenumerationer
       %p Betala direkt med Payson. Payson samarbetar med Visa/Mastercard och internetbankerna Swedbank, Handelsbanken, SEB och Nordea.
       :markdown
@@ -39,7 +42,7 @@
         .span2
           %strong {{couponifyPrice(package, coupon)}} kr
         .span3
-          %button.btn.btn-buy(ng-click="buyPackage(package.sku)") Köp
+          %a.btn.btn-warning.btn-medium.text-center(ng-click="buyPackage(package.sku)") Köp
       %p(ng-hide="showCouponForm")
         %button(type="button" class="btn" ng-click="toggleCouponForm()") Klicka här om du har en rabattkod
       %form.form-horizontal(ng-show="showCouponForm" name="couponForm" ng-submit="submitCoupon()" novalidate)

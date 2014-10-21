@@ -2,13 +2,13 @@
   .span3
     #member-nav(ng-show="isLoggedIn()") 
       %ul.nav.nav-stacked.nav-pills
-        %li.box.opaque
+        %li.box.opaque.member-nav-side.member-nav-top
           %a{href: "#!/medlemssidor"} Medlemssidor
-        %li.box.opaque
+        %li.box.opaque.member-nav-side
           %a{href: "#!/medlemssidor/installningar"} Inställningar
-        %li.box.opaque
+        %li.box.opaque.member-nav-side
           %a{href: "#!/medlemssidor/prenumeration"} Prenumeration
-        %li.box.opaque
+        %li.box.opaque.member-nav-side
           %a{href: "#!/medlemssidor/kampanjer"} Kampanjer
     #member-info-box
       .box.opaque
@@ -23,7 +23,7 @@
     .padhack
       %h2 Om oss
       :markdown
-        HittaLyan är en tjänst som hjälper dig att hitta en hyreslägenhet i Stockholm.
+        HittaLyan är en tjänst som hjälper dig att hitta en hyreslägenhet i eller i närheten av Stockholm.
         Detta gör vi genom att hålla koll på när hyresvärdar lägger upp nya lägenheter 
         och tipsa dig som är medlem. 
         Vi som står bakom tjänsten är ett företag som heter Lingonberry Productions.
