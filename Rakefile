@@ -5,7 +5,7 @@ require 'securerandom'
 def strip_gemfile_of_development_gems(dir)
   gemfile_path = File.join(dir, "Gemfile")
   lines = File.readlines(gemfile_path)
-  
+
   production_lines = lines.take_while {|line| !line.downcase.include?('--development gems--')}
   File.open(gemfile_path, 'w') do |file|
     file.write(production_lines.join(''))
@@ -16,7 +16,7 @@ end
 def set_up_deployment_directory
   # Fix for Gonza. Ugly, brutish and working.
   system('env RACK_ENV="production" bundle install')
-  
+
   # Create deployment directory
   current_dir = File.expand_path(File.dirname(__FILE__), 'public/')
   deployment_directory_path = File.join(current_dir, "tmp/deploy-#{SecureRandom.hex}")
@@ -71,7 +71,7 @@ end
 desc "Deploy to Appfog."
 task :deploy do
   Rake::Task['assets:rebuild'].invoke
-  
+
   in_a_deployment_directory do
     system('af login lingonberryprod@gmail.com')
     system("env RACK_ENV=\"production\" af update #{appfog_app_name}")
@@ -89,29 +89,31 @@ end
 
 task :mail do
   require_relative 'init'
-  
+
   users = []
-  to = ENV['to'] #|| :everyone
+  to = ENV['to']
   subject = ENV['subject']
   file = ENV['file']
-  
+
   LOG.info "To: #{to}"
   LOG.info "Subject: #{subject}"
   LOG.info "Source File: #{file}"
-  
+
   if to == :everyone
     users = User.all
   else
     users = [User.find_by(email: to)]
   end
-  
+
   users.each do |user|
     @user = user
     LOG.info "Shooting mail to: #{user.email}"
-    Mailer.shoot_email(user,
-                       subject,
-                       render_mail(file, binding),
-                       'html')
+    Manmailer.shoot_email(user,
+                          subject,
+                          render_mail(file, binding),
+                          INFO_EMAIL,
+                          INFO_NAME,
+                          'html')
   end
 end
 
@@ -150,15 +152,15 @@ namespace :assets do
     end
 
     def remove_empty_directories
-      Dir.glob(PUBLIC_PATH + "/**/*").select do |d| 
+      Dir.glob(PUBLIC_PATH + "/**/*").select do |d|
           File.directory?(d)
-        end.reverse_each do |d| 
+        end.reverse_each do |d|
           if (Dir.entries(d) - %w[ . .. ]).empty?
             Dir.rmdir(d)
           end
         end
     end
-    
+
     pipelines = %w[viewcompilation.rb fingerprinting.rb assetcompilation.rb]
     pipelines.each do |pipeline|
       puts "Cleaning the #{pipeline.sub('.rb', '')} pipeline."

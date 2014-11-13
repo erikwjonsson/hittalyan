@@ -73,20 +73,20 @@ Cuba.define do
         end
       end
     end
-    
+
     on ":sid" do |sid|
       on get do
         send_json User.all.map { |u| u.as_external_document}
       end
-      
+
       on post do
         res.write "Made successful post"
       end
-      
+
       on put do
         res.write "Made successful put"
       end
-      
+
       on delete do
         res.write "Made successful delete"
       end
@@ -107,7 +107,7 @@ Cuba.define do
       puts "Putsing: #{Time.now}"
       send_view "test"
     end
-  
+
     on "" do
       user_agent = env['HTTP_USER_AGENT'].downcase
       if ['google', 'msnbot', 'yahoo'].any? {|bot| user_agent.include?(bot)}
@@ -126,23 +126,23 @@ Cuba.define do
       fragment = env['PATH_INFO']
       res.redirect("/#!#{fragment}", 301)
     end
-    
+
     on "environment" do
       res.write ENVIRONMENT.to_s
     end
-    
+
     on "loggedin" do
       res.status = 401 unless current_user(req)
     end
-    
+
     on "landing" do
       send_view "landing"
     end
-    
+
     on "vanliga-fragor" do
       send_view "vanliga-fragor"
     end
-    
+
     on "om" do
       send_view "om"
     end
@@ -150,7 +150,7 @@ Cuba.define do
     on "membersidebar" do
       send_view "membersidebar"
     end
-    
+
     on "medlemssidor" do
       user = current_user(req)
       if user == nil
@@ -166,9 +166,9 @@ Cuba.define do
           rent = rent.to_i
           cities = ActiveSupport::JSON.decode(URI.unescape(cities))
           apartments = Apartment.where(
-                         rooms: rooms, 
-                         area: area, 
-                         rent: 0..rent, 
+                         rooms: rooms,
+                         area: area,
+                         rent: 0..rent,
                          :city.in => cities,
                          advertisement_found_at: 30.days.ago..Time.now)
 
@@ -180,10 +180,10 @@ Cuba.define do
             # Unselect packages the user should never see. These are to be kept
             # behind locked doors and closed windows at all times. Always.
             criteria_a = package.show
-            
+
             # Unselect packages that the user shouldn't be interested in seeing
             # criteria_b = (package.show_to_premium == user.active)
-            
+
             # Unselect if trial
             # criteria_c = if user.trial
             #                package.show_to_trial == user.trial
@@ -198,14 +198,14 @@ Cuba.define do
               criteria_a # && criteria_b && criteria_c
             end
           end
-          
+
           external_packages.map! do |package|
             package.as_external_document
           end
-          
+
           send_json(external_packages)
         end
-        
+
         on "coupon/:code" do |code|
           begin
             coupon = Coupon.where(code: code, valid: true).first.as_external_document
@@ -214,15 +214,15 @@ Cuba.define do
           end
           send_json(coupon)
         end
-        
+
         on "installningar" do
           send_view "filtersettings"
         end
-        
+
         on "lagenheter" do
           send_view "apartments"
         end
-        
+
         on "apartments_list" do
           user = current_user(req)
           filt_apts = filtered_apartments_since(user.filter, 7)
@@ -232,7 +232,7 @@ Cuba.define do
         on "change_password" do
           send_view "change_password"
         end
-        
+
         on "prenumeration" do
           on "betalningsbekraftning" do
             send_view "betalningsbekraftning"
@@ -246,11 +246,11 @@ Cuba.define do
         send_view "medlemssidor"
       end
     end
-    
+
     on "login" do
       send_view "login"
     end
-    
+
     on "registrera" do
       send_view "registrera"
     end
@@ -269,14 +269,14 @@ Cuba.define do
           user.update_attributes(notify_by_email: false)
           res.write "E-postutskick om lägenheter har avaktiverats."
         end
-      
+
         on "communications/:unsubscribe_id" do |unsubscribe_id|
           user = User.find_by(unsubscribe_id: unsubscribe_id)
           user.update_attributes(permits_to_be_emailed: false)
           res.write "Du kommer ej längre få e-postutskick med information från oss."
         end
 
-        on "all/:unsubscribe_id" do |unsubscribe_id| 
+        on "all/:unsubscribe_id" do |unsubscribe_id|
           user = User.find_by(unsubscribe_id: unsubscribe_id)
           user.update_attributes(notify_by_email: false)
           user.update_attributes(permits_to_be_emailed: false)
@@ -301,7 +301,7 @@ Cuba.define do
       res.status = 404 # not found
     end
   end
-  
+
   #POST----------------------------------------
   on post do
     on "test" do
@@ -337,7 +337,7 @@ Cuba.define do
         res.status = 400
       end
     end
-  
+
     on "login" do
       on param('email'), param('password') do |email, password|
         user = User.authenticate(email, password)
@@ -349,12 +349,12 @@ Cuba.define do
         end
       end
     end
-    
+
     on "logout" do
       user = current_user(req)
       user.session.delete if user
     end
-    
+
     on "signup", param('email'), param('password'), param('first_name'),
     param('last_name'), param('referred_by')\
     do |email, password, first_name, last_name, referred_by|
@@ -365,7 +365,7 @@ Cuba.define do
                             last_name: last_name,
                             referred_by: referred_by)
         user.create_filter()
-        
+
         # test user for unit testing purposes
         if email == 'hank@rug.burn'
           user.delete
@@ -377,7 +377,7 @@ Cuba.define do
         res.write "#{error_codes}" unless production?
       end
     end
-    
+
     on "medlemssidor" do
       user = current_user(req)
       if user == nil
@@ -390,7 +390,7 @@ Cuba.define do
             res.status = 400 #Bad request
           end
         end
-        
+
         on "account_termination", param('password') do |password|
           if user.has_password?(password)
             user.session.delete
@@ -399,7 +399,7 @@ Cuba.define do
             res.status = 400 #Bad request
           end
         end
-        
+
         on "change_password", param('new_password'), param('old_password') do |new_password, old_password|
           begin
             user.change_password(new_password, old_password)
@@ -424,10 +424,12 @@ Cuba.define do
                   "<p>Observera att länken endast är giltig i 12 timmar och att du måste klicka på länken i det senaste e-postmeddelandet om du tryckt flera gånger på att återställa ditt lösenord.</p>",
                   "<p>Med vänlig hälsning,<br/>",
                   "HittaLyan</p>"].join("\n")
-          Mailer.shoot_email(email,
-                      "Lösenordsåterställning",
-                      body,
-                      'html')
+          Manmailer.shoot_email(email,
+                            'Lösenordsåterställning',
+                            body,
+                            INFO_EMAIL,
+                            INFO_NAME,
+                            'html')
         else
           puts "Password reset request for non-existent user #{email}."
         end
@@ -452,7 +454,12 @@ Cuba.define do
     end
 
     on "message", param('email'), param('message') do |email, message|
-      Mailer.shoot_email(Mailer::OUR_STANDARD_EMAIL, "Meddelande via kontaktformulär", message, 'text', email)
+      Manmailer.shoot_email(INFO_EMAIL,
+                            'Meddelande via kontaktformulär',
+                            message,
+                            email,
+                            '',
+                            'html')
     end
 
     on ":catchall" do

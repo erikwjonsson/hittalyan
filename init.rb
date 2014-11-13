@@ -21,10 +21,11 @@ require 'erb'
 require 'rack/rewrite'
 require 'rack/cors'
 require 'airbrake'
+require 'mandrill'
 
 require_relative 'lib/getenvironment'
 require_relative 'lib/encryption'
-require_relative 'lib/mailer'
+require_relative 'lib/manmailer'
 ENVIRONMENT = get_environment
 require_relative 'helpers'
 WEBSITE_ADDRESS = website_address
@@ -183,3 +184,11 @@ test_errbit_config
 # in the database it stores all times in UTC and then in the application it
 # automatically converts the time for you when you read from the database.
 Time.zone = "Europe/Stockholm"
+
+# =================
+# Configures email
+# =================
+INFO_EMAIL = 'info@hittalyan.se'
+INFO_NAME = 'Info Hittalyan'
+
+MANDRILL = Mandrill::API.new('3_F3jtvsdM0LV384fNiHcQ')
