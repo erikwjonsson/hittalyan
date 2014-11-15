@@ -8,7 +8,7 @@ class User
   include LingonberryMongoidImportExport
 
   externally_accessible :filter, # embedded document, all fields
-                        :email, 
+                        :email,
                         :first_name,
                         :last_name,
                         :referred_by,
@@ -58,17 +58,17 @@ class User
   embeds_one :filter
   SALT = 'aa2c2c739ba0c61dc84345b1c2dc222f'
   UNSUBSCRIBE_SALT = 'lu5rnzg9wgly9a2l1ftbdij7edb6e6'
-  
+
   validates :email, presence: true, uniqueness: true, length: { maximum: 64 }
   # Note that hashed_password isn't hashed at the point of validation
   validates :hashed_password, presence: true, length: { minimum: 6, maximum: 64}
-  
+
   validate :validate_and_coerce_mobile_number_format
-  
+
   before_validation do |document|
     # When a user registers, downcase the email address.
     # This will downcase the email unnecessarily whenever the document
-    # is updated. But life is life, what to do? 
+    # is updated. But life is life, what to do?
     document.email.downcase!
   end
 
@@ -109,7 +109,7 @@ class User
   def unsubscribe_from_all_emails_link
     unsubscribe_link(:all)
   end
-  
+
   def has_password?(submitted_password)
     self.hashed_password == Encryption.encrypt(SALT, submitted_password)
   end
@@ -119,25 +119,25 @@ class User
     return nil unless user
     return user if user.has_password?(submitted_password)
   end
-  
+
   # Needs both a new_password (duh) and old_password for extra security
   def change_password(new_password, old_password)
     raise WrongPassword unless has_password?(old_password)
     change_password!(new_password)
   end
-  
+
   # Only needs new_password. Use with care since possibly someone without proper
   # authority could arbitrarily change the password.
   def change_password!(new_password)
     # We really want to validate the new_passord before it gets hashed.
     # We jut don't know how. Crap.
-    if new_password.length >= 6 && new_password.length <= 64 
+    if new_password.length >= 6 && new_password.length <= 64
       self.update_attribute(:hashed_password, Encryption.encrypt(SALT, new_password))
     else
       raise NewPasswordFailedValidation
     end
   end
-  
+
   class WrongPassword < StandardError
     def message
       "Submitted password does not match."
@@ -178,29 +178,29 @@ class User
       "New password failed validation."
     end
   end
-  
+
   class MalformedMobileNumber < StandardError
     def message
       "We do not accept extra-terrestrial phone numbers. Sorry."
     end
   end
-  
+
   def subtract_sms
     self.inc(:sms_account, -1) if self.sms_account > 0
   end
-  
+
   # Shitty_code_begin >>>
   def needs_reminding
     trial_days = 2
     active_days = 4
     self.premium_until ||= Time.zone.now
-    
+
     # For trial users
     # If user is active and trial and hasn't been reminded and has less than #{trial_days} left
     if self.active && self.trial && self.has_been_reminded != true && (self.premium_until - Time.zone.now) < trial_days*24*60*60
       return true
     end
-    
+
     # For non-trial users
     # If user is active and isn't trial and hasn't been reminded and has less than #{active_days} left
     if self.active && self.trial != true && self.has_been_reminded != true && (self.premium_until - Time.zone.now) < active_days*24*60*60
@@ -212,10 +212,12 @@ class User
 
   private
     def shoot_welcome_email
-      Mailer.shoot_email(self,
-                         'Välkommen - startinstruktioner och tips',
-                          render_mail("welcome_as_premium_member", binding),
-                         'html')
+      Manmailer.shoot_email(self,
+                            'Välkommen - startinstruktioner och tips',
+                            render_mail("welcome_as_premium_member", binding),
+                            INFO_EMAIL,
+                            INFO_NAME,
+                            'html')
       self.update_attribute(:has_received_welcome_email, true)
     end
 
