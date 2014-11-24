@@ -53,6 +53,7 @@ class User
   field :has_been_reminded_nonbuyers, type: Boolean, default: false
   field :has_been_reminded_nonbuyers2, type: Boolean, default: false
   field :has_been_reminded_nonbuyers3_discount, type: Boolean, default: false
+  # These fields below has been commented away because the criteria are the same
   # field :has_been_reminded_nonbuyers3_free_trial, type: Boolean, default: false
   field :has_been_informed_campaign_days, type: Boolean, default: false
   # field :has_been_informed_campaign_discount, type: Boolean, default: false
