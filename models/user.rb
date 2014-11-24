@@ -229,7 +229,7 @@ class User
     def shoot_welcome_email
       Manmailer.shoot_email(self,
                             "Välkommen - startinstruktioner och tips",
-                            render_mail("manmailer/welcome_as_premium_member", binding),
+                            render_mail("welcome_as_premium_member", binding),
                             INFO_EMAIL,
                             INFO_NAME,
                             'html')
