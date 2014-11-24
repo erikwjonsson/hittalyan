@@ -49,10 +49,23 @@ class User
   field :has_received_welcome_email, type: Boolean, default: false
   field :greeted_by_apartmentor, type: Boolean, default: false
   field :has_been_reminded, type: Boolean, default: false
-  field :has_been_reminded_again, type: Boolean, default: false
   # To prevent SubscriptionEnd emails if user has never had an active subscription
-  field :has_been_notified_that_subscription_has_expired, type: Boolean, default: true
-  field :has_been_enquired_about_gotten_startedness, type: Boolean, default: false
+  field :has_been_reminded_nonbuyers, type: Boolean, default: false
+  field :has_been_reminded_nonbuyers2, type: Boolean, default: false
+  field :has_been_reminded_nonbuyers3_discount, type: Boolean, default: false
+
+  # These fields below has been commented away because the criteria are the same
+  # field :has_been_reminded_nonbuyers3_free_trial, type: Boolean, default: false
+  field :has_been_informed_campaign_days, type: Boolean, default: false
+  # field :has_been_informed_campaign_discount, type: Boolean, default: false
+  # field :has_been_informed_campaign_sharing, type: Boolean, default: false
+
+  field :has_been_reminded_subscription_about_to_end, type: Boolean, default: false
+  field :has_been_greeted_user, type: Boolean, default: false
+  field :has_been_notified_that_subscription_has_ended, type: Boolean, default: true
+  field :has_been_notified_that_subscription_has_ended2, type: Boolean, default: false
+  field :has_been_notified_that_subscription_has_ended3, type: Boolean, default: false
+  field :has_been_welcomed_buyer, type: Boolean, default: false
 
   has_one :session
   embeds_one :filter
@@ -82,6 +95,8 @@ class User
     return unless self.mobile_number
     # Removes whitespace and dashes
     self.mobile_number = self.mobile_number.gsub(/\s+|\-+/, "")
+
+
 
     if self.mobile_number == ""
     elsif self.mobile_number[0..1] == '00'
@@ -213,7 +228,7 @@ class User
   private
     def shoot_welcome_email
       Manmailer.shoot_email(self,
-                            'Välkommen - startinstruktioner och tips',
+                            "Välkommen - startinstruktioner och tips",
                             render_mail("welcome_as_premium_member", binding),
                             INFO_EMAIL,
                             INFO_NAME,
