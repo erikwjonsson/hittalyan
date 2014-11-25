@@ -8,7 +8,7 @@ class User
   include LingonberryMongoidImportExport
 
   externally_accessible :filter, # embedded document, all fields
-                        :email, 
+                        :email,
                         :first_name,
                         :last_name,
                         :referred_by,
@@ -49,26 +49,39 @@ class User
   field :has_received_welcome_email, type: Boolean, default: false
   field :greeted_by_apartmentor, type: Boolean, default: false
   field :has_been_reminded, type: Boolean, default: false
-  field :has_been_reminded_again, type: Boolean, default: false
   # To prevent SubscriptionEnd emails if user has never had an active subscription
-  field :has_been_notified_that_subscription_has_expired, type: Boolean, default: true
-  field :has_been_enquired_about_gotten_startedness, type: Boolean, default: false
+  field :has_been_reminded_nonbuyers, type: Boolean, default: false
+  field :has_been_reminded_nonbuyers2, type: Boolean, default: false
+  field :has_been_reminded_nonbuyers3_discount, type: Boolean, default: false
+
+  # These fields below has been commented away because the criteria are the same
+  # field :has_been_reminded_nonbuyers3_free_trial, type: Boolean, default: false
+  field :has_been_informed_campaign_days, type: Boolean, default: false
+  # field :has_been_informed_campaign_discount, type: Boolean, default: false
+  # field :has_been_informed_campaign_sharing, type: Boolean, default: false
+
+  field :has_been_reminded_subscription_about_to_end, type: Boolean, default: false
+  field :has_been_greeted_user, type: Boolean, default: false
+  field :has_been_notified_that_subscription_has_ended, type: Boolean, default: true
+  field :has_been_notified_that_subscription_has_ended2, type: Boolean, default: false
+  field :has_been_notified_that_subscription_has_ended3, type: Boolean, default: false
+  field :has_been_welcomed_buyer, type: Boolean, default: false
 
   has_one :session
   embeds_one :filter
   SALT = 'aa2c2c739ba0c61dc84345b1c2dc222f'
   UNSUBSCRIBE_SALT = 'lu5rnzg9wgly9a2l1ftbdij7edb6e6'
-  
+
   validates :email, presence: true, uniqueness: true, length: { maximum: 64 }
   # Note that hashed_password isn't hashed at the point of validation
   validates :hashed_password, presence: true, length: { minimum: 6, maximum: 64}
-  
+
   validate :validate_and_coerce_mobile_number_format
-  
+
   before_validation do |document|
     # When a user registers, downcase the email address.
     # This will downcase the email unnecessarily whenever the document
-    # is updated. But life is life, what to do? 
+    # is updated. But life is life, what to do?
     document.email.downcase!
   end
 
@@ -82,6 +95,8 @@ class User
     return unless self.mobile_number
     # Removes whitespace and dashes
     self.mobile_number = self.mobile_number.gsub(/\s+|\-+/, "")
+
+
 
     if self.mobile_number == ""
     elsif self.mobile_number[0..1] == '00'
@@ -109,7 +124,7 @@ class User
   def unsubscribe_from_all_emails_link
     unsubscribe_link(:all)
   end
-  
+
   def has_password?(submitted_password)
     self.hashed_password == Encryption.encrypt(SALT, submitted_password)
   end
@@ -119,25 +134,25 @@ class User
     return nil unless user
     return user if user.has_password?(submitted_password)
   end
-  
+
   # Needs both a new_password (duh) and old_password for extra security
   def change_password(new_password, old_password)
     raise WrongPassword unless has_password?(old_password)
     change_password!(new_password)
   end
-  
+
   # Only needs new_password. Use with care since possibly someone without proper
   # authority could arbitrarily change the password.
   def change_password!(new_password)
     # We really want to validate the new_passord before it gets hashed.
     # We jut don't know how. Crap.
-    if new_password.length >= 6 && new_password.length <= 64 
+    if new_password.length >= 6 && new_password.length <= 64
       self.update_attribute(:hashed_password, Encryption.encrypt(SALT, new_password))
     else
       raise NewPasswordFailedValidation
     end
   end
-  
+
   class WrongPassword < StandardError
     def message
       "Submitted password does not match."
@@ -178,29 +193,29 @@ class User
       "New password failed validation."
     end
   end
-  
+
   class MalformedMobileNumber < StandardError
     def message
       "We do not accept extra-terrestrial phone numbers. Sorry."
     end
   end
-  
+
   def subtract_sms
     self.inc(:sms_account, -1) if self.sms_account > 0
   end
-  
+
   # Shitty_code_begin >>>
   def needs_reminding
     trial_days = 2
     active_days = 4
     self.premium_until ||= Time.zone.now
-    
+
     # For trial users
     # If user is active and trial and hasn't been reminded and has less than #{trial_days} left
     if self.active && self.trial && self.has_been_reminded != true && (self.premium_until - Time.zone.now) < trial_days*24*60*60
       return true
     end
-    
+
     # For non-trial users
     # If user is active and isn't trial and hasn't been reminded and has less than #{active_days} left
     if self.active && self.trial != true && self.has_been_reminded != true && (self.premium_until - Time.zone.now) < active_days*24*60*60
@@ -212,10 +227,12 @@ class User
 
   private
     def shoot_welcome_email
-      Mailer.shoot_email(self,
-                         'Välkommen - startinstruktioner och tips',
-                          render_mail("welcome_as_premium_member", binding),
-                         'html')
+      Manmailer.shoot_email(self,
+                            "Välkommen - startinstruktioner och tips",
+                            render_mail("welcome_as_premium_member", binding),
+                            INFO_EMAIL,
+                            INFO_NAME,
+                            'html')
       self.update_attribute(:has_received_welcome_email, true)
     end
 
