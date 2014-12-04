@@ -110,7 +110,7 @@ Cuba.use Rack::Cors do
   end
 end
 Cuba.use Airbrake::Rack
-Cuba.use Rack::Protection
+Cuba.use Rack::Protection, :except => :session_hijacking
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.use Rack::Logger
 Cuba.use DeathToMing
