@@ -2,6 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
+
 require_relative '../init'
 
 class UserTest < Minitest::Test
@@ -126,19 +127,21 @@ class UserTest < Minitest::Test
     refute(returning_user.active)
   end
 
-  def test_apply_package_premium30_on_inactive_user_adds_30_days
+  def test_apply_package_premium30sms_on_inactive_user_adds_30_days_and_sms
     refute(@user.active)
-    @user.apply_package(Packages::PACKAGE_BY_SKU["PREMIUM30"])
+    @user.apply_package(Packages::PACKAGE_BY_SKU.fetch("PREMIUM30SMS"))
     
     assert_equal(1.day.from_now.midnight + 30.days, @user.premium_until)
+    assert_equal(1.day.from_now.midnight + 30.days, @user.sms_until)
   end
 
-  def test_apply_package_premium30_on_active_user_adds_30_days_from_premium_until
-    @user.apply_package(Packages::PACKAGE_BY_SKU["TRIAL7"])
+  def test_apply_package_premium30sms_on_active_user_adds_30_days_and_sms_from_premium_until
+    @user.apply_package(Packages::PACKAGE_BY_SKU["PREMIUM30SMS"])
     original_premium_until = @user.premium_until.dup
-    @user.apply_package(Packages::PACKAGE_BY_SKU["PREMIUM30"])
+    @user.apply_package(Packages::PACKAGE_BY_SKU["PREMIUM30SMS"])
 
     assert_equal(original_premium_until + 30.days, @user.premium_until)
+    assert_equal(original_premium_until + 30.days, @user.sms_until)
   end
 
   def teardown
