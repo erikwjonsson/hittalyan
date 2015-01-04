@@ -1159,3 +1159,19 @@ Media queries
 }
 
 
+.pic-copyright-text {
+  display: block;
+  margin-top: 30px;
+  text-align: right;
+  font-size: 9px;
+  color: rgba(252, 249, 249, 0.46);
+}
+
+.pic-copyright-text-registrera {
+  display: block;
+  margin-top: 30px;
+  text-align: right;
+  font-size: 9px;
+  color: rgba(252, 249, 249, 0.46);
+  margin-left: 24px;
+}
