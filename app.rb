@@ -355,19 +355,17 @@ Cuba.define do
       user.session.delete if user
     end
 
-    on "signup", param('email'), param('password'), param('first_name'),
-    param('last_name'), param('referred_by')\
-    do |email, password, first_name, last_name, referred_by|
+    on "signup", param('data') do |data|
       begin
-        user = User.create!(email: email,
-                            hashed_password: password, # becomes hashed when created
-                            first_name: first_name,
-                            last_name: last_name,
-                            referred_by: referred_by)
+        user = User.create!(email: data.fetch('email'),
+                            hashed_password: data.fetch('password'), # becomes hashed when created
+                            first_name: data.fetch('first_name'),
+                            last_name: data.fetch('last_name'),
+                            referred_by: data['referred_by']) # optional
         user.create_filter()
 
         # test user for unit testing purposes
-        if email == 'hank@rug.burn'
+        if data['email'] == 'hank@rug.burn'
           user.delete
           res.write 'You\'ve got Hank!'
         end

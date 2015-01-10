@@ -163,7 +163,7 @@ function SignupController($scope, $http, $location, analytics) {
       $scope.message = "Registrerar...";
       $scope.working = true;
       $scope.cross = false;
-      $http.post("signup", $scope.data).
+      $http.post("signup", {data: $scope.data }).
         success(function(data, status) {
           // Hack because of some funky business happening...
           if (status === 200) {
