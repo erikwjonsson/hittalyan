@@ -159,7 +159,7 @@ function SignupController($scope, $http, $location, analytics) {
                      password: $scope.password,
                      first_name: $scope.first_name,
                      last_name: $scope.last_name,
-                     referred_by: $scope.referred_by || ''};
+                     referred_by: $scope.referred_by};
       $scope.message = "Registrerar...";
       $scope.working = true;
       $scope.cross = false;
