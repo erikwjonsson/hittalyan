@@ -7,7 +7,7 @@ gem 'cuba', '~>3.1.0'
 gem 'rack-post-body-to-params', '~>0.1.5'
 gem 'thin', '~>1.5.0'
 gem 'rest-client', '~>1.6.7'
-gem 'payson_api', '0.3.0'
+gem 'payson_api', '0.4.1'
 gem 'af'
 gem 'rack-rewrite', '~> 1.2.1'
 gem 'rack-cors'
@@ -32,5 +32,6 @@ if ENV['RACK_ENV'] == 'development'
   gem 'haml', '3.1.7'
   gem 'rdiscount', '1.6.8'
 
-  gem "minitest", "~> 4.2"
+  gem "minitest", "~>5.5"
+  gem 'minitest-reporters'
 end
