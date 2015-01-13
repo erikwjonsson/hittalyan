@@ -1,0 +1,49 @@
+<%# coding: utf-8 %>
+<!doctype html>
+<html lang='se'>
+  <head>
+    <meta charset='utf-8'>
+  </head>
+  <body>
+    <p>Hej<%= " #{user.first_name}" unless user.first_name.blank? %>!</p>
+
+    <p>Roligt att du valt att prenumerera på HittaLyan! Vill du få dina lägenhetstips som SMS? Gå i så fall till <a href="http://www.hittalyan.se/hashbang/medlemssidor/installningar" rel="nofollow">inställningar</a> och ange ditt mobilnummer så aktiveras SMS-utskick automatiskt.</p>
+
+    <p>För att snabbare kunna anmäla dig hos hyresvärdarna när en lägehet dyker upp rekommenderar vi att du registrerar dig på respektive hyresvärds hemsida redan nu. Länkar till hyresvärdarna hittar du nedan.<p>
+
+    <p>Om du undrar något är det bara att du hör av dig. Vi önskar dig lycka till med lägenhetsletandet!<p>
+
+    <ul style="list-style-type:none">
+        <li><a href="http://www.akelius.se/" >Akelius Lägenheter</a></li>
+        <li><a href="https://bostad.stockholm.se/" >Bostadsförmedlingen i Stockholm Bostadssnabben</a></li>
+        <li><a href="http://www.haningebostader.se/">Haninge Bostäder</a></li>
+        <li><a href="http://www.hasselbyhem.se/">Hässelby Hem</a></li>
+        <li><a href="http://www.ikanobostad.se/">Ikano Bostad</a></li>
+        <li><a href="http://www.sigtunahem.se/">Sigtuna Hem</a></li>
+        <li><a href="http://www.sollentunahem.se/">Sollentuna Hem</a></li>
+        <li><a href="http://www.tyresobostader.se/">Tyresö Bostäder</a></li>
+        <li><a href="http://upplands-brohus.se/">Upplands-Brohus</a></li>
+        <li><a href="http://www.vasbyhem.se/">Väsby Hem</a></li>
+        <li><a href="http://www.wahlinfastigheter.se/">Wahlin Fastigheter</a></li>
+    </ul>
+
+    <p>I övrigt så har följande hyresvärdar valt att i fortsättningen lägga upp sina lägenheter via SSB Bostadssnabben. Du behöver inte registrera dig på deras hemsidor så länge du registrerat dig på Bostadsförmedlingen i Stockholm.</p>
+
+    <ul style="list-style-type:none">
+    <li>Wallenstam</li>
+    <li>Stena Fastigheter</li>
+    <li>Heba</li>
+    <li>Signalisten</li>
+    </ul>
+
+    <p>Med vänliga hälsningar,<br/>
+    HittaLyan-teamet</p>
+
+    <hr/>
+    <p>
+      <a href="<%= user.unsubscribe_from_email_communications_link %>" rel="nofollow">Klicka här</a> om du ej längre vill få allmänna e-postmeddelanden från oss.<br/>
+      <a href="<%= user.unsubscribe_from_all_emails_link %>" rel="nofollow">Klicka här</a> om du inte vill få några fler e-postmeddelanden överhuvudtaget från oss.
+    </p>
+
+  </body>
+</html>

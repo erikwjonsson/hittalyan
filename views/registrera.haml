@@ -78,11 +78,11 @@
                 Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
           .control-group.control-group-compact
             %label.control-label(for="referred_by")
-              %strong Referent:
+              %strong Tipsades av:
             .controls
               %input.control-buffer(type="email"
                      name="referred_by"
-                     placeholder="Referent"
+                     placeholder="Kompis e-postadress"
                      id="referred_by"
                      ng-model="referred_by")
               %span(ng-show="signup.referred_by.$valid && referred_by")
