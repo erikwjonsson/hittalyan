@@ -410,6 +410,10 @@ Media queries
     font-weight: 300;
   }
 
+  .pic-copyright-text-registrera {
+    margin-left: 33px;
+  }
+
   .cover-image--landing {
     background-image: url(images/gamla_stan_cc_attribution_cropped.jpg);
   }
@@ -499,6 +503,10 @@ Media queries
     /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
        makes font look too thin in FF */
     font-weight: 300;
+  }
+
+  .pic-copyright-text-registrera {
+    margin-left: 22px;
   }
 
   .cover-image--landing {
@@ -595,6 +603,10 @@ Media queries
     /* something odd with fontweight being 200 in several places. Bootstrap weirdness?
        makes font look too thin in FF */
     font-weight: 300;
+  }
+
+  .pic-copyright-text-registrera {
+    margin-left: 23px;
   }
 
   .cover-image--landing {
@@ -697,6 +709,10 @@ Media queries
     font-weight: 300;
     margin-top: -53px;
     margin-left: 52px;
+  }
+
+  .pic-copyright-text-registrera {
+    margin-left: 3px;
   }
 
   .img-polaroid {
@@ -872,6 +888,10 @@ Media queries
     font-weight: 300;
     margin-top: -53px;
     margin-left: 52px;
+  }
+
+  .pic-copyright-text-registrera {
+    margin-left: 3px;
   }
 
   /* This class overwrites the polaroid frame in bootstrap to go away in mobile format */
@@ -1159,3 +1179,26 @@ Media queries
 }
 
 
+.pic-copyright-text {
+  display: block;
+  margin-top: 30px;
+  text-align: right;
+  font-size: 9px;
+  color: rgba(252, 249, 249, 0.46);
+}
+
+.pic-copyright-text-registrera {
+  display: block;
+  margin-top: 30px;
+  text-align: right;
+  font-size: 9px;
+  color: rgba(252, 249, 249, 0.46);
+}
+
+.pic-copyright-text a:link {
+    color: rgba(252, 249, 249, 0.46);
+}
+
+.pic-copyright-text-registrera a:link {
+    color: rgba(252, 249, 249, 0.46);
+}

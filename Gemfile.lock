@@ -166,7 +166,7 @@ DEPENDENCIES
   minitest (~> 5.5)
   minitest-reporters
   mongoid (~> 3.0.0)
-  payson_api (= 0.4.1)
+  payson_api (= 0.3.0)
   rack-cors
   rack-livereload (= 0.3.12)
   rack-post-body-to-params (~> 0.1.5)
