@@ -46,7 +46,6 @@ class User
   field :trial, type: Boolean, default: false
 
   # Diagnostic fields
-  field :has_received_welcome_email, type: Boolean, default: false
   field :greeted_by_apartmentor, type: Boolean, default: false
   field :has_been_reminded, type: Boolean, default: false
   # To prevent SubscriptionEnd emails if user has never had an active subscription
