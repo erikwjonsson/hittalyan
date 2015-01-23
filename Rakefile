@@ -46,12 +46,12 @@ def branch
   `git rev-parse --abbrev-ref HEAD`.chomp
 end
 
-def production?
-  branch == "production"
+def master?
+  branch == "master"
 end
 
 def appfog_app_name
-  if production?
+  if master?
     "hittalyan"
   else
     "cubancabal"
