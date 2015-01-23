@@ -46,7 +46,6 @@ class User
   field :trial, type: Boolean, default: false
 
   # Diagnostic fields
-  field :has_received_welcome_email, type: Boolean, default: false
   field :greeted_by_apartmentor, type: Boolean, default: false
   field :has_been_reminded, type: Boolean, default: false
   # To prevent SubscriptionEnd emails if user has never had an active subscription
@@ -182,6 +181,7 @@ class User
     begin
       shoot_welcome_email if package.sku.include?('START')
       shoot_welcome_email if package.sku.include?('TRIAL7')
+      shoot_greeting_email if package.sku.include?('START')
     rescue Exception => e
       puts "Failed to send welcome email to #{self.email}."
       log_exception(e)
@@ -228,12 +228,22 @@ class User
   private
     def shoot_welcome_email
       Manmailer.shoot_email(self,
-                            "Välkommen - startinstruktioner och tips",
-                            render_mail("welcome_as_premium_member", binding),
+                            "Välkommen som prenumerant hos HittaLyan",
+                            render_mail("welcomebuyer", binding),
                             INFO_EMAIL,
                             INFO_NAME,
                             'html')
-      self.update_attribute(:has_received_welcome_email, true)
+      self.update_attribute(:has_been_welcomed_buyer, true)
+    end
+
+    def shoot_greeting_email
+      Manmailer.shoot_email(self,
+                            "Välkommen till HittaLyan",
+                            render_mail("greetinguser", binding),
+                            INFO_EMAIL,
+                            INFO_NAME,
+                            'html')
+      self.update_attribute(:has_been_greeted_user, true)
     end
 
     def add_premium_days(days_to_add)
