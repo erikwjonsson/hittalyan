@@ -227,9 +227,15 @@ class User
 
   private
     def shoot_welcome_email
+      # The variables we want accessible within the template.
+      template_variables = {
+        user: self
+      }
+
+      # Shoot the email
       Manmailer.shoot_email(self,
                             "Välkommen som prenumerant hos HittaLyan",
-                            render_mail("welcomebuyer", binding),
+                            render_mail("welcomebuyer", template_variables),
                             INFO_EMAIL,
                             INFO_NAME,
                             'html')
@@ -237,9 +243,14 @@ class User
     end
 
     def shoot_greeting_email
+      # The variables we want accessible within the template.
+      template_variables = {
+        user: self
+      }
+
       Manmailer.shoot_email(self,
                             "Välkommen till HittaLyan",
-                            render_mail("greetinguser", binding),
+                            render_mail("greetinguser", template_variables),
                             INFO_EMAIL,
                             INFO_NAME,
                             'html')

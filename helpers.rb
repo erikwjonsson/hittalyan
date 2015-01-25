@@ -69,9 +69,8 @@ class MongoidExceptionCodifier
     end
 end
 
-# Renders an ERB template. If you're unsure about what to pass
-# as a_binding you probably want to pass 'binding' (without quotes).
-def render_mail(template, a_binding)
+# Renders an ERB template.
+def render_mail(template, template_variables)
   content = File.read("mails/#{template}.html.erb")
-  ERB.new(content).result(a_binding)
+  Erubis::Eruby.new(content).result(template_variables)
 end
