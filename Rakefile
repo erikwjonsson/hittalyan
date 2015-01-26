@@ -106,11 +106,14 @@ task :mail do
   end
 
   users.each do |user|
-    @user = user
+    template_variables = {
+      user: user
+    }
+
     LOG.info "Shooting mail to: #{user.email}"
     Manmailer.shoot_email(user,
                           subject,
-                          render_mail(file, binding),
+                          render_mail(file, template_variables),
                           INFO_EMAIL,
                           INFO_NAME,
                           'html')

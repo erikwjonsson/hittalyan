@@ -23,6 +23,11 @@ require 'rack/cors'
 require 'airbrake'
 require 'mandrill'
 
+# We use Erubis instead of ERB in stdlib since we can pass local variables in
+# instead of passing in an entire scope, thus making our code less likely to
+# break apart.
+require 'erubis'
+
 require_relative 'lib/getenvironment'
 require_relative 'lib/encryption'
 require_relative 'lib/manmailer'
