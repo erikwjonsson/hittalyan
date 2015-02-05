@@ -34,6 +34,7 @@
                     required)
               %span(ng-show="signup['first-name'].$valid")
                 %i.icon-ok.checkmark.okness.icon-large
+          
           .control-group.control-group-compact
             %label.control-label(for="last-name")
               %strong Efternamn:
@@ -46,6 +47,7 @@
                     required)
               %span(ng-show="signup['last-name'].$valid")
                 %i.icon-ok.checkmark.okness.icon-large
+          
           .control-group.control-group-compact
             %label.control-label(for="email")
               %strong Din e-postadress:
@@ -60,6 +62,7 @@
                 %i.icon-ok.checkmark.okness.icon-large
               %span.mobile-block(ng-class="{'visibility-hidden': !(signup.email.$error.email)}")
                 Ogiltig&nbsp;e-postadress.
+          
           .control-group.control-group-compact
             %label.control-label(for="password")
               %strong Önskat lösenord:
@@ -74,8 +77,19 @@
                      ng-maxlength="36")
               %span(ng-show="signup.password.$valid")
                 %i.icon-ok.checkmark.okness.icon-large
-              %span.mobile-block(ng-class="{'visibility-hidden': !(signup.password.$error.minlength)}") 
+              %span.mobile-block(ng-class="{'visibility-hidden': !(signup.password.$error.minlength)}")
                 Lösenordet&nbsp;är&nbsp;för&nbsp;kort.
+          
+          .control-group.control-group-compact
+            %label.control-label(for="traffic_source")
+              %strong Hur hittade du HittaLyan?
+            .controls
+              %select(ng-model="traffic_source"
+                      ng-options="s.name for s in trafficSourceOptions")
+                %option(value="") Default option placeholder
+              %span(ng-show="signup.traffic_source.$valid")
+                %i.icon-ok.checkmark.okness.icon-large
+          
           .control-group.control-group-compact
             %label.control-label(for="referred_by")
               %strong Tipsades av:
@@ -89,6 +103,7 @@
                 %i.icon-ok.checkmark.okness.icon-large
               %span.mobile-block(ng-class="{'visibility-hidden': !(signup.referred_by.$error.email)}")
                 Ogiltig&nbsp;e-postadress.
+          
           .control-group.control-group-compact
             .controls
               %input(type="submit"
