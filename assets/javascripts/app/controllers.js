@@ -170,7 +170,7 @@ function SignupController($scope, $http, $location, analytics) {
                      first_name: $scope.first_name,
                      last_name: $scope.last_name,
                      referred_by: $scope.referred_by,
-                     traffic_source: $scope.traffic_source.name};
+                     traffic_source: $scope.traffic_source === undefined ? null : $scope.traffic_source.name};
       $scope.message = "Registrerar...";
       $scope.working = true;
       $scope.cross = false;
