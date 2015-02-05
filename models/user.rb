@@ -30,6 +30,7 @@ class User
   field :first_name, type: String, default: ""
   field :last_name, type: String, default: ""
   field :referred_by, type: String, default: ""
+  field :traffic_source, type: String, default: ""
   field :mobile_number, type: String
   field :hashed_password, type: String
   field :notify_by_email, type: Boolean, default: true
