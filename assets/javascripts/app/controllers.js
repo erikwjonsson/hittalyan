@@ -122,13 +122,13 @@ function SignupController($scope, $http, $location, analytics) {
   $scope.trafficSourceOptions = [{name: "TODO DEFAULT OPTION PLACEHOLDER", value: null},
                                 {name: "Affisch", value: "Affisch"},
                                 {name: "Tipsad av kompis", value: "Tipsad av kompis"},
-                                {name: "Rabatt från rabattsite", value: "Rabatt från rabattsite"},
-                                {name: "Artikel i tidning", value: "Artikel i tidning"},
+                                {name: "Rabattsida", value: "Rabattsida"},
+                                {name: "Tidningsartikel", value: "Tidningsartikel"},
                                 {name: "Blogg", value: "Blogg"},
                                 {name: "Facebook-grupp", value: "Facebook-grupp"},
                                 {name: "Facebook-annons", value: "Facebook-annons"},
-                                {name: "Google Annons", value: "Google Annons"},
-                                {name: "Sökning i Google", value: "Sökning i Google"}]
+                                {name: "Google-annons", value: "Google-annons"},
+                                {name: "Googlesökning", value: "Googlesökning"}]
   $scope.traffic_source = $scope.trafficSourceOptions[0] //Default value selected
 
   function loggedInSuccess() {
