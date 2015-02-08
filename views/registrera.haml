@@ -86,7 +86,6 @@
             .controls
               %select(ng-model="traffic_source"
                       ng-options="s.name for s in trafficSourceOptions")
-                %option(value="") Default option placeholder
               %span(ng-show="signup.traffic_source.$valid")
                 %i.icon-ok.checkmark.okness.icon-large
           

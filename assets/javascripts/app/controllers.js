@@ -119,15 +119,17 @@ function FAQController($scope, $routeParams, analytics) {
 function SignupController($scope, $http, $location, analytics) {
   LOGIN_DESTINATION = '/medlemssidor';
 
-  $scope.trafficSourceOptions = [{name: "Affisch"},
-                                {name: "Tipsad av kompis"},
-                                {name: "Rabatt från rabattsite"},
-                                {name: "Artikel i tidning"},
-                                {name: "Blogg"},
-                                {name: "Facebook-grupp"},
-                                {name: "Facebook-annons"},
-                                {name: "Google Annons"},
-                                {name: "Sökning i Google"}]
+  $scope.trafficSourceOptions = [{name: "TODO DEFAULT OPTION PLACEHOLDER", value: null},
+                                {name: "Affisch", value: "Affisch"},
+                                {name: "Tipsad av kompis", value: "Tipsad av kompis"},
+                                {name: "Rabatt från rabattsite", value: "Rabatt från rabattsite"},
+                                {name: "Artikel i tidning", value: "Artikel i tidning"},
+                                {name: "Blogg", value: "Blogg"},
+                                {name: "Facebook-grupp", value: "Facebook-grupp"},
+                                {name: "Facebook-annons", value: "Facebook-annons"},
+                                {name: "Google Annons", value: "Google Annons"},
+                                {name: "Sökning i Google", value: "Sökning i Google"}]
+  $scope.traffic_source = $scope.trafficSourceOptions[0] //Default value selected
 
   function loggedInSuccess() {
     trackConversion();
@@ -170,7 +172,7 @@ function SignupController($scope, $http, $location, analytics) {
                      first_name: $scope.first_name,
                      last_name: $scope.last_name,
                      referred_by: $scope.referred_by,
-                     traffic_source: $scope.traffic_source === undefined ? null : $scope.traffic_source.name};
+                     traffic_source: $scope.traffic_source.value};
       $scope.message = "Registrerar...";
       $scope.working = true;
       $scope.cross = false;
