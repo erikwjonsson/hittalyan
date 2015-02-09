@@ -128,7 +128,8 @@ function SignupController($scope, $http, $location, analytics) {
                                 {name: "Facebook-grupp", value: "Facebook-grupp"},
                                 {name: "Facebook-annons", value: "Facebook-annons"},
                                 {name: "Google-annons", value: "Google-annons"},
-                                {name: "Googlesökning", value: "Googlesökning"}]
+                                {name: "Googlesökning", value: "Googlesökning"},
+                                {name: "Annat", value: "Annat"}]
   $scope.traffic_source = $scope.trafficSourceOptions[0] //Default value selected
 
   function loggedInSuccess() {
