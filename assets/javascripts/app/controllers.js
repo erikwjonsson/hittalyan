@@ -125,8 +125,8 @@ function SignupController($scope, $http, $location, analytics) {
                                 {name: "Rabattsida", value: "Rabattsida"},
                                 {name: "Tidningsartikel", value: "Tidningsartikel"},
                                 {name: "Blogg", value: "Blogg"},
-                                {name: "Facebook-grupp", value: "Facebook-grupp"},
-                                {name: "Facebook-annons", value: "Facebook-annons"},
+                                {name: "Facebookgrupp", value: "Facebookgrupp"},
+                                {name: "Facebookannons", value: "Facebookannons"},
                                 {name: "Googleannons", value: "Googleannons"},
                                 {name: "Googlesökning", value: "Googlesökning"},
                                 {name: "Annat", value: "Annat"}]
