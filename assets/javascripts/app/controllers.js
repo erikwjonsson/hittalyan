@@ -119,7 +119,7 @@ function FAQController($scope, $routeParams, analytics) {
 function SignupController($scope, $http, $location, analytics) {
   LOGIN_DESTINATION = '/medlemssidor';
 
-  $scope.trafficSourceOptions = [{name: "TODO DEFAULT OPTION PLACEHOLDER", value: null},
+  $scope.trafficSourceOptions = [{name: "Välj ett alternativ", value: null},
                                 {name: "Affisch", value: "Affisch"},
                                 {name: "Tipsad av kompis", value: "Tipsad av kompis"},
                                 {name: "Rabattsida", value: "Rabattsida"},
