@@ -84,11 +84,16 @@
             %label.control-label(for="traffic_source")
               %strong Hur hittade du HittaLyan?
             .controls
-              %select(ng-model="traffic_source"
-                      ng-options="s.name for s in trafficSourceOptions")
+              %select(name="traffic_source"
+                      ng-model="traffic_source"
+                      ng-options="s.name for s in trafficSourceOptions"
+                      required)
+                %option(value="" default)Välj alternativ
               %span(ng-show="signup.traffic_source.$valid")
                 %i.icon-ok.checkmark.okness.icon-large
-          
+              %span.mobile-block(ng-class="{'visibility-hidden': !(signup.traffic_source.$error.required && signup.traffic_source.$dirty)}")
+                %i.icon-remove.checkmark.wrongness.icon-large
+
           .control-group.control-group-compact
             %label.control-label(for="referred_by")
               %strong Tipsades av:

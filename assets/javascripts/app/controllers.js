@@ -119,8 +119,7 @@ function FAQController($scope, $routeParams, analytics) {
 function SignupController($scope, $http, $location, analytics) {
   LOGIN_DESTINATION = '/medlemssidor';
 
-  $scope.trafficSourceOptions = [{name: "Välj ett alternativ", value: null},
-                                {name: "Affisch", value: "Affisch"},
+  $scope.trafficSourceOptions = [{name: "Affisch", value: "Affisch"},
                                 {name: "Tipsad av kompis", value: "Tipsad av kompis"},
                                 {name: "Rabattsida", value: "Rabattsida"},
                                 {name: "Tidningsartikel", value: "Tidningsartikel"},
@@ -130,7 +129,6 @@ function SignupController($scope, $http, $location, analytics) {
                                 {name: "Googleannons", value: "Googleannons"},
                                 {name: "Googlesökning", value: "Googlesökning"},
                                 {name: "Annat", value: "Annat"}]
-  $scope.traffic_source = $scope.trafficSourceOptions[0] //Default value selected
 
   function loggedInSuccess() {
     trackConversion();
