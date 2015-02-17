@@ -121,13 +121,14 @@ function SignupController($scope, $http, $location, analytics) {
 
   $scope.trafficSourceOptions = [{name: "Affisch", value: "Affisch"},
                                 {name: "Tipsad av kompis", value: "Tipsad av kompis"},
-                                {name: "Rabatt från rabattsite", value: "Rabatt från rabattsite"},
-                                {name: "Artikel i tidning", value: "Artikel i tidning"},
+                                {name: "Rabattsida", value: "Rabattsida"},
+                                {name: "Tidningsartikel", value: "Tidningsartikel"},
                                 {name: "Blogg", value: "Blogg"},
-                                {name: "Facebook-grupp", value: "Facebook-grupp"},
-                                {name: "Facebook-annons", value: "Facebook-annons"},
-                                {name: "Google Annons", value: "Google Annons"},
-                                {name: "Sökning i Google", value: "Sökning i Google"}]
+                                {name: "Facebookgrupp", value: "Facebookgrupp"},
+                                {name: "Facebookannons", value: "Facebookannons"},
+                                {name: "Googleannons", value: "Googleannons"},
+                                {name: "Googlesökning", value: "Googlesökning"},
+                                {name: "Annat", value: "Annat"}]
 
   function loggedInSuccess() {
     trackConversion();
