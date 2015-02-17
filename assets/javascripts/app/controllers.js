@@ -119,6 +119,17 @@ function FAQController($scope, $routeParams, analytics) {
 function SignupController($scope, $http, $location, analytics) {
   LOGIN_DESTINATION = '/medlemssidor';
 
+  $scope.trafficSourceOptions = [{name: "Affisch", value: "Affisch"},
+                                {name: "Tipsad av kompis", value: "Tipsad av kompis"},
+                                {name: "Rabattsida", value: "Rabattsida"},
+                                {name: "Tidningsartikel", value: "Tidningsartikel"},
+                                {name: "Blogg", value: "Blogg"},
+                                {name: "Facebookgrupp", value: "Facebookgrupp"},
+                                {name: "Facebookannons", value: "Facebookannons"},
+                                {name: "Googleannons", value: "Googleannons"},
+                                {name: "Googlesökning", value: "Googlesökning"},
+                                {name: "Annat", value: "Annat"}]
+
   function loggedInSuccess() {
     trackConversion();
     $scope.message = "Registrering lyckad. Loggar in...";
@@ -159,7 +170,8 @@ function SignupController($scope, $http, $location, analytics) {
                      password: $scope.password,
                      first_name: $scope.first_name,
                      last_name: $scope.last_name,
-                     referred_by: $scope.referred_by};
+                     referred_by: $scope.referred_by,
+                     traffic_source: $scope.traffic_source.value};
       $scope.message = "Registrerar...";
       $scope.working = true;
       $scope.cross = false;

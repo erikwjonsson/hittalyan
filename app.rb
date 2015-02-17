@@ -361,7 +361,8 @@ Cuba.define do
                             hashed_password: data.fetch('password'), # becomes hashed when created
                             first_name: data.fetch('first_name'),
                             last_name: data.fetch('last_name'),
-                            referred_by: data['referred_by']) # optional
+                            referred_by: data['referred_by'], # optional
+                            traffic_source: data['traffic_source']) # optional
         user.create_filter()
 
         # test user for unit testing purposes
