@@ -120,14 +120,14 @@ function SignupController($scope, $http, $location, analytics) {
   LOGIN_DESTINATION = '/medlemssidor';
 
   $scope.trafficSourceOptions = [{name: "Affisch", value: "Affisch"},
-                                {name: "Tipsad av kompis", value: "Tipsad av kompis"},
-                                {name: "Rabattsida", value: "Rabattsida"},
-                                {name: "Tidningsartikel", value: "Tidningsartikel"},
                                 {name: "Blogg", value: "Blogg"},
-                                {name: "Facebookgrupp", value: "Facebookgrupp"},
                                 {name: "Facebookannons", value: "Facebookannons"},
+                                {name: "Facebookgrupp", value: "Facebookgrupp"},
                                 {name: "Googleannons", value: "Googleannons"},
                                 {name: "Googlesökning", value: "Googlesökning"},
+                                {name: "Rabattsida", value: "Rabattsida"},
+                                {name: "Tidningsartikel", value: "Tidningsartikel"},
+                                {name: "Tipsad av kompis", value: "Tipsad av kompis"},
                                 {name: "Annat", value: "Annat"}]
 
   function loggedInSuccess() {
