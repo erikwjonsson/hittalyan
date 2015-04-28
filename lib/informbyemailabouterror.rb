@@ -6,7 +6,7 @@ Backtrace:
   #{e.backtrace}
 BODY
 
-  Manmailer.shoot_email('hittalyanab@gmail.com.com',
+  Manmailer.shoot_email('hittalyanab@gmail.com',
                         "Cubancabal Exception: #{e.class.name}",
                         body,
                         INFO_EMAIL,
