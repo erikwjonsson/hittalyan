@@ -1,5 +1,4 @@
 #encoding: utf-8
-
 require_relative 'init'
 
 if ENVIRONMENT == :development
