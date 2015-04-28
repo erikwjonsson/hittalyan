@@ -474,4 +474,3 @@ Cuba.define do
     raise e
   end
 end
-
