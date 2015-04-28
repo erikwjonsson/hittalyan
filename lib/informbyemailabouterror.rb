@@ -1,5 +1,6 @@
 def inform_by_email_about_error(e)
   puts 'SENDING EMAIL ABOUT ERROR----------'
+  
   body = <<BODY
 The following error was caught at #{Time.now}:
 Backtrace:
