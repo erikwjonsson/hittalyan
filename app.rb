@@ -1,4 +1,5 @@
 #encoding: utf-8
+
 require_relative 'init'
 
 if ENVIRONMENT == :development
@@ -59,6 +60,7 @@ def filtered_apartments_since(filter, days_ago)
 end
 
 Cuba.define do
+  begin
   # Mobile Specials
   on "mobile" do
     on "login", param('email'), param('password') do |email, password|
@@ -467,4 +469,10 @@ Cuba.define do
       res.write "Nu kom du allt fel din javel!"
     end
   end
+
+  rescue Exception => e
+    inform_by_email_about_error(e)
+    raise e
+  end
 end
+
