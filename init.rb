@@ -31,6 +31,7 @@ require 'erubis'
 require_relative 'lib/getenvironment'
 require_relative 'lib/encryption'
 require_relative 'lib/manmailer'
+require_relative 'lib/informbyemailabouterror'
 ENVIRONMENT = get_environment
 require_relative 'helpers'
 WEBSITE_ADDRESS = website_address
