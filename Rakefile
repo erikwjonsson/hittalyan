@@ -2,6 +2,14 @@ require 'rake/testtask'
 require 'fileutils'
 require 'securerandom'
 
+def logged_in?
+  `af info`.include?('lingonberryprod@gmail.com')
+end
+
+def af_login
+  system('af login lingonberryprod@gmail.com') unless logged_in?
+end
+
 def strip_gemfile_of_development_gems(dir)
   gemfile_path = File.join(dir, "Gemfile")
   lines = File.readlines(gemfile_path)
@@ -73,7 +81,7 @@ task :deploy do
   Rake::Task['assets:rebuild'].invoke
 
   in_a_deployment_directory do
-    system('af login lingonberryprod@gmail.com')
+    af_login
     system("env RACK_ENV=\"production\" af update #{appfog_app_name}")
     system("af start #{appfog_app_name}")
     # Resetting Gemfile.lock. Messes up git otherwise.
