@@ -32,6 +32,18 @@ p << Package.new(sku: 'PREMIUM30SMS',
                  active: true,
                  show_to: ['non_premium'])
 
+p << Package.new(sku: 'PREMIUM30SMSRENEWAL',
+                 name: '*Förnya* HittaLyan 30 dagar + SMS',
+                 description: ''\
+                 '*Förnya* HittaLyan 30 dagar + SMS. Innehåller 30 dagars prenumeration på '\
+                 'lägenhetstips via e-post och SMS.',
+                 payson_description: '*Förnya* HittaLyan 30 dagar + SMS',
+                 unit_price_in_ore: 7120,
+                 premium_days: 30,
+                 sms_days: 30,
+                 active: true,
+                 show_to: ['premium'])
+
 # p << Package.new(sku: 'PREMIUM30',
 #                  name: 'HittaLyan 30 dagar',
 #                  description: ''\
