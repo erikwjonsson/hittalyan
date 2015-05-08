@@ -14,7 +14,7 @@ packages << Package.new(sku: 'PREMIUM30SMS',
                  'HittaLyan 30 dagar + SMS. Innehåller 30 dagars prenumeration på '\
                  'lägenhetstips via e-post och SMS.',
                  payson_description: 'HittaLyan 30 dagar + SMS',
-                 unit_price_in_ore: 23840,
+                 unit_price_in_ore: 23840, #298 SEK with VAT
                  premium_days: 30,
                  sms_days: 30,
                  active: true,
@@ -26,7 +26,7 @@ packages << Package.new(sku: 'PREMIUM30SMSRENEWAL',
                  '*Förnya* HittaLyan 30 dagar + SMS. Innehåller 30 dagars prenumeration på '\
                  'lägenhetstips via e-post och SMS.',
                  payson_description: '*Förnya* HittaLyan 30 dagar + SMS',
-                 unit_price_in_ore: 7120,
+                 unit_price_in_ore: 7120, #89 SEK with VAT
                  premium_days: 30,
                  sms_days: 30,
                  active: true,
