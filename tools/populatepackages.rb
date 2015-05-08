@@ -2,25 +2,13 @@
 
 require_relative '../init.rb'
 
-p = []
+packages = []
 
 # ==============================================
 # Production packages for production deployment
 # ==============================================
-# p << Package.new(sku: 'START',
-#                  name: 'Start',
-#                  description: ''\
-#                  'Startpaketet innehåller 30 dagars prenumeration på '\
-#                  'lägenhetstips. Vi bjuder på 75 SMS som startbonus.',
-#                  payson_description: 'Startpaket: 30 dagar, 75 SMS',
-#                  unit_price_in_ore: 223.20*100,
-#                  premium_days: 30,
-#                  sms_account: 75,
-#                  active: true,
-#                  show_to_premium: false,
-                 # show_to_trial: true)
 
-p << Package.new(sku: 'PREMIUM30SMS',
+packages << Package.new(sku: 'PREMIUM30SMS',
                  name: 'HittaLyan 30 dagar + SMS',
                  description: ''\
                  'HittaLyan 30 dagar + SMS. Innehåller 30 dagars prenumeration på '\
@@ -32,7 +20,7 @@ p << Package.new(sku: 'PREMIUM30SMS',
                  active: true,
                  show_to: ['non_premium'])
 
-p << Package.new(sku: 'PREMIUM30SMSRENEWAL',
+packages << Package.new(sku: 'PREMIUM30SMSRENEWAL',
                  name: '*Förnya* HittaLyan 30 dagar + SMS',
                  description: ''\
                  '*Förnya* HittaLyan 30 dagar + SMS. Innehåller 30 dagars prenumeration på '\
@@ -44,60 +32,12 @@ p << Package.new(sku: 'PREMIUM30SMSRENEWAL',
                  active: true,
                  show_to: ['premium'])
 
-# p << Package.new(sku: 'PREMIUM30',
-#                  name: 'HittaLyan 30 dagar',
-#                  description: ''\
-#                  'HittaLyan 30 dagar. Innehåller 30 dagars prenumeration på '\
-#                  'lägenhetstips via e-post.',
-#                  payson_description: 'HittaLyan 30 dagar',
-#                  unit_price_in_ore: 11120,
-#                  premium_days: 30,
-#                  active: true,
-#                  show_to_premium: true)
-
-# p << Package.new(sku: 'SMS',
-#                  name: 'Tillägg SMS',
-#                  description: ''\
-#                  'Tillägg för utskick av SMS. Behöver bara köpas om du redan har '\
-#                  'prenumeration utan SMS.',
-#                  payson_description: 'HittaLyan SMS',
-#                  unit_price_in_ore: 3200,
-#                  sms_days: 30,
-#                  show_to_premium: true)
-
-# p << Package.new(sku: 'SMS50',
-#                  name: 'SMS50',
-#                  description: ''\
-#                  'SMS50-paketet innehåller 50 SMS.',
-#                  payson_description: 'SMS50: 50 SMS',
-#                  unit_price_in_ore: 24*100,
-#                  sms_account: 50,
-#                  show_to_premium: true)
-
-# p << Package.new(sku: 'SMS150',
-#                  name: 'SMS150',
-#                  description: ''\
-#                  'SMS150-paketet innehåller 150 SMS.',
-#                  payson_description: 'SMS150: 150 SMS',
-#                  unit_price_in_ore: 60*100,
-#                  sms_account: 150,
-#                  show_to_premium: true)
-
-# p << Package.new(sku: 'SMS300',
-#                  name: 'SMS300',
-#                  description: ''\
-#                  'SMS300-paketet innehåller 300 SMS.',
-#                  payson_description: 'SMS300: 300 SMS',
-#                  unit_price_in_ore: 88*100,
-#                  sms_account: 300,
-#                  show_to_premium: true)
-
 # ==============================================================
 # Special packages for internal use. Never to be shown to users
 # ==============================================================
 
 # Package for giving new users a trial period
-p << Package.new(sku: 'TRIAL7',
+packages << Package.new(sku: 'TRIAL7',
                  name: 'TRIAL7',
                  description: ''\
                  'Ger 7 dagar prenumeration med sms',
@@ -109,7 +49,7 @@ p << Package.new(sku: 'TRIAL7',
                  trial: true)
 
 # Package for giving referrals free days
-p << Package.new(sku: 'REFERRAL',
+packages << Package.new(sku: 'REFERRAL',
                  name: 'REFERRAL',
                  description: ''\
                  'Ger 10 dagar prenumeration med sms',
@@ -123,7 +63,7 @@ p << Package.new(sku: 'REFERRAL',
 # Test packages for development and testing
 # ==========================================
 unless production?
-  p << Package.new(sku: 'TEST',
+  packages << Package.new(sku: 'TEST',
                    name: 'Test',
                    description: 'Detta är ett TESTpaket för utvecklingssyften',
                    payson_description: 'TESTpaket: 30 dagar, sms: 300',
@@ -138,7 +78,7 @@ end
 Package.destroy_all
 
 # Save them all to database
-p.each_with_index do |o, i|
-  o.priority = i
-  o.save!
+packages.each_with_index do |p, i|
+  p.priority = i
+  p.save!
 end
