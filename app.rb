@@ -178,26 +178,13 @@ Cuba.define do
 
         on "packages" do
           external_packages = Packages::PACKAGES.select do |package|
-            # Unselect packages the user should never see. These are to be kept
-            # behind locked doors and closed windows at all times. Always.
-            criteria_a = package.show
-
-            # Unselect packages that the user shouldn't be interested in seeing
-            # criteria_b = (package.show_to_premium == user.active)
-
-            # Unselect if trial
-            # criteria_c = if user.trial
-            #                package.show_to_trial == user.trial
-            #              else
-            #                true
-            #              end
-
-            # Fulhack to show startpackage to trial users
-            if package.show_to_trial && user.trial
-              true
+            user_state = if user.active
+              'premium'
             else
-              criteria_a # && criteria_b && criteria_c
+              'non_premium'
             end
+
+            package.show_to.include?(user_state)
           end
 
           external_packages.map! do |package|
@@ -260,6 +247,7 @@ Cuba.define do
       on "confirmation" do
         send_view "passwordresetconfirmation"
       end
+      gimp
       send_view "passwordreset"
     end
 

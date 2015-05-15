@@ -30,7 +30,7 @@ p << Package.new(sku: 'PREMIUM30SMS',
                  premium_days: 30,
                  sms_days: 30,
                  active: true,
-                 show_to_premium: true)
+                 show_to: ['non_premium'])
 
 # p << Package.new(sku: 'PREMIUM30',
 #                  name: 'HittaLyan 30 dagar',
@@ -94,9 +94,7 @@ p << Package.new(sku: 'TRIAL7',
                  premium_days: 7,
                  sms_days: 7,
                  active: true,
-                 trial: true,
-                 show: false,
-                 show_to_premium: false)
+                 trial: true)
 
 # Package for giving referrals free days
 p << Package.new(sku: 'REFERRAL',
@@ -107,9 +105,7 @@ p << Package.new(sku: 'REFERRAL',
                  unit_price_in_ore: 8888*100,
                  premium_days: 10,
                  sms_days: 10,
-                 active: true,
-                 show: false,
-                 show_to_premium: false)
+                 active: true)
 
 # ==========================================
 # Test packages for development and testing
@@ -123,7 +119,7 @@ unless production?
                    premium_days: 30,
                    sms_days: 30,
                    active: true,
-                   show_to_premium: true)
+                   show_to: ['premium', 'non_premium'])
 end
 
 # Remove all old packages

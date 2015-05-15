@@ -14,10 +14,8 @@ class Package
   field :payson_description, type: String
   field :unit_price_in_ore, type: Integer
   field :priority, type: Integer
-  field :show_to_premium, type: Boolean
-  field :show, type: Boolean, default: true
   field :trial, type: Boolean, default: false
-  field :show_to_trial, type: Boolean, default: false
+  field :show_to, type: Array, default: []
 
   field :premium_days, type: Integer, default: 0
   field :sms_days, type: Integer, default: 0
