@@ -21,11 +21,11 @@ packages << Package.new(sku: 'PREMIUM30SMS',
                  show_to: ['non_premium'])
 
 packages << Package.new(sku: 'PREMIUM30SMSRENEWAL',
-                 name: '*Förnya* HittaLyan 30 dagar + SMS',
+                 name: 'Förnya HittaLyan 30 dagar + SMS',
                  description: ''\
-                 '*Förnya* HittaLyan 30 dagar + SMS. Innehåller 30 dagars prenumeration på '\
+                 'Förnya HittaLyan 30 dagar + SMS. Innehåller 30 dagars prenumeration på '\
                  'lägenhetstips via e-post och SMS.',
-                 payson_description: '*Förnya* HittaLyan 30 dagar + SMS',
+                 payson_description: 'Förnya HittaLyan 30 dagar + SMS',
                  unit_price_in_ore: 7120, #89 SEK with VAT
                  premium_days: 30,
                  sms_days: 30,
