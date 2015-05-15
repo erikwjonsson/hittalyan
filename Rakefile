@@ -18,7 +18,6 @@ def strip_gemfile_of_development_gems(dir)
   File.open(gemfile_path, 'w') do |file|
     file.write(production_lines.join(''))
   end
-
 end
 
 def set_up_deployment_directory
@@ -93,6 +92,10 @@ task :bundle do
   system('pwd')
   puts "Bundling..."
   system('bundle install --quiet')
+end
+
+task :populatepackages do
+  system('ruby tools/populatepackages.rb')
 end
 
 task :mail do
