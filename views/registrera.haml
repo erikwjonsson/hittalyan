@@ -94,7 +94,7 @@
               %span.mobile-block(ng-class="{'visibility-hidden': !(signup.traffic_source.$error.required && signup.traffic_source.$dirty)}")
                 %i.icon-remove.checkmark.wrongness.icon-large
 
-          .control-group.control-group-compact
+          .control-group.control-group-compact(ng-show="traffic_source.value == 'Tipsad av kompis'")
             %label.control-label(for="referred_by")
               %strong Tipsades av:
             .controls
