@@ -24,7 +24,7 @@
         %fieldset
           .control-group.control-group-compact
             %label.control-label(for="first-name")
-              %strong Förnamn:
+              Förnamn:
             .controls
               %input.control-buffer(type="text"
                     name="first-name"
@@ -37,7 +37,7 @@
           
           .control-group.control-group-compact
             %label.control-label(for="last-name")
-              %strong Efternamn:
+              Efternamn:
             .controls
               %input.control-buffer(type="text"
                     name="last-name"
@@ -50,7 +50,7 @@
           
           .control-group.control-group-compact
             %label.control-label(for="email")
-              %strong Din e-postadress:
+              Din e-postadress:
             .controls
               %input.control-buffer(type="email"
                      name="email"
@@ -65,7 +65,7 @@
           
           .control-group.control-group-compact
             %label.control-label(for="password")
-              %strong Önskat lösenord:
+              Önskat lösenord:
             .controls
               %input.control-buffer(type="password"
                      name="password"
@@ -82,7 +82,7 @@
           
           .control-group.control-group-compact
             %label.control-label(for="traffic_source")
-              %strong Hur hittade du HittaLyan?
+              Hur hittade du HittaLyan?
             .controls
               %select(name="traffic_source"
                       ng-model="traffic_source"
@@ -96,7 +96,7 @@
 
           .control-group.control-group-compact(ng-show="traffic_source.value == 'Tipsad av kompis'")
             %label.control-label(for="referred_by")
-              %strong Tipsades av:
+              Tipsades av:
             .controls
               %input.control-buffer(type="email"
                      name="referred_by"
